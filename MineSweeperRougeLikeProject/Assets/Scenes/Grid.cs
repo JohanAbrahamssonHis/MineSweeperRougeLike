@@ -5,22 +5,25 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    [SerializeField] public GameObject square;
+    [SerializeField] public GameObject SquareGameObject;
     
     public float squaresXSize;
     public float squaresYSize;
     public float margin;
 
-    private List<GameObject> squaresX;
-    private List<GameObject> squaresY;
+    public List<Square> squares;
     
     public void Start()
     {
+        
         for (int i = 0; i < squaresXSize; i++)
         {
             for (int j = 0; j < squaresYSize; j++)
             {
-                Instantiate(square, new Vector2(i-((float)squaresXSize-1)/2, j-((float)squaresYSize-1)/2), quaternion.identity);
+                GameObject square = Instantiate(SquareGameObject, new Vector2((i+i*margin)-(((squaresXSize-1)/2)+margin*((squaresXSize-1)/2)), (j+j*margin)-(((squaresYSize-1)/2)+margin*((squaresYSize-1)/2))), quaternion.identity, gameObject.transform);
+                Square squareInfo = square.AddComponent<Square>();
+                squares.Add(squareInfo);
+                squareInfo.position = new Vector2(i, j);
             }
         }
     
