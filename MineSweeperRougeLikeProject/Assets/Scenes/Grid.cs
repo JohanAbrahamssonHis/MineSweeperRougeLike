@@ -7,13 +7,16 @@ public class Grid : MonoBehaviour
 {
     [SerializeField] public GameObject SquareGameObject;
     
-    public float squaresXSize;
-    public float squaresYSize;
+    public int squaresXSize;
+    public int squaresYSize;
     public float margin;
 
     public List<Square> squares;
+
+    public Sprite spriteMine;
+    public Sprite[] spriteNumbers;
     
-    public void Start()
+    public void Awake()
     {
         
         for (int i = 0; i < squaresXSize; i++)
@@ -24,9 +27,14 @@ public class Grid : MonoBehaviour
                 Square squareInfo = square.AddComponent<Square>();
                 squares.Add(squareInfo);
                 squareInfo.position = new Vector2(i, j);
+                squareInfo.Mine = spriteMine;
+                squareInfo.Numbers = spriteNumbers;
+                squareInfo.squareRevealed = true;
+                square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";
             }
         }
     
+        Debug.Log(squares.Count);
     
     }
     

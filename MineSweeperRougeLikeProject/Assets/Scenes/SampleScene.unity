@@ -272,6 +272,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &608604206
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 608604208}
+  - component: {fileID: 608604207}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &608604207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608604206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ca007e77df68b4dbe84edcf947ce94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mines: 50
+  grid: {fileID: 1366821810}
+  startPos: {x: 4, y: 4}
+--- !u!4 &608604208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608604206}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,7 +504,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 4f3a106299767d146975053c7be09b97, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -581,11 +628,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4510617b77cd3ae49ad36be880b91502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SquareGameObject: {fileID: 0}
-  squaresXSize: 7
-  squaresYSize: 7
+  SquareGameObject: {fileID: 1353334550}
+  squaresXSize: 9
+  squaresYSize: 9
   margin: 0.15
   squares: []
+  spriteMine: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  spriteNumbers:
+  - {fileID: 1363247066, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: 1214291291, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: -148606231, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: -225564472, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: -1881804300, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: -1277823448, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: 1532178571, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: -1326121765, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: 355064047, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
 --- !u!4 &1366821811
 Transform:
   m_ObjectHideFlags: 0
