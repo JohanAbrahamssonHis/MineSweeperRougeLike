@@ -11,15 +11,23 @@ public class MineRoomManager : MonoBehaviour
 
     public Grid grid;
 
-    public Vector2 startPos;
+    private Vector2 startPos;
+
+    public bool AfterFirstMove;
     
     
     
     // Start is called before the first frame update
     void Start()
     {
+    }
+
+    public void SetLogic(Square square)
+    {
+        startPos = square.position;
         SetMineField();
         SetNumbers();
+        AfterFirstMove = true;
     }
 
     void SetMineField()
@@ -45,6 +53,7 @@ public class MineRoomManager : MonoBehaviour
         }
     }
 
+
     void SetNumbers()
     {
         foreach (Square square in grid.squares)
@@ -60,6 +69,31 @@ public class MineRoomManager : MonoBehaviour
                 }  
             }
             square.number = mineValue;
+        }
+    }
+
+    void ResetNumbers()
+    {
+        foreach (Square square in grid.squares)
+        {
+            square.number = 0;
+        }
+    }
+
+    public void RevealTile(Square square)
+    {
+        square.squareRevealed = true;
+        if (square.number != 0) return;
+        
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
+                    square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
+                if(!grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))].squareRevealed)
+                    RevealTile(grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))]);
+            }  
         }
     }
 
@@ -80,6 +114,7 @@ public class MineRoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ResetNumbers();
+        SetNumbers();
     }
 }

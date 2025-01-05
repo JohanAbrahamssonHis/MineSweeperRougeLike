@@ -29,7 +29,7 @@ public class Grid : MonoBehaviour
                 squareInfo.position = new Vector2(i, j);
                 squareInfo.Mine = spriteMine;
                 squareInfo.Numbers = spriteNumbers;
-                squareInfo.squareRevealed = true;
+                //squareInfo.squareRevealed = true;
                 square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";
             }
         }

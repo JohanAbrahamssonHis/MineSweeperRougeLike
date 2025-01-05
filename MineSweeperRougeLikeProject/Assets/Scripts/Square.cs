@@ -30,19 +30,24 @@ public class Square : MonoBehaviour
     public Sprite Mine;
     public Sprite[] Numbers;
     public Vector2 position;
+    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRendererContainer;
     
     // Start is called before the first frame update
     void Start()
     {
         containter = gameObject.transform.GetChild(0).gameObject;
-        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        containter.GetComponent<SpriteRenderer>().sprite = number == 0 ? null : hasMine ? Mine : Numbers[number-1];
+        _spriteRenderer.color = squareRevealed ? Color.gray : Color.white;
+        
+        _spriteRendererContainer.sprite = number == 0 ? null : hasMine ? Mine : Numbers[number-1];
 
-        containter.GetComponent<SpriteRenderer>().sortingOrder = squareRevealed ? 1 : -1;
+        _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
     }
 }
