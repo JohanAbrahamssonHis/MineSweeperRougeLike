@@ -631,7 +631,7 @@ MonoBehaviour:
   SquareGameObject: {fileID: 1353334550}
   squaresXSize: 9
   squaresYSize: 9
-  margin: 0.15
+  margin: 0.08
   squares: []
   spriteMine: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   spriteNumbers:
