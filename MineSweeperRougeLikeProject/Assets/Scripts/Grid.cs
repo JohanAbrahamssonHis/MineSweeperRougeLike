@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     public int squaresXSize;
     public int squaresYSize;
     public float margin;
+    public float squareLength;
 
     public List<Square> squares;
 
@@ -44,7 +45,7 @@ public class Grid : MonoBehaviour
     {
         if (squaresSize%2==0)
         {
-            return (index + index * margin) - (((squaresSize - 1) / 2) + margin * ((squaresSize - 1) / 2)) - margin;
+            return (index + index * margin) - (((squaresSize - 1) / 2) + margin * ((squaresSize - 1) / 2)) - squareLength / 2 - margin / 2;
         }
         
         return (index + index * margin) - (((squaresSize - 1) / 2) + margin * ((squaresSize - 1) / 2));

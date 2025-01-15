@@ -59,13 +59,13 @@ public class MineRoomManager : MonoBehaviour
         foreach (Square square in grid.squares)
         {
             int mineValue = 0;
-            for (int i = -1; i <= 1; i++)
+            for (int x = -1; x <= 1; x++)
             {
-                for (int j = -1; j <= 1; j++)
+                for (int y = -1; y <= 1; y++)
                 {
-                    if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
-                        square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                    if(grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))].hasMine) mineValue++;
+                    if ((square.position.x + x < 0 || square.position.x + x > grid.squaresXSize - 1) ||
+                        (square.position.y + y < 0 || square.position.y + y > grid.squaresYSize - 1) ) continue;
+                    if(grid.squares[GetPostion(new Vector2(square.position.x+x, square.position.y+y))].hasMine) mineValue++;
                 }  
             }
             square.number = mineValue;
@@ -99,7 +99,7 @@ public class MineRoomManager : MonoBehaviour
 
     int GetPostion(Vector2 pos)
     {
-        int value = (int)(pos.y) + (int)(pos.x) * (grid.squaresXSize);
+        int value = (int)(pos.y) + (int)(pos.x) * (grid.squaresYSize);
         return value;
     }
     

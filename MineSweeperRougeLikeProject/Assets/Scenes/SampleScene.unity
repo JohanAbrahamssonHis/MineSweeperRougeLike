@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca007e77df68b4dbe84edcf947ce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mines: 5
+  mines: 15
   grid: {fileID: 1366821810}
   AfterFirstMove: 0
 --- !u!4 &608604208
@@ -656,9 +656,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SquareGameObject: {fileID: 1353334550}
-  squaresXSize: 7
-  squaresYSize: 7
+  squaresXSize: 15
+  squaresYSize: 6
   margin: 0.08
+  squareLength: 1
   squares: []
   spriteMine: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   spriteNumbers:
