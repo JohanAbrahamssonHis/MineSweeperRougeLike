@@ -19,15 +19,12 @@ public class InputHandler : MonoBehaviour
 
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(!rayHit.collider) return;
-        
-        Debug.Log(rayHit.collider.gameObject.name);
-        if (rayHit.collider.gameObject.TryGetComponent(out Square square))
+
+        if (!rayHit.collider.gameObject.TryGetComponent(out Square square)) return;
+        if (!_mineRoomManager.AfterFirstMove)
         {
-            if (!_mineRoomManager.AfterFirstMove)
-            {
-                _mineRoomManager.SetLogic(square);
-            }
-            _mineRoomManager.RevealTile(square);
+            _mineRoomManager.SetLogic(square);
         }
+        _mineRoomManager.RevealTile(square);
     }
 }

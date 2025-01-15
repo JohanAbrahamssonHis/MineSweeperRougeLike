@@ -23,7 +23,7 @@ public class Grid : MonoBehaviour
         {
             for (int j = 0; j < squaresYSize; j++)
             {
-                GameObject square = Instantiate(SquareGameObject, new Vector2((i+i*margin)-(((squaresXSize-1)/2)+margin*((squaresXSize-1)/2)), (j+j*margin)-(((squaresYSize-1)/2)+margin*((squaresYSize-1)/2))), quaternion.identity, gameObject.transform);
+                GameObject square = Instantiate(SquareGameObject, new Vector2(setOnGrid(i,squaresXSize), setOnGrid(j,squaresYSize)), quaternion.identity, gameObject.transform);
                 Square squareInfo = square.AddComponent<Square>();
                 squares.Add(squareInfo);
                 squareInfo.position = new Vector2(i, j);
@@ -34,11 +34,19 @@ public class Grid : MonoBehaviour
             }
         }
     
-        Debug.Log(squares.Count);
-    
     }
     
     public void Update()
     {
+    }
+
+    float setOnGrid(int index, int squaresSize)
+    {
+        if (squaresSize%2==0)
+        {
+            return (index + index * margin) - (((squaresSize - 1) / 2) + margin * ((squaresSize - 1) / 2)) - margin;
+        }
+        
+        return (index + index * margin) - (((squaresSize - 1) / 2) + margin * ((squaresSize - 1) / 2));
     }
 }
