@@ -2,12 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MineRoomManager : MonoBehaviour
 {
-    public int mines;
+    public int normalMines;
+    public int doubleMines;
+    private int mines;
 
     public Grid grid;
 
@@ -24,6 +27,7 @@ public class MineRoomManager : MonoBehaviour
 
     public void SetLogic(Square square)
     {
+        mines = doubleMines + normalMines;
         startPos = square.position;
         SetMineField();
         SetNumbers();
@@ -32,6 +36,8 @@ public class MineRoomManager : MonoBehaviour
 
     void SetMineField()
     {
+        int normalMineCount = normalMines;
+        int doubleMineCount = doubleMines;
         for (int i = 0; i < mines; i++)
         {
             if (grid.squares.Count(x => !x.hasMine) <= 9)
@@ -48,6 +54,30 @@ public class MineRoomManager : MonoBehaviour
                 Square selectedSquare = grid.squares[GetPostion(selectedPosition)];
                 if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
                 selectedSquare.hasMine = true;
+                int randomValue = Random.Range(0, 1);
+                selectedSquare.mine = randomValue == 0 ? normalMineCount>0 ? new NormalMine() : new DoubleMine() :  doubleMineCount>0 ? new DoubleMine() : new NormalMine();
+                if (randomValue == 0)
+                {
+                    if (normalMineCount > 0)
+                    {
+                        normalMineCount--;
+                    }
+                    else
+                    {
+                        doubleMineCount--;
+                    }
+                }
+                else
+                {
+                    if (normalMineCount > 0)
+                    {
+                        doubleMineCount--;
+                    }
+                    else
+                    {
+                        normalMineCount--;
+                    }
+                }
                 condition = false;
             } while (condition);
         }
@@ -65,7 +95,8 @@ public class MineRoomManager : MonoBehaviour
                 {
                     if ((square.position.x + x < 0 || square.position.x + x > grid.squaresXSize - 1) ||
                         (square.position.y + y < 0 || square.position.y + y > grid.squaresYSize - 1) ) continue;
-                    if(grid.squares[GetPostion(new Vector2(square.position.x+x, square.position.y+y))].hasMine) mineValue++;
+                    if (grid.squares[GetPostion(new Vector2(square.position.x + x, square.position.y + y))].hasMine)
+                        mineValue += grid.squares[GetPostion(new Vector2(square.position.x+x, square.position.y+y))].mine.weight ;
                 }  
             }
             square.number = mineValue;
@@ -91,7 +122,8 @@ public class MineRoomManager : MonoBehaviour
             {
                 if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
                     square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                if(!grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))].squareRevealed)
+                if(!grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))].squareRevealed &&
+                   !grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))].hasFlag)
                     RevealTile(grid.squares[GetPostion(new Vector2(square.position.x+i, square.position.y+j))]);
             }  
         }

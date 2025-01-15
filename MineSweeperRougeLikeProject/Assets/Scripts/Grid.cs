@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -39,6 +40,15 @@ public class Grid : MonoBehaviour
     
     public void Update()
     {
+        if (squares.Any(x => x.hasMine && x.squareRevealed))
+        {
+            Debug.Log("Lose");
+        }
+
+        if (!squares.Any(x => !x.hasMine && !x.squareRevealed))
+        {
+            Debug.Log("Win");
+        }
     }
 
     float setOnGrid(int index, int squaresSize)

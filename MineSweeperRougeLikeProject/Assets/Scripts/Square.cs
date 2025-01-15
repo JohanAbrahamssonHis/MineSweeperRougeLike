@@ -20,25 +20,33 @@ public enum SquareType
     Revealed
 }
 
+
+
 public class Square : MonoBehaviour
 {
     public int number;
-    public GameObject containter;
+    private GameObject containter;
+    private GameObject flagContainer;
     public SquareColour currentSquareColour;
     public bool squareRevealed;
     public bool hasMine;
+    public Mine mine;
+    public bool hasFlag;
     public Sprite Mine;
     public Sprite[] Numbers;
     public Vector2 position;
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererContainer;
+    private SpriteRenderer _spriteRendererFlagContainer;
     
     // Start is called before the first frame update
     void Start()
     {
         containter = gameObject.transform.GetChild(0).gameObject;
+        flagContainer = gameObject.transform.GetChild(1).gameObject;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
+        _spriteRendererFlagContainer = flagContainer.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -49,5 +57,7 @@ public class Square : MonoBehaviour
         _spriteRendererContainer.sprite = number == 0 ? null : hasMine ? Mine : Numbers[number-1];
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+
+        _spriteRendererFlagContainer.sortingOrder = hasFlag ? 1 : -1;
     }
 }
