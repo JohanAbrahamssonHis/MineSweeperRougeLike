@@ -301,8 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca007e77df68b4dbe84edcf947ce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalMines: 3
-  doubleMines: 3
+  normalMines: 15
+  doubleMines: 5
   grid: {fileID: 1366821810}
   AfterFirstMove: 0
 --- !u!4 &608604208
@@ -658,12 +658,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SquareGameObject: {fileID: 1353334550}
-  squaresXSize: 6
-  squaresYSize: 6
+  squaresXSize: 10
+  squaresYSize: 10
   margin: 0.08
   squareLength: 1
   squares: []
-  spriteMine: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  spriteMine: {fileID: -267421914, guid: af96cb144a83eaf46b9c05241cbae54e, type: 3}
   spriteNumbers:
   - {fileID: 1363247066, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   - {fileID: 1214291291, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
@@ -674,6 +674,21 @@ MonoBehaviour:
   - {fileID: 1532178571, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   - {fileID: -1326121765, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   - {fileID: 355064047, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  - {fileID: 1990423895, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 1603165367, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 256799500, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 2138501953, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -1618683831, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 423320538, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 891689728, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 569135385, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: 913146155, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -1341769216, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -556181209, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -1292239222, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -1970831019, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -1553372449, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
+  - {fileID: -1414947100, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
 --- !u!4 &1366821811
 Transform:
   m_ObjectHideFlags: 0
