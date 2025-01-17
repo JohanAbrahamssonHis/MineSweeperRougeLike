@@ -10,15 +10,16 @@ public abstract class Mine : MonoBehaviour
     public Vector2 position;
     public List<Vector2> neighbours;
     public delegate void CallBack(string hello);
-    SpriteRenderer _spriteRenderer;
+    public SpriteRenderer _spriteRenderer;
 
     public CallBack call;
     
     // Start is called before the first frame update
     public void SetUpMine()
     {
+        if (GetComponent<SpriteRenderer>() == null) gameObject.AddComponent<SpriteRenderer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = sprite;
+        _spriteRenderer.sprite = null;
     }
 
     public void SetPosition(Vector2 pos)
@@ -28,6 +29,7 @@ public abstract class Mine : MonoBehaviour
     
     public void GetSpriteOrder(int order)
     {
+        Debug.Log($"Hello {order}");
         _spriteRenderer.sortingOrder = order;
     }
 

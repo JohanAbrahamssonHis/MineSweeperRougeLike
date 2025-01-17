@@ -47,7 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   sprite: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
-  position: {x: 5, y: 5}
+  position: {x: 1, y: 6}
+  neighbours: []
+  _spriteRenderer: {fileID: 198714267412457026}
 --- !u!212 &198714267412457026
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,8 +90,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,6 +99,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

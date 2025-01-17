@@ -61,7 +61,8 @@ public class Square : MonoBehaviour
 
         if (hasMine)
         {
-            mine.GetSpriteOrder(squareRevealed ? 1 : -1);
+            //Debug.Log($"Yes captain; square X {position.x}, Y {position.y}");
+            //mine.GetSpriteOrder(squareRevealed ? -1 : 0);
         }
     }
 }
