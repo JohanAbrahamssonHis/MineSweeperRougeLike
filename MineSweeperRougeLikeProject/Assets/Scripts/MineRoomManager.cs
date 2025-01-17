@@ -12,22 +12,39 @@ public class MineRoomManager : MonoBehaviour
     public int doubleMines;
     private int mines;
 
+    public Mine minePreset;
+    
     public Grid grid;
 
     private Vector2 startPos;
 
     public bool AfterFirstMove;
+
+    public List<MalwarePackage> malwarePackages;
+    public List<Mine> _mines;
     
     
     
     // Start is called before the first frame update
     void Start()
     {
+        mines = doubleMines + normalMines;
+        
+        //Adds basic mines
+        for (int i = 0; i < mines; i++)
+        {
+           _mines.Add(minePreset); 
+        }
+        
+        //Adds mines depending on packages
+        foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
+        {
+            _mines.Add(mine);
+        }
     }
 
     public void SetLogic(Square square)
     {
-        mines = doubleMines + normalMines;
         startPos = square.position;
         SetMineField();
         SetNumbers();

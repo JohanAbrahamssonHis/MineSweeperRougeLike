@@ -434,8 +434,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalMines: 15
   doubleMines: 0
+  minePreset: {fileID: 1266771402935823973, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
   grid: {fileID: 1366821810}
   AfterFirstMove: 0
+  malwarePackages:
+  - {fileID: 11400000, guid: c21b6972f80749643907921ac1b20876, type: 2}
+  - {fileID: 11400000, guid: c21b6972f80749643907921ac1b20876, type: 2}
+  _mines: []
 --- !u!4 &608604208
 Transform:
   m_ObjectHideFlags: 0
@@ -740,53 +745,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1329758849
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1329758850}
-  - component: {fileID: 1329758851}
-  m_Layer: 0
-  m_Name: DoubleTroubleMine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1329758850
+--- !u!4 &1329758850 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+  m_PrefabInstance: {fileID: 7467575807075416435}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329758849}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 94801462}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1329758851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329758849}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8858926f322764a4683a722965c3f314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 2
-  sprite: {fileID: -286034292, guid: af96cb144a83eaf46b9c05241cbae54e, type: 3}
-  position: {x: 0, y: 0}
 --- !u!1 &1353334550
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +898,7 @@ MonoBehaviour:
   margin: 0.08
   squareLength: 1
   squares: []
-  spriteMine: {fileID: -267421914, guid: af96cb144a83eaf46b9c05241cbae54e, type: 3}
+  spriteMine: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   spriteNumbers:
   - {fileID: 1363247066, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   - {fileID: 1214291291, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
@@ -1231,3 +1194,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
+--- !u!1001 &7467575807075416435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 94801462}
+    m_Modifications:
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738737, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7467575808337738738, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
+      propertyPath: m_Name
+      value: DoubleTroubleMine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4df0560f181c56d4ab04f42fc991919d, type: 3}
