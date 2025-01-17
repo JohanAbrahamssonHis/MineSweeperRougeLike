@@ -32,7 +32,6 @@ public class Square : MonoBehaviour
     public bool hasMine;
     public Mine mine;
     public bool hasFlag;
-    public Sprite Mine;
     public Sprite[] Numbers;
     public Vector2 position;
     private SpriteRenderer _spriteRenderer;
@@ -54,10 +53,15 @@ public class Square : MonoBehaviour
     {
         _spriteRenderer.color = squareRevealed ? Color.gray : Color.white;
         
-        _spriteRendererContainer.sprite = number == 0 ? null : hasMine ? Mine : Numbers[number-1];
+        _spriteRendererContainer.sprite = hasMine ? mine.sprite : Numbers[number];
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
 
         _spriteRendererFlagContainer.sortingOrder = hasFlag ? 1 : -1;
+
+        if (hasMine)
+        {
+            mine.GetSpriteOrder(squareRevealed ? 1 : -1);
+        }
     }
 }

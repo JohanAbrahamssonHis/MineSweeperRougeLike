@@ -432,14 +432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca007e77df68b4dbe84edcf947ce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalMines: 15
-  doubleMines: 0
+  mines: 5
   minePreset: {fileID: 1266771402935823973, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
   grid: {fileID: 1366821810}
   AfterFirstMove: 0
   malwarePackages:
   - {fileID: 11400000, guid: c21b6972f80749643907921ac1b20876, type: 2}
-  - {fileID: 11400000, guid: c21b6972f80749643907921ac1b20876, type: 2}
+  - {fileID: 11400000, guid: 85b013fae5c8eb441b2d9b54973525ba, type: 2}
   _mines: []
 --- !u!4 &608604208
 Transform:
@@ -900,6 +899,7 @@ MonoBehaviour:
   squares: []
   spriteMine: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   spriteNumbers:
+  - {fileID: -1328605720, guid: 5164b924e5f0f48458a849aeab172c5c, type: 3}
   - {fileID: 1363247066, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   - {fileID: 1214291291, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   - {fileID: -148606231, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
@@ -1166,15 +1166,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266771402935823972, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1266771402935823972, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1266771402935823972, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1266771402935823972, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

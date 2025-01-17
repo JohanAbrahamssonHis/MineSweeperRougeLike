@@ -14,8 +14,7 @@ public class Grid : MonoBehaviour
     public float squareLength;
 
     public List<Square> squares;
-
-    public Sprite spriteMine;
+    
     public Sprite[] spriteNumbers;
     
     public void Awake()
@@ -29,7 +28,6 @@ public class Grid : MonoBehaviour
                 Square squareInfo = square.AddComponent<Square>();
                 squares.Add(squareInfo);
                 squareInfo.position = new Vector2(i, j);
-                squareInfo.Mine = spriteMine;
                 squareInfo.Numbers = spriteNumbers;
                 //squareInfo.squareRevealed = true;
                 square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";

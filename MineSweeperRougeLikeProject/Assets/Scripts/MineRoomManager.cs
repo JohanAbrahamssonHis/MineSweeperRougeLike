@@ -8,9 +8,7 @@ using Random = UnityEngine.Random;
 
 public class MineRoomManager : MonoBehaviour
 {
-    public int normalMines;
-    public int doubleMines;
-    private int mines;
+    public int mines;
 
     public Mine minePreset;
     
@@ -28,8 +26,6 @@ public class MineRoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mines = doubleMines + normalMines;
-        
         //Adds basic mines
         for (int i = 0; i < mines; i++)
         {
@@ -53,9 +49,9 @@ public class MineRoomManager : MonoBehaviour
 
     void SetMineField()
     {
-        int normalMineCount = normalMines;
-        int doubleMineCount = doubleMines;
-        for (int i = 0; i < mines; i++)
+        var minesCollection = new List<Mine>(_mines);
+        
+        foreach (var selectedMine in _mines)
         {
             if (grid.squares.Count(x => !x.hasMine) <= 9)
             {
@@ -71,30 +67,10 @@ public class MineRoomManager : MonoBehaviour
                 Square selectedSquare = grid.squares[GetPostion(selectedPosition)];
                 if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
                 selectedSquare.hasMine = true;
-                int randomValue = Random.Range(0, 1);
-                selectedSquare.mine = randomValue == 0 ? normalMineCount>0 ? new NormalMine() : new DoubleMine() :  doubleMineCount>0 ? new DoubleMine() : new NormalMine();
-                if (randomValue == 0)
-                {
-                    if (normalMineCount > 0)
-                    {
-                        normalMineCount--;
-                    }
-                    else
-                    {
-                        doubleMineCount--;
-                    }
-                }
-                else
-                {
-                    if (normalMineCount > 0)
-                    {
-                        doubleMineCount--;
-                    }
-                    else
-                    {
-                        normalMineCount--;
-                    }
-                }
+                selectedSquare.mine = selectedMine;
+                selectedSquare.mine.SetPosition(selectedSquare.position);
+                selectedSquare.mine.SetUpMine();
+                GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
             } while (condition);
         }
