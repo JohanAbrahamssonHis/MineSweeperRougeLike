@@ -37,6 +37,7 @@ public class Square : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererContainer;
     private SpriteRenderer _spriteRendererFlagContainer;
+    public bool hasNeighbourMine;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,7 @@ public class Square : MonoBehaviour
     {
         _spriteRenderer.color = squareRevealed ? Color.gray : Color.white;
         
-        _spriteRendererContainer.sprite = hasMine ? mine.sprite : Numbers[number];
+        _spriteRendererContainer.sprite = hasNeighbourMine ? hasMine ? mine.sprite : Numbers[number] : null;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
 

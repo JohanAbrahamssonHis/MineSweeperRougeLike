@@ -5,9 +5,11 @@ using UnityEngine;
 public class TripleThreatMine : Mine
 {
     // Start is called before the first frame update
-    public TripleThreatMine()
+    public override void SetUpMine()
     {
+        base.SetUpMine();
         weight = 3;
+        SetStandardNeighbours(neighbours);
     }
 
     // Update is called once per frame

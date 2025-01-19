@@ -392,14 +392,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ca007e77df68b4dbe84edcf947ce94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mines: 3
+  mines: 2
   minePreset: {fileID: 1266771402935823973, guid: 216e847960d25d742ad9f2dd562db5bb, type: 3}
   grid: {fileID: 1366821810}
   AfterFirstMove: 0
-  malwarePackages:
-  - {fileID: 11400000, guid: c21b6972f80749643907921ac1b20876, type: 2}
-  - {fileID: 11400000, guid: 85b013fae5c8eb441b2d9b54973525ba, type: 2}
-  - {fileID: 11400000, guid: 01f113b98f18792459a96ccf1231638a, type: 2}
+  malwarePackages: []
   _mines: []
 --- !u!4 &608604208
 Transform:

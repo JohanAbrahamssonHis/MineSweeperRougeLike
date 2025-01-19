@@ -26,10 +26,13 @@ public class MineRoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _mines = new List<Mine>();
         //Adds basic mines
         for (int i = 0; i < mines; i++)
         {
-           _mines.Add(minePreset); 
+            NormalMine norm = new NormalMine();
+            norm.SetUpMine();
+           _mines.Add(norm);
         }
         
         //Adds mines depending on packages
@@ -70,7 +73,7 @@ public class MineRoomManager : MonoBehaviour
                 selectedSquare.mine = selectedMine;
                 selectedSquare.mine.SetPosition(selectedSquare.position);
                 selectedSquare.mine.SetUpMine();
-                GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
+                //GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
             } while (condition);
         }
@@ -79,6 +82,20 @@ public class MineRoomManager : MonoBehaviour
 
     void SetNumbers()
     {
+        foreach (var mine in _mines)
+        {
+            Debug.Log($"{mine.position.x}, {mine.position.y}");
+            foreach (var neighbour in mine.neighbours)
+            {
+                if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
+                    (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1) ) continue;
+                Square square = grid.squares[GetPostion(neighbour)];
+                square.hasNeighbourMine = true;
+                square.number += mine.weight;
+            }
+        }
+        
+        /*
         foreach (Square square in grid.squares)
         {
             int mineValue = 0;
@@ -94,6 +111,7 @@ public class MineRoomManager : MonoBehaviour
             }
             square.number = mineValue;
         }
+        */
     }
 
     void ResetNumbers()
@@ -107,7 +125,7 @@ public class MineRoomManager : MonoBehaviour
     public void RevealTile(Square square)
     {
         square.squareRevealed = true;
-        if (square.number != 0) return;
+        if (square.hasNeighbourMine) return;
         
         for (int i = -1; i <= 1; i++)
         {
