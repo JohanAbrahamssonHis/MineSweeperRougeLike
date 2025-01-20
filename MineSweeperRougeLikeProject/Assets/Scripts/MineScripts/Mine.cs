@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Mine
+public abstract class Mine : MonoBehaviour
 {
     public int weight;
     public Sprite sprite;

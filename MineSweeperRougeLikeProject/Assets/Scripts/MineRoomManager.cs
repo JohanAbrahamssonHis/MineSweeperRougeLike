@@ -30,15 +30,19 @@ public class MineRoomManager : MonoBehaviour
         //Adds basic mines
         for (int i = 0; i < mines; i++)
         {
-            NormalMine norm = new NormalMine();
-            norm.SetUpMine();
-           _mines.Add(norm);
+            GameObject mineInst = Instantiate(minePreset.gameObject);
+            Mine mine = mineInst.GetComponent<Mine>();
+            mine.SetUpMine();
+           _mines.Add(mine);
         }
         
         //Adds mines depending on packages
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
-            _mines.Add(mine);
+            GameObject mineInst = Instantiate(mine.gameObject);
+            Mine tempMine = mineInst.GetComponent<Mine>();
+            tempMine.SetUpMine();
+            _mines.Add(tempMine);
         }
     }
 
@@ -73,6 +77,7 @@ public class MineRoomManager : MonoBehaviour
                 selectedSquare.mine = selectedMine;
                 selectedSquare.mine.SetPosition(selectedSquare.position);
                 selectedSquare.mine.SetUpMine();
+                selectedSquare.mine.transform.parent = selectedSquare.transform;
                 //GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
             } while (condition);
@@ -84,7 +89,6 @@ public class MineRoomManager : MonoBehaviour
     {
         foreach (var mine in _mines)
         {
-            Debug.Log($"{mine.position.x}, {mine.position.y}");
             foreach (var neighbour in mine.neighbours)
             {
                 if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
@@ -157,6 +161,7 @@ public class MineRoomManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!AfterFirstMove) return;
         ResetNumbers();
         SetNumbers();
     }
