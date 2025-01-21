@@ -306,10 +306,9 @@ MonoBehaviour:
   grid: {fileID: 1366821810}
   AfterFirstMove: 0
   malwarePackages:
-  - {fileID: 11400000, guid: aad5bf35b6eeed848803fba7a78ffdbc, type: 2}
-  - {fileID: 11400000, guid: 85b013fae5c8eb441b2d9b54973525ba, type: 2}
-  - {fileID: 11400000, guid: c21b6972f80749643907921ac1b20876, type: 2}
-  - {fileID: 11400000, guid: 01f113b98f18792459a96ccf1231638a, type: 2}
+  - {fileID: 11400000, guid: d26f4629d552c3b4da111a9758e102bf, type: 2}
+  - {fileID: 11400000, guid: d26f4629d552c3b4da111a9758e102bf, type: 2}
+  - {fileID: 11400000, guid: d26f4629d552c3b4da111a9758e102bf, type: 2}
   _mines: []
 --- !u!4 &608604208
 Transform:

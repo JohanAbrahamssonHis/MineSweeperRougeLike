@@ -28,6 +28,8 @@ public class InputHandler : MonoBehaviour
         }
 
         _mineRoomManager.RevealTile(square);
+        
+        _mineRoomManager.AfterActionFunction();
     }
     
     public void OnRightClick(InputAction.CallbackContext context)

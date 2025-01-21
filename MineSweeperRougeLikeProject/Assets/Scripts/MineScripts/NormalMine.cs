@@ -5,9 +5,9 @@ using UnityEngine;
 public class NormalMine : Mine
 {
     // Start is called before the first frame update
-    public override void SetUpMine()
+    public override void SetUpMine(MineRoomManager mineRoomManager)
     {
-        base.SetUpMine();
+        base.SetUpMine(mineRoomManager);
         weight = 1;
         SetStandardNeighbours(neighbours);
     }
