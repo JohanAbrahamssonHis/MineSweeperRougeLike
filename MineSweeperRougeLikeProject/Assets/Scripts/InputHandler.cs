@@ -23,13 +23,14 @@ public class InputHandler : MonoBehaviour
         if (!rayHit.collider.gameObject.TryGetComponent(out Square square)) return;
         if (square.hasFlag) return;
         if (!_mineRoomManager.AfterFirstMove)
-        {
             _mineRoomManager.SetLogic(square);
-        }
+        else
+        {
+            if (square.squareRevealed) return;
+            _mineRoomManager.RevealTile(square);
 
-        _mineRoomManager.RevealTile(square);
-        
-        _mineRoomManager.AfterActionFunction();
+            _mineRoomManager.AfterActionFunction();
+        }
     }
     
     public void OnRightClick(InputAction.CallbackContext context)

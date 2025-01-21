@@ -51,6 +51,7 @@ public class MineRoomManager : MonoBehaviour
         startPos = square.position;
         SetMineField();
         SetNumbers();
+        RevealTilesFirstMove(square);
         AfterFirstMove = true;
     }
 
@@ -132,6 +133,24 @@ public class MineRoomManager : MonoBehaviour
         square.squareRevealed = true; 
         
         if (square.hasNeighbourMine) return;
+
+        for (int i = -1; i <= 1; i++)
+        {
+            for (int j = -1; j <= 1; j++)
+            {
+                if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
+                    square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
+                if (!grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]
+                        .squareRevealed &&
+                    !grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))].hasFlag)
+                    RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
+            }
+        }
+    }
+    
+    public void RevealTilesFirstMove(Square square)
+    {
+        square.squareRevealed = true; 
 
         for (int i = -1; i <= 1; i++)
         {
@@ -233,6 +252,13 @@ public class MineRoomManager : MonoBehaviour
     public void AfterActionFunction()
     {
         afterActionEvent?.Invoke(this, new afterActionArgs());
+        ResetNumbers();
+        SetNumbers();
+        List<Square> revealedSquares = grid.squares.Where(x => x.squareRevealed).ToList();
+        foreach (var square in revealedSquares.Where(x => !x.hasNeighbourMine))
+        {
+            RevealTile(square);
+        }
     }
 }
 

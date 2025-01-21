@@ -307,8 +307,6 @@ MonoBehaviour:
   AfterFirstMove: 0
   malwarePackages:
   - {fileID: 11400000, guid: d26f4629d552c3b4da111a9758e102bf, type: 2}
-  - {fileID: 11400000, guid: d26f4629d552c3b4da111a9758e102bf, type: 2}
-  - {fileID: 11400000, guid: d26f4629d552c3b4da111a9758e102bf, type: 2}
   _mines: []
 --- !u!4 &608604208
 Transform:
@@ -663,8 +661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SquareGameObject: {fileID: 1353334550}
-  squaresXSize: 8
-  squaresYSize: 8
+  squaresXSize: 9
+  squaresYSize: 9
   margin: 0.08
   squareLength: 1
   squares: []
