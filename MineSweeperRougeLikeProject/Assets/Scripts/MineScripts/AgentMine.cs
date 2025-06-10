@@ -18,7 +18,7 @@ public class AgentMine : Mine
     {
     }
 
-    void MineRoomManagerOnafterActionEvent(object sender, afterActionArgs args)
+    void MineRoomManagerOnafterActionEvent(object sender, AfterActionArgs args)
     {
         List<Vector2> neighboursTemp = new List<Vector2>(base.neighbours);
 

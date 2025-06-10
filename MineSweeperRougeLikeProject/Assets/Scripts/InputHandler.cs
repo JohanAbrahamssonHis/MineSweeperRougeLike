@@ -46,4 +46,11 @@ public class InputHandler : MonoBehaviour
             square.hasFlag = !square.hasFlag;
         }
     }
+    
+    public void OnResetBoard(InputAction.CallbackContext context)
+    {
+        if (!context.started) return;
+        
+        _mineRoomManager.ResetBoard();
+    }
 }

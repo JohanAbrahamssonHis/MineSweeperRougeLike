@@ -20,13 +20,17 @@ public class MineRoomManager : MonoBehaviour
 
     public List<MalwarePackage> malwarePackages;
     public List<Mine> _mines;
-    public delegate void afterAction(object sender, afterActionArgs args);
+    public delegate void afterAction(object sender, AfterActionArgs args);
     public static event afterAction afterActionEvent;
 
 
 
     // Start is called before the first frame update
     void Start()
+    {
+    }
+
+    public void BeginLogic()
     {
         _mines = new List<Mine>();
         //Adds basic mines
@@ -48,6 +52,7 @@ public class MineRoomManager : MonoBehaviour
 
     public void SetLogic(Square square)
     {
+        BeginLogic();
         startPos = square.position;
         SetMineField();
         SetNumbers();
@@ -251,7 +256,7 @@ public class MineRoomManager : MonoBehaviour
 
     public void AfterActionFunction()
     {
-        afterActionEvent?.Invoke(this, new afterActionArgs());
+        afterActionEvent?.Invoke(this, new AfterActionArgs());
         ResetNumbers();
         SetNumbers();
         List<Square> revealedSquares = grid.squares.Where(x => x.squareRevealed).ToList();
@@ -260,8 +265,27 @@ public class MineRoomManager : MonoBehaviour
             RevealTile(square);
         }
     }
+
+    public void ResetBoard()
+    {
+        
+        foreach (var mine in _mines)
+        {
+            Destroy(mine.gameObject);
+        }
+        _mines.Clear();
+
+        foreach (var gridSquare in grid.squares)
+        {
+            gridSquare.squareRevealed = false;
+            gridSquare.hasFlag = false;
+            gridSquare.hasMine = false;
+        }
+
+        AfterFirstMove = false;
+    }
 }
 
-public class afterActionArgs
+public class AfterActionArgs
 {
 }
