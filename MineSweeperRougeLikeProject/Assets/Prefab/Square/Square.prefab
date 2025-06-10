@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 4f3a106299767d146975053c7be09b97, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1621215128327120873
@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1621215128327120871}
   - component: {fileID: 1621215128327120872}
   - component: {fileID: 1621215128327120870}
+  - component: {fileID: 8613991772289876465}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7328c69c4d6850e4790ba54dd202d10c, type: 3}
+  m_Sprite: {fileID: -653557789, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -197,6 +198,29 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8613991772289876465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621215128327120873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8748adec299dc1a4e8baad153237b714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  number: 0
+  currentSquareColour: 0
+  squareRevealed: 0
+  hasMine: 0
+  mine: {fileID: 0}
+  hasFlag: 0
+  Numbers: []
+  position: {x: 0, y: 0}
+  hasNeighbourMine: 0
+  squareSpriteUnused: {fileID: -653557789, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
+  squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
 --- !u!1 &1621215128431673766
 GameObject:
   m_ObjectHideFlags: 0
