@@ -7,9 +7,27 @@ public class Room : MonoBehaviour
     public Sprite sprite;
     public Vector2 position;
     public List<Vector2> neighbours;
+    public FloorManager floorManager;
     
     public void SetPosition(Vector2 pos)
     {
         position = pos;
+    }
+    
+    public virtual void SetUpRoom(FloorManager floorManager)
+    {
+        neighbours = new List<Vector2>();
+        this.floorManager = floorManager;
+    }
+    
+    protected void SetStandardNeighbours(List<Vector2> setNeighbours)
+    {
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                setNeighbours.Add(new Vector2(position.x+x,position.y+y));
+            }  
+        }
     }
 }

@@ -33,9 +33,8 @@ public class SquareFloor : MonoBehaviour
     {
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : squareSpriteUnused;
         
-        _spriteRendererContainer.sprite = hasRoom ? room.sprite : Numbers[number];
+        _spriteRendererContainer.sprite = hasNeighbourRoom ? hasRoom ? room.sprite : Numbers[number] : null;
 
-        //hasNeighbourRoom ? | : null
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
     }
 }
