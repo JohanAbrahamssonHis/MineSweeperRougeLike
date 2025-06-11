@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class SquareFloor : MonoBehaviour
+{
+    public int number;
+    private GameObject containter;
+    public bool squareRevealed;
+    public bool hasRoom;
+    public Room room;
+    public Sprite[] Numbers;
+    public Vector2 position;
+    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRendererContainer;
+    public bool hasNeighbourRoom;
+
+    public Sprite squareSpriteUnused;
+    public Sprite squareSpriteUsed;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        containter = gameObject.transform.GetChild(0).gameObject;
+        
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : squareSpriteUnused;
+        
+        _spriteRendererContainer.sprite = hasRoom ? room.sprite : Numbers[number];
+
+        //hasNeighbourRoom ? | : null
+        _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+    }
+}

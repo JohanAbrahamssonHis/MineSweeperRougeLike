@@ -8,37 +8,40 @@ using Random = UnityEngine.Random;
 
 public class FloorManager : MonoBehaviour
 {
-    public int mines;
+    public int rooms;
 
-    public Mine minePreset;
+    public Room roomPreset;
 
-    public Grid grid;
+    public FloorGrid grid;
 
     private Vector2 startPos;
 
     public bool AfterFirstMove;
-
-    public List<MalwarePackage> malwarePackages;
-    public List<Mine> _mines;
+    
+    public List<Room> _rooms;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        BeginLogic();
     }
 
     public void BeginLogic()
     {
-        _mines = new List<Mine>();
+        _rooms = new List<Room>();
         //Adds basic mines
-        for (int i = 0; i < mines; i++)
+        for (int i = 0; i < rooms; i++)
         {
-            GameObject mineInst = Instantiate(minePreset.gameObject);
-            Mine mine = mineInst.GetComponent<Mine>();
-            _mines.Add(mine);
+            GameObject mineInst = Instantiate(roomPreset.gameObject);
+            Room room = mineInst.GetComponent<Room>();
+            _rooms.Add(room);
         }
+        
+        SetRoomField();
 
+        /*
         //Adds mines depending on packages
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
@@ -46,26 +49,29 @@ public class FloorManager : MonoBehaviour
             Mine tempMine = mineInst.GetComponent<Mine>();
             _mines.Add(tempMine);
         }
+        */
     }
 
     public void SetLogic(SquareFloor square)
     {
+        /*
         BeginLogic();
         //startPos = square.position;
         SetMineField();
         SetNumbers();
         //RevealTilesFirstMove(square);
         AfterFirstMove = true;
+        */
     }
 
-    void SetMineField()
+    void SetRoomField()
     {
-        /*
-        var minesCollection = new List<Mine>(_mines);
+        
+        var minesCollection = new List<Room>(_rooms);
 
-        foreach (var selectedMine in _mines)
+        foreach (var selectedRoom in _rooms)
         {
-            if (grid.squares.Count(x => !x.hasMine) <= 9)
+            if (grid.squares.Count(x => !x.hasRoom) <= 9)
             {
                 Debug.Log("too few");
                 break;
@@ -76,52 +82,34 @@ public class FloorManager : MonoBehaviour
             {
                 Vector2 selectedPosition = new Vector2(Random.Range(0, grid.squaresXSize),
                     Random.Range(0, grid.squaresYSize));
-                Square selectedSquare = grid.squares[GetPostion(selectedPosition)];
-                if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
-                selectedSquare.hasMine = true;
-                selectedSquare.mine = selectedMine;
-                selectedSquare.mine.SetPosition(selectedSquare.position);
+                SquareFloor selectedSquare = grid.squares[GetPostion(selectedPosition)];
+                if (selectedSquare.hasRoom || IsNeighbour(selectedSquare.position, startPos)) continue;
+                selectedSquare.hasRoom = true;
+                selectedSquare.room = selectedRoom;
+                selectedSquare.room.SetPosition(selectedSquare.position);
                 //selectedSquare.mine.SetUpMine(this);
-                selectedSquare.mine.transform.parent = selectedSquare.transform;
+                selectedSquare.room.transform.parent = selectedSquare.transform;
                 condition = false;
             } while (condition);
         }
-        */
+        
     }
 
 
     void SetNumbers()
     {
-        grid.squares.ForEach(x => x.hasNeighbourMine = false);
-        foreach (var mine in _mines)
+        grid.squares.ForEach(x => x.hasNeighbourRoom = false);
+        foreach (var room in _rooms)
         {
-            foreach (var neighbour in mine.neighbours)
+            foreach (var neighbour in room.neighbours)
             {
                 if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
                     (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
-                //Square square = grid.squares[GetPostion(neighbour)];
-                //square.hasNeighbourMine = true;
-                //square.number += mine.weight;
+                SquareFloor square = grid.squares[GetPostion(neighbour)];
+                square.hasNeighbourRoom = true;
+                square.number += 1;
             }
         }
-
-        /*
-        foreach (Square square in grid.squares)
-        {
-            int mineValue = 0;
-            for (int x = -1; x <= 1; x++)
-            {
-                for (int y = -1; y <= 1; y++)
-                {
-                    if ((square.position.x + x < 0 || square.position.x + x > grid.squaresXSize - 1) ||
-                        (square.position.y + y < 0 || square.position.y + y > grid.squaresYSize - 1) ) continue;
-                    if (grid.squares[GetPostion(new Vector2(square.position.x + x, square.position.y + y))].hasMine)
-                        mineValue += grid.squares[GetPostion(new Vector2(square.position.x+x, square.position.y+y))].mine.weight ;
-                }
-            }
-            square.number = mineValue;
-        }
-        */
     }
 
     void ResetNumbers()
@@ -285,7 +273,7 @@ public class FloorManager : MonoBehaviour
 
     public void ResetBoard()
     {
-        
+        /*
         foreach (var mine in _mines)
         {
             Destroy(mine.gameObject);
@@ -301,5 +289,6 @@ public class FloorManager : MonoBehaviour
         }
 
         AfterFirstMove = false;
+        */
     }
 }
