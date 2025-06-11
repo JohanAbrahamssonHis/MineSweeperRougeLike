@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MineRoomManager : MonoBehaviour
+public class FloorManager : MonoBehaviour
 {
     public int mines;
 
@@ -20,8 +20,6 @@ public class MineRoomManager : MonoBehaviour
 
     public List<MalwarePackage> malwarePackages;
     public List<Mine> _mines;
-    public delegate void afterAction(object sender, AfterActionArgs args);
-    public static event afterAction afterActionEvent;
 
 
 
@@ -50,18 +48,19 @@ public class MineRoomManager : MonoBehaviour
         }
     }
 
-    public void SetLogic(Square square)
+    public void SetLogic(SquareFloor square)
     {
         BeginLogic();
-        startPos = square.position;
+        //startPos = square.position;
         SetMineField();
         SetNumbers();
-        RevealTilesFirstMove(square);
+        //RevealTilesFirstMove(square);
         AfterFirstMove = true;
     }
 
     void SetMineField()
     {
+        /*
         var minesCollection = new List<Mine>(_mines);
 
         foreach (var selectedMine in _mines)
@@ -82,12 +81,12 @@ public class MineRoomManager : MonoBehaviour
                 selectedSquare.hasMine = true;
                 selectedSquare.mine = selectedMine;
                 selectedSquare.mine.SetPosition(selectedSquare.position);
-                selectedSquare.mine.SetUpMine(this);
+                //selectedSquare.mine.SetUpMine(this);
                 selectedSquare.mine.transform.parent = selectedSquare.transform;
-                //GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
             } while (condition);
         }
+        */
     }
 
 
@@ -100,9 +99,9 @@ public class MineRoomManager : MonoBehaviour
             {
                 if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
                     (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
-                Square square = grid.squares[GetPostion(neighbour)];
-                square.hasNeighbourMine = true;
-                square.number += mine.weight;
+                //Square square = grid.squares[GetPostion(neighbour)];
+                //square.hasNeighbourMine = true;
+                //square.number += mine.weight;
             }
         }
 
@@ -127,14 +126,17 @@ public class MineRoomManager : MonoBehaviour
 
     void ResetNumbers()
     {
+        /*
         foreach (Square square in grid.squares)
         {
             square.number = 0;
         }
+        */
     }
 
-    public void RevealTile(Square square)
+    public void RevealTile(SquareFloor square)
     {
+        /*
         square.squareRevealed = true; 
         
         if (square.hasNeighbourMine) return;
@@ -151,10 +153,12 @@ public class MineRoomManager : MonoBehaviour
                     RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
             }
         }
+        */
     }
     
-    public void RevealTilesFirstMove(Square square)
+    public void RevealTilesFirstMove(SquareFloor square)
     {
+        /*
         square.squareRevealed = true; 
 
         for (int i = -1; i <= 1; i++)
@@ -169,6 +173,7 @@ public class MineRoomManager : MonoBehaviour
                     RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
             }
         }
+        */
     }
 
     int GetPostion(Vector2 pos)
@@ -195,6 +200,12 @@ public class MineRoomManager : MonoBehaviour
 
     public void MoveMine(Mine mine, List<Vector2> neighbours)
     {
+        /*
+        if (mine == null)
+        {
+            Debug.Log("Hello");
+        }
+        
         Square currentSquare = grid.squares[GetPostion(mine.position)];
         if(currentSquare.squareRevealed || currentSquare.hasFlag) return;
         
@@ -231,10 +242,13 @@ public class MineRoomManager : MonoBehaviour
             
             return;
         }
+        */
+        
     }
 
     public void CheckTiles(List<Vector2> tiles)
     {
+        /*
         foreach (Square square in tiles.Select(squarePos => grid.squares[GetPostion(squarePos)]))
         {
             if (square.hasNeighbourMine) return;
@@ -252,10 +266,12 @@ public class MineRoomManager : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     public void AfterActionFunction()
     {
+        /*
         afterActionEvent?.Invoke(this, new AfterActionArgs());
         ResetNumbers();
         SetNumbers();
@@ -264,6 +280,7 @@ public class MineRoomManager : MonoBehaviour
         {
             RevealTile(square);
         }
+        */
     }
 
     public void ResetBoard()
@@ -277,6 +294,7 @@ public class MineRoomManager : MonoBehaviour
 
         foreach (var gridSquare in grid.squares)
         {
+            gridSquare.mine = null;
             gridSquare.squareRevealed = false;
             gridSquare.hasFlag = false;
             gridSquare.hasMine = false;
@@ -284,8 +302,4 @@ public class MineRoomManager : MonoBehaviour
 
         AfterFirstMove = false;
     }
-}
-
-public class AfterActionArgs
-{
 }

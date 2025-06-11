@@ -13,7 +13,7 @@ public class Grid : MonoBehaviour
     public float margin;
     public float squareLength;
 
-    public List<Square> squares;
+    public List<SquareMine> squares;
     
     public Sprite[] spriteNumbers;
     
@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour
             for (int j = 0; j < squaresYSize; j++)
             {
                 GameObject square = Instantiate(SquareGameObject, new Vector2(setOnGrid(i,squaresXSize), setOnGrid(j,squaresYSize)), quaternion.identity, transform.GetChild(0).gameObject.transform);
-                Square squareInfo = square.GetComponent<Square>();
+                SquareMine squareInfo = square.GetComponent<SquareMine>();
                 squares.Add(squareInfo);
                 squareInfo.position = new Vector2(i, j);
                 squareInfo.Numbers = spriteNumbers;

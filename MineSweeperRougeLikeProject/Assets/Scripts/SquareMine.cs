@@ -22,7 +22,7 @@ public enum SquareType
 
 
 
-public class Square : MonoBehaviour
+public class SquareMine : MonoBehaviour
 {
     public int number;
     private GameObject containter;

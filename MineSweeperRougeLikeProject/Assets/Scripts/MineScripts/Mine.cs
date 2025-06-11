@@ -38,17 +38,6 @@ public abstract class Mine : MonoBehaviour
         _spriteRenderer.sortingOrder = order;
     }
 
-    public void Suckda(string hello)
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     protected void SetStandardNeighbours(List<Vector2> setNeighbours)
     {
         for (int x = -1; x <= 1; x++)
