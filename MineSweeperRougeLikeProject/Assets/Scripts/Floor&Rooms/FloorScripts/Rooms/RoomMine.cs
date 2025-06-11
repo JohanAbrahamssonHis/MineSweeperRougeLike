@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RoomMine : Room
 {
@@ -8,5 +9,12 @@ public class RoomMine : Room
     {
         base.SetUpRoom(floorManager);
         SetStandardNeighbours(neighbours);
+    }
+
+    public override void RoomFunction()
+    {
+        base.RoomFunction();
+        //floorManager.DisableScene();
+        SceneManager.LoadScene("SampleScene", LoadSceneMode.Additive);
     }
 }

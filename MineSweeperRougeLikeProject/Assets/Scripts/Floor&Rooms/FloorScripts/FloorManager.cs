@@ -117,6 +117,8 @@ public class FloorManager : MonoBehaviour
     {
         square.squareRevealed = true; 
         
+        if(square.hasRoom) square.room.RoomFunction();
+        
         if (square.hasNeighbourRoom) return;
 
         for (int i = -1; i <= 1; i++)
@@ -134,8 +136,9 @@ public class FloorManager : MonoBehaviour
     
     public void RevealTilesFirstMove(SquareFloor square)
     {
-        
         square.squareRevealed = true; 
+        
+        if(square.hasRoom) square.room.RoomFunction();
         
         for (int i = -1; i <= 1; i++)
         {

@@ -15,14 +15,8 @@ public abstract class Mine : MonoBehaviour
 
     public CallBack call;
     
-    // Start is called before the first frame update
     public virtual void SetUpMine(MineRoomManager mineRoomManager)
     {
-        /*
-        if (GetComponent<SpriteRenderer>() == null) gameObject.AddComponent<SpriteRenderer>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.sprite = null;
-        */
         neighbours = new List<Vector2>();
         this.mineRoomManager = mineRoomManager;
     }
@@ -30,12 +24,6 @@ public abstract class Mine : MonoBehaviour
     public void SetPosition(Vector2 pos)
     {
         position = pos;
-    }
-    
-    public void GetSpriteOrder(int order)
-    {
-        Debug.Log($"Hello {order}");
-        _spriteRenderer.sortingOrder = order;
     }
 
     protected void SetStandardNeighbours(List<Vector2> setNeighbours)

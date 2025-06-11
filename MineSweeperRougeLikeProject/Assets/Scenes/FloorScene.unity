@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85db05bd0e0462f4080556804b5045fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms: 5
+  rooms: 3
   roomPreset: {fileID: 1147051332}
   grid: {fileID: 722828203}
   AfterFirstMove: 0

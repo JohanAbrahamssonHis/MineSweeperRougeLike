@@ -30,4 +30,9 @@ public class Room : MonoBehaviour
             }  
         }
     }
+
+    public virtual void RoomFunction()
+    {
+        //What the room does when Clicked on
+    }
 }
