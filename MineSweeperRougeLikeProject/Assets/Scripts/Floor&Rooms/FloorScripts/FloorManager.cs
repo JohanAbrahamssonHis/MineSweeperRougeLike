@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 public class FloorManager : MonoBehaviour
@@ -21,6 +22,9 @@ public class FloorManager : MonoBehaviour
     public List<Room> _rooms;
 
 
+    //To disable
+    public PlayerInput inputHandler;
+    
     
 
     public void BeginLogic()
@@ -220,5 +224,12 @@ public class FloorManager : MonoBehaviour
 
         AfterFirstMove = false;
         
+    }
+
+    public void DisableFloor(bool state)
+    {
+        this.gameObject.SetActive(state);
+        grid.gameObject.SetActive(state);
+        inputHandler.gameObject.SetActive(state);
     }
 }

@@ -14,7 +14,7 @@ public class RoomMine : Room
     public override void RoomFunction()
     {
         base.RoomFunction();
-        //floorManager.DisableScene();
+        floorManager.DisableFloor(false);
         SceneManager.LoadScene("SampleScene", LoadSceneMode.Additive);
     }
 }
