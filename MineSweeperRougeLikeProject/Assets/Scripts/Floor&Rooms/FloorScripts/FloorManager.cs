@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -24,8 +25,11 @@ public class FloorManager : MonoBehaviour
 
     //To disable
     public PlayerInput inputHandler;
-    
-    
+
+    public void Start()
+    {
+        SceneDeterminer.FloorManager = this;  
+    }
 
     public void BeginLogic()
     {
@@ -51,7 +55,6 @@ public class FloorManager : MonoBehaviour
 
     public void SetLogic(SquareFloor square)
     {
-        
         BeginLogic();
         startPos = square.position;
         SetRoomField();

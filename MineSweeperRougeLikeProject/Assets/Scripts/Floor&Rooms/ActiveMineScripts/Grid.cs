@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Grid : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class Grid : MonoBehaviour
         if (!squares.Any(x => !x.hasMine && !x.squareRevealed))
         {
             Debug.Log("Win");
+            SceneDeterminer.Instance.ReturnToFloor("SampleScene");
         }
     }
 
