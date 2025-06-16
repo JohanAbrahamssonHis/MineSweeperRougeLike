@@ -21,15 +21,23 @@ public class InputFloorHandler : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(!rayHit.collider) return;
 
-        if (!rayHit.collider.gameObject.TryGetComponent(out SquareFloor square)) return;
-        if (!floorManager.AfterFirstMove)
-            floorManager.SetLogic(square);
-        else
+        if (rayHit.collider.gameObject.TryGetComponent(out SquareFloor square))
         {
-            if (square.squareRevealed) return;
-            floorManager.RevealTile(square);
+            if (!floorManager.AfterFirstMove)
+                floorManager.SetLogic(square);
+            else
+            {
+                if (square.squareRevealed) return;
+                floorManager.RevealTile(square);
 
-            floorManager.AfterActionFunction();
+                floorManager.AfterActionFunction();
+            }
+        }
+        else if (rayHit.collider.gameObject.TryGetComponent(out BossRoomSquare bossSquare))
+        {
+            if(!bossSquare.isActive) return;
+            bossSquare.squareRevealed = true;
+            bossSquare.room.RoomFunction();
         }
     }
     

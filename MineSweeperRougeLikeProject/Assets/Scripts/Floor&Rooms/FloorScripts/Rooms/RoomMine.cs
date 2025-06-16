@@ -14,6 +14,6 @@ public class RoomMine : Room
     public override void RoomFunction()
     {
         base.RoomFunction();
-        SceneDeterminer.Instance.LoadAddedScene("SampleScene");
+        SceneDeterminer.LoadAddedScene("SampleScene");
     }
 }

@@ -25,6 +25,7 @@ public class FloorManager : MonoBehaviour
 
     //To disable
     public PlayerInput inputHandler;
+    public BossRoomSquare bossRoom;
 
     public void Start()
     {
@@ -73,7 +74,7 @@ public class FloorManager : MonoBehaviour
         {
             if (grid.squares.Count(x => !x.hasRoom) <= 9)
             {
-                Debug.Log("too few");
+                Debug.LogError("too few");
                 break;
             }
 
@@ -225,8 +226,10 @@ public class FloorManager : MonoBehaviour
             gridSquare.hasRoom = false;
         }
 
+        bossRoom.squareRevealed = false;
+        bossRoom.isActive = false;
+
         AfterFirstMove = false;
-        
     }
 
     public void DisableFloor(bool state)
@@ -234,5 +237,6 @@ public class FloorManager : MonoBehaviour
         this.gameObject.SetActive(state);
         grid.gameObject.SetActive(state);
         inputHandler.gameObject.SetActive(state);
+        bossRoom.gameObject.SetActive(state);
     }
 }

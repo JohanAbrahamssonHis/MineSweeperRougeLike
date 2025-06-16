@@ -169,7 +169,7 @@ public class MineRoomManager : MonoBehaviour
     {
         if (mine == null)
         {
-            Debug.Log("Hello");
+            Debug.LogError("Mine is missing to move");
         }
         
         SquareMine currentSquare = grid.squares[GetPostion(mine.position)];

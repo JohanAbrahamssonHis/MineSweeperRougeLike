@@ -21,17 +21,15 @@ public class SceneDeterminer : ScriptableObject
     public static FloorManager FloorManager { get; set; }
 
 
-    public void LoadAddedScene(string sceneName)
+    public static void LoadAddedScene(string sceneName)
     {
         FloorManager.DisableFloor(false);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
     
-    public void ReturnToFloor(string sceneName)
+    public static void ReturnToFloor(string sceneName)
     {
-        Debug.Log("zello");
         FloorManager.DisableFloor(true);
-        Debug.Log("rello");
         SceneManager.UnloadSceneAsync(sceneName);
     }
 }
