@@ -37,6 +37,7 @@ public class InputFloorHandler : MonoBehaviour
         {
             if(!bossSquare.isActive) return;
             bossSquare.squareRevealed = true;
+            floorManager.currentRoom = bossSquare.room;
             bossSquare.room.RoomFunction();
         }
     }

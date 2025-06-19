@@ -9,12 +9,13 @@ public class RoomMine : Room
     {
         base.SetUpRoom(floorManager);
         SetStandardNeighbours(neighbours);
+        scene = "MineRoomScene";
     }
 
     public override void RoomFunction()
     {
         base.RoomFunction();
-        SceneDeterminer.LoadAddedScene("MineRoomScene");
+        SceneDeterminer.LoadAddedScene(scene);
     }
 
     public override void LeaveRoomFunction()

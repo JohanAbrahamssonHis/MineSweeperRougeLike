@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class Room : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public abstract class Room : MonoBehaviour
     public Vector2 position;
     public List<Vector2> neighbours;
     public FloorManager floorManager;
+    public string scene;
     
     public void SetPosition(Vector2 pos)
     {
