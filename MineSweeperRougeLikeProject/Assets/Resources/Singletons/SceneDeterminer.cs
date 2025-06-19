@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(menuName = "Scene Determiner", fileName = nameof(SceneDeterminer))]
@@ -30,6 +31,7 @@ public class SceneDeterminer : ScriptableObject
     public static void ReturnToFloor(string sceneName)
     {
         FloorManager.DisableFloor(true);
+        FloorManager.currentRoom.LeaveRoomFunction();
         SceneManager.UnloadSceneAsync(sceneName);
     }
 }

@@ -266,6 +266,4 @@ public class MineRoomManager : MonoBehaviour
     }
 }
 
-public class AfterActionArgs
-{
-}
+public class AfterActionArgs { }

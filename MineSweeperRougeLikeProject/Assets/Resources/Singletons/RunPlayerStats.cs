@@ -10,7 +10,7 @@ public class RunPlayerStats : ScriptableObject
     {
         get
         {
-            if (_instance == null) _instance = Resources.Load<RunPlayerStats>("Assets/Singletons/" + nameof(RunPlayerStats) + ".cs");
+            if (_instance == null) _instance = Resources.Load<RunPlayerStats>("Singletons/RunPlayerStats");
             return _instance;
         }
          
@@ -19,6 +19,7 @@ public class RunPlayerStats : ScriptableObject
     public int Health { get; set; }
     public float Time { get; set; }
     public int Money { get; set; }
+    public int FloorCount { get; set; }
     
     
 }

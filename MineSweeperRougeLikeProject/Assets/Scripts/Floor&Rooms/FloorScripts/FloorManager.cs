@@ -22,6 +22,8 @@ public class FloorManager : MonoBehaviour
     
     public List<Room> _rooms;
 
+    public Room currentRoom;
+
 
     //To disable
     public PlayerInput inputHandler;
@@ -123,9 +125,13 @@ public class FloorManager : MonoBehaviour
 
     public void RevealTile(SquareFloor square)
     {
-        square.squareRevealed = true; 
-        
-        if(square.hasRoom) square.room.RoomFunction();
+        square.squareRevealed = true;
+
+        if (square.hasRoom)
+        {
+            currentRoom = square.room;
+            square.room.RoomFunction();
+        }
         
         if (square.hasNeighbourRoom) return;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room : MonoBehaviour
+public abstract class Room : MonoBehaviour
 {
     public Sprite sprite;
     public Vector2 position;
@@ -34,5 +34,10 @@ public class Room : MonoBehaviour
     public virtual void RoomFunction()
     {
         //What the room does when Clicked on
+    }
+
+    public virtual void LeaveRoomFunction()
+    {
+        //LeavingRoomFunction
     }
 }

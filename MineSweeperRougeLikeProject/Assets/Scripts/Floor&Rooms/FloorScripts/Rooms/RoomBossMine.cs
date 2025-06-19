@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RoomMine : Room
+public class RoomBossMine : Room
 {
     public override void SetUpRoom(FloorManager floorManager)
     {
@@ -14,12 +14,13 @@ public class RoomMine : Room
     public override void RoomFunction()
     {
         base.RoomFunction();
-        SceneDeterminer.LoadAddedScene("MineRoomScene");
+        SceneDeterminer.LoadAddedScene("BossRoomScene");
     }
 
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
-        RunPlayerStats.Instance.FloorCount++;
+        RunPlayerStats.Instance.FloorCount = 0;
+        SceneDeterminer.FloorManager.ResetBoard();
     }
 }
