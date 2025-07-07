@@ -20,6 +20,8 @@ public class RunPlayerStats : ScriptableObject
     public float Time { get; set; }
     public int Money { get; set; }
     public int FloorCount { get; set; }
+    public int RoomCount { get; set; }
+    public List<MalwarePackage> MalwarePackages { get; set; }
     
     
 }

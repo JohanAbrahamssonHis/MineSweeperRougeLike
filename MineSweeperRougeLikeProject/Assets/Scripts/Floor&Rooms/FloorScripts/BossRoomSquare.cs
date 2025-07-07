@@ -7,7 +7,7 @@ public class BossRoomSquare : MonoBehaviour
 {
     private GameObject containter;
     public bool squareRevealed;
-    public Room room;
+    public RoomBossMine room;
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererContainer;
     public bool isActive;
@@ -24,6 +24,8 @@ public class BossRoomSquare : MonoBehaviour
         _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
         
         _spriteRendererContainer.sprite = room.sprite;
+
+        room.bossRoomSquare = this;
     }
 
     // Update is called once per frame

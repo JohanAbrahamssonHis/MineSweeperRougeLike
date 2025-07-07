@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
-    private Camera _mainCamera;
+    public Camera _mainCamera;
     public MineRoomManager _mineRoomManager;
     
     void Awake()
     {
-        _mainCamera = Camera.main;
+        //_mainCamera = Camera.main;
     }
     
     
@@ -20,6 +20,11 @@ public class InputHandler : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(!rayHit.collider) return;
 
+        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
+        interactable.Interact();
+        
+        
+        /*
         if (!rayHit.collider.gameObject.TryGetComponent(out SquareMine square)) return;
         if (square.hasFlag) return;
         if (!_mineRoomManager.AfterFirstMove)
@@ -31,6 +36,7 @@ public class InputHandler : MonoBehaviour
 
             _mineRoomManager.AfterActionFunction();
         }
+        */
     }
     
     public void OnRightClick(InputAction.CallbackContext context)

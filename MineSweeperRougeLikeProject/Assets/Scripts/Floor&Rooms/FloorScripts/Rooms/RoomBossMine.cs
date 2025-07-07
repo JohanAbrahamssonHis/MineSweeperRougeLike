@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RoomBossMine : Room
 {
+    public BossRoomSquare bossRoomSquare;
+    
     public override void SetUpRoom(FloorManager floorManager)
     {
         base.SetUpRoom(floorManager);
@@ -23,5 +26,10 @@ public class RoomBossMine : Room
         base.LeaveRoomFunction();
         RunPlayerStats.Instance.FloorCount = 0;
         SceneDeterminer.FloorManager.ResetBoard();
+    }
+
+    public void CheckActivation()
+    {
+        if (RunPlayerStats.Instance.FloorCount > 1) bossRoomSquare.isActive = true;
     }
 }

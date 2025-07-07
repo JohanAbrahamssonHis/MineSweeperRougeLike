@@ -22,7 +22,7 @@ public enum SquareType
 
 
 
-public class SquareMine : MonoBehaviour
+public class SquareMine : MonoBehaviour, IInteractable
 {
     public int number;
     private GameObject containter;
@@ -68,5 +68,22 @@ public class SquareMine : MonoBehaviour
             //Debug.Log($"Yes captain; square X {position.x}, Y {position.y}");
             //mine.GetSpriteOrder(squareRevealed ? -1 : 0);
         }
+    }
+
+    public void Interact()
+    {
+        Debug.Log("Hello");
+        /*
+        if (hasFlag) return;
+        if (!_mineRoomManager.AfterFirstMove)
+            _mineRoomManager.SetLogic(this);
+        else
+        {
+            if (squareRevealed) return;
+            _mineRoomManager.RevealTile(this);
+
+            _mineRoomManager.AfterActionFunction();
+        }
+        */
     }
 }
