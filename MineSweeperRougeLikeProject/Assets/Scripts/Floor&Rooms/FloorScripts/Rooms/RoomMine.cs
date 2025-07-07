@@ -21,6 +21,6 @@ public class RoomMine : Room
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
-        RunPlayerStats.Instance.FloorCount++;
+        RunPlayerStats.Instance.RoomCount++;
     }
 }

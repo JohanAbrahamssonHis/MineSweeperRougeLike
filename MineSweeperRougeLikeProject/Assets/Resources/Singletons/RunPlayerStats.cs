@@ -22,6 +22,8 @@ public class RunPlayerStats : ScriptableObject
     public int FloorCount { get; set; }
     public int RoomCount { get; set; }
     public List<MalwarePackage> MalwarePackages { get; set; }
-    
-    
+
+    public MineRoomManager MineRoomManager { get; set; }
+    public FloorManager FloorManager { get; set; }
+
 }

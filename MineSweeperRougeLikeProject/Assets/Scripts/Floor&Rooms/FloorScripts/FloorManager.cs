@@ -31,7 +31,7 @@ public class FloorManager : MonoBehaviour
 
     public void Start()
     {
-        SceneDeterminer.FloorManager = this;  
+        RunPlayerStats.Instance.FloorManager = this;
     }
 
     public void BeginLogic()
@@ -242,7 +242,7 @@ public class FloorManager : MonoBehaviour
     {
         this.gameObject.SetActive(state);
         grid.gameObject.SetActive(state);
-        inputHandler.gameObject.SetActive(state);
+        //inputHandler.gameObject.SetActive(state);
         bossRoom.gameObject.SetActive(state);
     }
 }

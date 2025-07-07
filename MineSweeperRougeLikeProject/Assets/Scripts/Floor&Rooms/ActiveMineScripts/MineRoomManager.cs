@@ -23,8 +23,14 @@ public class MineRoomManager : MonoBehaviour
     public delegate void afterAction(object sender, AfterActionArgs args);
     public static event afterAction afterActionEvent;
 
+    public void Start()
+    {
+        RunPlayerStats.Instance.MineRoomManager = this;
+    }
+
     public void BeginLogic()
     {
+        
         _mines = new List<Mine>();
         //Adds basic mines
         for (int i = 0; i < mines; i++)

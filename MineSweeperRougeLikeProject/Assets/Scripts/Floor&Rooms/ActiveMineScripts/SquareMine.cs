@@ -72,18 +72,26 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("Hello");
-        /*
         if (hasFlag) return;
-        if (!_mineRoomManager.AfterFirstMove)
-            _mineRoomManager.SetLogic(this);
+
+        MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
+        
+        if (!mineRoomManager.AfterFirstMove)
+            mineRoomManager.SetLogic(this);
         else
         {
             if (squareRevealed) return;
-            _mineRoomManager.RevealTile(this);
+            mineRoomManager.RevealTile(this);
 
-            _mineRoomManager.AfterActionFunction();
+            mineRoomManager.AfterActionFunction();
         }
-        */
+    }
+
+    public void SecondInteract()
+    {
+        if (!squareRevealed)
+        {
+            hasFlag = !hasFlag;
+        }
     }
 }

@@ -47,7 +47,7 @@ public class Grid : MonoBehaviour
         if (!squares.Any(x => !x.hasMine && !x.squareRevealed))
         {
             Debug.Log("Win");
-            SceneDeterminer.ReturnToFloor(SceneDeterminer.FloorManager.currentRoom.scene);
+            SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
         }
     }
 

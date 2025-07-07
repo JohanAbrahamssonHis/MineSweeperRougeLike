@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SquareFloor : MonoBehaviour
+public class SquareFloor : MonoBehaviour, IInteractable
 {
     public int number;
     private GameObject containter;
@@ -36,5 +36,25 @@ public class SquareFloor : MonoBehaviour
         _spriteRendererContainer.sprite = hasNeighbourRoom ? hasRoom ? room.sprite : Numbers[number] : null;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+    }
+
+    public void Interact()
+    {
+        FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
+        
+        if (!floorManager.AfterFirstMove)
+            floorManager.SetLogic(this);
+        else
+        {
+            if (squareRevealed) return;
+            floorManager.RevealTile(this);
+
+            floorManager.AfterActionFunction();
+        }
+    }
+
+    public void SecondInteract()
+    {
+        
     }
 }

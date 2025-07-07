@@ -24,12 +24,18 @@ public class RoomBossMine : Room
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
-        RunPlayerStats.Instance.FloorCount = 0;
-        SceneDeterminer.FloorManager.ResetBoard();
+        RunPlayerStats.Instance.RoomCount = 0;
+        RunPlayerStats.Instance.FloorCount++;
+        if (RunPlayerStats.Instance.FloorCount > 8)
+        {
+            Debug.Log("Floor win, reset");
+            RunPlayerStats.Instance.FloorCount = 0;
+        }
+        RunPlayerStats.Instance.FloorManager.ResetBoard();
     }
 
     public void CheckActivation()
     {
-        if (RunPlayerStats.Instance.FloorCount > 1) bossRoomSquare.isActive = true;
+        if (RunPlayerStats.Instance.RoomCount  > 1) bossRoomSquare.isActive = true;
     }
 }

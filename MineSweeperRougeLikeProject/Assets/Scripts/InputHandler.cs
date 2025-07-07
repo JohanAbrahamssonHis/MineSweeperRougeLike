@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
-    public Camera _mainCamera;
-    public MineRoomManager _mineRoomManager;
+    private Camera _mainCamera;
     
     void Awake()
     {
-        //_mainCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
     
     
@@ -22,21 +21,6 @@ public class InputHandler : MonoBehaviour
 
         if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
         interactable.Interact();
-        
-        
-        /*
-        if (!rayHit.collider.gameObject.TryGetComponent(out SquareMine square)) return;
-        if (square.hasFlag) return;
-        if (!_mineRoomManager.AfterFirstMove)
-            _mineRoomManager.SetLogic(square);
-        else
-        {
-            if (square.squareRevealed) return;
-            _mineRoomManager.RevealTile(square);
-
-            _mineRoomManager.AfterActionFunction();
-        }
-        */
     }
     
     public void OnRightClick(InputAction.CallbackContext context)
@@ -46,17 +30,17 @@ public class InputHandler : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(!rayHit.collider) return;
 
-        if (!rayHit.collider.gameObject.TryGetComponent(out SquareMine square)) return;
-        if (!square.squareRevealed)
-        {
-            square.hasFlag = !square.hasFlag;
-        }
+        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
+        interactable.SecondInteract();
     }
     
     public void OnResetBoard(InputAction.CallbackContext context)
     {
         if (!context.started) return;
         
-        _mineRoomManager.ResetBoard();
+        /*
+        RunPlayerStats.Instance?.MineRoomManager.ResetBoard();
+        RunPlayerStats.Instance?.FloorManager.ResetBoard();
+        */
     }
 }

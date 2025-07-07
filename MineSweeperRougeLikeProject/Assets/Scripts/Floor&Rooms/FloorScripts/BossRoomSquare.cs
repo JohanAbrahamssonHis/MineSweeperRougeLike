@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BossRoomSquare : MonoBehaviour
+public class BossRoomSquare : MonoBehaviour, IInteractable
 {
     private GameObject containter;
     public bool squareRevealed;
@@ -34,5 +34,18 @@ public class BossRoomSquare : MonoBehaviour
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : isActive ? squareSpriteBossActive : squareSpriteBossUnactive;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+    }
+
+    public void Interact()
+    {
+        if(!isActive) return;
+        squareRevealed = true;
+        RunPlayerStats.Instance.FloorManager.currentRoom = room;
+        room.RoomFunction();
+    }
+
+    public void SecondInteract()
+    {
+        
     }
 }

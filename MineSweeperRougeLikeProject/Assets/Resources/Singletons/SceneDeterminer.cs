@@ -24,15 +24,17 @@ public class SceneDeterminer : ScriptableObject
 
     public static void LoadAddedScene(string sceneName)
     {
-        FloorManager.DisableFloor(false);
+        RunPlayerStats.Instance.FloorManager.DisableFloor(false);
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
     
     public static void ReturnToFloor(string sceneName)
     {
-        FloorManager.DisableFloor(true);
-        FloorManager.currentRoom.LeaveRoomFunction();
-        RoomBossMine rb = FloorManager.bossRoom.room as RoomBossMine;
+        FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
+        
+        floorManager.DisableFloor(true);
+        floorManager.currentRoom.LeaveRoomFunction();
+        RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
         rb.CheckActivation();
         SceneManager.UnloadSceneAsync(sceneName);
     }
