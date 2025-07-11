@@ -32,6 +32,7 @@ public class FloorManager : MonoBehaviour
     public void Start()
     {
         RunPlayerStats.Instance.FloorManager = this;
+        RunPlayerStats.Instance.MalwarePackages = new List<MalwarePackage>();
     }
 
     public void BeginLogic()
@@ -40,8 +41,8 @@ public class FloorManager : MonoBehaviour
         //Adds basic rooms
         for (int i = 0; i < rooms; i++)
         {
-            GameObject mineInst = Instantiate(roomPreset.gameObject);
-            Room room = mineInst.GetComponent<Room>();
+            GameObject roomInst = Instantiate(roomPreset.gameObject);
+            Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
 
@@ -64,7 +65,6 @@ public class FloorManager : MonoBehaviour
         SetNumbers();
         RevealTilesFirstMove(square);
         AfterFirstMove = true;
-        
     }
 
     void SetRoomField()
@@ -244,5 +244,10 @@ public class FloorManager : MonoBehaviour
         grid.gameObject.SetActive(state);
         //inputHandler.gameObject.SetActive(state);
         bossRoom.gameObject.SetActive(state);
+    }
+
+    public void OnApplicationQuit()
+    {
+        RunPlayerStats.Instance.ResetValues();
     }
 }

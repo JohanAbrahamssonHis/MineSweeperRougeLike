@@ -24,6 +24,8 @@ public class RoomBossMine : Room
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
+        SceneDeterminer.LoadAddedScene("MalwarePicker");
+        /*
         RunPlayerStats.Instance.RoomCount = 0;
         RunPlayerStats.Instance.FloorCount++;
         if (RunPlayerStats.Instance.FloorCount > 8)
@@ -32,6 +34,7 @@ public class RoomBossMine : Room
             RunPlayerStats.Instance.FloorCount = 0;
         }
         RunPlayerStats.Instance.FloorManager.ResetBoard();
+        */
     }
 
     public void CheckActivation()

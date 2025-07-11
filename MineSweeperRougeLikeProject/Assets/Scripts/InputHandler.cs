@@ -37,7 +37,7 @@ public class InputHandler : MonoBehaviour
     public void OnResetBoard(InputAction.CallbackContext context)
     {
         if (!context.started) return;
-        
+        RunPlayerStats.Instance.ResetValues(); 
         /*
         RunPlayerStats.Instance?.MineRoomManager.ResetBoard();
         RunPlayerStats.Instance?.FloorManager.ResetBoard();

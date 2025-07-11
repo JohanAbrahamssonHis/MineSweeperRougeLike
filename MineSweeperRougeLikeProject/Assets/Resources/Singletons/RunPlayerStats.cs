@@ -25,5 +25,17 @@ public class RunPlayerStats : ScriptableObject
 
     public MineRoomManager MineRoomManager { get; set; }
     public FloorManager FloorManager { get; set; }
+    
+    public void ResetValues()
+    {
+        Health = 4;
+        Time = 5 * 60;
+        Money = 0;
+        FloorCount = 0;
+        RoomCount = 0;
+        MalwarePackages = new List<MalwarePackage>();
+        MineRoomManager = null;
+        FloorManager = null;
+    }
 
 }
