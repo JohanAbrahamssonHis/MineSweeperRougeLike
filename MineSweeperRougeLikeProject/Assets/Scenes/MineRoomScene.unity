@@ -315,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 568311369}
     - target: {fileID: 8428630882770831324, guid: 5ea7dd3ce9eb1f448bd918423ee7dc40, type: 3}
       propertyPath: malwarePackages.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8428630882770831324, guid: 5ea7dd3ce9eb1f448bd918423ee7dc40, type: 3}
       propertyPath: malwarePackages.Array.data[0]

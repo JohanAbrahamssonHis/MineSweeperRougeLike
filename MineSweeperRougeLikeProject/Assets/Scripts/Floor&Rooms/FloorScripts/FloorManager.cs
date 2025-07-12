@@ -230,6 +230,7 @@ public class FloorManager : MonoBehaviour
             gridSquare.room = null;
             gridSquare.squareRevealed = false;
             gridSquare.hasRoom = false;
+            gridSquare.number = 0;
         }
 
         bossRoom.squareRevealed = false;

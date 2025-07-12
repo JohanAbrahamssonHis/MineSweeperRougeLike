@@ -40,6 +40,8 @@ public class MineRoomManager : MonoBehaviour
             _mines.Add(mine);
         }
 
+        malwarePackages = RunPlayerStats.Instance.MalwarePackages;
+
         //Adds mines depending on packages
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
