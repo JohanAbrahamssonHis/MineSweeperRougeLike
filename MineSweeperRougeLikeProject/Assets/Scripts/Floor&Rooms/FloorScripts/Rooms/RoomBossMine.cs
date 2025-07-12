@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class RoomBossMine : Room
 {
     public BossRoomSquare bossRoomSquare;
+    public int minimumRoomCountActivation;
     
     public override void SetUpRoom(FloorManager floorManager)
     {
         base.SetUpRoom(floorManager);
         SetStandardNeighbours(neighbours);
         scene = "BossRoomScene";
+        CheckActivation();
     }
 
     public override void RoomFunction()
@@ -25,7 +27,7 @@ public class RoomBossMine : Room
     {
         base.LeaveRoomFunction();
         SceneDeterminer.LoadAddedScene("MalwarePicker");
-        /*
+        
         RunPlayerStats.Instance.RoomCount = 0;
         RunPlayerStats.Instance.FloorCount++;
         if (RunPlayerStats.Instance.FloorCount > 8)
@@ -34,11 +36,10 @@ public class RoomBossMine : Room
             RunPlayerStats.Instance.FloorCount = 0;
         }
         RunPlayerStats.Instance.FloorManager.ResetBoard();
-        */
     }
 
     public void CheckActivation()
     {
-        if (RunPlayerStats.Instance.RoomCount  > 1) bossRoomSquare.isActive = true;
+        if (RunPlayerStats.Instance.RoomCount  > minimumRoomCountActivation) bossRoomSquare.isActive = true;
     }
 }

@@ -33,9 +33,20 @@ public class SceneDeterminer : ScriptableObject
         FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
         
         floorManager.DisableFloor(true);
-        floorManager.currentRoom.LeaveRoomFunction();
+        
+        floorManager.currentRoom?.LeaveRoomFunction();
         RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
         rb.CheckActivation();
         SceneManager.UnloadSceneAsync(sceneName);
+    }
+    
+    public static void ReturnToFloor()
+    {
+        FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
+        
+        floorManager.DisableFloor(true);
+        floorManager.currentRoom.LeaveRoomFunction();
+        RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
+        rb.CheckActivation();
     }
 }
