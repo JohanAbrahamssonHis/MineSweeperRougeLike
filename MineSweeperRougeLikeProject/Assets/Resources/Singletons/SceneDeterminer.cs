@@ -40,13 +40,8 @@ public class SceneDeterminer : ScriptableObject
         SceneManager.UnloadSceneAsync(sceneName);
     }
     
-    public static void ReturnToFloor()
+    public static void ReturnToFloorFromLose()
     {
-        FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
-        
-        floorManager.DisableFloor(true);
-        floorManager.currentRoom.LeaveRoomFunction();
-        RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
-        rb.CheckActivation();
+        SceneManager.LoadScene("FloorScene");
     }
 }

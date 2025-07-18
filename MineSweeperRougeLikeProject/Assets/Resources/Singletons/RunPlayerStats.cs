@@ -16,7 +16,24 @@ public class RunPlayerStats : ScriptableObject
          
     }
 
-    public int Health { get; set; }
+    private int health;
+    public bool isInvincable;
+    public int Health
+    {
+        get => health;
+        set
+        {
+            if(isInvincable) return;
+            health = value;
+            if (health < 0)
+            {
+                Lose();
+            }
+        }
+    }
+
+    
+
     public float Time { get; set; }
     public int Money { get; set; }
     public int FloorCount { get; set; }
@@ -27,6 +44,12 @@ public class RunPlayerStats : ScriptableObject
     public FloorManager FloorManager { get; set; }
 
     public MineViusalizer mineViusalizer { get; set; }
+
+    public void Lose()
+    {
+        ResetValues();
+        SceneDeterminer.ReturnToFloorFromLose();
+    }
     
     public void ResetValues()
     {

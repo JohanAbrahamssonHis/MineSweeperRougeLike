@@ -121,6 +121,9 @@ public class MineRoomManager : MonoBehaviour
         //The chosen square is revealed
         square.squareRevealed = true; 
         
+        //If this grid has a mine
+        if (square.mine != null) square.mine.Activate();
+        
         //If this square is neighbouring a mine, it will not do looping function
         if (square.hasNeighbourMine) return;
 

@@ -21,6 +21,11 @@ public abstract class Mine : MonoBehaviour
         this.mineRoomManager = mineRoomManager;
     }
 
+    public virtual void Activate()
+    {
+        RunPlayerStats.Instance.Health--;
+    }
+
     public void SetPosition(Vector2 pos)
     {
         position = pos;

@@ -41,12 +41,12 @@ public class Grid : MonoBehaviour
     {
         if (squares.Any(x => x.hasMine && x.squareRevealed))
         {
-            Debug.Log("Lose");
+            //Debug.Log("Lose");
         }
 
         if (!squares.Any(x => !x.hasMine && !x.squareRevealed))
         {
-            Debug.Log("Win");
+            //Debug.Log("Win");
             SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
         }
     }
