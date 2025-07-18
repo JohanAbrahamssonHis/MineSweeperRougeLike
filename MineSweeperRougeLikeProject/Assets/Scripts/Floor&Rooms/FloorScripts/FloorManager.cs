@@ -24,6 +24,8 @@ public class FloorManager : MonoBehaviour
 
     public Room currentRoom;
 
+    public StartMineHolder startMineHolder;
+
 
     //To disable
     public PlayerInput inputHandler;
@@ -33,6 +35,7 @@ public class FloorManager : MonoBehaviour
     {
         RunPlayerStats.Instance.FloorManager = this;
         RunPlayerStats.Instance.MalwarePackages = new List<MalwarePackage>();
+        startMineHolder.Addmines();
     }
 
     public void BeginLogic()

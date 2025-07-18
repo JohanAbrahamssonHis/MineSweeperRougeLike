@@ -25,6 +25,8 @@ public class RunPlayerStats : ScriptableObject
     
     public MineRoomManager MineRoomManager { get; set; }
     public FloorManager FloorManager { get; set; }
+
+    public MineViusalizer mineViusalizer { get; set; }
     
     public void ResetValues()
     {
@@ -36,6 +38,12 @@ public class RunPlayerStats : ScriptableObject
         MalwarePackages = new List<MalwarePackage>();
         MineRoomManager = null;
         FloorManager = null;
+    }
+
+    public void AddMalwarePackage(MalwarePackage malwarePackage)
+    {
+        MalwarePackages.Add(malwarePackage);
+        mineViusalizer.SetVisualizer();
     }
 
 }
