@@ -22,5 +22,6 @@ public class RoomMine : Room
     {
         base.LeaveRoomFunction();
         RunPlayerStats.Instance.RoomCount++;
+        RunPlayerStats.Instance.Time += 30;
     }
 }

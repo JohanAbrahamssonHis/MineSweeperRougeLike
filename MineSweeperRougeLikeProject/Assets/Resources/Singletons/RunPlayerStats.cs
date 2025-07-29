@@ -32,9 +32,23 @@ public class RunPlayerStats : ScriptableObject
         }
     }
 
-    
 
-    public float Time { get; set; }
+    public Timmer Timmer;
+    public bool ActiveTimer;
+    private float time;
+    public float Time
+    {
+        get => time;
+        set
+        {
+            time = value;
+            Timmer.SetTimmer();
+            if (time < 0)
+            {
+                Lose();
+            }
+        }
+    }
     public int Money { get; set; }
     public int FloorCount { get; set; }
     public int RoomCount { get; set; }
@@ -54,7 +68,7 @@ public class RunPlayerStats : ScriptableObject
     public void ResetValues()
     {
         Health = 4;
-        Time = 5 * 60;
+        Time = 5*60;
         Money = 0;
         FloorCount = 0;
         RoomCount = 0;
