@@ -18,9 +18,8 @@ public class Grid : MonoBehaviour
     
     public Sprite[] spriteNumbers;
     
-    public void Awake()
+    public void SetupGrid()
     {
-        
         for (int i = 0; i < squaresXSize; i++)
         {
             for (int j = 0; j < squaresYSize; j++)

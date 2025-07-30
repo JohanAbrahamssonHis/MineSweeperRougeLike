@@ -14,18 +14,14 @@ public class MineViusalizer : MonoBehaviour
     public List<Sprite> sprites;
     
     List<GameObject> _gameObjects = new List<GameObject>();
-
-    public bool isInvincable;
+    
     void OnEnable()
     {
         RunPlayerStats.Instance.mineViusalizer = this;
         //RunPlayerStats.Instance.AddMalwarePackage(malwarePackage);
     }
 
-    private void Update()
-    {
-        RunPlayerStats.Instance.isInvincable = isInvincable;
-    }
+    
 
     public void SetVisualizer()
     {

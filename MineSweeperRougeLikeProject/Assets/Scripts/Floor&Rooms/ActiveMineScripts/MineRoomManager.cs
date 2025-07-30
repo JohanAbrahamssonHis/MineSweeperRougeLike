@@ -26,6 +26,10 @@ public class MineRoomManager : MonoBehaviour
     public void Start()
     {
         RunPlayerStats.Instance.MineRoomManager = this;
+
+        grid.squaresXSize = (int)RunPlayerStats.Instance.GridSize.x;
+        grid.squaresYSize = (int)RunPlayerStats.Instance.GridSize.y;
+        grid.SetupGrid();
     }
 
     public void BeginLogic()

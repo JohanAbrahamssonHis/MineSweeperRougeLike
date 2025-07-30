@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [CreateAssetMenu(menuName = "RunPlayerStats", fileName = "RunPlayerStats")]
 public class RunPlayerStats : ScriptableObject
@@ -50,8 +51,21 @@ public class RunPlayerStats : ScriptableObject
         }
     }
     public int Money { get; set; }
-    public int FloorCount { get; set; }
+    private int floorCount;
+    public int FloorCount
+    {
+        get => floorCount;
+        set
+        {
+            floorCount = value;
+            if (floorCount % 2 == 1) RoomLock++;
+            else GridSize += Vector2.one;
+        }
+    }
     public int RoomCount { get; set; }
+    public int RoomLock { get; set; }
+    
+    public Vector2 GridSize { get; set; }
     public List<MalwarePackage> MalwarePackages { get; set; }
     
     public MineRoomManager MineRoomManager { get; set; }
@@ -68,10 +82,12 @@ public class RunPlayerStats : ScriptableObject
     public void ResetValues()
     {
         Health = 4;
-        Time = 5*60;
-        Money = 0;
+        Time = 4*60;
+        Money = 10;
         FloorCount = 0;
         RoomCount = 0;
+        RoomLock = 2;
+        GridSize = new Vector2(6, 6);
         MalwarePackages = new List<MalwarePackage>();
         MineRoomManager = null;
         FloorManager = null;
