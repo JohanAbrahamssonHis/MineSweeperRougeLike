@@ -11,8 +11,10 @@ using Random = UnityEngine.Random;
 public class FloorManager : MonoBehaviour
 {
     public int rooms;
-
+    public int shopRooms;
+    
     public Room roomPreset;
+    public Room roomPresetShop;
 
     public FloorGrid grid;
 
@@ -45,6 +47,13 @@ public class FloorManager : MonoBehaviour
         for (int i = 0; i < rooms; i++)
         {
             GameObject roomInst = Instantiate(roomPreset.gameObject);
+            Room room = roomInst.GetComponent<Room>();
+            _rooms.Add(room);
+        }
+        
+        for (int i = 0; i < shopRooms; i++)
+        {
+            GameObject roomInst = Instantiate(roomPresetShop.gameObject);
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
