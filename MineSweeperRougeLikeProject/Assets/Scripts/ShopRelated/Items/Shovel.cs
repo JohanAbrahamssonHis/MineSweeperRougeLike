@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,11 @@ public class Shovel : Item
 
     public override void Join()
     {
-        Debug.Log("Would join here");
+        ActionEvents.Instance.OnAction += Function;
+    }
+
+    public void OnApplicationQuit()
+    {
+        ActionEvents.Instance.OnAction -= Function;
     }
 }

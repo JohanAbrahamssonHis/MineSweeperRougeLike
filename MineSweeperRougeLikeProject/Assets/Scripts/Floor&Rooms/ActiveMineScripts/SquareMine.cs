@@ -73,6 +73,8 @@ public class SquareMine : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (hasFlag) return;
+        
+        ActionEvents.Instance.TriggerEventAction();
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-[CreateAssetMenu(menuName = "RunPlayerStats", fileName = "RunPlayerStats")]
+[CreateAssetMenu(menuName = "Singletons/RunPlayerStats", fileName = "RunPlayerStats")]
 public class RunPlayerStats : ScriptableObject
 {
     private static RunPlayerStats _instance;

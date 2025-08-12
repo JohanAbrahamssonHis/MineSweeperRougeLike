@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(menuName = "Scene Determiner", fileName = nameof(SceneDeterminer))]
+[CreateAssetMenu(menuName = "Singletons/SceneDeterminer", fileName = nameof(SceneDeterminer))]
 public class SceneDeterminer : ScriptableObject
 {
     private static SceneDeterminer _instance;

@@ -3,11 +3,16 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "RunPlayerStats", fileName = "RunPlayerStats")]
-public class ActionEvents : MonoBehaviour
+[CreateAssetMenu(menuName = "Singletons/ActionEvents", fileName = "ActionEvents")]
+public class ActionEvents : ScriptableObject
 {
     private static ActionEvents _instance;
-    
+
+    private void Awake()
+    {
+        _instance = new ActionEvents();
+    }
+
     public static ActionEvents Instance
     {
         get
@@ -21,5 +26,9 @@ public class ActionEvents : MonoBehaviour
     
     public event ActionEvent OnAction;
     public event ActionEvent OnFlag;
-    
+    public event ActionEvent OnDamage;
+
+    public void TriggerEventAction() => OnAction?.Invoke();
+    public void TriggerEventFlag() => OnFlag?.Invoke();
+    public void TriggerEventDamage() => OnDamage?.Invoke();
 }
