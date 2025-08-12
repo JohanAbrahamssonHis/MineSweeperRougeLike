@@ -8,11 +8,6 @@ public class ActionEvents : ScriptableObject
 {
     private static ActionEvents _instance;
 
-    private void Awake()
-    {
-        _instance = new ActionEvents();
-    }
-
     public static ActionEvents Instance
     {
         get
