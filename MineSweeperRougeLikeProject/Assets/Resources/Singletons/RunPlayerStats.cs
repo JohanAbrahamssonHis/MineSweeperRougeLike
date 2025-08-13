@@ -50,6 +50,9 @@ public class RunPlayerStats : ScriptableObject
             }
         }
     }
+    
+    public int Points { get; set; }
+    public float Heat { get; set; }
     public int Money { get; set; }
     private int floorCount;
     public int FloorCount

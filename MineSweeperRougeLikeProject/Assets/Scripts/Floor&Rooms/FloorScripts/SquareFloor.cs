@@ -33,7 +33,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
     {
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : squareSpriteUnused;
         
-        _spriteRendererContainer.sprite = hasNeighbourRoom ? hasRoom ? room.sprite : Numbers[number] : null;
+        _spriteRendererContainer.sprite = hasNeighbourRoom ? hasRoom ? room.sprite : NumberSprites.Instance.GetNumberedSprite(number) : null;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
     }

@@ -9,14 +9,18 @@ public class ShopItem : MonoBehaviour, IInteractable
     private int cost;
     public Item Item;
     private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRendererCost;
 
     private void Start()
     {
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _spriteRendererCost = transform.GetChild(2).GetComponent<SpriteRenderer>();
 
         _spriteRenderer.sprite = Item.sprite;
 
         cost = Item.cost;
+        _spriteRendererCost.sprite = NumberSprites.Instance.GetNumberedSprite(cost);
+        
         isBought = false;
     }
 

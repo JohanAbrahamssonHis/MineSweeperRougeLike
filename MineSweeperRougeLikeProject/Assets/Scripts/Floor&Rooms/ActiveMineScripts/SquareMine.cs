@@ -57,7 +57,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     {
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : squareSpriteUnused;
         
-        _spriteRendererContainer.sprite = hasNeighbourMine ? hasMine ? mine.sprite : Numbers[number] : null;
+        _spriteRendererContainer.sprite = hasNeighbourMine ? hasMine ? mine.sprite : NumberSprites.Instance.GetNumberedSprite(number) : null;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
 
@@ -75,6 +75,8 @@ public class SquareMine : MonoBehaviour, IInteractable
         if (hasFlag) return;
         
         ActionEvents.Instance.TriggerEventAction();
+        RunPlayerStats.Instance.Points += 10;
+        RunPlayerStats.Instance.Heat += 0.1f;
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         

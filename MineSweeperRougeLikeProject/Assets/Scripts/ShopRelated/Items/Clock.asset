@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3408a7070c99dd84fa9dab33fffb5d2a, type: 3}
   m_Name: Clock
   m_EditorClassIdentifier: 
-  cost: 8
+  cost: 5
   sprite: {fileID: 287022947, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
