@@ -76,7 +76,7 @@ public class SquareMine : MonoBehaviour, IInteractable
         
         ActionEvents.Instance.TriggerEventAction();
         RunPlayerStats.Instance.Points += 10;
-        RunPlayerStats.Instance.Heat += 0.1f;
+        RunPlayerStats.Instance.Heat += 0.15f;
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         

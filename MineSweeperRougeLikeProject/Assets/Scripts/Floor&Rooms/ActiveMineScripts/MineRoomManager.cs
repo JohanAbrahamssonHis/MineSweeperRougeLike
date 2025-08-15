@@ -27,6 +27,9 @@ public class MineRoomManager : MonoBehaviour
     {
         RunPlayerStats.Instance.MineRoomManager = this;
 
+        RunPlayerStats.Instance.Points = 0;
+        RunPlayerStats.Instance.Heat = 0;
+        
         grid.squaresXSize = (int)RunPlayerStats.Instance.GridSize.x;
         grid.squaresYSize = (int)RunPlayerStats.Instance.GridSize.y;
         grid.SetupGrid();
