@@ -29,6 +29,9 @@ public class HeatsGauge : MonoBehaviour
 
         if (timeDelay <= 0) heat -= Time.deltaTime * speed;
 
+        
+        RunPlayerStats.Instance.ComboValue = heat > 0.4f ? heat > 0.8f ? 2 : 1.5f : 1;
+        
         comboSprite.sprite = heat > 0.4f ? heat > 0.8f ? comboSprites[2] : comboSprites[1] : comboSprites[0];
 
         heat = Math.Clamp(heat, 0, 1);
