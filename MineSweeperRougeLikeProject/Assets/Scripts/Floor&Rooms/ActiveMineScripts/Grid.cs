@@ -17,6 +17,8 @@ public class Grid : MonoBehaviour
     public List<SquareMine> squares;
     
     public Sprite[] spriteNumbers;
+
+    public EndRoomScreen endRoomScreen;
     
     public void SetupGrid()
     {
@@ -46,7 +48,11 @@ public class Grid : MonoBehaviour
         if (!squares.Any(x => !x.hasMine && !x.squareRevealed))
         {
             //Debug.Log("Win");
-            SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
+            
+            //SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
+            
+            //ends the round
+            endRoomScreen.SetScreen(true);
         }
     }
 
