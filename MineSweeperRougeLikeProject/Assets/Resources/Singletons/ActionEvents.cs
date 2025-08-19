@@ -19,11 +19,29 @@ public class ActionEvents : ScriptableObject
 
     public delegate void ActionEvent();
     
+    
+    //First Action Of the game
+    public event ActionEvent OnFirstAction;
+    public void TriggerEventFirstAction() => OnFirstAction?.Invoke();
+    
+    //When a box is clicked (aka an action)
     public event ActionEvent OnAction;
-    public event ActionEvent OnFlag;
-    public event ActionEvent OnDamage;
-
     public void TriggerEventAction() => OnAction?.Invoke();
+    
+    //After an action has been made
+    public event ActionEvent OnAfterAction;
+    public void TriggerEventAfterAction() => OnAfterAction?.Invoke();
+    
+    //When you win a room
+    public event ActionEvent OnMineRoomWin;
+    public void TriggerEventMineRoomWin() => OnMineRoomWin?.Invoke();
+    
+    //When Flag is placed
+    public event ActionEvent OnFlag;
     public void TriggerEventFlag() => OnFlag?.Invoke();
+    
+    //When You take Damage
+    public event ActionEvent OnDamage;
     public void TriggerEventDamage() => OnDamage?.Invoke();
+    
 }

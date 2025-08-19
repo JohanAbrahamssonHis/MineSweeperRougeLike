@@ -147,6 +147,9 @@ public class MineRoomManager : MonoBehaviour
                     RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
             }
         }
+        
+        //The grid checks if all tiles that do not contain a mine has been revealed
+        grid.CheckWin();
     }
     
     public void RevealTilesFirstMove(SquareMine square)

@@ -7,7 +7,7 @@ public class Shovel : Item
 {
     public override void Function()
     {
-        Debug.Log("hee");
+        RunPlayerStats.Instance.Points += 2;
     }
 
     public override void Join()

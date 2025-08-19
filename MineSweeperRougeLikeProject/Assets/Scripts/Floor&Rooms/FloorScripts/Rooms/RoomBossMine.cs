@@ -26,7 +26,7 @@ public class RoomBossMine : Room
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
-        RunPlayerStats.Instance.ActiveTimer = false;
+        
         SceneDeterminer.LoadAddedScene("MalwarePicker");
         
         RunPlayerStats.Instance.RoomCount = 0;

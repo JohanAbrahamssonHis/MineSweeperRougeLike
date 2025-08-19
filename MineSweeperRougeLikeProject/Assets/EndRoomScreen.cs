@@ -10,13 +10,13 @@ public class EndRoomScreen : MonoBehaviour
     public TMP_Text moneyAmount;
     public TMP_Text timeAmount;
     //TODO: fix this
-    private bool tempLock;
+    //private bool tempLock;
 
 
     public void SetScreen(bool state)
     {
-        if(tempLock) return;
-        tempLock = true;
+        //if(tempLock) return;
+        //tempLock = true;
         
         gameObject.SetActive(state);
         

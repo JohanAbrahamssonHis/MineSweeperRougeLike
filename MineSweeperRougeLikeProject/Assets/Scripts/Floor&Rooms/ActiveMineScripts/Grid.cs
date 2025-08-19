@@ -37,23 +37,13 @@ public class Grid : MonoBehaviour
         }
     
     }
-    
-    public void Update()
-    {
-        if (squares.Any(x => x.hasMine && x.squareRevealed))
-        {
-            //Debug.Log("Lose");
-        }
 
-        if (!squares.Any(x => !x.hasMine && !x.squareRevealed))
-        {
-            //Debug.Log("Win");
-            
-            //SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
-            
-            //ends the round
-            endRoomScreen.SetScreen(true);
-        }
+    public void CheckWin()
+    {
+        if (squares.Any(x => !x.hasMine && !x.squareRevealed)) return;
+        //ends the round
+        endRoomScreen.SetScreen(true);
+        RunPlayerStats.Instance.ActiveTimer = false;
     }
 
     float setOnGrid(int index, int squaresSize)

@@ -59,13 +59,13 @@ public class MineViusalizer : MonoBehaviour
                 continue;
             }
            
-            _gameObjects.Add(CreateVisualHolder(mines[i].sprite, sprites[amountOfMines]));
+            _gameObjects.Add(CreateVisualHolder(mines[i].sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines) , mines[i]));
             amountOfMines = 1;
 
         }
         
         //Last is created regardless
-        _gameObjects.Add(CreateVisualHolder(mines.Last().sprite, sprites[amountOfMines]));
+        _gameObjects.Add(CreateVisualHolder(mines.Last().sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines), mines.Last()));
 
         float completelength = 7;
 
@@ -83,11 +83,14 @@ public class MineViusalizer : MonoBehaviour
         }
     }
 
-    private GameObject CreateVisualHolder(Sprite mineSprite, Sprite numberSprite)
+    private GameObject CreateVisualHolder(Sprite mineSprite, Sprite numberSprite, Mine mine)
     {
         GameObject currentGameObject = Instantiate(visualObject, gameObject.transform);
-        currentGameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = mineSprite;
-        currentGameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = numberSprite;
+        
+        currentGameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = mineSprite;
+        currentGameObject.transform.GetChild(2).GetComponent<SpriteRenderer>().sprite = numberSprite;
+        
+        currentGameObject.GetComponent<MineVisualHolder>().mine = mine;
 
         return currentGameObject;
     }

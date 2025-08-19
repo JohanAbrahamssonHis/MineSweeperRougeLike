@@ -37,6 +37,9 @@ public class SquareMine : MonoBehaviour, IInteractable
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererContainer;
     private SpriteRenderer _spriteRendererFlagContainer;
+
+    private SpriteRenderer _spriteRendererMineFlagRenderer;
+    
     public bool hasNeighbourMine;
 
     public Sprite squareSpriteUnused;
@@ -50,6 +53,8 @@ public class SquareMine : MonoBehaviour, IInteractable
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
         _spriteRendererFlagContainer = flagContainer.GetComponent<SpriteRenderer>();
+
+        _spriteRendererMineFlagRenderer = flagContainer.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -61,22 +66,12 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
 
-        _spriteRendererFlagContainer.sortingOrder = hasFlag ? 1 : -1;
-
-        if (hasMine)
-        {
-            //Debug.Log($"Yes captain; square X {position.x}, Y {position.y}");
-            //mine.GetSpriteOrder(squareRevealed ? -1 : 0);
-        }
+        _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
     }
 
     public void Interact()
     {
         if (hasFlag) return;
-        
-        ActionEvents.Instance.TriggerEventAction();
-        RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*5);
-        RunPlayerStats.Instance.Heat += 0.15f;
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         
@@ -85,6 +80,11 @@ public class SquareMine : MonoBehaviour, IInteractable
         else
         {
             if (squareRevealed) return;
+            
+            ActionEvents.Instance.TriggerEventAction();
+            RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*5);
+            RunPlayerStats.Instance.Heat += 0.15f;
+            
             mineRoomManager.RevealTile(this);
 
             mineRoomManager.AfterActionFunction();
@@ -93,9 +93,9 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void SecondInteract()
     {
-        if (!squareRevealed)
-        {
-            hasFlag = !hasFlag;
-        }
+        if (squareRevealed) return;
+        hasFlag = !hasFlag;
+        
+        _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
     }
 }

@@ -76,6 +76,11 @@ public class RunPlayerStats : ScriptableObject
     public FloorManager FloorManager { get; set; }
 
     public MineViusalizer mineViusalizer { get; set; }
+    private Mine _flagMineSelected;
+    public Mine FlagMineSelected { 
+        get => _flagMineSelected;
+        set => _flagMineSelected = value;
+    }
 
     public void Lose()
     {
@@ -95,6 +100,7 @@ public class RunPlayerStats : ScriptableObject
         MalwarePackages = new List<MalwarePackage>();
         MineRoomManager = null;
         FloorManager = null;
+        FlagMineSelected = null;
     }
 
     public void AddMalwarePackage(MalwarePackage malwarePackage)
