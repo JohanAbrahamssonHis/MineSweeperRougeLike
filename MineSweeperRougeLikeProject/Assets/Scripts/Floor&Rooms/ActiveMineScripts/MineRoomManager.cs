@@ -133,7 +133,7 @@ public class MineRoomManager : MonoBehaviour
         
         //If this square is neighbouring a mine, it will not do looping function
         if (square.hasNeighbourMine) return;
-
+        
         //Looping function for all its neighbours, Stops if it is already revealed or has a flag. Repeats this functions. 
         for (int i = -1; i <= 1; i++)
         {
@@ -147,12 +147,9 @@ public class MineRoomManager : MonoBehaviour
                     RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
             }
         }
-        
-        //The grid checks if all tiles that do not contain a mine has been revealed
-        grid.CheckWin();
     }
-    
-    public void RevealTilesFirstMove(SquareMine square)
+
+    private void RevealTilesFirstMove(SquareMine square)
     {
         //The chosen square is revealed
         square.squareRevealed = true; 
@@ -262,6 +259,7 @@ public class MineRoomManager : MonoBehaviour
         {
             RevealTile(square);
         }
+        grid.CheckWin();
     }
 
     public void ResetBoard()

@@ -7,7 +7,7 @@ public class Shovel : Item
 {
     public override void Function()
     {
-        RunPlayerStats.Instance.Points += 2;
+        RunPlayerStats.Instance.Points += (int)(2*RunPlayerStats.Instance.ComboValue);
     }
 
     public override void Join()

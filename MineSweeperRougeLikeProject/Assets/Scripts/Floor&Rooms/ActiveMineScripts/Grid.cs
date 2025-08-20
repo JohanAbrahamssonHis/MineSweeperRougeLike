@@ -41,6 +41,7 @@ public class Grid : MonoBehaviour
     public void CheckWin()
     {
         if (squares.Any(x => !x.hasMine && !x.squareRevealed)) return;
+        
         //ends the round
         endRoomScreen.SetScreen(true);
         RunPlayerStats.Instance.ActiveTimer = false;

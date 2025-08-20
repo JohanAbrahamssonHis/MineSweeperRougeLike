@@ -24,7 +24,7 @@ public class EndRoomScreen : MonoBehaviour
 
         //TODO: Put this to a better place
         RunPlayerStats.Instance.Money += RunPlayerStats.Instance.Points / 10;
-
+        
         moneyAmount.text = $"+{RunPlayerStats.Instance.Points / 10}";
 
         //TODO: make this a variable
