@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 [CreateAssetMenu(menuName = "Singletons/RunPlayerStats", fileName = "RunPlayerStats")]
 public class RunPlayerStats : ScriptableObject
 {
@@ -43,6 +45,7 @@ public class RunPlayerStats : ScriptableObject
         set
         {
             time = value;
+            if(Timmer==null) return;
             Timmer.SetTimmer();
             if (time < 0)
             {
@@ -76,16 +79,12 @@ public class RunPlayerStats : ScriptableObject
     public FloorManager FloorManager { get; set; }
 
     public MineViusalizer mineViusalizer { get; set; }
-    private Mine _flagMineSelected;
-    public Mine FlagMineSelected { 
-        get => _flagMineSelected;
-        set => _flagMineSelected = value;
-    }
+    public Mine FlagMineSelected { get; set; }
 
     public void Lose()
     {
-        ResetValues();
-        SceneDeterminer.ReturnToFloorFromLose();
+        //ResetValues();
+        SceneManager.LoadScene("StartScene");
     }
     
     public void ResetValues()
@@ -106,6 +105,7 @@ public class RunPlayerStats : ScriptableObject
     public void AddMalwarePackage(MalwarePackage malwarePackage)
     {
         MalwarePackages.Add(malwarePackage);
+        if(mineViusalizer==null) return;
         mineViusalizer.SetVisualizer();
     }
 

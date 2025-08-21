@@ -13,7 +13,7 @@ public class Timmer : MonoBehaviour
     public TMP_Text textSeconds;
     public Canvas canvas;
     private SpriteRenderer spriteRenderer;
-    void Start()
+    void Awake()
     {
         time = RunPlayerStats.Instance.Time;
 
