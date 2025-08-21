@@ -37,6 +37,7 @@ public class MineRoomManager : MonoBehaviour
 
     public void BeginLogic()
     {
+        Debug.Log(RunPlayerStats.Instance.MalwarePackages.Count);
         
         _mines = new List<Mine>();
         //Adds basic mines

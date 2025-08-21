@@ -33,6 +33,7 @@ public class EndRoomScreen : MonoBehaviour
 
     public void ReturnToFloor()
     {
+        Debug.Log("hello");
         SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
     }
 
