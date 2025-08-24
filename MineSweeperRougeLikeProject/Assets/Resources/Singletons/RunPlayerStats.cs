@@ -84,7 +84,7 @@ public class RunPlayerStats : ScriptableObject
     public void Lose()
     {
         //ResetValues();
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
     }
     
     public void ResetValues()
