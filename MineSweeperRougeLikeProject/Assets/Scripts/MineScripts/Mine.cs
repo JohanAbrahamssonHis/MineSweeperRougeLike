@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Mine : MonoBehaviour
 {
+    public bool isDisabled;
     public int weight;
     public Sprite sprite;
     public Vector2 position;

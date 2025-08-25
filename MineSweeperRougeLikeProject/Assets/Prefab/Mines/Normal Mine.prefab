@@ -44,8 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddae076bbce3a74b9d119d5f86866e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDisabled: 0
   weight: 1
   sprite: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
   position: {x: 0, y: 0}
   neighbours: []
   _spriteRenderer: {fileID: 0}
+  mineRoomManager: {fileID: 0}

@@ -37,7 +37,6 @@ public class MineRoomManager : MonoBehaviour
 
     public void BeginLogic()
     {
-        Debug.Log(RunPlayerStats.Instance.MalwarePackages.Count);
         
         _mines = new List<Mine>();
         //Adds basic mines
@@ -152,6 +151,8 @@ public class MineRoomManager : MonoBehaviour
 
     private void RevealTilesFirstMove(SquareMine square)
     {
+        ActionEvents.Instance.TriggerEventFirstAction();
+        
         //The chosen square is revealed
         square.squareRevealed = true; 
 

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80448b821d31bae4698545b5269403a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDisabled: 0
   weight: 1
   sprite: {fileID: -420438937, guid: af96cb144a83eaf46b9c05241cbae54e, type: 3}
   position: {x: 0, y: 0}

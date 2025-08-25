@@ -66,12 +66,19 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
 
+        if (hasMine && mine.isDisabled)
+        {
+            _spriteRendererContainer.sprite = mine.sprite;
+            _spriteRendererContainer.color = Color.red;
+            _spriteRendererContainer.sortingOrder = 1;
+        }
+
         _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
     }
 
     public void Interact()
     {
-        if (hasFlag) return;
+        if (hasFlag || (hasMine && mine.isDisabled)) return;
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         

@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SquareMine
       objectReference: {fileID: 0}
+    - target: {fileID: 8613991772289876465, guid: 202639b48f5c0c84084b33e5fea7f334, type: 3}
+      propertyPath: mine
+      value: 
+      objectReference: {fileID: 305305550780303652, guid: 496ef67902c4b964fbc5f05a94c3c7f8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 202639b48f5c0c84084b33e5fea7f334, type: 3}
 --- !u!1 &1529435661
