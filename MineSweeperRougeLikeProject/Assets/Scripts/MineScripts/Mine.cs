@@ -10,6 +10,7 @@ public abstract class Mine : MonoBehaviour
     public Sprite sprite;
     public Vector2 position;
     public List<Vector2> neighbours;
+    public bool isActivated;
     public delegate void CallBack(string hello);
     public SpriteRenderer _spriteRenderer;
     public MineRoomManager mineRoomManager;
@@ -24,6 +25,7 @@ public abstract class Mine : MonoBehaviour
 
     public virtual void Activate()
     {
+        isActivated = true;
         RunPlayerStats.Instance.Health--;
     }
 
