@@ -35,6 +35,7 @@ public class RoomBossMine : Room
         {
             RunPlayerStats.Instance.FloorCount = 0;
         }
+        
         RunPlayerStats.Instance.FloorManager.ResetBoard();
     }
 

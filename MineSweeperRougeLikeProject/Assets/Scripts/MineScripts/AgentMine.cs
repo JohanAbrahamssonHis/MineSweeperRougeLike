@@ -26,6 +26,7 @@ public class AgentMine : Mine
 
     void MineRoomManagerOnAfterActionEvent(object sender, AfterActionArgs args)
     {
+        if(isDisabled) return;
         List<Vector2> neighboursTemp = new List<Vector2>(base.neighbours);
 
         mineRoomManager.MoveMine(this, neighboursTemp);

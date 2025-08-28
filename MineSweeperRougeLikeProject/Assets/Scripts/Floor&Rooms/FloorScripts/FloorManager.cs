@@ -65,6 +65,38 @@ public class FloorManager : MonoBehaviour
         */
     }
 
+    public void AddRoom(GameObject roomGameObject, int amount)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject roomInst = Instantiate(roomGameObject.gameObject);
+            Room room = roomInst.GetComponent<Room>();
+            _rooms.Add(room);
+        }
+    }
+    
+    public void AddBasicRoom(int amount)
+    {
+        rooms += amount;
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject roomInst = Instantiate(roomPreset.gameObject);
+            Room room = roomInst.GetComponent<Room>();
+            _rooms.Add(room);
+        }
+    }
+    
+    public void AddShopRoom(int amount)
+    {
+        shopRooms += amount;
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject roomInst = Instantiate(roomPresetShop.gameObject);
+            Room room = roomInst.GetComponent<Room>();
+            _rooms.Add(room);
+        }
+    }
+
     public void SetLogic(SquareFloor square)
     {
         BeginLogic();

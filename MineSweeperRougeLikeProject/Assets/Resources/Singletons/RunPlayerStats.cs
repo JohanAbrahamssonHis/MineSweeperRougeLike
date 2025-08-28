@@ -63,12 +63,27 @@ public class RunPlayerStats : ScriptableObject
         set
         {
             floorCount = value;
+            if(value==0) return;
+            FloorManager.AddBasicRoom(1);
+            if (floorCount % 3 == 2) FloorManager.AddShopRoom(1);
             if (floorCount % 2 == 1) RoomLock++;
             else GridSize += Vector2.one;
         }
     }
+    
+    
     public int RoomCount { get; set; }
-    public int RoomLock { get; set; }
+    
+    public LockBar lockBar { get; set; }
+    private int roomLock;
+    public int RoomLock
+    {
+        get => roomLock;
+        set
+        {
+            roomLock = value;
+            if(lockBar!=null) lockBar.FixLocks();
+        } }
     
     public Vector2 GridSize { get; set; }
     public List<MalwarePackage> MalwarePackages { get; set; }

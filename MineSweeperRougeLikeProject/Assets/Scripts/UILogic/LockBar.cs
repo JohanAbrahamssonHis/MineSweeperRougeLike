@@ -13,24 +13,13 @@ public class LockBar : MonoBehaviour
     public Sprite unlockedSprite;
     private void Start()
     {
-        maxLocks = RunPlayerStats.Instance.RoomLock;
-
+        RunPlayerStats.Instance.lockBar = this;
         _gameObjects = new List<GameObject>();
         _renderers = new List<SpriteRenderer>();
         
-        for (int i = 0; i < maxLocks; i++)
-        {
-            GameObject currentGameObject = new GameObject();
-            _gameObjects.Add(currentGameObject);
-            currentGameObject.transform.parent = gameObject.transform;
-            currentGameObject.transform.localPosition = new Vector3(i, 0, 0);
-            SpriteRenderer currentRenderer = currentGameObject.AddComponent<SpriteRenderer>();
-            currentRenderer.sprite = sprite;
-            _renderers.Add(currentRenderer);
-        }
+        FixLocks();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         for (int i = 0; i < _gameObjects.Count; i++)
