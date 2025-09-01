@@ -67,7 +67,7 @@ public class MineViusalizer : MonoBehaviour
         //Last is created regardless
         _gameObjects.Add(CreateVisualHolder(mines.Last().sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines), mines.Last()));
 
-        float completelength = 7;
+        float completelength = 5;
 
         if (_gameObjects.Count==1)
         {

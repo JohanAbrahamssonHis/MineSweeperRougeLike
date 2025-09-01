@@ -34,6 +34,8 @@ public class ShopItem : MonoBehaviour, IInteractable
         _spriteRenderer.color = Color.gray;
         
         Item.Join();
+        
+        RunPlayerStats.Instance.AddItemToInventory(Item);
     }
 
     public void SecondInteract()

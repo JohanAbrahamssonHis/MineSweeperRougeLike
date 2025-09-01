@@ -70,6 +70,16 @@ public class RunPlayerStats : ScriptableObject
             else GridSize += Vector2.one;
         }
     }
+
+    public List<Item> Inventory;
+    
+    public ItemInventoryVisual ItemInventoryVisual;
+
+    public void AddItemToInventory(Item item)
+    {
+        Inventory.Add(item);
+        ItemInventoryVisual.FixVisual();
+    }
     
     
     public int RoomCount { get; set; }
@@ -83,7 +93,9 @@ public class RunPlayerStats : ScriptableObject
         {
             roomLock = value;
             if(lockBar!=null) lockBar.FixLocks();
-        } }
+        }
+        
+    }
     
     public Vector2 GridSize { get; set; }
     public List<MalwarePackage> MalwarePackages { get; set; }
@@ -113,6 +125,7 @@ public class RunPlayerStats : ScriptableObject
         MineRoomManager = null;
         FloorManager = null;
         FlagMineSelected = null;
+        Inventory = new List<Item>();
     }
 
     public void AddMalwarePackage(MalwarePackage malwarePackage)
