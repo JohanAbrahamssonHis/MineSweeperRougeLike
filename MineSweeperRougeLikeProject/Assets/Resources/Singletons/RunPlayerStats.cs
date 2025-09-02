@@ -18,9 +18,10 @@ public class RunPlayerStats : ScriptableObject
         }
          
     }
-
-    private int health;
+    
+    
     public bool isInvincable;
+    private int health;
     public int Health
     {
         get => health;
@@ -29,9 +30,12 @@ public class RunPlayerStats : ScriptableObject
             if(isInvincable) return;
             if (value < health) ActionEvents.Instance.TriggerEventDamage();
             health = value;
-            if (health < 0) Lose();
+            HealthBar.HealthChanged(value);
+            if (health < 1) Lose();
         }
     }
+
+    public HealthBar HealthBar { get; set; }
 
 
     public Timmer Timmer;
@@ -114,7 +118,7 @@ public class RunPlayerStats : ScriptableObject
     
     public void ResetValues()
     {
-        Health = 4;
+        Health = 5;
         Time = 4*60;
         Money = 10;
         FloorCount = 0;

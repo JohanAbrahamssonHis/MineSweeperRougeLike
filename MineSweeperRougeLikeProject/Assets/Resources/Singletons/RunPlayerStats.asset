@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
   m_Name: RunPlayerStats
   m_EditorClassIdentifier: 
-  isInvincable: 1
+  isInvincable: 0
   Timmer: {fileID: 0}
   ActiveTimer: 0
   Inventory:
-  - {fileID: 11400000, guid: fdedd0d7c2a8e6543aeb6155167f8bc9, type: 2}
+  - {fileID: 11400000, guid: 9f8a44ead61bd4f49b6fb8aa8a446e9f, type: 2}
   ItemInventoryVisual: {fileID: 0}
