@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cost: 4
   sprite: {fileID: -2086356782, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
+  rarity: 4
   _totalAmountOfDisable: 3

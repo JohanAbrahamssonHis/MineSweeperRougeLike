@@ -11,7 +11,7 @@ public class ShopItem : MonoBehaviour, IInteractable
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererCost;
 
-    private void Start()
+    public void SetUpShopItem()
     {
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _spriteRendererCost = transform.GetChild(2).GetComponent<SpriteRenderer>();

@@ -1634,8 +1634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemVisualPreset: {fileID: 2960340388462438108, guid: 6393ab0b2454800459587be9c2ec35e1, type: 3}
-  itemTest: {fileID: 11400000, guid: 9cf7bf943d0df0e4caa52ee4190a31d8, type: 2}
-  amountOfTest: 3
   distance: 5
   speed: 2
   strength: 0.2
@@ -1670,7 +1668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rooms: 3
-  shopRooms: 1
+  shopRooms: 5
   roomPreset: {fileID: 1147051332}
   roomPresetShop: {fileID: 274460984}
   grid: {fileID: 722828203}
