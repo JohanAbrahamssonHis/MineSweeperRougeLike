@@ -92,11 +92,12 @@ public class HealthBar : MonoBehaviour
         // Calculate the total width to fill
         float totalWidth = distance;
         // Calculate spacing so icons fill the area from -distance/2 to +distance/2
-        float iconSpacing = totalWidth / (_gameObjects.Count - 1);
+        // +1 instead of -1 to include spacing on both ends
+        float iconSpacing = totalWidth / (_gameObjects.Count + 1);
         float startX = -totalWidth / 2f;
         for (int i = 0; i < _gameObjects.Count; i++)
         {
-            float x = startX + i * iconSpacing;
+            float x = startX + (i + 1) * iconSpacing;
             _gameObjects[i].transform.localPosition = new Vector3(x, 0, 0);
             _positions[i] = new Vector3(x, 0, 0);
         }
