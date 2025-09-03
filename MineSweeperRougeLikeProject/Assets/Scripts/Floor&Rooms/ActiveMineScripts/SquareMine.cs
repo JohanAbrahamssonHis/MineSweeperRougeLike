@@ -81,15 +81,19 @@ public class SquareMine : MonoBehaviour, IInteractable
         if (hasFlag || (hasMine && mine.isDisabled)) return;
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
-        
+
         if (!mineRoomManager.AfterFirstMove)
+        {
+            ActionEvents.Instance.TriggerEventAction();
             mineRoomManager.SetLogic(this);
+            ActionEvents.Instance.TriggerEventAfterAction();
+        }
         else
         {
             if (squareRevealed) return;
             
             ActionEvents.Instance.TriggerEventAction();
-            RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*5);
+            RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*2);
             RunPlayerStats.Instance.Heat += 0.15f;
             
             mineRoomManager.RevealTile(this);
