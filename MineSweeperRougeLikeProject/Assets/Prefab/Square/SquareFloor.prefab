@@ -160,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -653557789, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
+  m_Sprite: {fileID: 1441971498, guid: 0db38ad34b9211c4f925f337605e532b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -215,6 +215,6 @@ MonoBehaviour:
   room: {fileID: 0}
   Numbers: []
   position: {x: 0, y: 0}
-  hasNeighbourMine: 0
-  squareSpriteUnused: {fileID: -653557789, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
+  hasNeighbourRoom: 0
+  squareSpriteUnused: {fileID: 1441971498, guid: 0db38ad34b9211c4f925f337605e532b, type: 3}
   squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}

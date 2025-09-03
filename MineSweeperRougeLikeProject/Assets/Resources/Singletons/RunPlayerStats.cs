@@ -30,7 +30,7 @@ public class RunPlayerStats : ScriptableObject
             if(isInvincable) return;
             if (value < health) ActionEvents.Instance.TriggerEventDamage();
             health = value;
-            HealthBar.HealthChanged(value);
+            if(HealthBar!=null) HealthBar.HealthChanged(value);
             if (health < 1) Lose();
         }
     }
