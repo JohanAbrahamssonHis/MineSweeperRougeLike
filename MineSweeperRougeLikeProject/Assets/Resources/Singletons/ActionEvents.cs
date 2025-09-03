@@ -19,6 +19,8 @@ public class ActionEvents : ScriptableObject
 
     public delegate void ActionEvent();
     
+    public delegate void ActionEventShop(ShopManager shopManager);
+    
     
     //First Action Of the game
     public event ActionEvent OnFirstAction;
@@ -44,4 +46,16 @@ public class ActionEvents : ScriptableObject
     public event ActionEvent OnDamage;
     public void TriggerEventDamage() => OnDamage?.Invoke();
     
+    //When shop is entered
+    public event ActionEventShop OnShop;
+    public void TriggerEventShop(ShopManager shopManager) => OnShop?.Invoke(shopManager);
+    
+    //After shop is entered
+    public event ActionEventShop OnShopAfter;
+    public void TriggerEventShopAfter(ShopManager shopManager) => OnShopAfter?.Invoke(shopManager);
+    
+    //Leaving Shop
+    public event ActionEventShop OnShopLeave;
+    public void TriggerEventShopLeave(ShopManager shopManager) => OnShopLeave?.Invoke(shopManager);
+
 }

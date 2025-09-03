@@ -19,9 +19,10 @@ public class EightBall : Item
     {
         ActionEvents.Instance.OnFirstAction += Function;
     }
-    
-    public void OnApplicationQuit()
+
+    public override void Unsubscribe()
     {
-        ActionEvents.Instance.OnAction -= Function;
+        base.Unsubscribe();
+        ActionEvents.Instance.OnFirstAction -= Function;
     }
 }

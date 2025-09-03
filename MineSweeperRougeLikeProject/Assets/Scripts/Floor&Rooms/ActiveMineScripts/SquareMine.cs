@@ -95,6 +95,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             mineRoomManager.RevealTile(this);
 
             mineRoomManager.AfterActionFunction();
+            ActionEvents.Instance.TriggerEventAfterAction();
         }
     }
 
@@ -103,6 +104,7 @@ public class SquareMine : MonoBehaviour, IInteractable
         if (squareRevealed) return;
         hasFlag = !hasFlag;
         
+        ActionEvents.Instance.TriggerEventFlag();
         _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
     }
 }

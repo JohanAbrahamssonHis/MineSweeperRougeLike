@@ -9,4 +9,6 @@ public abstract class Item : ScriptableObject
     public int rarity;
     public abstract void Function();
     public abstract void Join();
+
+    public virtual void Unsubscribe(){}
 }

@@ -6,7 +6,14 @@ using UnityEngine;
 public class ShopItem : MonoBehaviour, IInteractable
 {
     private bool isBought;
+
     private int cost;
+    
+    public int Cost
+    {
+        get => cost;
+        set => SetCost(value);
+    }
     public Item Item;
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererCost;
@@ -18,11 +25,17 @@ public class ShopItem : MonoBehaviour, IInteractable
 
         _spriteRenderer.sprite = Item.sprite;
 
-        cost = Item.cost;
-        _spriteRendererCost.sprite = NumberSprites.Instance.GetNumberedSprite(cost);
+        Cost = Item.cost;
         
         isBought = false;
     }
+
+    public void SetCost(int value)
+    {
+        cost = value;
+        _spriteRendererCost.sprite = NumberSprites.Instance.GetNumberedSprite(cost);
+    }
+    
 
     public void Interact()
     {

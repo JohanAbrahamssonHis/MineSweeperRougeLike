@@ -45,6 +45,7 @@ public class Grid : MonoBehaviour
         //ends the round
         endRoomScreen.SetScreen(true);
         RunPlayerStats.Instance.ActiveTimer = false;
+        ActionEvents.Instance.TriggerEventMineRoomWin();
     }
 
     float setOnGrid(int index, int squaresSize)

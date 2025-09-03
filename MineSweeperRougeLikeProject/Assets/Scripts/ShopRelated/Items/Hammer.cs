@@ -27,9 +27,10 @@ public class Hammer : Item
     {
         ActionEvents.Instance.OnDamage += Function;
     }
-    
-    public void OnApplicationQuit()
+
+    public override void Unsubscribe()
     {
+        base.Unsubscribe();
         ActionEvents.Instance.OnDamage -= Function;
     }
 }

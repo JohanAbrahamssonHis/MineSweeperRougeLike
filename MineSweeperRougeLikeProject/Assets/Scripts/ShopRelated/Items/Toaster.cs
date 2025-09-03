@@ -14,4 +14,10 @@ public class Toaster : Item
     {
         ActionEvents.Instance.OnAction += Function;
     }
+
+    public override void Unsubscribe()
+    {
+        base.Unsubscribe();
+        ActionEvents.Instance.OnAction -= Function;
+    }
 }

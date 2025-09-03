@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
-  m_Name: RunPlayerStats
+  m_Script: {fileID: 11500000, guid: d22ba0359b58808438b51a9af5af77cb, type: 3}
+  m_Name: Coin
   m_EditorClassIdentifier: 
-  isInvincable: 0
-  Timmer: {fileID: 0}
-  ActiveTimer: 0
-  Inventory: []
-  ItemInventoryVisual: {fileID: 0}
+  cost: 2
+  sprite: {fileID: -757130003, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
+  rarity: 3

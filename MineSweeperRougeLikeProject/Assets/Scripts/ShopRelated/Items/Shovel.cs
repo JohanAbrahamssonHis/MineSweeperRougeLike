@@ -15,8 +15,9 @@ public class Shovel : Item
         ActionEvents.Instance.OnAction += Function;
     }
 
-    public void OnApplicationQuit()
+    public override void Unsubscribe()
     {
+        base.Unsubscribe();
         ActionEvents.Instance.OnAction -= Function;
     }
 }

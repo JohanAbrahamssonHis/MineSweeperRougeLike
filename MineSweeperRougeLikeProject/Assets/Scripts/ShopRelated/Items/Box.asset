@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
-  m_Name: RunPlayerStats
+  m_Script: {fileID: 11500000, guid: 358046fd202d55a4e858cd97cdc396d2, type: 3}
+  m_Name: Box
   m_EditorClassIdentifier: 
-  isInvincable: 0
-  Timmer: {fileID: 0}
-  ActiveTimer: 0
-  Inventory: []
-  ItemInventoryVisual: {fileID: 0}
+  cost: 4
+  sprite: {fileID: -828071088, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
+  rarity: 2
+  maxMoney: 10
+  minMoney: 0
+  minesAddedOdds: 2
+  maxMines: 1
+  minMines: 2

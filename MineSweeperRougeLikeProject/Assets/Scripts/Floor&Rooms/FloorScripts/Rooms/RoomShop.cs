@@ -20,6 +20,5 @@ public class RoomShop : Room
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
-        
     }
 }

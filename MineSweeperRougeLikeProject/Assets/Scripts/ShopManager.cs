@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class ShopManager : MonoBehaviour
     private int HighestRarity;
     void Start()
     {
+        ActionEvents.Instance.TriggerEventShop(this);
         BannedItemList = new List<Item>();
         
         foreach (var item in ItemList.Where(item => item.rarity > HighestRarity)) HighestRarity = item.rarity;
@@ -20,6 +22,8 @@ public class ShopManager : MonoBehaviour
         
         ShopItems.ForEach(x => x.Item = GetShopItem());
         ShopItems.ForEach(x => x.SetUpShopItem());
+        
+        ActionEvents.Instance.TriggerEventShopAfter(this);
     }
 
 
@@ -33,7 +37,7 @@ public class ShopManager : MonoBehaviour
 
         BannedItemList.Add(rarityItems[selectItem]);
 
-        return rarityItems[selectItem];
+        return Instantiate(rarityItems[selectItem]);
     }
 
     private List<Item> GetRarityValue()

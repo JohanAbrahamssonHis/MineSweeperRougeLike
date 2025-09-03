@@ -113,14 +113,15 @@ public class RunPlayerStats : ScriptableObject
     public void Lose()
     {
         //ResetValues();
+        Inventory.ForEach(x => x.Unsubscribe());
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
     }
     
     public void ResetValues()
     {
         Health = 5;
-        Time = 4*60;
-        Money = 10;
+        Time = 3*60;
+        Money = 5;
         FloorCount = 0;
         RoomCount = 0;
         RoomLock = 2;

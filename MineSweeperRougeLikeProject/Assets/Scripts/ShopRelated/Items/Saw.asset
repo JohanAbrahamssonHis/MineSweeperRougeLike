@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
-  m_Name: RunPlayerStats
+  m_Script: {fileID: 11500000, guid: 4079bbd40a55fbd488f6477604a9b6bb, type: 3}
+  m_Name: Saw
   m_EditorClassIdentifier: 
-  isInvincable: 0
-  Timmer: {fileID: 0}
-  ActiveTimer: 0
-  Inventory: []
-  ItemInventoryVisual: {fileID: 0}
+  cost: 6
+  sprite: {fileID: 1263599406, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
+  rarity: 4
