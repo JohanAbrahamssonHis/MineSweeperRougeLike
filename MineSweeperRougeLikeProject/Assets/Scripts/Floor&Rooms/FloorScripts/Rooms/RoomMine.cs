@@ -15,6 +15,7 @@ public class RoomMine : Room
     public override void RoomFunction()
     {
         base.RoomFunction();
+        RunPlayerStats.Instance.endState = false;
         SceneDeterminer.LoadAddedScene(scene);
     }
 

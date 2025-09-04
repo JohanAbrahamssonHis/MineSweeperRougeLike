@@ -116,6 +116,14 @@ public class RunPlayerStats : ScriptableObject
         Inventory.ForEach(x => x.Unsubscribe());
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
     }
+
+    public bool endState { get; set; }
+    public void Win()
+    {
+        endState = true;
+        ActiveTimer = false;
+        ActionEvents.Instance.TriggerEventMineRoomWin();
+    }
     
     public void ResetValues()
     {

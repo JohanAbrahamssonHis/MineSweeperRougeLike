@@ -42,10 +42,10 @@ public class Grid : MonoBehaviour
     {
         if (squares.Any(x => !x.hasMine && !x.squareRevealed)) return;
         
+        RunPlayerStats.Instance.Win();
+        
         //ends the round
         endRoomScreen.SetScreen(true);
-        RunPlayerStats.Instance.ActiveTimer = false;
-        ActionEvents.Instance.TriggerEventMineRoomWin();
     }
 
     float setOnGrid(int index, int squaresSize)
