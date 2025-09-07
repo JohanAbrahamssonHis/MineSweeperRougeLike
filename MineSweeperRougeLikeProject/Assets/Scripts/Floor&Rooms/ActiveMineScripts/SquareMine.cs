@@ -44,6 +44,8 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public Sprite squareSpriteUnused;
     public Sprite squareSpriteUsed;
+
+    public AudioClip audioClip;
     
     // Start is called before the first frame update
     void Start()
@@ -85,6 +87,7 @@ public class SquareMine : MonoBehaviour, IInteractable
         if (!mineRoomManager.AfterFirstMove)
         {
             ActionEvents.Instance.TriggerEventAction();
+            SoundManager.Instance.AddSoundBite(audioClip, transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
             mineRoomManager.SetLogic(this);
             ActionEvents.Instance.TriggerEventAfterAction();
         }
@@ -95,6 +98,8 @@ public class SquareMine : MonoBehaviour, IInteractable
             ActionEvents.Instance.TriggerEventAction();
             RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*2);
             RunPlayerStats.Instance.Heat += 0.15f;
+            
+            SoundManager.Instance.AddSoundBite(audioClip, transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
             
             mineRoomManager.RevealTile(this);
 

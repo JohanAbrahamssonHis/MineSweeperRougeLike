@@ -18,6 +18,8 @@ public class SquareFloor : MonoBehaviour, IInteractable
 
     public Sprite squareSpriteUnused;
     public Sprite squareSpriteUsed;
+
+    public AudioClip audioClip;
     
     // Start is called before the first frame update
     void Start()
@@ -48,9 +50,11 @@ public class SquareFloor : MonoBehaviour, IInteractable
         {
             if (squareRevealed) return;
             floorManager.RevealTile(this);
-
+            
             floorManager.AfterActionFunction();
         }
+
+        SoundManager.Instance.AddSoundBite(audioClip, transform, true, 1);
     }
 
     public void SecondInteract()

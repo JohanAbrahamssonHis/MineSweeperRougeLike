@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe393d1d1da3e94e8c6c8d59e5211f5, type: 3}
   m_Name: SoundManager
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 24300002, guid: 3868d2379eb3e524c9e5d46535247ef3, type: 2}

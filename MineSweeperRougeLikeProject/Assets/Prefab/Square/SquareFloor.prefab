@@ -218,3 +218,4 @@ MonoBehaviour:
   hasNeighbourRoom: 0
   squareSpriteUnused: {fileID: 1441971498, guid: 0db38ad34b9211c4f925f337605e532b, type: 3}
   squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
+  audioClip: {fileID: 8300000, guid: 89ccc6db848c3ac498fa5463943fd37a, type: 3}

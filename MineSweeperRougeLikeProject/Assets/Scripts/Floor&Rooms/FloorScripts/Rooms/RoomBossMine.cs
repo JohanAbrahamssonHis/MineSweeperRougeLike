@@ -20,6 +20,7 @@ public class RoomBossMine : Room
     {
         base.RoomFunction();
         RunPlayerStats.Instance.ActiveTimer = true;
+        RunPlayerStats.Instance.endState = false;
         SceneDeterminer.LoadAddedScene(scene);
     }
 
