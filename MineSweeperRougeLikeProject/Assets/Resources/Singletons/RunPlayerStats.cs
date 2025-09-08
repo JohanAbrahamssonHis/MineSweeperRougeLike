@@ -149,7 +149,13 @@ public class RunPlayerStats : ScriptableObject
 
     public void AddMalwarePackage(MalwarePackage malwarePackage)
     {
-        MalwarePackages.Add(malwarePackage);
+        MalwarePackages.Add(Instantiate(malwarePackage));
+        if(mineViusalizer==null) return;
+        mineViusalizer.SetVisualizer();
+    }
+
+    public void SetMineVisualizer()
+    {
         if(mineViusalizer==null) return;
         mineViusalizer.SetVisualizer();
     }

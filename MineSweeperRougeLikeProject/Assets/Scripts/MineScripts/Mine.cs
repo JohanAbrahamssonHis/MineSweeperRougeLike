@@ -15,6 +15,8 @@ public abstract class Mine : MonoBehaviour
     public SpriteRenderer _spriteRenderer;
     public MineRoomManager mineRoomManager;
 
+    public AudioClip audioClip;
+
     public CallBack call;
     
     public virtual void SetUpMine(MineRoomManager mineRoomManager)
@@ -27,6 +29,7 @@ public abstract class Mine : MonoBehaviour
     {
         isActivated = true;
         RunPlayerStats.Instance.Health--;
+        SoundManager.Instance.AddSoundBite(audioClip, transform, true, 1);
     }
 
     public void SetPosition(Vector2 pos)

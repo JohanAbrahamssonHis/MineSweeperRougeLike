@@ -24,18 +24,12 @@ public class Box : Item
 
         MalwarePackage selectedMalwarePackage =
             RunPlayerStats.Instance.MalwarePackages[Random.Range(0, RunPlayerStats.Instance.MalwarePackages.Count)];
-
-        Mine selectedMine = Instantiate(selectedMalwarePackage.mines[Random.Range(0, selectedMalwarePackage.mines.Count)]);
         
-        
-        MalwarePackage _malwarePackage = ScriptableObject.CreateInstance<MalwarePackage>();
-
         for (int i = 0; i < randomAmountOfMines; i++)
         {
-            _malwarePackage.mines.Add(selectedMine);
+            Mine selectedMine = Instantiate(selectedMalwarePackage.mines[Random.Range(0, selectedMalwarePackage.mines.Count)]);
+           selectedMalwarePackage.AddMine(selectedMine);
         }
-
-        RunPlayerStats.Instance.AddMalwarePackage(_malwarePackage);
     }
 
     public override void Join()

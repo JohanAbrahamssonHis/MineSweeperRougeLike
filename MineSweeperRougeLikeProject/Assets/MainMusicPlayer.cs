@@ -8,7 +8,7 @@ public class MainMusicPlayer : MonoBehaviour
     public AudioClip backgroundMusic;
     public AudioMixerGroup mixerGroup;
 
-    void Start()
+    void OnEnable()
     {
         if (SoundManager.Instance.Main != null)
         {

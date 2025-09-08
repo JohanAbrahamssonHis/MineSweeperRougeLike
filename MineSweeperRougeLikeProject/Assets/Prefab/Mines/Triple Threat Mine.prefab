@@ -44,8 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b47b5f8d5977d438c94515e538e6ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDisabled: 0
   weight: 3
   sprite: {fileID: -1281434448, guid: af96cb144a83eaf46b9c05241cbae54e, type: 3}
   position: {x: 0, y: 0}
   neighbours: []
+  isActivated: 0
   _spriteRenderer: {fileID: 0}
+  mineRoomManager: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 8227a5771b85e7843a663e9626eb98b5, type: 3}
