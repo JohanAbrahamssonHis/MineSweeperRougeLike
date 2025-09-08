@@ -30,14 +30,17 @@ public class RoomBossMine : Room
         
         SceneDeterminer.LoadAddedScene("MalwarePicker");
         
-        RunPlayerStats.Instance.RoomCount = 0;
-        RunPlayerStats.Instance.FloorCount++;
-        if (RunPlayerStats.Instance.FloorCount > 8)
+        RunPlayerStats rPS = RunPlayerStats.Instance;
+        
+        rPS.Money += rPS.MoneyGain + rPS.Points/10;
+        rPS.RoomCount = 0;
+        rPS.FloorCount++;
+        if (rPS.FloorCount > 8)
         {
-            RunPlayerStats.Instance.FloorCount = 0;
+            rPS.FloorCount = 0;
         }
         
-        RunPlayerStats.Instance.FloorManager.ResetBoard();
+        rPS.FloorManager.ResetBoard();
     }
 
     public void CheckActivation()

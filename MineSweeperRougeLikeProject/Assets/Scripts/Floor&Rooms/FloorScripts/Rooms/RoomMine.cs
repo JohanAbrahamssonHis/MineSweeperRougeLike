@@ -22,7 +22,10 @@ public class RoomMine : Room
     public override void LeaveRoomFunction()
     {
         base.LeaveRoomFunction();
-        RunPlayerStats.Instance.RoomCount++;
-        RunPlayerStats.Instance.Time += 30;
+        RunPlayerStats rPS = RunPlayerStats.Instance;
+        
+        rPS.RoomCount++;
+        rPS.Time += rPS.TimeGain;
+        rPS.Money += rPS.MoneyGain + rPS.Points/10;
     }
 }
