@@ -63,8 +63,8 @@ public class SoundManager : ScriptableObject
 
     private AudioSource AddSoundBite(AudioClip audioClip, Transform transform, bool playOnCommand, float timeToDestory, float pitch, bool loop)
     {
-        GameObject soundObject = new GameObject("Sound_" + transform.name);
-        if(timeToDestory<=0) soundObject.transform.SetParent(transform);
+        GameObject soundObject = new GameObject("Sound_" + (transform==null? "Null" : transform));
+        if(timeToDestory<=0 || transform!=null) soundObject.transform.SetParent(transform);
         AudioSource soundObjectAudioSource = soundObject.AddComponent<AudioSource>();
         soundObjectAudioSource.outputAudioMixerGroup = Mixer;
         soundObjectAudioSource.pitch = pitch;

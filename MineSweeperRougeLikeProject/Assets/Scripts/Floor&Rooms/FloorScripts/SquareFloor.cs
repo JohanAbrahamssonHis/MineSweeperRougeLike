@@ -42,6 +42,8 @@ public class SquareFloor : MonoBehaviour, IInteractable
     {
         FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
         
+        SoundManager.Instance.Play("Action", null, true, 1);
+        
         if (!floorManager.AfterFirstMove)
             floorManager.SetLogic(this);
         else
@@ -51,8 +53,6 @@ public class SquareFloor : MonoBehaviour, IInteractable
             
             floorManager.AfterActionFunction();
         }
-
-        SoundManager.Instance.Play("Click", transform, true, 1);
     }
 
     public void SecondInteract()

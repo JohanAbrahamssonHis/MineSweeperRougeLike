@@ -112,6 +112,8 @@ public class SquareMine : MonoBehaviour, IInteractable
         hasFlag = !hasFlag;
         
         ActionEvents.Instance.TriggerEventFlag();
+        SoundManager.Instance.Play("Flag", transform, true, 1);
+       
         _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
     }
 }

@@ -49,10 +49,7 @@ public class RunPlayerStats : ScriptableObject
             time = value;
             if(Timmer==null) return;
             Timmer.SetTimmer();
-            if (time < 0)
-            {
-                Lose();
-            }
+            if (time < 0) Lose();
         }
     }
     
@@ -61,7 +58,19 @@ public class RunPlayerStats : ScriptableObject
     public int Points { get; set; }
     public float Heat { get; set; }
     public float ComboValue { get; set; }
-    public int Money { get; set; }
+
+    private int money;
+
+    public int Money
+    {
+        get => money;
+        set
+        {
+            money = value;
+            SoundManager.Instance.Play("Money", null, true, 1f, 1 + Money * 0.05f);
+        }
+    }
+
     public int MoneyGain { get; set; }
     
     private int floorCount;
@@ -119,6 +128,8 @@ public class RunPlayerStats : ScriptableObject
         //ResetValues();
         Inventory.ForEach(x => x.Unsubscribe());
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
+        SoundManager.Instance.Play("GameOver", null, true, 3f);
+        SoundManager.Instance.Play("GameOverVoice", null, true, 3f);
     }
 
     public bool endState { get; set; }
@@ -133,13 +144,14 @@ public class RunPlayerStats : ScriptableObject
     {
         Health = 5;
         Time = 3*60;
-        TimeGain = 30;
+        TimeGain = 15;
         Money = 5;
         MoneyGain = 4;
         FloorCount = 0;
         RoomCount = 0;
         RoomLock = 2;
         GridSize = new Vector2(6, 6);
+        ActiveTimer = false;
         MalwarePackages = new List<MalwarePackage>();
         MineRoomManager = null;
         FloorManager = null;

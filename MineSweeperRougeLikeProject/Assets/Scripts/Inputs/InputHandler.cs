@@ -16,6 +16,8 @@ public class InputHandler : MonoBehaviour
     {
         if (!context.started) return;
 
+        //SoundManager.Instance.Play("Click", transform, true, 1f);
+        
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(!rayHit.collider) return;
 
@@ -27,6 +29,8 @@ public class InputHandler : MonoBehaviour
     {
         if (!context.started) return;
 
+        //SoundManager.Instance.Play("Click", transform, true, 1f);
+        
         var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(!rayHit.collider) return;
 
