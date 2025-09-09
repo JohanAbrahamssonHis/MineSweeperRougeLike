@@ -18,14 +18,16 @@ public class MainMusicPlayer : MonoBehaviour
         
         DontDestroyOnLoad(gameObject);
         
+        /*
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = backgroundMusic;
         audioSource.playOnAwake = true;
         audioSource.loop = true;
         audioSource.volume = 0.9f;
         audioSource.reverbZoneMix = 0.9f;
+        */
         
-        SoundManager.Instance.PlayMain(audioSource);
+        SoundManager.Instance.PlayMain(transform);
         
         SoundManager.Instance.Mixer = mixerGroup;
         SoundManager.Instance.Main.outputAudioMixerGroup = SoundManager.Instance.Mixer;

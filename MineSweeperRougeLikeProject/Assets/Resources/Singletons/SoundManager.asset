@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe393d1d1da3e94e8c6c8d59e5211f5, type: 3}
   m_Name: SoundManager
   m_EditorClassIdentifier: 
-  Mixer: {fileID: 24300002, guid: 3868d2379eb3e524c9e5d46535247ef3, type: 2}
+  clipLibrary:
+  - clipName: MainMusic
+    audioClip: {fileID: 8300000, guid: a5d210bdf33e84e4bbf3c75b8d1fa4d3, type: 3}
+  - clipName: Click
+    audioClip: {fileID: 8300000, guid: 89ccc6db848c3ac498fa5463943fd37a, type: 3}
+  - clipName: Explosion
+    audioClip: {fileID: 8300000, guid: 8227a5771b85e7843a663e9626eb98b5, type: 3}
