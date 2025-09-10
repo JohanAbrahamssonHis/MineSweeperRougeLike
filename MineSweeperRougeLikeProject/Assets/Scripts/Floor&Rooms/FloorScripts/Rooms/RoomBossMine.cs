@@ -24,7 +24,6 @@ public class RoomBossMine : Room
         //SoundManager.Instance.Play("BoomBeep", null, true, 0,1,true);
         RunPlayerStats.Instance.endState = false;
         //SoundManager.Instance.Play("EliteEvilLaugh", null, true, 2f);
-        Debug.Log(scene);
         
         SceneDeterminer.LoadAddedScene(scene);
     }
