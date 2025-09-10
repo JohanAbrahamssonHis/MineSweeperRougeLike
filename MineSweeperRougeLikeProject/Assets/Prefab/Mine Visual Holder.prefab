@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6933958440122149240}
-  - component: {fileID: 6495999824650034848}
+  - component: {fileID: 5063256538146900323}
   - component: {fileID: 4482819421779084632}
   m_Layer: 0
   m_Name: Mine Visual Holder
@@ -120,7 +120,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6495999824650034848
+--- !u!114 &5063256538146900323
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6933958440122149243}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e40b1aca7815940836a7df98d0108d, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b87e3bdf0802904caa370091f8e565b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mine: {fileID: 0}

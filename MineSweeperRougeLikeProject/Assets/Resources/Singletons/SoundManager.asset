@@ -14,21 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clipLibrary:
   - clipName: MainMusic
-    audioClip: {fileID: 8300000, guid: a5d210bdf33e84e4bbf3c75b8d1fa4d3, type: 3}
+    audioClip: {fileID: 8300000, guid: 1723deebdcced69459e9616b123290a2, type: 3}
   - clipName: Click
-    audioClip: {fileID: 8300000, guid: 89ccc6db848c3ac498fa5463943fd37a, type: 3}
+    audioClip: {fileID: 8300000, guid: a0c1c5ce523c415488c07ea21622616e, type: 3}
   - clipName: Action
-    audioClip: {fileID: 8300000, guid: 35e3388655a2bea439b2522f5a710fc0, type: 3}
+    audioClip: {fileID: 8300000, guid: 26d56caf4919e024e9249bd8ebd34edf, type: 3}
   - clipName: Flag
-    audioClip: {fileID: 8300000, guid: af7940fb7a5974c4b99bdf6ff4679cb3, type: 3}
+    audioClip: {fileID: 8300000, guid: 02892ff93306a0c41afc34132d245880, type: 3}
   - clipName: Money
-    audioClip: {fileID: 8300000, guid: aec756f5736c56547a2cebfc82368b3f, type: 3}
+    audioClip: {fileID: 8300000, guid: b8096938c7c056d44a4992b22b3a39da, type: 3}
   - clipName: Explosion
-    audioClip: {fileID: 8300000, guid: 8227a5771b85e7843a663e9626eb98b5, type: 3}
+    audioClip: {fileID: 8300000, guid: b5db73fdf0fd8af449994ebc1c780262, type: 3}
   - clipName: GameOver
-    audioClip: {fileID: 8300000, guid: b88b14820d8e4fd47bd1005386158b17, type: 3}
+    audioClip: {fileID: 8300000, guid: 39adb5ab8a5a183428b46838daee7211, type: 3}
   - clipName: GameOverVoice
-    audioClip: {fileID: 8300000, guid: c062dfacc50d1ea43ba691a58825d2b9, type: 3}
+    audioClip: {fileID: 8300000, guid: 4771f6f1234717b43b26a9ee62a3f185, type: 3}
   - clipName: EnterRoomSound
     audioClip: {fileID: 8300000, guid: f67e8f597012b35479c8a4bd1ff3b6a1, type: 3}
   - clipName: EliteEvilLaugh

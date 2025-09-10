@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624764d7355502b45ad410ef9b7ddf40, type: 3}
-  m_Name: AgentMineMalwarePackage
+  m_Script: {fileID: 11500000, guid: 20754f47fd604504b83f440ec348c670, type: 3}
+  m_Name: AgentMine
   m_EditorClassIdentifier: 
   mines:
   - {fileID: -1865432411817466198, guid: 74c918aa6f62a654ebcdbea6aa796469, type: 3}
   - {fileID: -1865432411817466198, guid: 74c918aa6f62a654ebcdbea6aa796469, type: 3}
   - {fileID: -1865432411817466198, guid: 74c918aa6f62a654ebcdbea6aa796469, type: 3}
   - {fileID: -1865432411817466198, guid: 74c918aa6f62a654ebcdbea6aa796469, type: 3}
-  commonality: 3
+  commonality: 2

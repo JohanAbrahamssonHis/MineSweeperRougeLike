@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624764d7355502b45ad410ef9b7ddf40, type: 3}
-  m_Name: MalwarePackage
+  m_Script: {fileID: 11500000, guid: 20754f47fd604504b83f440ec348c670, type: 3}
+  m_Name: LargeMine
   m_EditorClassIdentifier: 
-  mines: []
-  commonality: 0
+  mines:
+  - {fileID: 1961793400585736223, guid: 9b41b290ffbb5a648adc0602427aa369, type: 3}
+  commonality: 1

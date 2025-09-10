@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437770862474675607}
   - component: {fileID: 6437770862474675604}
-  - component: {fileID: 6437770862474675605}
+  - component: {fileID: 7253393481358821568}
   m_Layer: 0
   m_Name: Input Handler
   m_TagString: Untagged
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6437770862474675605}
+      - m_Target: {fileID: 7253393481358821568}
         m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
     m_ActionName: GamePlay/Click[/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6437770862474675605}
+      - m_Target: {fileID: 7253393481358821568}
         m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
         m_MethodName: OnRightClick
         m_Mode: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
     m_ActionName: GamePlay/RightClick[/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6437770862474675605}
+      - m_Target: {fileID: 7253393481358821568}
         m_TargetAssemblyTypeName: InputHandler, Assembly-CSharp
         m_MethodName: OnResetBoard
         m_Mode: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_DefaultActionMap: GamePlay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6437770862474675605
+--- !u!114 &7253393481358821568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +120,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6437770862474675626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbf11425601b3084d8ddf966c14ed4d5, type: 3}
+  m_Script: {fileID: 11500000, guid: d3ebb4d645b15964a91553eba0df8453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mineRoomManager: {fileID: 0}

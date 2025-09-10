@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 1621215128327120871}
   - component: {fileID: 1621215128327120872}
   - component: {fileID: 1621215128327120870}
-  - component: {fileID: 8613991772289876465}
+  - component: {fileID: 5467571542411376121}
   m_Layer: 0
   m_Name: SquareMine
   m_TagString: Untagged
@@ -366,7 +366,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8613991772289876465
+--- !u!114 &5467571542411376121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1621215128327120873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8748adec299dc1a4e8baad153237b714, type: 3}
+  m_Script: {fileID: 11500000, guid: b2d329e443812a94fa0e0ad7708a51a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   number: 0
@@ -389,7 +389,6 @@ MonoBehaviour:
   hasNeighbourMine: 0
   squareSpriteUnused: {fileID: -653557789, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
   squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
-  audioClip: {fileID: 8300000, guid: 89ccc6db848c3ac498fa5463943fd37a, type: 3}
 --- !u!1 &1621215128431673766
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8428630882770831327}
-  - component: {fileID: 8428630882770831324}
+  - component: {fileID: 2012682591697734899}
   m_Layer: 0
   m_Name: Mine Room Manager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8428630882770831324
+--- !u!114 &2012682591697734899
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,11 +41,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8428630882770831325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ca007e77df68b4dbe84edcf947ce94, type: 3}
+  m_Script: {fileID: 11500000, guid: e14c0aafcbca3944b871deb4cb91f39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mines: 5
-  minePreset: {fileID: 305305550780303652, guid: 496ef67902c4b964fbc5f05a94c3c7f8, type: 3}
+  mines: 0
+  minePreset: {fileID: 0}
   grid: {fileID: 0}
   AfterFirstMove: 0
   malwarePackages: []

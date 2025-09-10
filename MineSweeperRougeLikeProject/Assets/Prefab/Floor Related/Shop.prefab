@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4475167768653244972}
-  - component: {fileID: 4475167768653244963}
+  - component: {fileID: 4458448135108494753}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4475167768653244963
+--- !u!114 &4458448135108494753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4475167768653244973}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 177a90b185c51fa47a83f5aa879d6c5c, type: 3}
+  m_Script: {fileID: 11500000, guid: fbbf4c8de32dd9d47a0ddc70c98b97eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 1167401071, guid: 4c792b96ce7fd434ba498805f6873c9d, type: 3}

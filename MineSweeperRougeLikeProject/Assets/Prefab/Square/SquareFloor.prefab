@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1621215128327120871}
   - component: {fileID: 1621215128327120872}
   - component: {fileID: 1621215128327120870}
-  - component: {fileID: -7590976309789133605}
+  - component: {fileID: 1950913151243043917}
   m_Layer: 0
   m_Name: SquareFloor
   m_TagString: Untagged
@@ -197,7 +197,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-7590976309789133605
+--- !u!114 &1950913151243043917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1621215128327120873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bcb7ce9ec3338f4d93955965778b4a4, type: 3}
+  m_Script: {fileID: 11500000, guid: fa75855417f80f24dba7a65d459ee449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   number: 0
@@ -218,4 +218,3 @@ MonoBehaviour:
   hasNeighbourRoom: 0
   squareSpriteUnused: {fileID: 1441971498, guid: 0db38ad34b9211c4f925f337605e532b, type: 3}
   squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
-  audioClip: {fileID: 8300000, guid: 89ccc6db848c3ac498fa5463943fd37a, type: 3}

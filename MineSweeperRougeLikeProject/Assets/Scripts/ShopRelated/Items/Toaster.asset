@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969612db25566554f9ed0c8bff2f8143, type: 3}
+  m_Script: {fileID: 11500000, guid: b3a05e5125a537343b915cd6e1c83dcc, type: 3}
   m_Name: Toaster
   m_EditorClassIdentifier: 
   cost: 7
-  sprite: {fileID: -684189714, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
+  sprite: {fileID: 873033037, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
   rarity: 5

@@ -458,7 +458,7 @@ GameObject:
   - component: {fileID: 1076259674143154447}
   - component: {fileID: 1076259674143154442}
   - component: {fileID: 1076259674143154445}
-  - component: {fileID: 404519639358087613}
+  - component: {fileID: 4829788896693104359}
   - component: {fileID: 4635141466287365074}
   m_Layer: 5
   m_Name: Button
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &404519639358087613
+--- !u!114 &4829788896693104359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -535,7 +535,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1076259674143154446}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f837743c297454db5c44c9c14d211f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e46258a6a687a647a5a50d4ec607345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!61 &4635141466287365074
@@ -573,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1076259674184380016}
-  - component: {fileID: 1076259674184380019}
+  - component: {fileID: 3287336144533917435}
   m_Layer: 0
   m_Name: EndScreen
   m_TagString: Untagged
@@ -597,7 +597,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1076259674184380019
+--- !u!114 &3287336144533917435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1076259674184380018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0842b150890dd404391c285d9bc0b231, type: 3}
+  m_Script: {fileID: 11500000, guid: 7649664262428e44899e42e84ee615ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pointsAmount: {fileID: 1076259674224791532}

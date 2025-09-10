@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624764d7355502b45ad410ef9b7ddf40, type: 3}
-  m_Name: SadMine
+  m_Script: {fileID: 11500000, guid: 20754f47fd604504b83f440ec348c670, type: 3}
+  m_Name: SadMines
   m_EditorClassIdentifier: 
   mines:
   - {fileID: -6520091372330050083, guid: 9fd46c42f57143e49b30578361d2aa47, type: 3}
   - {fileID: -6520091372330050083, guid: 9fd46c42f57143e49b30578361d2aa47, type: 3}
   - {fileID: -6520091372330050083, guid: 9fd46c42f57143e49b30578361d2aa47, type: 3}
-  commonality: 100
+  commonality: 3

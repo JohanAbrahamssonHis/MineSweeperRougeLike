@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 624764d7355502b45ad410ef9b7ddf40, type: 3}
-  m_Name: NormalMineMalwarePackage
+  m_Script: {fileID: 11500000, guid: 20754f47fd604504b83f440ec348c670, type: 3}
+  m_Name: NormalMines
   m_EditorClassIdentifier: 
   mines:
   - {fileID: 305305550780303652, guid: 496ef67902c4b964fbc5f05a94c3c7f8, type: 3}
