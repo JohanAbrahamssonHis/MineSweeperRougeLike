@@ -1637,10 +1637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85db05bd0e0462f4080556804b5045fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms: 3
-  shopRooms: 2
   roomPreset: {fileID: 4999749242277558151, guid: db2ca8902006fee4fbd970c4088945fa, type: 3}
   roomPresetShop: {fileID: 4475167768653244963, guid: 17f5c242a3fb1f64dae8ee65bb69767d, type: 3}
+  roomPresetElite: {fileID: 2337625670424260714, guid: a7c79889cbdbec3408bff3b51bc2f7bb, type: 3}
   grid: {fileID: 722828203}
   AfterFirstMove: 0
   _rooms: []
