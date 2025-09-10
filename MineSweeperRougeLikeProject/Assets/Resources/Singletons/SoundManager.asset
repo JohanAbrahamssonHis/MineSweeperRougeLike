@@ -29,3 +29,11 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: b88b14820d8e4fd47bd1005386158b17, type: 3}
   - clipName: GameOverVoice
     audioClip: {fileID: 8300000, guid: c062dfacc50d1ea43ba691a58825d2b9, type: 3}
+  - clipName: EnterRoomSound
+    audioClip: {fileID: 8300000, guid: f67e8f597012b35479c8a4bd1ff3b6a1, type: 3}
+  - clipName: EliteEvilLaugh
+    audioClip: {fileID: 8300000, guid: dbe5da2026068784497499caebef99fb, type: 3}
+  - clipName: BoomBeep
+    audioClip: {fileID: 8300000, guid: 27deefb61515e5f4082f1c712b8e070a, type: 3}
+  - clipName: Switch
+    audioClip: {fileID: 8300000, guid: cfb59e5b0626613419ddc55fc0eddf43, type: 3}

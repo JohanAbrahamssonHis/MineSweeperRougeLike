@@ -20,7 +20,10 @@ public class RoomBossMine : Room
     {
         base.RoomFunction();
         RunPlayerStats.Instance.ActiveTimer = true;
+        SoundManager.Instance.Play("Switch", null, true, 2f, 1.5f);
+        //SoundManager.Instance.Play("BoomBeep", null, true, 0,1,true);
         RunPlayerStats.Instance.endState = false;
+        //SoundManager.Instance.Play("EliteEvilLaugh", null, true, 2f);
         SceneDeterminer.LoadAddedScene(scene);
     }
 
@@ -33,7 +36,7 @@ public class RoomBossMine : Room
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
         rPS.Money += rPS.MoneyGain + rPS.Points/10;
-        rPS.RoomCount = 0;
+        rPS.RoomCountCleared = 0;
         rPS.FloorCount++;
         if (rPS.FloorCount > 8)
         {
@@ -45,6 +48,6 @@ public class RoomBossMine : Room
 
     public void CheckActivation()
     {
-        if (RunPlayerStats.Instance.RoomCount  >= RunPlayerStats.Instance.RoomLock) bossRoomSquare.isActive = true;
+        if (RunPlayerStats.Instance.RoomCountCleared  >= RunPlayerStats.Instance.RoomLock) bossRoomSquare.isActive = true;
     }
 }

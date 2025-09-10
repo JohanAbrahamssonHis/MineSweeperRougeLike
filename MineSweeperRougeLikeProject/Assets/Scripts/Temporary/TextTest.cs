@@ -16,6 +16,6 @@ public class TextTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = $"{RunPlayerStats.Instance.RoomCount}";
+        text.text = $"{RunPlayerStats.Instance.RoomCountCleared}";
     }
 }

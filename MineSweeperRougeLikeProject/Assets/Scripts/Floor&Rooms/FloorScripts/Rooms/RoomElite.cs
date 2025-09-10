@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RoomMine : Room
+public class RoomElite : Room
 {
     public override void SetUpRoom(FloorManager floorManager)
     {
@@ -18,10 +18,11 @@ public class RoomMine : Room
         
         
         RunPlayerStats.Instance.endState = false;
+
+        SoundManager.Instance.Play("Switch", null, true, 2f, 1.5f);
+        RunPlayerStats.Instance.ActiveTimer = true;
         
-        //if(Random.Range(0,rPS.RoomCount-rPS.RoomCountCleared-1)==0)
-        
-        SoundManager.Instance.Play("EnterRoomSound", null, true, 2f);
+        SoundManager.Instance.Play("EliteEvilLaugh", null, true, 4f);
         SceneDeterminer.LoadAddedScene(scene);
     }
 

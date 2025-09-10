@@ -81,10 +81,17 @@ public class RunPlayerStats : ScriptableObject
         {
             floorCount = value;
             if(value==0) return;
-            FloorManager.AddBasicRoom(1);
             if (floorCount % 3 == 2) FloorManager.AddShopRoom(1);
-            if (floorCount % 2 == 1) RoomLock++;
-            else GridSize += Vector2.one;
+            if (floorCount % 2 == 0)
+            {
+                FloorManager.AddBasicRoom(1);
+                GridSize += Vector2.one;
+            }
+            else
+            {
+                FloorManager.AddEliteRoom(1);
+                RoomLock++;
+            }
         }
     }
 
@@ -99,8 +106,10 @@ public class RunPlayerStats : ScriptableObject
     }
     
     
+    public int RoomCountCleared { get; set; }
+    public int EliteRoomCount { get; set; }
     public int RoomCount { get; set; }
-    
+    public int ShopCount { get; set; }
     public LockBar lockBar { get; set; }
     private int roomLock;
     public int RoomLock
@@ -144,11 +153,14 @@ public class RunPlayerStats : ScriptableObject
     {
         Health = 5;
         Time = 3*60;
-        TimeGain = 15;
+        TimeGain = 30;
         Money = 5;
         MoneyGain = 4;
         FloorCount = 0;
-        RoomCount = 0;
+        RoomCountCleared = 0;
+        EliteRoomCount = 1;
+        RoomCount = 2;
+        ShopCount = 2;
         RoomLock = 2;
         GridSize = new Vector2(6, 6);
         ActiveTimer = false;

@@ -10,11 +10,10 @@ using Random = UnityEngine.Random;
 
 public class FloorManager : MonoBehaviour
 {
-    public int rooms;
-    public int shopRooms;
-    
     public Room roomPreset;
     public Room roomPresetShop;
+    public Room roomPresetElite;
+    
 
     public FloorGrid grid;
 
@@ -39,20 +38,11 @@ public class FloorManager : MonoBehaviour
     public void BeginLogic()
     {
         _rooms = new List<Room>();
-        //Adds basic rooms
-        for (int i = 0; i < rooms; i++)
-        {
-            GameObject roomInst = Instantiate(roomPreset.gameObject);
-            Room room = roomInst.GetComponent<Room>();
-            _rooms.Add(room);
-        }
         
-        for (int i = 0; i < shopRooms; i++)
-        {
-            GameObject roomInst = Instantiate(roomPresetShop.gameObject);
-            Room room = roomInst.GetComponent<Room>();
-            _rooms.Add(room);
-        }
+        //Adds basic rooms
+        AddRoom(roomPreset, RunPlayerStats.Instance.RoomCount);
+        AddRoom(roomPresetShop, RunPlayerStats.Instance.ShopCount);
+        AddRoom(roomPresetElite, RunPlayerStats.Instance.EliteRoomCount);
 
         /*
         //Adds mines depending on packages
@@ -65,11 +55,11 @@ public class FloorManager : MonoBehaviour
         */
     }
 
-    public void AddRoom(GameObject roomGameObject, int amount)
+    public void AddRoom(Room roomObject, int amount)
     {
         for (int i = 0; i < amount; i++)
         {
-            GameObject roomInst = Instantiate(roomGameObject.gameObject);
+            GameObject roomInst = Instantiate(roomObject.gameObject);
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
@@ -77,7 +67,7 @@ public class FloorManager : MonoBehaviour
     
     public void AddBasicRoom(int amount)
     {
-        rooms += amount;
+        RunPlayerStats.Instance.RoomCount += amount;
         for (int i = 0; i < amount; i++)
         {
             GameObject roomInst = Instantiate(roomPreset.gameObject);
@@ -88,10 +78,21 @@ public class FloorManager : MonoBehaviour
     
     public void AddShopRoom(int amount)
     {
-        shopRooms += amount;
+        RunPlayerStats.Instance.ShopCount += amount;
         for (int i = 0; i < amount; i++)
         {
             GameObject roomInst = Instantiate(roomPresetShop.gameObject);
+            Room room = roomInst.GetComponent<Room>();
+            _rooms.Add(room);
+        }
+    }
+    
+    public void AddEliteRoom(int amount)
+    {
+        RunPlayerStats.Instance.EliteRoomCount += amount;
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject roomInst = Instantiate(roomPresetElite.gameObject);
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }

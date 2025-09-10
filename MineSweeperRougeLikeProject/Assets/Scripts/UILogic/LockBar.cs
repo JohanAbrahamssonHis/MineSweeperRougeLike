@@ -24,8 +24,8 @@ public class LockBar : MonoBehaviour
     {
         for (int i = 0; i < _gameObjects.Count; i++)
         {
-            _renderers[i].sprite = i >= RunPlayerStats.Instance.RoomCount ? sprite : unlockedSprite;
-            _gameObjects[i].transform.rotation = i >= RunPlayerStats.Instance.RoomCount ? quaternion.identity : quaternion.RotateZ(Mathf.PI/16);
+            _renderers[i].sprite = i >= RunPlayerStats.Instance.RoomCountCleared ? sprite : unlockedSprite;
+            _gameObjects[i].transform.rotation = i >= RunPlayerStats.Instance.RoomCountCleared ? quaternion.identity : quaternion.RotateZ(Mathf.PI/16);
         }
     }
 
