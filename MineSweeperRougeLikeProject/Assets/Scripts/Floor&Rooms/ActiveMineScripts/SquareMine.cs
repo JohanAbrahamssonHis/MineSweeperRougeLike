@@ -25,8 +25,11 @@ public enum SquareType
 public class SquareMine : MonoBehaviour, IInteractable
 {
     public int number;
+    public int longNumber;
     private GameObject containter;
     private GameObject flagContainer;
+    private GameObject decalContainter;
+    
     public SquareColour currentSquareColour;
     public bool squareRevealed;
     public bool hasMine;
@@ -37,8 +40,14 @@ public class SquareMine : MonoBehaviour, IInteractable
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererContainer;
     private SpriteRenderer _spriteRendererFlagContainer;
+    private SpriteRenderer _spriteRendererDecalContainer;
+
+    public Sprite DecalArrow;
+    public bool isLongNeighbour;
 
     private SpriteRenderer _spriteRendererMineFlagRenderer;
+    
+    private SpriteRenderer _spriteRendererDecalContainerRenderer;
     
     public bool hasNeighbourMine;
 
@@ -50,11 +59,15 @@ public class SquareMine : MonoBehaviour, IInteractable
     {
         containter = gameObject.transform.GetChild(0).gameObject;
         flagContainer = gameObject.transform.GetChild(1).gameObject;
+        decalContainter = gameObject.transform.GetChild(2).gameObject;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
         _spriteRendererFlagContainer = flagContainer.GetComponent<SpriteRenderer>();
+        _spriteRendererDecalContainer = decalContainter.GetComponent<SpriteRenderer>();
 
         _spriteRendererMineFlagRenderer = flagContainer.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
+        _spriteRendererDecalContainerRenderer = decalContainter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -66,6 +79,10 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
 
+        _spriteRendererDecalContainer.sprite = isLongNeighbour && squareRevealed ? DecalArrow : null;
+        //_spriteRendererDecalContainerRenderer.sprite = isLongNeighbour && squareRevealed ? NumberSprites.Instance.GetNumberedSprite(longNumber) : null;
+        
+        
         if (hasMine && mine.isDisabled)
         {
             _spriteRendererContainer.sprite = mine.sprite;

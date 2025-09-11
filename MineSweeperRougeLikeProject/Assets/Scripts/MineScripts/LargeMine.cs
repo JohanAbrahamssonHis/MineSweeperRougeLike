@@ -9,11 +9,14 @@ public class LargeMine : Mine
     {
         base.SetUpMine(mineRoomManager);
         weight = 1;
+        SetStandardNeighbours(neighbours);
         for (int x = -2; x <= 2; x++)
         {
             for (int y = -2; y <= 2; y++)
             {
+                if (neighbours.Contains(new Vector2(position.x + x, position.y + y))) continue;
                 neighbours.Add(new Vector2(position.x+x,position.y+y));
+                longnNeighbours.Add(new Vector2(position.x+x,position.y+y));
             }  
         }
     }

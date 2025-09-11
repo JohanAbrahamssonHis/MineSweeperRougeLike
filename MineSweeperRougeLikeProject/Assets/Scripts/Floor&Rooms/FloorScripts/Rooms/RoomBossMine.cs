@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -7,7 +8,13 @@ using UnityEngine.SceneManagement;
 public class RoomBossMine : Room
 {
     public BossRoomSquare bossRoomSquare;
-    
+
+    public void OnEnable()
+    {
+        SetUpRoom(RunPlayerStats.Instance.FloorManager);
+        Debug.Log(scene);
+    }
+
     public override void SetUpRoom(FloorManager floorManager)
     {
         base.SetUpRoom(floorManager);
@@ -24,6 +31,8 @@ public class RoomBossMine : Room
         //SoundManager.Instance.Play("BoomBeep", null, true, 0,1,true);
         RunPlayerStats.Instance.endState = false;
         //SoundManager.Instance.Play("EliteEvilLaugh", null, true, 2f);
+        
+        Debug.Log(scene);
         
         SceneDeterminer.LoadAddedScene(scene);
     }

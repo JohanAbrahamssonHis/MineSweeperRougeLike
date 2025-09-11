@@ -102,6 +102,7 @@ public class MineRoomManager : MonoBehaviour
     void SetNumbers()
     {
         grid.squares.ForEach(x => x.hasNeighbourMine = false);
+        grid.squares.ForEach(x => x.isLongNeighbour = false);
         foreach (var mine in _mines)
         {
             foreach (var neighbour in mine.neighbours)
@@ -112,6 +113,15 @@ public class MineRoomManager : MonoBehaviour
                 square.hasNeighbourMine = true;
                 square.number += mine.weight;
             }
+            //Fix this
+            foreach (var neighbour in mine.longnNeighbours)
+            {
+                if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
+                    (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
+                SquareMine square = grid.squares[GetPostion(neighbour)];
+                square.isLongNeighbour = true;
+                square.longNumber += mine.weight;
+            }
         }
     }
 
@@ -120,6 +130,7 @@ public class MineRoomManager : MonoBehaviour
         foreach (SquareMine square in grid.squares)
         {
             square.number = 0;
+            square.longNumber = 0;
         }
     }
 

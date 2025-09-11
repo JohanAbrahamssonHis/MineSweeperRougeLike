@@ -10,6 +10,7 @@ public abstract class Mine : MonoBehaviour
     public Sprite sprite;
     public Vector2 position;
     public List<Vector2> neighbours;
+    public List<Vector2> longnNeighbours;
     public bool isActivated;
     public delegate void CallBack(string hello);
     public SpriteRenderer _spriteRenderer;

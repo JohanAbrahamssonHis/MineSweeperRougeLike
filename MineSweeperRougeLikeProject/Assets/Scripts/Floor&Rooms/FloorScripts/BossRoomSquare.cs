@@ -41,6 +41,7 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
         if(!isActive) return;
         squareRevealed = true;
         RunPlayerStats.Instance.FloorManager.currentRoom = room;
+        room.SetUpRoom(RunPlayerStats.Instance.FloorManager);
         room.RoomFunction();
     }
 
