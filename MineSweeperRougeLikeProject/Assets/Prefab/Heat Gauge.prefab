@@ -470,9 +470,9 @@ MonoBehaviour:
   - {fileID: 1026839151, guid: 8178f8e8ba5ffcc41afaa1fba271afd6, type: 3}
   - {fileID: 740577312, guid: 8178f8e8ba5ffcc41afaa1fba271afd6, type: 3}
   heatGauge: {fileID: 6074278855820755776}
-  speed: 0.3
+  speed: 0.2
   timeDelay: 0
-  timeDelayBase: 0.4
+  timeDelayBase: 0.8
   lastHeat: 0
 --- !u!1 &6074278856715683605
 GameObject:
