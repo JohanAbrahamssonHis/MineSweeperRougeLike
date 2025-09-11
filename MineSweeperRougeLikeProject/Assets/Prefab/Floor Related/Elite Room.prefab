@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e217cb3c11d0334795d56b951bfcd8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: -613067337, guid: 115f602b64c33ef4598896ab320aa4f4, type: 3}
+  sprite: {fileID: 1517882667, guid: f8fb555dabb92824ea90be5d5a1461c4, type: 3}
   position: {x: 0, y: 0}
   neighbours: []
   floorManager: {fileID: 0}
