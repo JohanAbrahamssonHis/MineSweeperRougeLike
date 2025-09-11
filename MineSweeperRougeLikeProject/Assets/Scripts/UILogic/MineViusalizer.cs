@@ -27,7 +27,7 @@ public class MineViusalizer : MonoBehaviour
     {
 
         List<Mine> mines = new List<Mine>();
-
+        
         RunPlayerStats.Instance.MalwarePackages.ForEach(x => x.mines.ForEach( mine =>mines.Add(mine)));
 
         var orderedEnumerable = mines.OrderBy(mine => mine.name).ToList();

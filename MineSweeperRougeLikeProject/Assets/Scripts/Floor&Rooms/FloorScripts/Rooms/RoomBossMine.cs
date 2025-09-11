@@ -12,7 +12,6 @@ public class RoomBossMine : Room
     public void OnEnable()
     {
         SetUpRoom(RunPlayerStats.Instance.FloorManager);
-        Debug.Log(scene);
     }
 
     public override void SetUpRoom(FloorManager floorManager)
@@ -31,8 +30,6 @@ public class RoomBossMine : Room
         //SoundManager.Instance.Play("BoomBeep", null, true, 0,1,true);
         RunPlayerStats.Instance.endState = false;
         //SoundManager.Instance.Play("EliteEvilLaugh", null, true, 2f);
-        
-        Debug.Log(scene);
         
         SceneDeterminer.LoadAddedScene(scene);
     }

@@ -56,7 +56,9 @@ public class RunPlayerStats : ScriptableObject
     public float TimeGain { get; set; }
     
     public int Points { get; set; }
+    public int PointsGain { get; set; }
     public float Heat { get; set; }
+    public float HeatGain { get; set; }
     public float ComboValue { get; set; }
 
     private int money;
@@ -156,7 +158,11 @@ public class RunPlayerStats : ScriptableObject
         Time = 3*60;
         TimeGain = 15;
         Money = 5;
-        MoneyGain = 4;
+        MoneyGain = 2;
+        Points = 0;
+        PointsGain = 1;
+        Heat = 0;
+        HeatGain = 0.15f;
         FloorCount = 0;
         RoomCountCleared = 0;
         EliteRoomCount = 1;

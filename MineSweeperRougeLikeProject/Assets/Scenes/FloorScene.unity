@@ -1125,10 +1125,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: -1438439818, guid: 4c792b96ce7fd434ba498805f6873c9d, type: 3}
-  distance: 4
-  speed: 0.2
-  delay: 0.2
-  strength: 0.2
+  distance: 6
+  speed: 0.4
+  delay: 3
+  strength: 0.1
 --- !u!1 &1559281179
 GameObject:
   m_ObjectHideFlags: 0

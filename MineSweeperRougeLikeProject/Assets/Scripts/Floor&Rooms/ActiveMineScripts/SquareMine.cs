@@ -111,7 +111,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             if (squareRevealed) return;
             
             ActionEvents.Instance.TriggerEventAction();
-            RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*2);
+            RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*RunPlayerStats.Instance.PointsGain);
             RunPlayerStats.Instance.Heat += 0.15f;
             
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);

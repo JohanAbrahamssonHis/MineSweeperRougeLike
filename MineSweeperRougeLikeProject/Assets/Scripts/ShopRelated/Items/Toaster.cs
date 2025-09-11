@@ -7,17 +7,11 @@ public class Toaster : Item
 
     public override void Function()
     {
-        RunPlayerStats.Instance.Heat += 0.1f;
+        RunPlayerStats.Instance.HeatGain += 0.5f;
     }
 
     public override void Join()
     {
-        ActionEvents.Instance.OnAction += Function;
-    }
-
-    public override void Unsubscribe()
-    {
-        base.Unsubscribe();
-        ActionEvents.Instance.OnAction -= Function;
+        Function();
     }
 }

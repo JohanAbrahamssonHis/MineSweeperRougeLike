@@ -7,17 +7,11 @@ public class Shovel : Item
 {
     public override void Function()
     {
-        RunPlayerStats.Instance.Points += (int)(2*RunPlayerStats.Instance.ComboValue);
+        RunPlayerStats.Instance.PointsGain += 1;
     }
 
     public override void Join()
     {
-        ActionEvents.Instance.OnAction += Function;
-    }
-
-    public override void Unsubscribe()
-    {
-        base.Unsubscribe();
-        ActionEvents.Instance.OnAction -= Function;
+        Function();
     }
 }
