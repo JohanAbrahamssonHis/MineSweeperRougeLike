@@ -84,12 +84,12 @@ public class RunPlayerStats : ScriptableObject
             if (floorCount % 3 == 2) FloorManager.AddShopRoom(1);
             if (floorCount % 2 == 0)
             {
-                FloorManager.AddBasicRoom(1);
+                FloorManager.AddEliteRoom(1);
                 GridSize += Vector2.one;
             }
             else
             {
-                FloorManager.AddEliteRoom(1);
+                FloorManager.AddBasicRoom(1);
                 RoomLock++;
             }
         }
@@ -135,6 +135,7 @@ public class RunPlayerStats : ScriptableObject
     public void Lose()
     {
         //ResetValues();
+        ActiveTimer = false;
         Inventory.ForEach(x => x.Unsubscribe());
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
         SoundManager.Instance.Play("GameOver", null, true, 3f);
@@ -153,7 +154,7 @@ public class RunPlayerStats : ScriptableObject
     {
         Health = 5;
         Time = 3*60;
-        TimeGain = 30;
+        TimeGain = 15;
         Money = 5;
         MoneyGain = 4;
         FloorCount = 0;
