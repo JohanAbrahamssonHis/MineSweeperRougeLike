@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Spin
   m_EditorClassIdentifier: 
   name: Spin
-  Speed: 3
+  t: {fileID: 0}
+  Speed: 1

@@ -133,12 +133,15 @@ public class RunPlayerStats : ScriptableObject
 
     public MineViusalizer mineViusalizer { get; set; }
     public Mine FlagMineSelected { get; set; }
+    
+    public BossModification BossModification { get; set; }
 
     public void Lose()
     {
         //ResetValues();
         ActiveTimer = false;
         Inventory.ForEach(x => x.Unsubscribe());
+        ResetBoss();
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
         SoundManager.Instance.Play("GameOver", null, true, 3f);
         SoundManager.Instance.Play("GameOverVoice", null, true, 3f);
@@ -149,7 +152,14 @@ public class RunPlayerStats : ScriptableObject
     {
         endState = true;
         ActiveTimer = false;
+        ResetBoss();
         ActionEvents.Instance.TriggerEventMineRoomWin();
+    }
+
+    private void ResetBoss()
+    {
+        if (FloorManager.currentRoom is not RoomBossMine) return;
+        BossModification?.UnsubscribeModification();
     }
     
     public void ResetValues()

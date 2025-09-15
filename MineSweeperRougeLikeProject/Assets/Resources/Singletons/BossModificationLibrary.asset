@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
-  m_Name: RunPlayerStats
+  m_Script: {fileID: 11500000, guid: b1466029ca697254b9101c25dd6bb625, type: 3}
+  m_Name: BossModificationLibrary
   m_EditorClassIdentifier: 
-  isInvincable: 1
-  Timmer: {fileID: 0}
-  ActiveTimer: 1
-  Inventory:
-  - {fileID: 0}
-  ItemInventoryVisual: {fileID: 0}
+  bossModifications:
+  - {fileID: 11400000, guid: 59a126af4d6814340aac2cbb605093dd, type: 2}
+  - {fileID: 11400000, guid: f85a1fd2050d78f45a223cc7f4eb408c, type: 2}

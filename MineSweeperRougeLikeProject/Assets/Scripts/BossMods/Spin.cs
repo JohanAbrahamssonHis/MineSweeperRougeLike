@@ -6,17 +6,18 @@ using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 [CreateAssetMenu(menuName = "BossMod/Spin", fileName = "Spin")]
-public class Spin : BossModification<Grid>
+public class Spin : BossModification
 {
     public float Speed;
+    private Grid grid;
     
-    public override void UpdateModification(Grid value)
+    public override void UpdateModification()
     {
-        value.transform.RotateAround(Vector2.zero, Vector3.forward, Time.deltaTime*Speed);
+        grid.transform.RotateAround(Vector2.zero, Vector3.forward, Time.deltaTime*Speed);
     }
 
-    public override void Modification(Grid value)
+    public override void Modification()
     {
-        
+        grid = RunPlayerStats.Instance.MineRoomManager.grid;
     }
 }

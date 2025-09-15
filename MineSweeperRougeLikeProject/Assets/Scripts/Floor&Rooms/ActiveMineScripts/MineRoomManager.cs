@@ -23,10 +23,12 @@ public class MineRoomManager : MonoBehaviour
     public delegate void afterAction(object sender, AfterActionArgs args);
     public static event afterAction afterActionEvent;
 
-    public void Start()
+    public void OnEnable()
     {
+        grid = transform.GetChild(0).GetComponent<Grid>();
+        
         RunPlayerStats.Instance.MineRoomManager = this;
-
+        
         RunPlayerStats.Instance.Points = 0;
         RunPlayerStats.Instance.Heat = 0;
         
