@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,20 +20,41 @@ public class RunPlayerStats : ScriptableObject
          
     }
     
-    
+    //DevLike Immunity
     public bool isInvincable;
-    private int health;
+    
+    //Will trigger events and extra but will remove damage
+    public bool isUnDamageable;
+    
+    private int _health;
+    
+    public int HealthDamageMultModifier { get; set; }
+    public int HealthDamageModifier { get; set; }
+    
     public int Health
     {
-        get => health;
+        get => _health;
         set
         {
             if(isInvincable) return;
-            if (value < health) ActionEvents.Instance.TriggerEventDamage();
-            health = value;
-            if(HealthBar!=null) HealthBar.HealthChanged(value);
-            if (health < 1) Lose();
+            var healthDelta = value < _health ? HealthDamage(value-_health) : HealthGain(value-_health);
+            if(isUnDamageable) return;
+            _health += healthDelta;
+            if(HealthBar!=null) HealthBar.HealthChanged(_health);
+            if (_health < 1) Lose();
         }
+    }
+
+    private int HealthDamage(int change)
+    {
+        ActionEvents.Instance.TriggerEventDamage();
+        change = (change + HealthDamageModifier) * HealthDamageMultModifier;
+        return change;
+    }
+
+    private int HealthGain(int change)
+    {
+        return change;
     }
 
     public HealthBar HealthBar { get; set; }
@@ -152,9 +174,50 @@ public class RunPlayerStats : ScriptableObject
     {
         endState = true;
         ActiveTimer = false;
-        ResetBoss();
         ActionEvents.Instance.TriggerEventMineRoomWin();
+        ResetBoss();
     }
+
+    #region EndRoomSet
+
+    public float TempTimeGain { get; set; }
+    public int TempMoneyGain { get; set; }
+    
+    public void EndRoomSet()
+    {
+        TimeEndRoomSet();
+        MoneyEndRoomSet();
+        
+        ResetTempValues();
+    }
+
+    public void TimeEndRoomSet()
+    {
+        Time += TimeGain + TempTimeGain;
+    }
+    
+    public float TimeEndRoomGet()
+    {
+        return TimeGain + TempTimeGain;
+    }
+    
+    public void MoneyEndRoomSet()
+    {
+        Money += MoneyGain + (Points / 10) + TempMoneyGain;
+    }
+    
+    public int MoneyEndRoomGet()
+    {
+        return MoneyGain + Points/10 + TempMoneyGain;
+    }
+
+    private void ResetTempValues()
+    {
+        TempMoneyGain = 0;
+        TempTimeGain = 0;
+    }
+
+    #endregion
 
     private void ResetBoss()
     {
@@ -164,6 +227,8 @@ public class RunPlayerStats : ScriptableObject
     
     public void ResetValues()
     {
+        HealthDamageModifier = 0;
+        HealthDamageMultModifier = 1;
         Health = 5;
         Time = 3*60;
         TimeGain = 15;
@@ -186,6 +251,15 @@ public class RunPlayerStats : ScriptableObject
         FloorManager = null;
         FlagMineSelected = null;
         Inventory = new List<Item>();
+
+        if (BossModification == null) return;
+        BossModification?.UnsubscribeModification();
+        BossModification = null;
+    }
+
+    void OnApplicationQuit()
+    {
+        BossModification?.UnsubscribeModification();
     }
 
     public void AddMalwarePackage(MalwarePackage malwarePackage)

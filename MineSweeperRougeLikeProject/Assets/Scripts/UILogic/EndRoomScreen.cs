@@ -17,8 +17,8 @@ public class EndRoomScreen : MonoBehaviour
         
         pointsAmount.text = RunPlayerStats.Instance.Points.ToString();
         
-        moneyAmount.text = $"+{RunPlayerStats.Instance.MoneyGain + RunPlayerStats.Instance.Points/10}";
+        moneyAmount.text = $"{RunPlayerStats.Instance.MoneyEndRoomGet()}";
         
-        timeAmount.text = $"+{RunPlayerStats.Instance.TimeGain}";
+        timeAmount.text = $"{RunPlayerStats.Instance.TimeEndRoomGet()}";
     }
 }

@@ -32,7 +32,6 @@ public class RoomElite : Room
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
         rPS.RoomCountCleared++;
-        rPS.Time += rPS.TimeGain;
-        rPS.Money += rPS.MoneyGain + rPS.Points/10;
+        RunPlayerStats.Instance.EndRoomSet();
     }
 }

@@ -42,7 +42,8 @@ public class RoomBossMine : Room
         
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
-        rPS.Money += rPS.MoneyGain + rPS.Points/10;
+       rPS.EndRoomSet();
+        
         rPS.RoomCountCleared = 0;
         rPS.FloorCount++;
         if (rPS.FloorCount > 8)
