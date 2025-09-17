@@ -144,6 +144,7 @@ public class FloorManager : MonoBehaviour
     void SetNumbers()
     {
         grid.squares.ForEach(x => x.hasNeighbourRoom = false);
+        grid.squares.ForEach(x => x.hasNeighbourShop = false);
         foreach (var room in _rooms)
         {
             foreach (var neighbour in room.neighbours)
@@ -151,6 +152,7 @@ public class FloorManager : MonoBehaviour
                 if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
                     (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
                 SquareFloor square = grid.squares[GetPostion(neighbour)];
+                if (room is RoomShop) square.hasNeighbourShop = true;
                 square.hasNeighbourRoom = true;
                 square.number += 1;
             }
@@ -183,9 +185,9 @@ public class FloorManager : MonoBehaviour
             {
                 if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
                     square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                if (!grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]
-                        .squareRevealed)
-                    RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
+                SquareFloor selectedSquare =
+                    grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
+                if (!selectedSquare.squareRevealed && !selectedSquare.hasFlag) RevealTile(selectedSquare);
             }
         }
     }
@@ -202,9 +204,9 @@ public class FloorManager : MonoBehaviour
             {
                 if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
                     square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                if (!grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]
-                        .squareRevealed)
-                    RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
+                SquareFloor selectedSquare =
+                    grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
+                if (!selectedSquare.squareRevealed && !selectedSquare.hasFlag) RevealTile(selectedSquare);
             }
         }
         
@@ -273,6 +275,7 @@ public class FloorManager : MonoBehaviour
             gridSquare.squareRevealed = false;
             gridSquare.hasRoom = false;
             gridSquare.number = 0;
+            gridSquare.hasNeighbourShop = false;
         }
 
         bossRoom.squareRevealed = false;

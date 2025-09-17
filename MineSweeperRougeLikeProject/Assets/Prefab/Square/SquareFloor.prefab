@@ -218,6 +218,9 @@ MonoBehaviour:
   Numbers: []
   position: {x: 0, y: 0}
   hasNeighbourRoom: 0
+  hasFlag: 0
+  hasNeighbourShop: 0
+  decalSprite: {fileID: 1413776381, guid: f8fb555dabb92824ea90be5d5a1461c4, type: 3}
   squareSpriteUnused: {fileID: 1441971498, guid: 0db38ad34b9211c4f925f337605e532b, type: 3}
   squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
 --- !u!1 &1787483518157832448

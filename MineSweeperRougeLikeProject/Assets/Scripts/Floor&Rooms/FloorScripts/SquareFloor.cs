@@ -16,6 +16,15 @@ public class SquareFloor : MonoBehaviour, IInteractable
     private SpriteRenderer _spriteRendererContainer;
     public bool hasNeighbourRoom;
 
+    public bool hasFlag;
+    private GameObject flagContainer;
+    private SpriteRenderer _spriteRendererFlagContainer;
+
+    public bool hasNeighbourShop;
+    public Sprite decalSprite;
+    private GameObject decalContainer;
+    private SpriteRenderer _spriteRendererDecalContainer;
+
     public Sprite squareSpriteUnused;
     public Sprite squareSpriteUsed;
     
@@ -23,9 +32,15 @@ public class SquareFloor : MonoBehaviour, IInteractable
     void Start()
     {
         containter = gameObject.transform.GetChild(0).gameObject;
+        flagContainer = gameObject.transform.GetChild(1).gameObject;
+        decalContainer = gameObject.transform.GetChild(2).gameObject;
         
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
+        _spriteRendererFlagContainer = flagContainer.GetComponent<SpriteRenderer>();
+        _spriteRendererDecalContainer = decalContainer.GetComponent<SpriteRenderer>();
+
+        _spriteRendererDecalContainer.sprite = decalSprite;
     }
 
     // Update is called once per frame
@@ -36,10 +51,16 @@ public class SquareFloor : MonoBehaviour, IInteractable
         _spriteRendererContainer.sprite = hasNeighbourRoom ? hasRoom ? room.sprite : NumberSprites.Instance.GetNumberedSprite(number) : null;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+        
+        _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
+        
+        if(squareRevealed) decalContainer.SetActive(hasNeighbourShop);
     }
 
     public void Interact()
     {
+        if(hasFlag || squareRevealed) return;
+        
         FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
         
         SoundManager.Instance.Play("Action", null, true, 1);
@@ -57,6 +78,9 @@ public class SquareFloor : MonoBehaviour, IInteractable
 
     public void SecondInteract()
     {
+        if (squareRevealed) return;
+        hasFlag = !hasFlag;
         
+        SoundManager.Instance.Play("Flag", transform, true, 1);
     }
 }
