@@ -17,7 +17,7 @@ public class MineViusalizer : MonoBehaviour
     
     void OnEnable()
     {
-        RunPlayerStats.Instance.mineViusalizer = this;
+        RunPlayerStats.Instance.mineVisualizer = this;
         SetVisualizer();
     }
 

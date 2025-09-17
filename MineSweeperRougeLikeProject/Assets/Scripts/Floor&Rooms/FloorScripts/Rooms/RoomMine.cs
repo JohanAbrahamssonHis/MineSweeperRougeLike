@@ -17,7 +17,7 @@ public class RoomMine : Room
         base.RoomFunction();
         
         
-        RunPlayerStats.Instance.endState = false;
+        RunPlayerStats.Instance.EndState = false;
         
         //if(Random.Range(0,rPS.RoomCount-rPS.RoomCountCleared-1)==0)
         

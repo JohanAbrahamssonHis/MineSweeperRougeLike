@@ -28,7 +28,7 @@ public class RoomBossMine : Room
         RunPlayerStats.Instance.ActiveTimer = true;
         SoundManager.Instance.Play("Switch", null, true, 2f, 1.5f);
         //SoundManager.Instance.Play("BoomBeep", null, true, 0,1,true);
-        RunPlayerStats.Instance.endState = false;
+        RunPlayerStats.Instance.EndState = false;
         //SoundManager.Instance.Play("EliteEvilLaugh", null, true, 2f);
         
         SceneDeterminer.LoadAddedScene(scene);

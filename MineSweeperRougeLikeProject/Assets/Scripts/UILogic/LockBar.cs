@@ -13,7 +13,7 @@ public class LockBar : MonoBehaviour
     public Sprite unlockedSprite;
     private void Start()
     {
-        RunPlayerStats.Instance.lockBar = this;
+        RunPlayerStats.Instance.LockBar = this;
         _gameObjects = new List<GameObject>();
         _renderers = new List<SpriteRenderer>();
         

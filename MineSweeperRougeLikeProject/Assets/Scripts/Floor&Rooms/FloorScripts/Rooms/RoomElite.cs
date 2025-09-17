@@ -17,7 +17,7 @@ public class RoomElite : Room
         base.RoomFunction();
         
         
-        RunPlayerStats.Instance.endState = false;
+        RunPlayerStats.Instance.EndState = false;
 
         SoundManager.Instance.Play("Switch", null, true, 2f, 1.5f);
         RunPlayerStats.Instance.ActiveTimer = true;

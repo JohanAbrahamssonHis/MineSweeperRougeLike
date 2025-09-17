@@ -19,6 +19,8 @@ public class RunPlayerStats : ScriptableObject
         }
          
     }
+
+    #region Health
     
     //DevLike Immunity
     public bool isInvincable;
@@ -26,10 +28,10 @@ public class RunPlayerStats : ScriptableObject
     //Will trigger events and extra but will remove damage
     public bool isUnDamageable;
     
-    private int _health;
-    
     public int HealthDamageMultModifier { get; set; }
     public int HealthDamageModifier { get; set; }
+    
+    private int _health;
     
     public int Health
     {
@@ -59,54 +61,75 @@ public class RunPlayerStats : ScriptableObject
 
     public HealthBar HealthBar { get; set; }
 
+    #endregion
 
-    public Timmer Timmer;
-    public bool ActiveTimer;
-    private float time;
+    #region Time
+    
+    public Timmer Timmer { get; set; }
+    public bool ActiveTimer { get; set; }
+    
+    
+    private float _time;
     public float Time
     {
-        get => time;
+        get => _time;
         set
         {
-            time = value;
+            _time = value;
             if(Timmer==null) return;
             Timmer.SetTimmer();
-            if (time < 0) Lose();
+            if (_time < 0) Lose();
         }
     }
     
     public float TimeGain { get; set; }
+
+    #endregion
+
+    #region Points
+
     
     public int Points { get; set; }
     public int PointsGain { get; set; }
+
+    #endregion
+
+    #region Heat
+
     public float Heat { get; set; }
     public float HeatGain { get; set; }
     public float ComboValue { get; set; }
+    
+    #endregion
 
-    private int money;
-
+    #region Money
+    
+    private int _money;
     public int Money
     {
-        get => money;
+        get => _money;
         set
         {
-            money = value;
+            _money = value;
             SoundManager.Instance.Play("Money", null, true, 1f, 1 + Money * 0.05f);
         }
     }
-
     public int MoneyGain { get; set; }
+
+    #endregion
+
+    #region Floor
     
-    private int floorCount;
+    private int _floorCount;
     public int FloorCount
     {
-        get => floorCount;
+        get => _floorCount;
         set
         {
-            floorCount = value;
+            _floorCount = value;
             if(value==0) return;
-            if (floorCount % 3 == 2) FloorManager.AddShopRoom(1);
-            if (floorCount % 2 == 0)
+            if (_floorCount % 3 == 2) FloorManager.AddShopRoom(1);
+            if (_floorCount % 2 == 0)
             {
                 FloorManager.AddEliteRoom(1);
                 GridSize += Vector2.one;
@@ -119,44 +142,52 @@ public class RunPlayerStats : ScriptableObject
         }
     }
 
-    public List<Item> Inventory;
+    public int RoomCountCleared { get; set; }
+    public int EliteRoomCount { get; set; }
+    public int RoomCount { get; set; }
+    public int ShopCount { get; set; }
     
-    public ItemInventoryVisual ItemInventoryVisual;
+    public LockBar LockBar { get; set; }
+    private int _roomLock;
+    public int RoomLock
+    {
+        get => _roomLock;
+        set
+        {
+            _roomLock = value;
+            if(LockBar!=null) LockBar.FixLocks();
+        }
+        
+    }
+
+    #endregion
+
+    #region Inventory
+
+    
+    public List<Item> Inventory { get; set; }
+    
+    public ItemInventoryVisual ItemInventoryVisual { get; set; }
 
     public void AddItemToInventory(Item item)
     {
         Inventory.Add(item);
         ItemInventoryVisual.FixVisual();
     }
-    
-    
-    public int RoomCountCleared { get; set; }
-    public int EliteRoomCount { get; set; }
-    public int RoomCount { get; set; }
-    public int ShopCount { get; set; }
-    public LockBar lockBar { get; set; }
-    private int roomLock;
-    public int RoomLock
-    {
-        get => roomLock;
-        set
-        {
-            roomLock = value;
-            if(lockBar!=null) lockBar.FixLocks();
-        }
-        
-    }
+
+    #endregion
     
     public Vector2 GridSize { get; set; }
-    public List<MalwarePackage> MalwarePackages { get; set; }
-    
     public MineRoomManager MineRoomManager { get; set; }
     public FloorManager FloorManager { get; set; }
-
-    public MineViusalizer mineViusalizer { get; set; }
+    public MineViusalizer mineVisualizer { get; set; }
     public Mine FlagMineSelected { get; set; }
-    
     public BossModification BossModification { get; set; }
+    
+
+    #region End States
+
+    public bool EndState { get; set; }
 
     public void Lose()
     {
@@ -169,14 +200,15 @@ public class RunPlayerStats : ScriptableObject
         SoundManager.Instance.Play("GameOverVoice", null, true, 3f);
     }
 
-    public bool endState { get; set; }
     public void Win()
     {
-        endState = true;
+        EndState = true;
         ActiveTimer = false;
         ActionEvents.Instance.TriggerEventMineRoomWin();
         ResetBoss();
     }
+    
+    #endregion
 
     #region EndRoomSet
 
@@ -219,6 +251,8 @@ public class RunPlayerStats : ScriptableObject
 
     #endregion
 
+    #region Reset
+    
     private void ResetBoss()
     {
         if (FloorManager.currentRoom is not RoomBossMine) return;
@@ -251,28 +285,26 @@ public class RunPlayerStats : ScriptableObject
         FloorManager = null;
         FlagMineSelected = null;
         Inventory = new List<Item>();
-
-        if (BossModification == null) return;
-        BossModification?.UnsubscribeModification();
-        BossModification = null;
     }
 
-    void OnApplicationQuit()
-    {
-        BossModification?.UnsubscribeModification();
-    }
+    #endregion
+
+    #region MalwarePackage
+    public List<MalwarePackage> MalwarePackages { get; set; }
 
     public void AddMalwarePackage(MalwarePackage malwarePackage)
     {
         MalwarePackages.Add(Instantiate(malwarePackage));
-        if(mineViusalizer==null) return;
-        mineViusalizer.SetVisualizer();
+        if(mineVisualizer==null) return;
+        mineVisualizer.SetVisualizer();
     }
 
     public void SetMineVisualizer()
     {
-        if(mineViusalizer==null) return;
-        mineViusalizer.SetVisualizer();
+        if(mineVisualizer==null) return;
+        mineVisualizer.SetVisualizer();
     }
+
+    #endregion
 
 }

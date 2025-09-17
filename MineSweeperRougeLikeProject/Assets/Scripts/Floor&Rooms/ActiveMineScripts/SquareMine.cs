@@ -95,7 +95,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (hasFlag || (hasMine && mine.isDisabled) || RunPlayerStats.Instance.endState) return;
+        if (hasFlag || (hasMine && mine.isDisabled) || RunPlayerStats.Instance.EndState) return;
 
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
 
@@ -125,7 +125,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void SecondInteract()
     {
-        if (squareRevealed || RunPlayerStats.Instance.endState) return;
+        if (squareRevealed || RunPlayerStats.Instance.EndState) return;
         hasFlag = !hasFlag;
         
         ActionEvents.Instance.TriggerEventFlag();
