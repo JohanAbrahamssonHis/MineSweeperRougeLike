@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(menuName = "Singletons/RunPlayerStats", fileName = "RunPlayerStats")]
 public class RunPlayerStats : ScriptableObject
@@ -186,6 +188,21 @@ public class RunPlayerStats : ScriptableObject
     public Mine FlagMineSelected { get; set; }
     public BossModification BossModification { get; set; }
     
+    public List<string> BannedBossModifications { get; set; }
+
+    public void SetBossModification()
+    {
+        if (BannedBossModifications.Count == BossModificationLibrary.Instance.bossModifications.Count)
+            ResetBannedBosses();
+        
+        List<BossModification> bossModifications = BossModificationLibrary.Instance.bossModifications.Where(x =>
+            !BannedBossModifications.Contains(x.name)).ToList();
+        
+        BossModification = Instantiate(bossModifications[Random.Range(0,bossModifications.Count)]);
+        
+        BannedBossModifications.Add(BossModification.name);
+    }
+    
 
     #region End States
 
@@ -288,6 +305,13 @@ public class RunPlayerStats : ScriptableObject
         FloorManager = null;
         FlagMineSelected = null;
         Inventory = new List<Item>();
+        BossModification = null;
+        BannedBossModifications = new List<string>();
+    }
+    
+    public void ResetBannedBosses()
+    {
+        BannedBossModifications.Clear();
     }
 
     #endregion

@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Crazy8
   m_EditorClassIdentifier: 
   name: Crazy8
+  sprite: {fileID: -2104564985, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   valueIncrease: 8

@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DVD
   m_EditorClassIdentifier: 
   name: DVD
+  sprite: {fileID: 730796988, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   speed: 1.5
   MaxDistanceFromCenter: 1.75

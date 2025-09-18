@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Freeze Dry
   m_EditorClassIdentifier: 
   name: FreezeDry
+  sprite: {fileID: -1054963295, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   timeMultiplierBase: 3
   minimumHeatTrigger: 0

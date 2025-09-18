@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Aged like Milk
   m_EditorClassIdentifier: 
   name: Aged Like Milk
+  sprite: {fileID: 1264986224, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   timeDamageLoss: 60

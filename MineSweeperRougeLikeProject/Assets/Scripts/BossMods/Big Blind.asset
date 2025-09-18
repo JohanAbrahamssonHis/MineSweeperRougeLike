@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Big Blind
   m_EditorClassIdentifier: 
   name: Big Blind
+  sprite: {fileID: -943819068, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   timeLoop: 10
   moneyLossMult: 2
   moneyLossBase: 1

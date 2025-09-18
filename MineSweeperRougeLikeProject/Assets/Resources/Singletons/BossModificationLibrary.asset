@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: BossModificationLibrary
   m_EditorClassIdentifier: 
   bossModifications:
+  - {fileID: 11400000, guid: 59a126af4d6814340aac2cbb605093dd, type: 2}
+  - {fileID: 11400000, guid: f85a1fd2050d78f45a223cc7f4eb408c, type: 2}
+  - {fileID: 11400000, guid: 4e0b98f585255124ca6b818e066ad19c, type: 2}
+  - {fileID: 11400000, guid: 6958eb77e40d56c4e8db55069afb64ad, type: 2}
+  - {fileID: 11400000, guid: 202cc832cfdf41a4bbc527440cfc9459, type: 2}
+  - {fileID: 11400000, guid: 6a2de7b0cd56acb40a8fc4791e20f0e8, type: 2}
   - {fileID: 11400000, guid: 4203feb3cba228d4ca327bfbb3527cb9, type: 2}

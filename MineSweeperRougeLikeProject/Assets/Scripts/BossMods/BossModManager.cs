@@ -15,11 +15,13 @@ public class BossModManager : MonoBehaviour
     
     public void Start()
     {
+        /*
         List<BossModification> bossModifications = BossModificationLibrary.Instance.bossModifications;
 
         _bossModification = Instantiate(bossModifications[Random.Range(0,bossModifications.Count)]);
+        */
 
-        RunPlayerStats.Instance.BossModification = _bossModification;
+        _bossModification = RunPlayerStats.Instance.BossModification;
         
         _bossModification.JoinModification();
         _bossModification.Modification();

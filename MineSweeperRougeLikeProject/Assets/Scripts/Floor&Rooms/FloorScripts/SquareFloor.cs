@@ -54,7 +54,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
         
         _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
         
-        if(squareRevealed) decalContainer.SetActive(hasNeighbourShop);
+        decalContainer.SetActive(hasNeighbourShop && squareRevealed);
     }
 
     public void Interact()

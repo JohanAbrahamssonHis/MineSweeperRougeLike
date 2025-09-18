@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Spin
   m_EditorClassIdentifier: 
   name: Spin
-  t: {fileID: 0}
+  sprite: {fileID: -229216987, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   Speed: 1

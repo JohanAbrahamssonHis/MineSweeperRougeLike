@@ -33,6 +33,7 @@ public class FloorManager : MonoBehaviour
     public void Start()
     {
         RunPlayerStats.Instance.FloorManager = this;
+        RunPlayerStats.Instance.SetBossModification();
     }
 
     public void BeginLogic()
@@ -276,12 +277,15 @@ public class FloorManager : MonoBehaviour
             gridSquare.hasRoom = false;
             gridSquare.number = 0;
             gridSquare.hasNeighbourShop = false;
+            gridSquare.hasFlag = false;
         }
 
         bossRoom.squareRevealed = false;
         bossRoom.isActive = false;
 
         AfterFirstMove = false;
+        
+        RunPlayerStats.Instance.SetBossModification();
     }
 
     public void DisableFloor(bool state)

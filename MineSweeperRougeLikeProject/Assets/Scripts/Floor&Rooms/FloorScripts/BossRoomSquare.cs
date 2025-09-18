@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,6 +11,7 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
     public RoomBossMine room;
     private SpriteRenderer _spriteRenderer;
     private SpriteRenderer _spriteRendererContainer;
+    private SpriteRenderer _spriteRendererBoss;
     public bool isActive;
     public Sprite squareSpriteBossUnactive;
     public Sprite squareSpriteBossActive;
@@ -26,6 +28,8 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
         _spriteRendererContainer.sprite = room.sprite;
 
         room.bossRoomSquare = this;
+
+        _spriteRendererBoss = transform.GetChild(2).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -34,6 +38,8 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : isActive ? squareSpriteBossActive : squareSpriteBossUnactive;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+        
+        _spriteRendererBoss.sprite = RunPlayerStats.Instance.BossModification.sprite;
     }
 
     public void Interact()

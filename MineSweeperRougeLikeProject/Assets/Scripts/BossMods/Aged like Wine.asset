@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Aged like Wine
   m_EditorClassIdentifier: 
   name: Aged Like Wine
+  sprite: {fileID: -1512454293, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
   value: 1
