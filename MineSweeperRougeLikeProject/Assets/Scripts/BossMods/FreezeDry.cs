@@ -9,26 +9,22 @@ public class FreezeDry : BossModification
     private float _timeMultiplier;
     public float minimumHeatTrigger = 0;
     private bool _fasterTime;
-    public override void Modification()
-    {
-        
-    }
+    public override void Modification() { }
 
     public override void UpdateModification()
     {
-        if (RunPlayerStats.Instance.Heat <= minimumHeatTrigger &&
-            RunPlayerStats.Instance.MineRoomManager.AfterFirstMove && !_fasterTime)
+        if(!RunPlayerStats.Instance.MineRoomManager.AfterFirstMove) return;
+        
+        if (RunPlayerStats.Instance.Heat <= minimumHeatTrigger & !_fasterTime)
         {
             //Faster Time
-            _timeMultiplier = timeMultiplierBase;
-            RunPlayerStats.Instance.TimeMult *= _timeMultiplier;
+            RunPlayerStats.Instance.TimeMult *= timeMultiplierBase;
             _fasterTime = true;
         }
 
-        if (!(RunPlayerStats.Instance.Heat <= minimumHeatTrigger) || !_fasterTime) return;
+        if (!(RunPlayerStats.Instance.Heat > minimumHeatTrigger & _fasterTime)) return;
         //Reset Time
-        _timeMultiplier *= 1/timeMultiplierBase;
-        RunPlayerStats.Instance.TimeMult *= _timeMultiplier;
+        RunPlayerStats.Instance.TimeMult *= 1 / timeMultiplierBase;
         _fasterTime = false;
     }
 

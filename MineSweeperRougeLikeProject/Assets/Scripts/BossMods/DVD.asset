@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a9918398bb991c4ba4f8a51a7dd2613, type: 3}
-  m_Name: Freeze Dry
+  m_Script: {fileID: 11500000, guid: 8eb58d498b8e87d4abb10ef7ce9419b1, type: 3}
+  m_Name: DVD
   m_EditorClassIdentifier: 
-  name: FreezeDry
-  timeMultiplierBase: 3
-  minimumHeatTrigger: 0
+  name: DVD
+  speed: 1.5
+  MaxDistanceFromCenter: 1.75
