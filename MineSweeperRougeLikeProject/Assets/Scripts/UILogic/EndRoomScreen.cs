@@ -10,15 +10,19 @@ public class EndRoomScreen : MonoBehaviour
     public TMP_Text moneyAmount;
     public TMP_Text timeAmount;
 
+    private string valueSymbol;
+
 
     public void SetScreen(bool state)
     {
         gameObject.SetActive(state);
         
         pointsAmount.text = RunPlayerStats.Instance.Points.ToString();
+
+        valueSymbol = RunPlayerStats.Instance.MoneyEndRoomGet() >= 0 ? "+" : "-";  
+        moneyAmount.text = $"{valueSymbol}{RunPlayerStats.Instance.MoneyEndRoomGet()}";
         
-        moneyAmount.text = $"{RunPlayerStats.Instance.MoneyEndRoomGet()}";
-        
-        timeAmount.text = $"{RunPlayerStats.Instance.TimeEndRoomGet()}";
+        valueSymbol = RunPlayerStats.Instance.TimeEndRoomGet() >= 0 ? "+" : "-"; 
+        timeAmount.text = $"{valueSymbol}{RunPlayerStats.Instance.TimeEndRoomGet()}";
     }
 }

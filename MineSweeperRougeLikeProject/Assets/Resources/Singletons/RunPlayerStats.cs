@@ -81,6 +81,8 @@ public class RunPlayerStats : ScriptableObject
             if (_time < 0) Lose();
         }
     }
+
+    public float TimeMult { get; set; }
     
     public float TimeGain { get; set; }
 
@@ -265,6 +267,7 @@ public class RunPlayerStats : ScriptableObject
         HealthDamageMultModifier = 1;
         Health = 5;
         Time = 3*60;
+        TimeMult = 1;
         TimeGain = 15;
         Money = 5;
         MoneyGain = 2;

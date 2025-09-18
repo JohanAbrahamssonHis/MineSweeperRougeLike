@@ -44,7 +44,7 @@ public class Timmer : MonoBehaviour
         spriteRenderer.sprite = RunPlayerStats.Instance.ActiveTimer ? spriteActive : sprite;
         
         if(!RunPlayerStats.Instance.ActiveTimer) return;
-        RunPlayerStats.Instance.Time -= Time.deltaTime;
+        RunPlayerStats.Instance.Time -= Time.deltaTime*RunPlayerStats.Instance.TimeMult;
     }
 
     public void SetTimmer()
