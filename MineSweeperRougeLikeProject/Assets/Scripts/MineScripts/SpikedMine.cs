@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NegativeMine : Mine
+public class SpikedMine : Mine
 {
     public override void SetUpMine(MineRoomManager mineRoomManager)
     {
         base.SetUpMine(mineRoomManager);
-        weight = -1;
+        weight = 1;
+        damage = 2;
         SetStandardNeighbours(neighbours);
     }
 }

@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20754f47fd604504b83f440ec348c670, type: 3}
-  m_Name: TrippleThreat
+  m_Name: SpikedMine
   m_EditorClassIdentifier: 
   mines:
-  - {fileID: -820334098780468814, guid: 0299ac8a04529ee4f9f68320a930348f, type: 3}
-  - {fileID: -820334098780468814, guid: 0299ac8a04529ee4f9f68320a930348f, type: 3}
-  commonality: 3
+  - {fileID: 1337436002198674984, guid: 64714cbe580e84a4e99e157c640db36b, type: 3}
+  - {fileID: 1337436002198674984, guid: 64714cbe580e84a4e99e157c640db36b, type: 3}
+  - {fileID: 1337436002198674984, guid: 64714cbe580e84a4e99e157c640db36b, type: 3}
+  commonality: 4

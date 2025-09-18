@@ -15,6 +15,7 @@ public abstract class Mine : MonoBehaviour
     public delegate void CallBack(string hello);
     public SpriteRenderer _spriteRenderer;
     public MineRoomManager mineRoomManager;
+    public int damage = 1;
 
     public CallBack call;
     
@@ -27,7 +28,7 @@ public abstract class Mine : MonoBehaviour
     public virtual void Activate()
     {
         isActivated = true;
-        RunPlayerStats.Instance.Health--;
+        RunPlayerStats.Instance.Health -= damage;
         SoundManager.Instance.Play("Explosion", transform, true, 1);
     }
 

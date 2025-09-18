@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
-  m_Name: RunPlayerStats
+  m_Script: {fileID: 11500000, guid: 20754f47fd604504b83f440ec348c670, type: 3}
+  m_Name: AngryMine
   m_EditorClassIdentifier: 
-  isInvincable: 0
-  isUnDamageable: 0
+  mines:
+  - {fileID: -68096107218417122, guid: 8c46a6016c1d78c4d9c30550b58e8fa6, type: 3}
+  commonality: 2
