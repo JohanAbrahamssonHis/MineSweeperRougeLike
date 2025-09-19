@@ -16,9 +16,12 @@ public class FloorGrid : MonoBehaviour
     public List<SquareFloor> squares;
     
     public Sprite[] spriteNumbers;
+
+    private RoomCountVisual _roomCountVisual;
     
     public void Awake()
     {
+        _roomCountVisual = transform.GetChild(1).GetComponent<RoomCountVisual>();
         
         for (int i = 0; i < squaresXSize; i++)
         {
@@ -33,7 +36,9 @@ public class FloorGrid : MonoBehaviour
                 square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";
             }
         }
-    
+
+        _roomCountVisual.transform.position = new Vector3(-((squareLength + margin) * squaresXSize / 2)+0.75f, ((squareLength + margin) * squaresYSize / 2) + 0.25f, 0);
+
     }
 
     float setOnGrid(int index, int squaresSize)

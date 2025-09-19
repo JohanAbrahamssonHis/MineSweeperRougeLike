@@ -131,9 +131,9 @@ public class RunPlayerStats : ScriptableObject
         set
         {
             _floorCount = value;
-            if(value==0) return;
-            if (_floorCount % 3 == 2) FloorManager.AddShopRoom(1);
-            if (_floorCount % 2 == 0)
+            if(value==1) return;
+            if (_floorCount % 3 == 0) FloorManager.AddShopRoom(1);
+            if (_floorCount % 2 == 1)
             {
                 FloorManager.AddEliteRoom(1);
                 GridSize += Vector2.one;
@@ -187,7 +187,8 @@ public class RunPlayerStats : ScriptableObject
     public MineViusalizer mineVisualizer { get; set; }
     public Mine FlagMineSelected { get; set; }
     public BossModification BossModification { get; set; }
-    
+
+    public bool DebugMode;
     public List<string> BannedBossModifications { get; set; }
 
     public void SetBossModification()
@@ -292,7 +293,7 @@ public class RunPlayerStats : ScriptableObject
         PointsGain = 1;
         Heat = 0;
         HeatGain = 0.15f;
-        FloorCount = 0;
+        FloorCount = 1;
         RoomCountCleared = 0;
         EliteRoomCount = 1;
         RoomCount = 2;

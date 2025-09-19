@@ -47,4 +47,24 @@ public class InputHandler : MonoBehaviour
         RunPlayerStats.Instance?.FloorManager.ResetBoard();
         */
     }
+
+    public void OnScroll(InputAction.CallbackContext context)
+    {
+        //if (!context.started) return;
+        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if(!rayHit.collider) return;
+
+        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
+        interactable.Scroll(context.ReadValue<float>());
+    }
+    
+    public void OnWheelButton(InputAction.CallbackContext context)
+    {
+        //if (!context.started) return;
+        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if(!rayHit.collider) return;
+
+        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
+        interactable.WheelButton();
+    }
 }
