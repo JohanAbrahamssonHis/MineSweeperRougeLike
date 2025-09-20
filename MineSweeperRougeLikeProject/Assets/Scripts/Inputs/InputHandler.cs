@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
@@ -14,28 +15,12 @@ public class InputHandler : MonoBehaviour
     
     public void OnClick(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
-
-        //SoundManager.Instance.Play("Click", transform, true, 1f);
-        
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if(!rayHit.collider) return;
-
-        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
-        interactable.Interact();
+        ButtonEffect().ForEach(x => x.Interact());
     }
     
     public void OnRightClick(InputAction.CallbackContext context)
     {
-        if (!context.started) return;
-
-        //SoundManager.Instance.Play("Click", transform, true, 1f);
-        
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if(!rayHit.collider) return;
-
-        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
-        interactable.SecondInteract();
+        ButtonEffect().ForEach(x => x.SecondInteract());
     }
     
     public void OnResetBoard(InputAction.CallbackContext context)
@@ -50,21 +35,26 @@ public class InputHandler : MonoBehaviour
 
     public void OnScroll(InputAction.CallbackContext context)
     {
-        //if (!context.started) return;
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if(!rayHit.collider) return;
-
-        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
-        interactable.Scroll(context.ReadValue<float>());
+        ButtonEffect().ForEach(x => x.Scroll(context.ReadValue<float>()));
     }
     
     public void OnWheelButton(InputAction.CallbackContext context)
     {
-        //if (!context.started) return;
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if(!rayHit.collider) return;
+        ButtonEffect().ForEach(x => x.WheelButton());
+    }
 
-        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return;
-        interactable.WheelButton();
+    private List<IInteractable> ButtonEffect()
+    {
+        List<IInteractable> interactables = new List<IInteractable>();
+        var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if(rayHits.Any(x => !x.collider)) return null;
+
+        foreach (var rayHit in rayHits)
+        {
+            if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) continue;
+            interactables.Add(interactable);
+        }
+
+        return interactables;
     }
 }
