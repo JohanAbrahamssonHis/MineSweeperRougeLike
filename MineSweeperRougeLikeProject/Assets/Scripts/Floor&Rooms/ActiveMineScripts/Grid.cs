@@ -37,7 +37,6 @@ public class Grid : MonoBehaviour, IInteractable
     {
         startPos   = transform.position;
         startScale = transform.localScale; // antas uniform
-        _collider2D = GetComponent<BoxCollider2D>();
     }
 
     private void Start()
@@ -60,7 +59,7 @@ public class Grid : MonoBehaviour, IInteractable
                 square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";
             }
         }
-
+        _collider2D = GetComponent<BoxCollider2D>();
         _collider2D.size = new Vector2(squaresXSize*squareLength + (squaresXSize-1)*margin,squaresYSize*squareLength+ (squaresYSize-1)*margin);
 
     }

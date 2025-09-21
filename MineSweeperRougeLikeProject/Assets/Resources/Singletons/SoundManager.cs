@@ -36,7 +36,7 @@ public class SoundManager : ScriptableObject
     }
 
     // === NEW: Play by name ===
-    public AudioSource Play(string clipName, Transform transform, bool playOnCommand = true, float timeToDestroy = 0f, float pitch = 1f, bool loop = false)
+    public AudioSource Play(string clipName, Transform transform, bool playOnCommand = true, float timeToDestroy = 0f, float pitch = 1f, bool loop = false, float volume = 1f)
     {
         AudioClip clip = GetClipByName(clipName);
         if (clip == null)
@@ -45,7 +45,7 @@ public class SoundManager : ScriptableObject
             return null;
         }
 
-        return AddSoundBite(clip, transform, playOnCommand, timeToDestroy, pitch, loop);
+        return AddSoundBite(clip, transform, playOnCommand, timeToDestroy, pitch, loop, volume);
     }
 
     public void PlayMain(Transform transform)
@@ -61,7 +61,7 @@ public class SoundManager : ScriptableObject
 
     #region AddSoundBite
 
-    private AudioSource AddSoundBite(AudioClip audioClip, Transform transform, bool playOnCommand, float timeToDestory, float pitch, bool loop)
+    private AudioSource AddSoundBite(AudioClip audioClip, Transform transform, bool playOnCommand, float timeToDestory, float pitch, bool loop, float volume)
     {
         GameObject soundObject = new GameObject("Sound_" + (transform==null? $"{audioClip.name}" : transform));
         if(timeToDestory<=0 || transform!=null) soundObject.transform.SetParent(transform);
@@ -69,6 +69,7 @@ public class SoundManager : ScriptableObject
         soundObjectAudioSource.outputAudioMixerGroup = Mixer;
         soundObjectAudioSource.pitch = pitch;
         soundObjectAudioSource.loop = loop;
+        soundObjectAudioSource.volume = volume;
 
         SoundBite soundObjectSoundBite = soundObject.AddComponent<SoundBite>();
         soundObjectSoundBite.AudioSource = soundObjectAudioSource;

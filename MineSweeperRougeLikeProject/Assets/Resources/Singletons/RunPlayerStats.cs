@@ -77,9 +77,11 @@ public class RunPlayerStats : ScriptableObject
         get => _time;
         set
         {
+            float temp = _time;
             _time = value;
             if(Timmer==null) return;
             Timmer.SetTimmer();
+            if(temp<value) Timmer.FixBeepTimmer();
             if (_time < 0) Lose();
         }
     }
@@ -291,7 +293,7 @@ public class RunPlayerStats : ScriptableObject
         TimeMult = 1;
         TimeGain = 15;
         Money = 5;
-        MoneyGain = 2;
+        MoneyGain = 1;
         Points = 0;
         PointsGain = 1;
         Heat = 0;
@@ -311,7 +313,14 @@ public class RunPlayerStats : ScriptableObject
         Inventory = new List<Item>();
         BossModification = null;
         BannedBossModifications = new List<string>();
+        //Camera = null;
+        SetCamera();
         setUpState = false;
+    }
+
+    public void SetCamera()
+    {
+        
     }
     
     public void ResetBannedBosses()

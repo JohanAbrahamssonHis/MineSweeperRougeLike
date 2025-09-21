@@ -49,7 +49,7 @@ public class InputHandler : MonoBehaviour
     {
         if (!context.performed) return null;
         List<IInteractable> interactables = new List<IInteractable>();
-        if (_mainCamera is null) Debug.LogError("fiehfei");
+        //if (_mainCamera is null) Debug.LogError("fiehfei");
         var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(rayHits.Any(x => !x.collider)) return null;
 

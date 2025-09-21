@@ -32,6 +32,7 @@ public class HealthBar : MonoBehaviour
             currentGameObject.transform.parent = gameObject.transform;
             SpriteRenderer _renderer = currentGameObject.AddComponent<SpriteRenderer>();
             _renderer.sprite = sprite;
+            _renderer.sortingOrder = 4;
         }
         UpdateIconPositions();
     }

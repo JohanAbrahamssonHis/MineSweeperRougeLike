@@ -34,6 +34,6 @@ MonoBehaviour:
   - clipName: EliteEvilLaugh
     audioClip: {fileID: 8300000, guid: dbe5da2026068784497499caebef99fb, type: 3}
   - clipName: BoomBeep
-    audioClip: {fileID: 8300000, guid: 27deefb61515e5f4082f1c712b8e070a, type: 3}
+    audioClip: {fileID: 8300000, guid: 95b02221d18077b438b253a383be483c, type: 3}
   - clipName: Switch
     audioClip: {fileID: 8300000, guid: cfb59e5b0626613419ddc55fc0eddf43, type: 3}
