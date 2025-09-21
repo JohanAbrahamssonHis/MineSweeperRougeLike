@@ -23,6 +23,8 @@ public class Grid : MonoBehaviour, IInteractable
 
     public EndRoomScreen endRoomScreen;
 
+    private BoxCollider2D _collider2D;
+
     [Header("Zoom")]
     [SerializeField] float zoomStep = 1.1f;   // >1 per scrollsteg
     [SerializeField] float minScale = 0.5f;
@@ -35,11 +37,12 @@ public class Grid : MonoBehaviour, IInteractable
     {
         startPos   = transform.position;
         startScale = transform.localScale; // antas uniform
+        _collider2D = GetComponent<BoxCollider2D>();
     }
 
-    public void Start()
+    private void Start()
     {
-        SetupGrid();
+        if (RunPlayerStats.Instance.DebugMode) SetupGrid();
     }
 
     public void SetupGrid()
@@ -57,7 +60,9 @@ public class Grid : MonoBehaviour, IInteractable
                 square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";
             }
         }
-    
+
+        _collider2D.size = new Vector2(squaresXSize*squareLength + (squaresXSize-1)*margin,squaresYSize*squareLength+ (squaresYSize-1)*margin);
+
     }
 
     public void CheckWin()

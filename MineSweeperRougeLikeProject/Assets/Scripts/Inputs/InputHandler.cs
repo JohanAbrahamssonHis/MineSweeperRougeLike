@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
     
-    void Awake()
+    void Start()
     {
-        _mainCamera = Camera.main;
+        _mainCamera = RunPlayerStats.Instance.Camera;
     }
     
     
     public void OnClick(InputAction.CallbackContext context)
     {
-        ButtonEffect().ForEach(x => x.Interact());
+        ButtonEffect(context)?.ForEach(x => x.Interact());
     }
     
     public void OnRightClick(InputAction.CallbackContext context)
     {
-        ButtonEffect().ForEach(x => x.SecondInteract());
+        ButtonEffect(context)?.ForEach(x => x.SecondInteract());
     }
     
     public void OnResetBoard(InputAction.CallbackContext context)
@@ -35,17 +36,20 @@ public class InputHandler : MonoBehaviour
 
     public void OnScroll(InputAction.CallbackContext context)
     {
-        ButtonEffect().ForEach(x => x.Scroll(context.ReadValue<float>()));
+        ButtonEffect(context)?.ForEach(x => x.Scroll(context.ReadValue<float>()));
     }
     
     public void OnWheelButton(InputAction.CallbackContext context)
     {
-        ButtonEffect().ForEach(x => x.WheelButton());
+        ButtonEffect(context)?.ForEach(x => x.WheelButton());
     }
 
-    private List<IInteractable> ButtonEffect()
+    
+    private List<IInteractable> ButtonEffect(InputAction.CallbackContext context)
     {
+        if (!context.performed) return null;
         List<IInteractable> interactables = new List<IInteractable>();
+        if (_mainCamera is null) Debug.LogError("fiehfei");
         var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(rayHits.Any(x => !x.collider)) return null;
 
@@ -57,4 +61,20 @@ public class InputHandler : MonoBehaviour
 
         return interactables;
     }
+    
+    /*
+    private IInteractable ButtonEffect(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return null;
+        Debug.Log("hello");
+        //List<IInteractable> interactables = new List<IInteractable>();
+        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if(!rayHit.collider) return null;
+
+        
+        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return null;
+
+        return interactable;
+    }
+    */
 }

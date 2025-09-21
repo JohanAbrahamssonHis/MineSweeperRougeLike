@@ -10,11 +10,13 @@ public class MainMusicPlayer : MonoBehaviour
 
     void OnEnable()
     {
+        
         if (SoundManager.Instance.Main != null)
         {
             Destroy(gameObject);
             return;
         }
+        
         
         DontDestroyOnLoad(gameObject);
         

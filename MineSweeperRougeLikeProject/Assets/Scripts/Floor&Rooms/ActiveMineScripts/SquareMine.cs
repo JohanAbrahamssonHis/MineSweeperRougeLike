@@ -96,7 +96,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (hasFlag || (hasMine && mine.isDisabled) || RunPlayerStats.Instance.EndState) return;
-
+        
         if (RunPlayerStats.Instance.DebugMode)
         {
             squareRevealed = true;

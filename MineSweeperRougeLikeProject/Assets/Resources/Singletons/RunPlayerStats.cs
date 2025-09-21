@@ -115,6 +115,7 @@ public class RunPlayerStats : ScriptableObject
         set
         {
             _money = value;
+            if(setUpState) return;
             SoundManager.Instance.Play("Money", null, true, 1f, 1 + Money * 0.05f);
         }
     }
@@ -167,7 +168,6 @@ public class RunPlayerStats : ScriptableObject
     #endregion
 
     #region Inventory
-
     
     public List<Item> Inventory { get; set; }
     
@@ -189,6 +189,8 @@ public class RunPlayerStats : ScriptableObject
     public BossModification BossModification { get; set; }
 
     public bool DebugMode;
+    public bool setUpState;
+    public Camera Camera { get; set; }
     public List<string> BannedBossModifications { get; set; }
 
     public void SetBossModification()
@@ -281,6 +283,7 @@ public class RunPlayerStats : ScriptableObject
     
     public void ResetValues()
     {
+        setUpState = true;
         HealthDamageModifier = 0;
         HealthDamageMultModifier = 1;
         Health = 5;
@@ -308,6 +311,7 @@ public class RunPlayerStats : ScriptableObject
         Inventory = new List<Item>();
         BossModification = null;
         BannedBossModifications = new List<string>();
+        setUpState = false;
     }
     
     public void ResetBannedBosses()
