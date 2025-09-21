@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraSet : MonoBehaviour
 {
-    [SerializeField] private new Camera camera;
+    [SerializeField] private Camera camera;
     // Start is called before the first frame update
     void Awake()
     {
