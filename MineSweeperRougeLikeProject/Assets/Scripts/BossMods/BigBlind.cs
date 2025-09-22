@@ -29,8 +29,6 @@ public class BigBlind : BossModification
         }
 
         RunPlayerStats.Instance.TempMoneyGain = -moneyLoss;
-        
-        Debug.Log(-moneyLoss);
     }
 
     public override void UnsubscribeModification()

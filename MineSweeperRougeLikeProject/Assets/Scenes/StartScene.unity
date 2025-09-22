@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a1f0c092486d034fa0e4e7ecb721984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartPackage: {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  StartPackage: {fileID: 11400000, guid: dcdbbf827d312da459d691058b5587e2, type: 2}
 --- !u!1 &138581479
 GameObject:
   m_ObjectHideFlags: 0
