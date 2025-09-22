@@ -192,7 +192,18 @@ public class RunPlayerStats : ScriptableObject
 
     public bool DebugMode;
     public bool setUpState;
-    public Camera Camera { get; set; }
+    
+    [System.NonSerialized] private Camera _camera;
+    public Camera Camera {
+        get => _camera;
+        set => _camera = value;
+    }
+    // Säker reset vid uppstart (oavsett domain reload-inställning)
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void ResetRuntimeState()
+    {
+        if (Instance != null) Instance._camera = null;
+    }
     public List<string> BannedBossModifications { get; set; }
 
     public void SetBossModification()
@@ -313,14 +324,7 @@ public class RunPlayerStats : ScriptableObject
         Inventory = new List<Item>();
         BossModification = null;
         BannedBossModifications = new List<string>();
-        //Camera = null;
-        SetCamera();
         setUpState = false;
-    }
-
-    public void SetCamera()
-    {
-        
     }
     
     public void ResetBannedBosses()

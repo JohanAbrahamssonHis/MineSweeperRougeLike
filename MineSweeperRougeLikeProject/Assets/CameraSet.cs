@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,30 +7,34 @@ using UnityEngine;
 public class CameraSet : MonoBehaviour
 {
     [SerializeField] private Camera camera;
-    // Start is called before the first frame update
-    void Awake()
+
+    private void Awake()
     {
-        
-        if (RunPlayerStats.Instance.Camera != null)
+        var stats = RunPlayerStats.Instance;
+
+        // Finns redan en kamera som inte är denna? Döda denna.
+        if (stats.Camera != null && stats.Camera != camera)
         {
             Destroy(gameObject);
             return;
         }
-        
-        DontDestroyOnLoad(this.gameObject);
-        RunPlayerStats.Instance.Camera = camera;
-        
+
+        // Sätt och bevara
+        stats.Camera = camera != null ? camera : GetComponentInChildren<Camera>();
+        DontDestroyOnLoad(gameObject);
     }
 
-    public void OnAppLaunch()
+    // Bra att nollställa när detta objekt försvinner
+    private void OnDestroy()
     {
-        Debug.Log("HEllos");
-        RunPlayerStats.Instance.Camera = null;
+        if (RunPlayerStats.Instance != null && RunPlayerStats.Instance.Camera == camera)
+            RunPlayerStats.Instance.Camera = null;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnApplicationQuit()
     {
-        
+        // Säkerhet – påverkar inte Editor-asset längre då fältet ej serialiseras
+        if (RunPlayerStats.Instance != null && RunPlayerStats.Instance.Camera == camera)
+            RunPlayerStats.Instance.Camera = null;
     }
 }
