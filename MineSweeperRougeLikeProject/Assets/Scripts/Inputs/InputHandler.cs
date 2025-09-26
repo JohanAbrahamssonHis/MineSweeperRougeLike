@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,12 +45,17 @@ public class InputHandler : MonoBehaviour
         ButtonEffect(context)?.ForEach(x => x.WheelButton());
     }
 
-    
+    //Hover I guess now is local? Should fix but unsure how to make it good
+
+    public void Update()
+    {
+        ButtonEffectNonInteract()?.ForEach(x => x.Hover());
+    }
+
     private List<IInteractable> ButtonEffect(InputAction.CallbackContext context)
     {
         if (!context.performed) return null;
         List<IInteractable> interactables = new List<IInteractable>();
-        //if (_mainCamera is null) Debug.LogError("fiehfei");
         var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if(rayHits.Any(x => !x.collider)) return null;
 
@@ -62,19 +68,19 @@ public class InputHandler : MonoBehaviour
         return interactables;
     }
     
-    /*
-    private IInteractable ButtonEffect(InputAction.CallbackContext context)
+    private List<IInteractable> ButtonEffectNonInteract()
     {
-        if (!context.performed) return null;
-        Debug.Log("hello");
-        //List<IInteractable> interactables = new List<IInteractable>();
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if(!rayHit.collider) return null;
+        List<IInteractable> interactables = new List<IInteractable>();
+        var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if(rayHits.Any(x => !x.collider)) return null;
 
-        
-        if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) return null;
+        foreach (var rayHit in rayHits)
+        {
+            if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) continue;
+            interactables.Add(interactable);
+        }
 
-        return interactable;
+        return interactables;
     }
-    */
+    
 }

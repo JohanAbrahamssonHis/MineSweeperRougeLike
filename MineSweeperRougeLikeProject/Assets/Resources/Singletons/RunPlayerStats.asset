@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInvincable: 0
   isUnDamageable: 0
-  DebugMode: 0
+  DebugMode: 1
   setUpState: 0
