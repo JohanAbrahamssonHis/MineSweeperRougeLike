@@ -8,10 +8,12 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
+    private List<IInteractable> _currentlyInteracted;
     
     void Start()
     {
         _mainCamera = RunPlayerStats.Instance.Camera;
+        _currentlyInteracted = new List<IInteractable>();
     }
     
     
@@ -45,11 +47,9 @@ public class InputHandler : MonoBehaviour
         ButtonEffect(context)?.ForEach(x => x.WheelButton());
     }
 
-    //Hover I guess now is local? Should fix but unsure how to make it good
-
     public void Update()
     {
-        ButtonEffectNonInteract()?.ForEach(x => x.Hover());
+        ButtonEffectHover()?.ForEach(x => x.Hover());
     }
 
     private List<IInteractable> ButtonEffect(InputAction.CallbackContext context)
@@ -68,7 +68,7 @@ public class InputHandler : MonoBehaviour
         return interactables;
     }
     
-    private List<IInteractable> ButtonEffectNonInteract()
+    private List<IInteractable> ButtonEffectHover()
     {
         List<IInteractable> interactables = new List<IInteractable>();
         var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
@@ -77,7 +77,18 @@ public class InputHandler : MonoBehaviour
         foreach (var rayHit in rayHits)
         {
             if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) continue;
+            if (!_currentlyInteracted.Contains(interactable))
+            {
+                interactable.HoverStart();
+                _currentlyInteracted.Add(interactable);
+            }
             interactables.Add(interactable);
+        }
+
+        foreach (var interactable in _currentlyInteracted.ToList().Where(interactable => !interactables.Contains(interactable)))
+        {
+            interactable.HoverEnd();
+            _currentlyInteracted.Remove(interactable);
         }
 
         return interactables;

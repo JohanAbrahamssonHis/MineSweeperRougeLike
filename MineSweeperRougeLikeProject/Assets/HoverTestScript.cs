@@ -7,14 +7,17 @@ public class HoverTestScript : MonoBehaviour, IInteractable
 {
     private SpriteRenderer _renderer;
     private TextVisualObject _textVisualObject;
+    public string text;
 
     public void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
         _textVisualObject = GetComponentInChildren<TextVisualObject>();
+        _textVisualObject.SetText(text);
+        RunPlayerStats.Instance.TextVisualObject = _textVisualObject;
     }
 
-    
+    /*
     public void OnMouseEnter()
     {
         HoverStart();
@@ -31,12 +34,13 @@ public class HoverTestScript : MonoBehaviour, IInteractable
         if(_textVisualObject.isStillHovered) return;
         HoverEnd("Sure is now not Hovering Main");
     }
+    */
     
 
     public void HoverStart()
     {
         Debug.Log("Sure is hovering");
-        //transform.localScale *= 2;
+        _textVisualObject.HiderContainer.SetActive(true);
     }
     
     public void Hover()
@@ -44,10 +48,10 @@ public class HoverTestScript : MonoBehaviour, IInteractable
         _renderer.color = Color.red;
     }
     
-    public void HoverEnd(string text)
+    public void HoverEnd()
     {
-        Debug.Log(text);
-        //transform.localScale /= 2;
+        Debug.Log("Sure is not hovering");
         _renderer.color = Color.white;
+        _textVisualObject.HiderContainer.SetActive(false);
     }
 }

@@ -218,6 +218,17 @@ public class RunPlayerStats : ScriptableObject
         
         BannedBossModifications.Add(BossModification.name);
     }
+
+    private TextVisualObject _textVisualObject;
+    public TextVisualObject TextVisualObject
+    {
+        get => _textVisualObject;
+        set
+        {
+            if(_textVisualObject!=null && value != null) return;
+            _textVisualObject = value;
+        } 
+    }
     
 
     #region End States

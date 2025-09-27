@@ -10,7 +10,7 @@ public interface IInteractable
     public void SecondInteract() {}
     public void HoverStart(){}
     public void Hover(){}
-    public void HoverEnd(String text){}
+    public void HoverEnd(){}
     public void Scroll(float value){}
     public void WheelButton() { }
 }
