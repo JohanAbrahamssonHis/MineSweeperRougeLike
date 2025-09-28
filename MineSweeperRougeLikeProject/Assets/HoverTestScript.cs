@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoverTestScript : MonoBehaviour, IInteractable
+public class HoverTestScript : MonoBehaviour, IInteractable, ITextable
 {
     private SpriteRenderer _renderer;
     private TextVisualObject _textVisualObject;
@@ -12,9 +12,9 @@ public class HoverTestScript : MonoBehaviour, IInteractable
     public void Start()
     {
         _renderer = GetComponent<SpriteRenderer>();
-        _textVisualObject = GetComponentInChildren<TextVisualObject>();
-        _textVisualObject.SetText(text);
-        RunPlayerStats.Instance.TextVisualObject = _textVisualObject;
+        //_textVisualObject = GetComponentInChildren<TextVisualObject>();
+        //_textVisualObject.SetText(text);
+        //RunPlayerStats.Instance.TextVisualObject = _textVisualObject;
     }
 
     /*
@@ -40,7 +40,7 @@ public class HoverTestScript : MonoBehaviour, IInteractable
     public void HoverStart()
     {
         Debug.Log("Sure is hovering");
-        _textVisualObject.HiderContainer.SetActive(true);
+        //_textVisualObject.HiderContainer.SetActive(true);
     }
     
     public void Hover()
@@ -52,6 +52,9 @@ public class HoverTestScript : MonoBehaviour, IInteractable
     {
         Debug.Log("Sure is not hovering");
         _renderer.color = Color.white;
-        _textVisualObject.HiderContainer.SetActive(false);
+        //_textVisualObject.HiderContainer.SetActive(false);
     }
+
+    public string Name => "Hover Test";
+    public string Description => "Visual Object that will show text";
 }
