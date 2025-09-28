@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface ITextable
 {
-    abstract string Name { get; }
-    abstract string Description { get; }
+    string Name { get; }
+    string Description { get; }
+    string Rarity => "";
 }

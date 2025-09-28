@@ -9,6 +9,7 @@ public class InputHandler : MonoBehaviour
 {
     private Camera _mainCamera;
     private List<IInteractable> _currentlyInteracted;
+    private IInteractable _mostCurrentlyInteracted;
     
     void Start()
     {
@@ -77,6 +78,16 @@ public class InputHandler : MonoBehaviour
         foreach (var rayHit in rayHits)
         {
             if (!rayHit.collider.gameObject.TryGetComponent(out IInteractable interactable)) continue;
+
+            if (rayHit.collider.gameObject.TryGetComponent(out ITextable textable))
+            {
+                if (_mostCurrentlyInteracted == null)
+                {
+                    _mostCurrentlyInteracted = interactable;
+                    TextVisualSingleton.Instance.textVisualObject.SetObject(rayHit.collider.gameObject, textable);
+                }
+            }
+            
             if (!_currentlyInteracted.Contains(interactable))
             {
                 interactable.HoverStart();
@@ -88,6 +99,11 @@ public class InputHandler : MonoBehaviour
         foreach (var interactable in _currentlyInteracted.ToList().Where(interactable => !interactables.Contains(interactable)))
         {
             interactable.HoverEnd();
+            if (interactable == _mostCurrentlyInteracted)
+            {
+                _mostCurrentlyInteracted = null;
+                TextVisualSingleton.Instance.textVisualObject.DisableObject();
+            }
             _currentlyInteracted.Remove(interactable);
         }
 

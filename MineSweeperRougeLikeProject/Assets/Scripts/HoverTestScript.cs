@@ -39,18 +39,16 @@ public class HoverTestScript : MonoBehaviour, IInteractable, ITextable
 
     public void HoverStart()
     {
-        Debug.Log("Sure is hovering");
+        _renderer.color = Color.red;
         //_textVisualObject.HiderContainer.SetActive(true);
     }
     
     public void Hover()
     {
-        _renderer.color = Color.red;
     }
     
     public void HoverEnd()
     {
-        Debug.Log("Sure is not hovering");
         _renderer.color = Color.white;
         //_textVisualObject.HiderContainer.SetActive(false);
     }
