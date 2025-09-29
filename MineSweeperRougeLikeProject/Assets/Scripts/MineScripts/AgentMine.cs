@@ -14,6 +14,10 @@ public class AgentMine : Mine
         MineRoomManager.afterActionEvent += MineRoomManagerOnAfterActionEvent;
     }
 
+    public override string Name => "Agent Mine";
+    public override string Description => "After each action, moves to a Neighbouring Square";
+    public override string Rarity => "Common";
+
     public void OnDestroy()
     {
         MineRoomManager.afterActionEvent -= MineRoomManagerOnAfterActionEvent;

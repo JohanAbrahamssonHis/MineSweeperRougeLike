@@ -54,5 +54,6 @@ public class HoverTestScript : MonoBehaviour, IInteractable, ITextable
     }
 
     public string Name => "Hover Test";
-    public string Description => "Visual Object that will show text";
+    public string Description => text;
+    public string Rarity => "common";
 }

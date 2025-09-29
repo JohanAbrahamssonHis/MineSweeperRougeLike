@@ -12,9 +12,7 @@ public class NormalMine : Mine
         SetStandardNeighbours(neighbours);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override string Name => "Normal Mine";
+    public override string Description => "A Standard Mine";
+    public override string Rarity => "Common";
 }

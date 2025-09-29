@@ -12,9 +12,7 @@ public class DoubleMine : Mine
         SetStandardNeighbours(neighbours);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override string Name => "Double Mine";
+    public override string Description => "Counts for Neighbouring Squares as ‘2’ mines";
+    public override string Rarity => "Common";
 }

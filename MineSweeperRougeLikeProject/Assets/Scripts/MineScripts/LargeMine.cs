@@ -21,9 +21,8 @@ public class LargeMine : Mine
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override string Name => "Large Mine";
+    public override string Description => "Neighbours squares as a 5x5 square";
+    public override string Rarity => "Rare";
+
 }

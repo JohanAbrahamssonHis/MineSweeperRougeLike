@@ -11,4 +11,8 @@ public class SpikedMine : Mine
         damage = 2;
         SetStandardNeighbours(neighbours);
     }
+
+    public override string Name => "Spiked Mine";
+    public override string Description => "Deals 2 damage when activated instead of 1";
+    public override string Rarity => "Common";
 }

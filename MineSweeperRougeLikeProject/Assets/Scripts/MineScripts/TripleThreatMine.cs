@@ -12,9 +12,7 @@ public class TripleThreatMine : Mine
         SetStandardNeighbours(neighbours);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override string Name => "Triple Mine";
+    public override string Description => "Counts for Neighbouring Squares as ‘3’ mines";
+    public override string Rarity => "UnCommon";
 }

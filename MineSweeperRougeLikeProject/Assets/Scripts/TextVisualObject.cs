@@ -31,6 +31,7 @@ public class TextVisualObject : MonoBehaviour
         */
         TextVisualSingleton.Instance.textVisualObject = this;
         HiderContainer.SetActive(false);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void SetObject(GameObject gameObjectSet, ITextable textable)
@@ -41,16 +42,26 @@ public class TextVisualObject : MonoBehaviour
         transform.localPosition = Vector3.zero;
         
         SetText(textable.Name, textable.Description, textable.Rarity);
-
-        //_textBox.
         
-        //HiderForm.transform.localPosition.y;
+        //HiderForm.rect.height = 2 + _textBox.rectTransform.rect.height;
+        
+        HiderForm.sizeDelta = new Vector2(
+            HiderForm.sizeDelta.x, // Keep the current width
+            _textNameBox.rectTransform.rect.height + _textBox.preferredHeight + _textBoxRarity.rectTransform.rect.height // Add 2 to the height of _textBox
+        );
+
+        HiderForm.localPosition = new Vector2(
+            0,
+            -(HiderForm.sizeDelta.y/2+0.5f)
+        );
         
         HiderContainer.SetActive(true);
+        transform.parent = null;
     }
 
     public void DisableObject()
     {
+        parentObject = null;
         HiderContainer.SetActive(false);
     }
 

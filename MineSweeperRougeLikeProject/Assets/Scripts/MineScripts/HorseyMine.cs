@@ -25,4 +25,8 @@ public class HorseyMine : Mine
             
         }
     }
+
+    public override string Name => "Horsey Mine";
+    public override string Description => "Neighbours squares as how a Knight in chess moves";
+    public override string Rarity => "Common";
 }

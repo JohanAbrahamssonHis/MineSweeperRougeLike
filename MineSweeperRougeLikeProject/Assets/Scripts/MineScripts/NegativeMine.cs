@@ -10,4 +10,8 @@ public class NegativeMine : Mine
         weight = -1;
         SetStandardNeighbours(neighbours);
     }
+
+    public override string Name => "Sad Mine";
+    public override string Description => "Counts for Neighbouring Squares as ‘-1’ mines";
+    public override string Rarity => "UnCommon";
 }

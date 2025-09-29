@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Mine : MonoBehaviour
+public abstract class Mine : MonoBehaviour, ITextable
 {
     public bool isDisabled;
     public int weight;
@@ -18,7 +18,7 @@ public abstract class Mine : MonoBehaviour
     public int damage = 1;
 
     public CallBack call;
-    
+
     public virtual void SetUpMine(MineRoomManager mineRoomManager)
     {
         neighbours = new List<Vector2>();
@@ -47,4 +47,9 @@ public abstract class Mine : MonoBehaviour
             }  
         }
     }
+
+    public abstract string Name { get; }
+    public abstract string Description { get; }
+    
+    public abstract string Rarity { get; }
 }
