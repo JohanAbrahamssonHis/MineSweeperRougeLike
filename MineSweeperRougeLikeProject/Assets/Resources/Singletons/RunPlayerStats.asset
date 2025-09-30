@@ -16,3 +16,10 @@ MonoBehaviour:
   isUnDamageable: 0
   DebugMode: 0
   setUpState: 0
+  startEffectAbilities:
+  - {fileID: 11400000, guid: 4860ec8dd1a6f4b41aaea418a48590d4, type: 2}
+  - {fileID: 11400000, guid: aedeb8bb12f0f994490c45aac9bfd49d, type: 2}
+  effectAbilities:
+  - {fileID: 0}
+  - {fileID: 0}
+  currentEffectAbility: {fileID: 0}

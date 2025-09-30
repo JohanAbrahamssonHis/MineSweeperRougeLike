@@ -204,6 +204,16 @@ public class RunPlayerStats : ScriptableObject
     {
         if (Instance != null) Instance._camera = null;
     }
+
+    public List<EffectAbility> startEffectAbilities;
+    public List<EffectAbility> effectAbilities;
+    public EffectAbility currentEffectAbility;
+
+    public EffectAbility GetNextEffectAbility()
+    {
+        return effectAbilities.Last() == currentEffectAbility ? effectAbilities.First() : effectAbilities[effectAbilities.IndexOf(currentEffectAbility) + 1];
+    }
+    
     public List<string> BannedBossModifications { get; set; }
 
     public void SetBossModification()
@@ -240,6 +250,7 @@ public class RunPlayerStats : ScriptableObject
         //ResetValues();
         ActiveTimer = false;
         Inventory.ForEach(x => x.Unsubscribe());
+        effectAbilities.ForEach(x => x.ResetAbility());
         ResetBoss();
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
         SoundManager.Instance.Play("GameOver", null, true, 3f);
@@ -251,6 +262,7 @@ public class RunPlayerStats : ScriptableObject
         EndState = true;
         ActiveTimer = false;
         ActionEvents.Instance.TriggerEventMineRoomWin();
+        effectAbilities.ForEach(x => x.ResetAbility());
         ResetBoss();
     }
     
@@ -335,12 +347,20 @@ public class RunPlayerStats : ScriptableObject
         Inventory = new List<Item>();
         BossModification = null;
         BannedBossModifications = new List<string>();
+        SetEffectAbilities();
         setUpState = false;
     }
-    
-    public void ResetBannedBosses()
+
+    private void ResetBannedBosses()
     {
         BannedBossModifications.Clear();
+    }
+
+    private void SetEffectAbilities()
+    {
+        effectAbilities.Clear();
+        startEffectAbilities.ForEach(x => effectAbilities.Add(Instantiate(x)));
+        currentEffectAbility = effectAbilities.First();
     }
 
     #endregion

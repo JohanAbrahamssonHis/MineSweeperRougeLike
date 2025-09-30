@@ -82,6 +82,7 @@ public class SquareMine : MonoBehaviour, IInteractable
         _spriteRendererDecalContainer.sprite = isLongNeighbour && squareRevealed ? DecalArrow : null;
         //_spriteRendererDecalContainerRenderer.sprite = isLongNeighbour && squareRevealed ? NumberSprites.Instance.GetNumberedSprite(longNumber) : null;
         
+        _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
         
         if (hasMine && mine.isDisabled)
         {
@@ -132,16 +133,33 @@ public class SquareMine : MonoBehaviour, IInteractable
     public void SecondInteract()
     {
         if (squareRevealed || RunPlayerStats.Instance.EndState) return;
+        RunPlayerStats.Instance.currentEffectAbility.CallAbility(this);
+        /*
+        if (squareRevealed || RunPlayerStats.Instance.EndState) return;
         hasFlag = !hasFlag;
-        
+
         if (RunPlayerStats.Instance.DebugMode)
         {
             return;
         }
-        
+
         ActionEvents.Instance.TriggerEventFlag();
         SoundManager.Instance.Play("Flag", transform, true, 1);
-       
+
         _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
+        */
+        
+        
+        /*
+        //Sensor Rules
+         
+        if (!hasMine)
+        {
+            MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
+            if (!mineRoomManager.AfterFirstMove) mineRoomManager.SetLogic(this);
+            else mineRoomManager.RevealTile(this);
+        }
+        else mine.isDisabled = true;
+         */
     }
 }
