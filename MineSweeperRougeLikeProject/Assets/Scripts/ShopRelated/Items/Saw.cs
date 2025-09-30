@@ -28,4 +28,8 @@ public class Saw : Item
         base.Unsubscribe();
         ActionEvents.Instance.OnShopAfter -= ShopFunction;
     }
+
+    public override string Name => "Saw";
+    public override string Description => "Future prices in shops are halved";
+    public override string Rarity => "Rare";
 }

@@ -14,4 +14,8 @@ public class Toaster : Item
     {
         Function();
     }
+
+    public override string Name => "Toaster";
+    public override string Description => "Heat gained per action is increased";
+    public override string Rarity => "Rare";
 }

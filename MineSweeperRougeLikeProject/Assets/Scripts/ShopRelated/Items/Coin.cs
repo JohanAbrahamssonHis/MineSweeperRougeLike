@@ -13,4 +13,8 @@ public class Coin : Item
     {
         Function();
     }
+
+    public override string Name => "Coin";
+    public override string Description => "Adds an extra shop on the next floor";
+    public override string Rarity => "Common";
 }

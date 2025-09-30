@@ -36,4 +36,8 @@ public class Box : Item
     {
         Function();
     }
+
+    public override string Name => "Box";
+    public override string Description => "Gain 1-10 money and 0-2 random mines";
+    public override string Rarity => "UnCommon";
 }

@@ -54,6 +54,7 @@ public class ItemInventoryVisual : MonoBehaviour
             GameObject newItemGameObject = Instantiate(itemVisualPreset, transform);
             newItemGameObject.transform.localPosition = new Vector3((i - (float)inventory.Count / 2)*distance*(1/(float)inventory.Count), 0, 0);
             newItemGameObject.GetComponent<SpriteRenderer>().sprite = inventory[i].sprite;
+            newItemGameObject.GetComponent<ItemVisualHover>()._item = inventory[i];
             _gameObjects.Add(newItemGameObject);
             _positions.Add(newItemGameObject.transform.localPosition);
         }

@@ -25,4 +25,8 @@ public class EightBall : Item
         base.Unsubscribe();
         ActionEvents.Instance.OnFirstAction -= Function;
     }
+
+    public override string Name => "Eight Ball";
+    public override string Description => "Start of a round. 1 in 8 chance per mine to be disabled";
+    public override string Rarity => "UnCommon";
 }

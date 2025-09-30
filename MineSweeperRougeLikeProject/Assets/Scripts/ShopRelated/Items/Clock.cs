@@ -13,4 +13,8 @@ public class Clock : Item
     {
         Function();
     }
+
+    public override string Name => "Clock";
+    public override string Description => "Gain a minute";
+    public override string Rarity => "Common";
 }

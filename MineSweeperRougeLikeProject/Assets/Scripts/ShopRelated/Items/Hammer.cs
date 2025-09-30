@@ -33,4 +33,8 @@ public class Hammer : Item
         base.Unsubscribe();
         ActionEvents.Instance.OnDamage -= Function;
     }
+
+    public override string Name => "Hammer";
+    public override string Description => "After taking damage, disable 3 random mines";
+    public override string Rarity => "UnCommon";
 }

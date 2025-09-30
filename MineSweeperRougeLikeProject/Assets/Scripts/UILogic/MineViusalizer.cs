@@ -12,6 +12,8 @@ public class MineViusalizer : MonoBehaviour
     public GameObject visualObject;
    
     public List<Sprite> sprites;
+
+    public float distance = 4;
     
     List<GameObject> _gameObjects = new List<GameObject>();
     
@@ -59,7 +61,7 @@ public class MineViusalizer : MonoBehaviour
                 continue;
             }
            
-            _gameObjects.Add(CreateVisualHolder(mines[i].sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines) , mines[i]));
+            _gameObjects.Add(CreateVisualHolder(mines[i].sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines), mines[i]));
             amountOfMines = 1;
 
         }
@@ -67,19 +69,20 @@ public class MineViusalizer : MonoBehaviour
         //Last is created regardless
         _gameObjects.Add(CreateVisualHolder(mines.Last().sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines), mines.Last()));
 
-        float completelength = 5;
-
+        /*
         if (_gameObjects.Count==1)
         {
             _gameObjects.First().transform.localPosition = 
                 new Vector3(0,  0, 0);
             return;
         }
+        */
         
         for (var i = 0; i < _gameObjects.Count; i++)
         {
             _gameObjects[i].transform.localPosition = 
-                new Vector3(0, i * -(completelength/(_gameObjects.Count-1)) + completelength/2, 0);
+                new Vector3(0, i * -(distance/(_gameObjects.Count==1?2:_gameObjects.Count-1)) + distance/2, 0);
+            //(i - (float)inventory.Count / 2)*distance*(1/(float)inventory.Count)
         }
     }
 

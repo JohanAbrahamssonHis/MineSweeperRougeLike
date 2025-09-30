@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour, IInteractable
 {
-    public MalwarePackage StartPackage;
+    public List<MalwarePackage> StartPackages;
     public void Interact()
     {
         RunPlayerStats.Instance.ResetValues();
-        RunPlayerStats.Instance.AddMalwarePackage(StartPackage);
+        StartPackages.ForEach(x => RunPlayerStats.Instance.AddMalwarePackage(x));
         SceneManager.LoadScene("FloorScene");
     }
 }

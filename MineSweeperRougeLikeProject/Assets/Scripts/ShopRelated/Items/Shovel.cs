@@ -14,4 +14,8 @@ public class Shovel : Item
     {
         Function();
     }
+
+    public override string Name => "Shovel";
+    public override string Description => "Gain +1 extra point per action";
+    public override string Rarity => "Common";
 }

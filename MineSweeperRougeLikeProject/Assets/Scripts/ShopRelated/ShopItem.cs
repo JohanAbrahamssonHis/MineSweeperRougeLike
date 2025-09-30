@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItem : MonoBehaviour, IInteractable
+public class ShopItem : MonoBehaviour, IInteractable, ITextable
 {
     private bool isBought;
 
@@ -54,4 +54,8 @@ public class ShopItem : MonoBehaviour, IInteractable
     public void SecondInteract()
     {
     }
+
+    public string Name => Item.Name;
+    public string Description => Item.Description;
+    public string Rarity => Item.Rarity;
 }

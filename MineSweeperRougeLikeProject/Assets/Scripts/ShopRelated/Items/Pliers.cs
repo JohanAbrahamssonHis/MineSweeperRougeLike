@@ -13,4 +13,8 @@ public class Pliers : Item
     {
         Function();
     }
+
+    public override string Name => "Plier";
+    public override string Description => "Gain one health";
+    public override string Rarity => "Common";
 }

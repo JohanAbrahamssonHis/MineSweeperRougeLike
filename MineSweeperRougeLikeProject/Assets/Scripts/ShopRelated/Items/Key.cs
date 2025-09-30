@@ -13,4 +13,8 @@ public class Key : Item
     {
         Function();
     }
+
+    public override string Name => "Key";
+    public override string Description => "You need one less room clear per floor";
+    public override string Rarity => "UnCommon";
 }
