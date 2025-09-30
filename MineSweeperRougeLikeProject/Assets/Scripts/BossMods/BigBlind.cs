@@ -36,6 +36,8 @@ public class BigBlind : BossModification
         ActionEvents.Instance.OnMineRoomWin -= SetMoneyLoss;
     }
 
+    public override string Description => "Lose 1$ at the end of round, doubles every 10 seconds";
+
     public override void UpdateModification()
     {
         base.UpdateModification();

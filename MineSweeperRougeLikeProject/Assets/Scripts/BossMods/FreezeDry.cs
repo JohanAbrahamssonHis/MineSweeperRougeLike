@@ -34,4 +34,6 @@ public class FreezeDry : BossModification
         _timeMultiplier *= 1/timeMultiplierBase;
         RunPlayerStats.Instance.TimeMult *= _timeMultiplier;
     }
+
+    public override string Description => "After the first action, while at 0 heat, time is lost three times as fast";
 }

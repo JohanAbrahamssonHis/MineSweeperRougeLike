@@ -16,6 +16,8 @@ public class Spin : BossModification
         grid.transform.RotateAround(Vector2.zero, Vector3.forward, Time.deltaTime*Speed);
     }
 
+    public override string Description => "The Grid will slowly Turn";
+
     public override void Modification()
     {
         grid = RunPlayerStats.Instance.MineRoomManager.grid;

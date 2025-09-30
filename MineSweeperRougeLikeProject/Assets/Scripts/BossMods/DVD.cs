@@ -26,6 +26,8 @@ public class DVD : BossModification
         CheckHitDetection(_grid.transform.position.y, _startPos.y, ref _direction.y);
     }
 
+    public override string Description => "Grid moves and bounces around";
+
     private void CheckHitDetection(float pos, float sPos, ref float dir)
     {
         if ((pos > MaxDistanceFromCenter + sPos && dir>=0) || (pos < -MaxDistanceFromCenter + sPos && dir<=0)) dir *= -1;

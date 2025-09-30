@@ -27,4 +27,7 @@ public class Crazy8 : BossModification
     {
         ActionEvents.Instance.OnAfterAction -= AddNumbers;
     }
+
+    public override string Description =>
+        "All numbers that are shown are ‘+8’ more than usual (aka a ‘1’ is shown as a ‘9’)";
 }

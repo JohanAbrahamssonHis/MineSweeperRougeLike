@@ -26,4 +26,6 @@ public class AgedLikeMilk : BossModification
         ActionEvents.Instance.OnDamage -= MilkDamage;
         RunPlayerStats.Instance.isUnDamageable = false;
     }
+
+    public override string Description => "You can't take damage. Instead, you lose 1 minute";
 }

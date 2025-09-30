@@ -14,6 +14,7 @@ public class TextVisualObject : MonoBehaviour
     private TMP_Text _textBox;
     private TMP_Text _textBoxRarity;
     private BoxCollider2D _boxCollider2D;
+    private GameObject baseParent;
     public bool isStillHovered;
     private string text;
     void Awake()
@@ -24,6 +25,7 @@ public class TextVisualObject : MonoBehaviour
         _textNameBox = HiderContainer.transform.GetChild(1).GetComponent<TMP_Text>();
         _textBox = HiderContainer.transform.GetChild(2).GetComponent<TMP_Text>();
         _textBoxRarity = HiderContainer.transform.GetChild(3).GetComponent<TMP_Text>();
+        baseParent = transform.parent.gameObject;
         /*
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _boxCollider2D.offset = new Vector2(-HiderForm.rect.x, HiderForm.rect.y);
@@ -31,7 +33,7 @@ public class TextVisualObject : MonoBehaviour
         */
         TextVisualSingleton.Instance.textVisualObject = this;
         HiderContainer.SetActive(false);
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(baseParent);
     }
 
     public void SetObject(GameObject gameObjectSet, ITextable textable)
@@ -47,16 +49,18 @@ public class TextVisualObject : MonoBehaviour
         
         HiderForm.sizeDelta = new Vector2(
             HiderForm.sizeDelta.x, // Keep the current width
-            _textNameBox.rectTransform.rect.height + _textBox.preferredHeight + _textBoxRarity.rectTransform.rect.height // Add 2 to the height of _textBox
+            _textNameBox.rectTransform.rect.height + _textBox.preferredHeight + (_textBoxRarity.text=="" ? 0.5f : _textBoxRarity.rectTransform.rect.height)
         );
 
         HiderForm.localPosition = new Vector2(
-            0,
+            0, 
             -(HiderForm.sizeDelta.y/2+0.5f)
         );
+
+        _textBox.transform.localPosition = new Vector2(_textBox.transform.localPosition.x, (_textBoxRarity.text == "" ? -0.25f : 0));
         
         HiderContainer.SetActive(true);
-        transform.parent = null;
+        transform.parent = baseParent.transform;
     }
 
     public void DisableObject()

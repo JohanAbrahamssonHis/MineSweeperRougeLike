@@ -16,4 +16,6 @@ public class AgedLikeWine : BossModification
     {
         RunPlayerStats.Instance.HealthDamageModifier += value;
     }
+
+    public override string Description => "Timer is paused, all sources deal +1 damage";
 }
