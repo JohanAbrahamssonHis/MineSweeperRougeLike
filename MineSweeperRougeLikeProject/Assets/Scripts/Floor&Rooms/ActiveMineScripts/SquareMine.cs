@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum SquareColour
 {
@@ -71,6 +72,8 @@ public class SquareMine : MonoBehaviour, IInteractable
     [SerializeField] private float bobbleSpeed = 10f; // how fast per half-tilt
     [SerializeField] private float damping = 3f;
     private bool isBubbling = false;
+
+    [SerializeField] private Material dissolveMaterial;
     
     // Start is called before the first frame update
     void Start()
@@ -85,6 +88,8 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         _spriteRendererMineFlagRenderer = flagContainer.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         _spriteRendererDecalContainerRenderer = decalContainter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        
+        
 
     }
 
@@ -116,7 +121,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (hasFlag || (hasMine && mine.isDisabled) || RunPlayerStats.Instance.EndState) return;
+        if (hasFlag || (hasMine && mine.isDisabled) || RunPlayerStats.Instance.EndState || squareRevealed) return;
         
         if (RunPlayerStats.Instance.DebugMode)
         {
@@ -173,7 +178,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void HoverEnd()
     {
-        if(!_isHovered) return;
+        if(!_isHovered || gameObject.IsDestroyed()) return;
         transform.localScale /= 1.1f;
         _isHovered = false;
     }
@@ -228,14 +233,48 @@ public class SquareMine : MonoBehaviour, IInteractable
         isBubbling = false;
     }
 
-    private IEnumerator RotateOverTime(Quaternion from, Quaternion to, float time)
+    public string propertyName = "_CutoffHeight"; 
+    public float startValue = 1.5f;
+    public float endValue = -1.5f;
+    public float duration = 1.0f;
+
+    public void StartDissolve(float randomOrg)
     {
+        StartCoroutine(DissolveRoutine(randomOrg));
+    }
+
+    private IEnumerator DissolveRoutine(float randomOrg)
+    {
+        // skapa en kopia av objektet
+
+        GameObject ghost = new GameObject(gameObject.name + "_ShaderOBJ");
+        
+        ghost.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        ghost.transform.localScale = transform.localScale;
+        ghost.transform.parent = transform;
+
+        // ta renderern och ge den en unik instans av materialet
+        SpriteRenderer rend = ghost.AddComponent<SpriteRenderer>();
+        rend.sprite = _spriteRenderer.sprite;
+        rend.sortingOrder = 4;
+        Material mat = new Material(dissolveMaterial);
+        rend.material = mat;
+
+        // animera värdet
         float t = 0f;
-        while (t < 1f)
+        duration += randomOrg;
+        while (t < duration)
         {
-            t += Time.deltaTime / time;
-            transform.rotation = Quaternion.Slerp(from, to, t);
+            float value = Mathf.Lerp(startValue, endValue, t / duration);
+            mat.SetFloat(propertyName, value);
+            t += Time.deltaTime;
             yield return null;
         }
+
+        // sätt sista värdet
+        mat.SetFloat(propertyName, endValue);
+
+        // ta bort ghost när klart
+        Destroy(ghost);
     }
 }

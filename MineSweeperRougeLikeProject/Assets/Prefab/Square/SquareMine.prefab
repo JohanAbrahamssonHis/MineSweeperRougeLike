@@ -393,12 +393,17 @@ MonoBehaviour:
   hasNeighbourMine: 0
   squareSpriteUnused: {fileID: -653557789, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
   squareSpriteUsed: {fileID: -1454708750, guid: 0a56f977ce1f8d048bf013a6406d1a80, type: 3}
-  maxAngle: 10
-  radius: 5
-  smooth: 25
-  bobbleAngle: 20
-  bobbleSpeed: 25
-  damping: 3
+  maxAngle: 12
+  radius: 8
+  smooth: 15
+  bobbleAngle: 25
+  bobbleSpeed: 30
+  damping: 5
+  dissolveMaterial: {fileID: 2100000, guid: 6af1c17c9f4fe6149818bcd8846c0163, type: 2}
+  propertyName: _CutoffHeight
+  startValue: 1.5
+  endValue: -1.5
+  duration: 0.3
 --- !u!1 &1621215128431673766
 GameObject:
   m_ObjectHideFlags: 0
