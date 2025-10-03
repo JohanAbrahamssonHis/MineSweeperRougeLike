@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76cf9ec8054cf294dab4e65537008ecb, type: 3}
   m_Name: RunPlayerStats
   m_EditorClassIdentifier: 
-  isInvincable: 1
+  isInvincable: 0
   isUnDamageable: 0
-  DebugMode: 0
+  DebugMode: 1
   setUpState: 0
   startEffectAbilities:
   - {fileID: 11400000, guid: 4860ec8dd1a6f4b41aaea418a48590d4, type: 2}

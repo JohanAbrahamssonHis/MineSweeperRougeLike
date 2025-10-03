@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -53,6 +54,23 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public Sprite squareSpriteUnused;
     public Sprite squareSpriteUsed;
+
+    private bool _isHovered;
+    [Header("Rotate Tilt")]
+    [Range(0f, 45f)] public float maxAngle = 12f;   // max tilt i grader
+    public float radius = 2.0f;            // längdskala; större = mjukare lut
+    public float smooth = 15f;             // följhastighet
+    
+    /*
+    [Header("Rotation shift")]
+    [SerializeField] private float rotateAngle = 20f;   // how much to rotate
+    [SerializeField] private float rotateTime = 0.1f;   // how fast rotation happens
+    [SerializeField] private float holdTime = 0.2f;     // how long to stay rotated
+    */
+    [SerializeField] private float bobbleAngle = 20f;   // how far to tilt (degrees)
+    [SerializeField] private float bobbleSpeed = 10f; // how fast per half-tilt
+    [SerializeField] private float damping = 3f;
+    private bool isBubbling = false;
     
     // Start is called before the first frame update
     void Start()
@@ -92,6 +110,8 @@ public class SquareMine : MonoBehaviour, IInteractable
         }
 
         _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
+
+        RotateAround();
     }
 
     public void Interact()
@@ -101,6 +121,7 @@ public class SquareMine : MonoBehaviour, IInteractable
         if (RunPlayerStats.Instance.DebugMode)
         {
             squareRevealed = true;
+            if (!isBubbling) StartCoroutine(Bobble());
             return;
         }
         
@@ -111,6 +132,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             ActionEvents.Instance.TriggerEventAction();
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
             mineRoomManager.SetLogic(this);
+            if (!isBubbling) StartCoroutine(Bobble());
             ActionEvents.Instance.TriggerEventAfterAction();
         }
         else
@@ -124,6 +146,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
             
             mineRoomManager.RevealTile(this);
+            if (!isBubbling) StartCoroutine(Bobble());
 
             mineRoomManager.AfterActionFunction();
             ActionEvents.Instance.TriggerEventAfterAction();
@@ -134,32 +157,85 @@ public class SquareMine : MonoBehaviour, IInteractable
     {
         if (squareRevealed || RunPlayerStats.Instance.EndState) return;
         RunPlayerStats.Instance.currentEffectAbility.CallAbility(this);
-        /*
-        if (squareRevealed || RunPlayerStats.Instance.EndState) return;
-        hasFlag = !hasFlag;
+    }
 
-        if (RunPlayerStats.Instance.DebugMode)
+    public void HoverStart()
+    {
+        if(squareRevealed)return;
+        transform.localScale *= 1.1f;
+        _isHovered = true;
+    }
+
+    public void Hover()
+    {
+        //transform.rotation = quaternion.identity;
+    }
+
+    public void HoverEnd()
+    {
+        if(!_isHovered) return;
+        transform.localScale /= 1.1f;
+        _isHovered = false;
+    }
+
+    public void RotateAround()
+    {
+        // 1) Få mouse pos
+        Vector3 mouseWorld = RunPlayerStats.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
+        
+        // 2) Räkna tilt mot musen (lokal 3D-känsla)
+        Vector2 d = new Vector2(mouseWorld.x - transform.position.x, mouseWorld.y - transform.position.y);
+
+        // “Naturlig” mättnad: arctan av avstånd/radius
+        float tiltX = -Mathf.Atan2(d.y, radius) * Mathf.Rad2Deg; // pitch (X)
+        float tiltY =  Mathf.Atan2(d.x, radius) * Mathf.Rad2Deg; // yaw   (Y)
+
+        // Begränsa
+        tiltX = Mathf.Clamp(tiltX, -maxAngle, maxAngle);
+        tiltY = Mathf.Clamp(tiltY, -maxAngle, maxAngle);
+
+        Quaternion targetRot = Quaternion.Euler(-tiltX, -tiltY, 0f);
+
+        // 3) Smidig interpolation (frametålig)
+        float t = 1f - Mathf.Exp(-smooth * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, t);
+
+    }
+    
+    private IEnumerator Bobble()
+    {
+        isBubbling = true;
+
+        Quaternion startRot = transform.rotation;
+        float elapsed = 0f;
+
+        while (elapsed < 2f) // bobble for ~2 seconds
         {
-            return;
+            elapsed += Time.deltaTime;
+
+            // damped sine wave: big swing at first, slowly fades out
+            float angle = Mathf.Sin(elapsed * bobbleSpeed) * bobbleAngle * Mathf.Exp(-elapsed * damping);
+
+            // apply rotation only on Z
+            transform.rotation = startRot * Quaternion.Euler(0f, 0f, angle);
+
+            yield return null;
         }
 
-        ActionEvents.Instance.TriggerEventFlag();
-        SoundManager.Instance.Play("Flag", transform, true, 1);
+        // reset to original rotation at end
+        transform.rotation = startRot;
 
-        _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
-        */
-        
-        
-        /*
-        //Sensor Rules
-         
-        if (!hasMine)
+        isBubbling = false;
+    }
+
+    private IEnumerator RotateOverTime(Quaternion from, Quaternion to, float time)
+    {
+        float t = 0f;
+        while (t < 1f)
         {
-            MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
-            if (!mineRoomManager.AfterFirstMove) mineRoomManager.SetLogic(this);
-            else mineRoomManager.RevealTile(this);
+            t += Time.deltaTime / time;
+            transform.rotation = Quaternion.Slerp(from, to, t);
+            yield return null;
         }
-        else mine.isDisabled = true;
-         */
     }
 }
