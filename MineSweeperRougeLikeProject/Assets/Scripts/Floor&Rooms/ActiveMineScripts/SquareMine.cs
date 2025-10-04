@@ -128,8 +128,9 @@ public class SquareMine : MonoBehaviour, IInteractable
             squareRevealed = true;
             //if (!isBubbling) StartCoroutine(Bobble());
             SpawnBackground();
-            StartCoroutine(SwingCoroutine(isOpen ? -1 : 1));
-            StartCoroutine(FloorZoom.Zoom(transform.position,transform.GetComponentInParent<Grid>()));
+            StartCoroutine(OpenDoorAnimation(transform.parent.transform, transform.position, isOpen ? -1 : 1));
+            //StartCoroutine(SwingCoroutine(isOpen ? -1 : 1));
+            //StartCoroutine(Zoom(transform.position,transform.parent.transform));
 
             return;
         }
@@ -353,4 +354,108 @@ public class SquareMine : MonoBehaviour, IInteractable
         spriteRenderer.sprite = squareSpriteUnused;
         gameObjectBackground.transform.SetParent(transform.parent);
     }
+    
+    
+    private float zoomStop = 20f;
+    private float durationZoom = 1f;
+    
+    private IEnumerator Zoom(Vector3 position, Transform grid)
+    {
+        float elapsed = 0f;
+        while (elapsed < durationZoom)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / durationZoom);
+            // 1) Världen under musen före zoom
+            Vector3 worldBefore = position;
+            // 2) Samma punkt i lokala coords före zoom
+            Vector3 localPoint = grid.InverseTransformPoint(worldBefore);
+
+            // 3) Bestäm ny uniform skala
+            grid.localScale = Vector3.one * Mathf.Lerp(1, zoomStop, t);
+
+            // 4) Världen för samma lokala punkt efter zoom
+            Vector3 worldAfter = grid.TransformPoint(localPoint);
+
+            // 5) Kompensera position så muspunkten står still
+            Vector3 offset = worldBefore - worldAfter;
+            grid.position += offset;
+            yield return null;
+        }
+        
+        //Stops now?
+    }
+    
+    private IEnumerator MoveToPos(Transform startPos, Vector3 targetPos)
+    {
+        float elapsed = 0f;
+        Vector3 startPosRef = startPos.position;
+        while (elapsed < durationZoom)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / durationZoom);
+
+            startPos.position = new Vector3(Mathf.Lerp(startPosRef.x, startPosRef.x-targetPos.x, t),Mathf.Lerp(startPosRef.y, startPosRef.y-targetPos.y, t),Mathf.Lerp(startPosRef.z, startPosRef.z-targetPos.z, t)) ;
+            
+            yield return null;
+        }
+    }
+
+    private IEnumerator OpenDoorAnimation(Transform startPos, Vector3 targetPos, int openSign)
+    {
+        //Move to position
+        float elapsed = 0f;
+        Vector3 startPosRef = startPos.position;
+        while (elapsed < durationZoom)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / durationZoom);
+
+            startPos.position = new Vector3(Mathf.Lerp(startPosRef.x, startPosRef.x - targetPos.x, t),
+                Mathf.Lerp(startPosRef.y, startPosRef.y - targetPos.y, t),
+                Mathf.Lerp(startPosRef.z, startPosRef.z - targetPos.z, t));
+
+            yield return null;
+        }
+
+        //Door Swings
+        if (hingePivot == null)
+        {
+            Debug.LogWarning("DoorHingeSwing: hingePivot saknas.");
+            yield break;
+        }
+
+        isAnimating = true;
+
+        float target = direction * openSign * openAngle; // positivt eller negativt beroende på håll
+        elapsed = 0f;
+        float applied = 0f; // hur många grader vi redan har roterat denna cykel
+
+        // Rotera runt gångjärnet i små steg med RotateAround
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            // Luta kurvan lite för mjuk start/stopp
+            float eased = EaseInOutCubic(t);
+
+            float desired = Mathf.Lerp(0f, target, eased);
+            float step = desired - applied;
+            applied = desired;
+
+            transform.RotateAround(
+                hingePivot.position,
+                Vector3.up, // Y-axel för 3D-känsla i 2D-scen
+                step
+            );
+
+            yield return null;
+        }
+        
+        
+        
+    }
+
+
 }
