@@ -116,7 +116,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
 
-        RotateAround();
+        //RotateAround();
     }
 
     public void Interact()
@@ -126,7 +126,11 @@ public class SquareMine : MonoBehaviour, IInteractable
         if (RunPlayerStats.Instance.DebugMode)
         {
             squareRevealed = true;
-            if (!isBubbling) StartCoroutine(Bobble());
+            //if (!isBubbling) StartCoroutine(Bobble());
+            SpawnBackground();
+            StartCoroutine(SwingCoroutine(isOpen ? -1 : 1));
+            StartCoroutine(FloorZoom.Zoom(transform.position,transform.GetComponentInParent<Grid>()));
+
             return;
         }
         
@@ -178,7 +182,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void HoverEnd()
     {
-        if(!_isHovered || gameObject.IsDestroyed()) return;
+        if(!_isHovered) return;
         transform.localScale /= 1.1f;
         _isHovered = false;
     }
@@ -276,5 +280,77 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         // ta bort ghost när klart
         Destroy(ghost);
+    }
+    
+    [Header("Setup")]
+    [Tooltip("Sätt denna till ett empty GameObject placerat vid dörrens gångjärn (kanten).")]
+    public Transform hingePivot;
+
+    [Header("Motion")]
+    [SerializeField] private float openAngle = 90f;   // hur mycket dörren öppnar
+    [SerializeField] private float durationSwing = 1f;   // tid för öppna/stäng
+    [SerializeField] private int direction = 1;       // 1 = öppna 'utåt', -1 = åt andra hållet
+
+    private bool isOpen = false;
+    private bool isAnimating = false;
+    private IEnumerator SwingCoroutine(int openSign)
+    {
+        if (hingePivot == null)
+        {
+            Debug.LogWarning("DoorHingeSwing: hingePivot saknas.");
+            yield break;
+        }
+
+        isAnimating = true;
+
+        float target = direction * openSign * openAngle; // positivt eller negativt beroende på håll
+        float elapsed = 0f;
+        float applied = 0f; // hur många grader vi redan har roterat denna cykel
+
+        // Rotera runt gångjärnet i små steg med RotateAround
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            // Luta kurvan lite för mjuk start/stopp
+            float eased = EaseInOutCubic(t);
+
+            float desired = Mathf.Lerp(0f, target, eased);
+            float step = desired - applied;
+            applied = desired;
+
+            transform.RotateAround(
+                hingePivot.position,
+                Vector3.up,   // Y-axel för 3D-känsla i 2D-scen
+                step
+            );
+
+            yield return null;
+        }
+
+        // Säkerställ exakt slutläge
+        float finalStep = target - applied;
+        if (Mathf.Abs(finalStep) > 0.001f)
+        {
+            transform.RotateAround(hingePivot.position, Vector3.up, finalStep);
+        }
+
+        isOpen = !isOpen;
+        isAnimating = false;
+    }
+
+    private float EaseInOutCubic(float x)
+    {
+        return x < 0.5f ? 4f*x*x*x : 1f - Mathf.Pow(-2f*x + 2f, 3f)/2f;
+    }
+
+    public void SpawnBackground()
+    {
+        GameObject gameObjectBackground = new GameObject();
+        gameObjectBackground.transform.position = transform.position;
+        SpriteRenderer spriteRenderer = gameObjectBackground.AddComponent<SpriteRenderer>();
+        spriteRenderer.sprite = squareSpriteUnused;
+        gameObjectBackground.transform.SetParent(transform.parent);
     }
 }

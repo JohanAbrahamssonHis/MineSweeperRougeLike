@@ -33,10 +33,13 @@ public class Grid : MonoBehaviour, IInteractable
     Vector3 startPos;
     Vector3 startScale;
 
+    private FloorZoom _floorZoom;
+
     void Awake()
     {
         startPos   = transform.position;
         startScale = transform.localScale; // antas uniform
+        _floorZoom = GetComponent<FloorZoom>();
     }
 
     private void Start()
