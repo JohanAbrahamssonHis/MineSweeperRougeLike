@@ -38,6 +38,7 @@ public class SceneDeterminer : ScriptableObject
         RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
         rb.CheckActivation();
         SceneManager.UnloadSceneAsync(sceneName);
+        floorManager.DoorAnimationClose();
     }
     
     public static void ReturnToFloorFromLose()

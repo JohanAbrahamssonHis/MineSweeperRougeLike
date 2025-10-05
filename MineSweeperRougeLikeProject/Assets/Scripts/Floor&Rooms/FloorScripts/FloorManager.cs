@@ -174,7 +174,9 @@ public class FloorManager : MonoBehaviour
         if (square.hasRoom)
         {
             currentRoom = square.room;
-            square.room.RoomFunction();
+            square.StartDoorAnimation(grid.transform);
+            _squareFloor = square;
+            //square.room.RoomFunction();
         }
         
         if (square.hasNeighbourRoom) return;
@@ -301,4 +303,10 @@ public class FloorManager : MonoBehaviour
         RunPlayerStats.Instance.ResetValues();
     }
     */
+
+    private SquareFloor _squareFloor;
+    public void DoorAnimationClose()
+    {
+        _squareFloor.CloseDoorAnimation(grid.transform);
+    }
 }
