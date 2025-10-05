@@ -128,7 +128,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             squareRevealed = true;
             //if (!isBubbling) StartCoroutine(Bobble());
             SpawnBackground();
-            StartCoroutine(OpenDoorAnimation(transform.parent.transform, transform.position, isOpen ? -1 : 1));
+            StartCoroutine(OpenDoorAnimation(transform.parent, transform.position, 1, 18f));
             //StartCoroutine(SwingCoroutine(isOpen ? -1 : 1));
             //StartCoroutine(Zoom(transform.position,transform.parent.transform));
 
@@ -294,18 +294,57 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     private bool isOpen = false;
     private bool isAnimating = false;
-    private IEnumerator SwingCoroutine(int openSign)
+
+    private float EaseInOutCubic(float x)
     {
+        return x < 0.5f ? 4f*x*x*x : 1f - Mathf.Pow(-2f*x + 2f, 3f)/2f;
+    }
+
+    [SerializeField] private Sprite backgroundSprite;
+    
+    public void SpawnBackground()
+    {
+        GameObject gameObjectBackground = new GameObject();
+        gameObjectBackground.transform.position = transform.position;
+        SpriteRenderer spriteRenderer = gameObjectBackground.AddComponent<SpriteRenderer>();
+        spriteRenderer.sprite = backgroundSprite;
+        gameObjectBackground.transform.SetParent(transform.parent);
+    }
+    
+    
+    private float zoomStop = 20f;
+    private float durationZoom = 1f;
+    private float durationMove = 1f;
+
+    private IEnumerator OpenDoorAnimation(Transform startPos, Vector3 targetPos, int openSign, float targetScale)
+    {
+        isAnimating = true;
+        
+        //Move to position
+        float elapsed = 0f;
+        Vector3 startPosRef = startPos.position;
+        while (elapsed < durationMove)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / durationMove);
+            float eased = EaseInOutCubic(t);
+
+            startPos.position = new Vector3(Mathf.Lerp(startPosRef.x, startPosRef.x - targetPos.x, eased),
+                Mathf.Lerp(startPosRef.y, startPosRef.y - targetPos.y, eased),
+                Mathf.Lerp(startPosRef.z, startPosRef.z - targetPos.z, eased));
+
+            yield return null;
+        }
+
+        //Door Swings
         if (hingePivot == null)
         {
             Debug.LogWarning("DoorHingeSwing: hingePivot saknas.");
             yield break;
         }
 
-        isAnimating = true;
-
         float target = direction * openSign * openAngle; // positivt eller negativt beroende på håll
-        float elapsed = 0f;
+        elapsed = 0f;
         float applied = 0f; // hur många grader vi redan har roterat denna cykel
 
         // Rotera runt gångjärnet i små steg med RotateAround
@@ -323,97 +362,65 @@ public class SquareMine : MonoBehaviour, IInteractable
 
             transform.RotateAround(
                 hingePivot.position,
-                Vector3.up,   // Y-axel för 3D-känsla i 2D-scen
+                Vector3.up, // Y-axel för 3D-känsla i 2D-scen
                 step
             );
 
             yield return null;
         }
-
-        // Säkerställ exakt slutläge
-        float finalStep = target - applied;
-        if (Mathf.Abs(finalStep) > 0.001f)
-        {
-            transform.RotateAround(hingePivot.position, Vector3.up, finalStep);
-        }
-
-        isOpen = !isOpen;
-        isAnimating = false;
-    }
-
-    private float EaseInOutCubic(float x)
-    {
-        return x < 0.5f ? 4f*x*x*x : 1f - Mathf.Pow(-2f*x + 2f, 3f)/2f;
-    }
-
-    public void SpawnBackground()
-    {
-        GameObject gameObjectBackground = new GameObject();
-        gameObjectBackground.transform.position = transform.position;
-        SpriteRenderer spriteRenderer = gameObjectBackground.AddComponent<SpriteRenderer>();
-        spriteRenderer.sprite = squareSpriteUnused;
-        gameObjectBackground.transform.SetParent(transform.parent);
-    }
-    
-    
-    private float zoomStop = 20f;
-    private float durationZoom = 1f;
-    
-    private IEnumerator Zoom(Vector3 position, Transform grid)
-    {
-        float elapsed = 0f;
-        while (elapsed < durationZoom)
-        {
-            elapsed += Time.deltaTime;
-            float t = Mathf.Clamp01(elapsed / durationZoom);
-            // 1) Världen under musen före zoom
-            Vector3 worldBefore = position;
-            // 2) Samma punkt i lokala coords före zoom
-            Vector3 localPoint = grid.InverseTransformPoint(worldBefore);
-
-            // 3) Bestäm ny uniform skala
-            grid.localScale = Vector3.one * Mathf.Lerp(1, zoomStop, t);
-
-            // 4) Världen för samma lokala punkt efter zoom
-            Vector3 worldAfter = grid.TransformPoint(localPoint);
-
-            // 5) Kompensera position så muspunkten står still
-            Vector3 offset = worldBefore - worldAfter;
-            grid.position += offset;
-            yield return null;
-        }
         
-        //Stops now?
-    }
+        // Zoom In – lås en vald punkt i världen (t.ex. gångjärnet) under zoom
+        elapsed = 0f;
     
-    private IEnumerator MoveToPos(Transform startPos, Vector3 targetPos)
-    {
-        float elapsed = 0f;
-        Vector3 startPosRef = startPos.position;
+        float startScale = startPos.localScale.x;
+        Vector3 startZoomPos = startPos.localPosition;
+        float endScale   = targetScale;
+
         while (elapsed < durationZoom)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / durationZoom);
+            float eased = EaseInOutCubic(t);
 
-            startPos.position = new Vector3(Mathf.Lerp(startPosRef.x, startPosRef.x-targetPos.x, t),Mathf.Lerp(startPosRef.y, startPosRef.y-targetPos.y, t),Mathf.Lerp(startPosRef.z, startPosRef.z-targetPos.z, t)) ;
+            startPos.localPosition = new Vector3(Mathf.Lerp(startZoomPos.x, -targetPos.x*endScale, eased),
+                Mathf.Lerp(startZoomPos.y, -targetPos.y*endScale, eased),
+                Mathf.Lerp(startZoomPos.z, -targetPos.z*endScale, eased));
             
+            startPos.localScale = new Vector3(Mathf.Lerp(startScale, endScale, eased),
+                Mathf.Lerp(startScale, endScale, eased),
+                Mathf.Lerp(startScale, endScale, eased));
+
             yield return null;
         }
-    }
 
-    private IEnumerator OpenDoorAnimation(Transform startPos, Vector3 targetPos, int openSign)
+        StartCoroutine(CloseDoorAnimation(startPos, targetPos, -1, 1));
+
+    }
+    
+    private IEnumerator CloseDoorAnimation(Transform startPos, Vector3 targetPos, int openSign, float targetScale)
     {
-        //Move to position
+        isAnimating = true;
+        
+        // Zoom In – lås en vald punkt i världen (t.ex. gångjärnet) under zoom
         float elapsed = 0f;
-        Vector3 startPosRef = startPos.position;
+    
+        float startScale = startPos.localScale.x;
+        Vector3 startZoomPos = startPos.localPosition;
+        float endScale   = targetScale;
+
         while (elapsed < durationZoom)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / durationZoom);
+            float eased = EaseInOutCubic(t);
 
-            startPos.position = new Vector3(Mathf.Lerp(startPosRef.x, startPosRef.x - targetPos.x, t),
-                Mathf.Lerp(startPosRef.y, startPosRef.y - targetPos.y, t),
-                Mathf.Lerp(startPosRef.z, startPosRef.z - targetPos.z, t));
+            startPos.localPosition = new Vector3(Mathf.Lerp(startZoomPos.x, -targetPos.x*endScale, eased),
+                Mathf.Lerp(startZoomPos.y, -targetPos.y*endScale, eased),
+                Mathf.Lerp(startZoomPos.z, -targetPos.z*endScale, eased));
+            
+            startPos.localScale = new Vector3(Mathf.Lerp(startScale, endScale, eased),
+                Mathf.Lerp(startScale, endScale, eased),
+                Mathf.Lerp(startScale, endScale, eased));
 
             yield return null;
         }
@@ -424,8 +431,6 @@ public class SquareMine : MonoBehaviour, IInteractable
             Debug.LogWarning("DoorHingeSwing: hingePivot saknas.");
             yield break;
         }
-
-        isAnimating = true;
 
         float target = direction * openSign * openAngle; // positivt eller negativt beroende på håll
         elapsed = 0f;
@@ -454,8 +459,21 @@ public class SquareMine : MonoBehaviour, IInteractable
         }
         
         
+        //Move to position
+        elapsed = 0f;
+        Vector3 startPosRef = startPos.position;
+        while (elapsed < durationMove)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsed / durationMove);
+            float eased = EaseInOutCubic(t);
+
+            startPos.position = new Vector3(Mathf.Lerp(startPosRef.x, startPosRef.x + targetPos.x, eased),
+                Mathf.Lerp(startPosRef.y, startPosRef.y + targetPos.y, eased),
+                Mathf.Lerp(startPosRef.z, startPosRef.z + targetPos.z, eased));
+
+            yield return null;
+        }
         
     }
-
-
 }
