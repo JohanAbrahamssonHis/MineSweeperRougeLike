@@ -10,6 +10,7 @@ public abstract class Room : MonoBehaviour
     public List<Vector2> neighbours;
     public FloorManager floorManager;
     public string scene;
+    public string _garageDoorSceneName = "GarageDoorScene";
     
     public void SetPosition(Vector2 pos)
     {

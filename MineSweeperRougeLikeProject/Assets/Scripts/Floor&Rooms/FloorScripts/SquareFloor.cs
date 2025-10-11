@@ -294,7 +294,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
         };
         SpriteRenderer spriteRenderer = gameObjectBackgroundSelect.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = backgroundSprite;
-        spriteRenderer.sortingOrder = -2;
+        spriteRenderer.sortingOrder = 10;
         GameObject gameObjectBackgroundSelectChild = new GameObject
         {
             transform =
@@ -306,7 +306,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
         };
         SpriteRenderer spriteRendererOBJ = gameObjectBackgroundSelectChild.AddComponent<SpriteRenderer>();
         spriteRendererOBJ.sprite = room.sprite;
-        spriteRendererOBJ.sortingOrder = -1;
+        spriteRendererOBJ.sortingOrder = 11;
         gameObjectBackgroundSelect.transform.SetParent(transform.parent);
         gameObjectBackground = gameObjectBackgroundSelect;
     }

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: 886708184a7678b42a9269b42d378308
+  - enabled: 1
+    path: Assets/Scenes/GarageDoorScene.unity
+    guid: bb894b4b46955c5459c240441f040d6d
   m_configObjects: {}

@@ -22,6 +22,7 @@ public class RoomMine : Room
         //if(Random.Range(0,rPS.RoomCount-rPS.RoomCountCleared-1)==0)
         
         SoundManager.Instance.Play("EnterRoomSound", null, true, 2f);
+        SceneDeterminer.LoadAddedScene(_garageDoorSceneName);
         SceneDeterminer.LoadAddedScene(scene);
     }
 
