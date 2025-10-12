@@ -51,10 +51,10 @@ public class GarageDoorShaker : MonoBehaviour
         _running = StartCoroutine(OpenSequence());
     }
 
-    public void CloseDoor()
+    public void CloseDoor(string sceneName)
     {
         if (_running != null) StopCoroutine(_running);
-        _running = StartCoroutine(CloseSequence());
+        _running = StartCoroutine(CloseSequence(sceneName));
     }
 
     IEnumerator OpenSequence()
@@ -68,7 +68,7 @@ public class GarageDoorShaker : MonoBehaviour
         _running = null;
     }
 
-    IEnumerator CloseSequence()
+    IEnumerator CloseSequence(string sceneName)
     {
         // flytta ner
         yield return MoveTo(_closedPos, closeMoveDuration, easeClose);
@@ -77,6 +77,8 @@ public class GarageDoorShaker : MonoBehaviour
         // “impact”-skak när den slår i nederkant
         yield return Shake(shakeAfterCloseDuration);
         _running = null;
+
+        SceneDeterminer.ReturnToFloorAfter(sceneName);
     }
 
     // ----- Helpers -----

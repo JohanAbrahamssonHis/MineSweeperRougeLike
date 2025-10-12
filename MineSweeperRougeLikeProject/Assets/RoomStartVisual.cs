@@ -16,8 +16,8 @@ public class RoomStartVisual : MonoBehaviour
         _garageDoorShaker.OpenDoor();
     }
 
-    public void CloseDoor()
+    public void CloseDoor(string sceneName = null)
     {
-        _garageDoorShaker.CloseDoor();
+        _garageDoorShaker.CloseDoor(sceneName);
     }
 }

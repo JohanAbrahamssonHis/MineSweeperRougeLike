@@ -167,6 +167,9 @@ public class SquareFloor : MonoBehaviour, IInteractable
             yield return null;
         }
         
+
+        SetBackgroundSortingOrder(10);
+
         // Zoom In – lås en vald punkt i världen (t.ex. gångjärnet) under zoom
         elapsed = 0f;
     
@@ -192,6 +195,16 @@ public class SquareFloor : MonoBehaviour, IInteractable
         }
         
         isAnimating = false;
+
+        SceneDeterminer.Instance.LoadAddedSceneGarage();
+
+        
+        elapsed = 0f;
+        while (elapsed < 0.001f)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
         
         room.RoomFunction();
 
@@ -221,10 +234,12 @@ public class SquareFloor : MonoBehaviour, IInteractable
 
             startPos.localPosition = Vector3.Lerp(startZoomPos, -targetPos * endScale, eased);
 
-            startPos.localScale = Vector3.Lerp(Vector3.one*startScale,Vector3.one*endScale, eased);
+            startPos.localScale = Vector3.Lerp(Vector3.one * startScale, Vector3.one * endScale, eased);
 
             yield return null;
         }
+
+        SetBackgroundSortingOrder(-2);
 
         //Door Swings
         if (hingePivot == null)
@@ -258,7 +273,6 @@ public class SquareFloor : MonoBehaviour, IInteractable
 
             yield return null;
         }
-        
         
         //Move to position
         elapsed = 0f;
@@ -294,7 +308,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
         };
         SpriteRenderer spriteRenderer = gameObjectBackgroundSelect.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = backgroundSprite;
-        spriteRenderer.sortingOrder = 10;
+        spriteRenderer.sortingOrder = -2;
         GameObject gameObjectBackgroundSelectChild = new GameObject
         {
             transform =
@@ -306,9 +320,23 @@ public class SquareFloor : MonoBehaviour, IInteractable
         };
         SpriteRenderer spriteRendererOBJ = gameObjectBackgroundSelectChild.AddComponent<SpriteRenderer>();
         spriteRendererOBJ.sprite = room.sprite;
-        spriteRendererOBJ.sortingOrder = 11;
+        spriteRendererOBJ.sortingOrder = -1;
         gameObjectBackgroundSelect.transform.SetParent(transform.parent);
         gameObjectBackground = gameObjectBackgroundSelect;
+    }
+
+    public void SetBackgroundSortingOrder(int order)
+    {
+        if (gameObjectBackground != null)
+        {
+            SpriteRenderer spriteRenderer = gameObjectBackground.GetComponent<SpriteRenderer>();
+            spriteRenderer.sortingOrder = order;
+            SpriteRenderer[] spriteRenderers = gameObjectBackground.GetComponentsInChildren<SpriteRenderer>();
+            foreach (SpriteRenderer spriteRendererSelect in spriteRenderers)
+            {
+                spriteRendererSelect.sortingOrder = order+1;
+            }
+        }
     }
     
     public void DestroyBackground()

@@ -20,6 +20,15 @@ public class SceneDeterminer : ScriptableObject
     }
 
     public static FloorManager FloorManager { get; set; }
+    public RoomStartVisual RoomStartVisual { get; set; }
+
+    public void LoadAddedSceneGarage()
+    {
+        SceneManager.LoadScene("GarageDoorScene", LoadSceneMode.Additive);
+        //Fix for null reference
+        RoomStartVisual = Object.FindObjectOfType<RoomStartVisual>();
+        Debug.Log(RoomStartVisual);
+    }
 
 
     public static void LoadAddedScene(string sceneName)
@@ -30,11 +39,17 @@ public class SceneDeterminer : ScriptableObject
     
     public static void ReturnToFloor(string sceneName)
     {
+        Instance.RoomStartVisual?.CloseDoor(sceneName);
+    }
+
+    public static void ReturnToFloorAfter(string sceneName)
+    {
         FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
         
         floorManager.DisableFloor(true);
         
         floorManager.currentRoom?.LeaveRoomFunction();
+        Instance.RoomStartVisual?.CloseDoor();
         RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
         rb.CheckActivation();
         SceneManager.UnloadSceneAsync(sceneName);
