@@ -26,8 +26,7 @@ public class SceneDeterminer : ScriptableObject
     {
         SceneManager.LoadScene("GarageDoorScene", LoadSceneMode.Additive);
         //Fix for null reference
-        RoomStartVisual = Object.FindObjectOfType<RoomStartVisual>();
-        Debug.Log(RoomStartVisual);
+        //RoomStartVisual = Object.FindObjectOfType<RoomStartVisual>();
     }
 
 
@@ -39,21 +38,29 @@ public class SceneDeterminer : ScriptableObject
     
     public static void ReturnToFloor(string sceneName)
     {
-        Instance.RoomStartVisual?.CloseDoor(sceneName);
+        if (RunPlayerStats.Instance.FloorManager.currentRoom is not RoomBossMine) Instance.RoomStartVisual?.CloseDoor(sceneName);
+        else ReturnToFloorAfter(sceneName);
     }
 
     public static void ReturnToFloorAfter(string sceneName)
     {
         FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
-        
+
         floorManager.DisableFloor(true);
-        
-        floorManager.currentRoom?.LeaveRoomFunction();
-        Instance.RoomStartVisual?.CloseDoor();
         RoomBossMine rb = floorManager.bossRoom.room as RoomBossMine;
+        if (RunPlayerStats.Instance.FloorManager.currentRoom is not RoomBossMine) floorManager.currentRoom?.LeaveRoomFunction();
         rb.CheckActivation();
         SceneManager.UnloadSceneAsync(sceneName);
+        SceneManager.UnloadSceneAsync("GarageDoorScene");
         floorManager.DoorAnimationClose();
+    }
+
+    public static void ReturnToFloorBoss(string sceneName)
+    {
+        FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
+        Instance.RoomStartVisual?.CloseDoor(sceneName);
+        SceneManager.UnloadSceneAsync(sceneName);
+        floorManager.currentRoom?.LeaveRoomFunction();
     }
     
     public static void ReturnToFloorFromLose()

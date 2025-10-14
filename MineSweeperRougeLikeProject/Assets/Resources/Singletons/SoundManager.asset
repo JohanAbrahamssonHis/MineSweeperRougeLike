@@ -37,3 +37,9 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 95b02221d18077b438b253a383be483c, type: 3}
   - clipName: Switch
     audioClip: {fileID: 8300000, guid: cfb59e5b0626613419ddc55fc0eddf43, type: 3}
+  - clipName: OpenDoor
+    audioClip: {fileID: 8300000, guid: 466452f06d00cc949961a08c223554ab, type: 3}
+  - clipName: CloseDoor
+    audioClip: {fileID: 8300000, guid: 406a4601a17337b47a1ab8a465ecad34, type: 3}
+  - clipName: MetalThunk
+    audioClip: {fileID: 8300000, guid: d5116d63728efd544b774a616422d770, type: 3}

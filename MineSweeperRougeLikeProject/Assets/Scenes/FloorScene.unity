@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -220,6 +219,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -948,6 +948,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 4
@@ -1828,6 +1829,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2148,6 +2150,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 5
@@ -2313,6 +2316,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2415,6 +2419,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 4
@@ -2867,7 +2872,8 @@ MonoBehaviour:
   AfterFirstMove: 0
   _rooms: []
   currentRoom: {fileID: 0}
-  bossRoom: {fileID: 1687389491}
+  bossRoom: {fileID: 687446549672547355}
+  _bossRoomSquare: {fileID: 0}
 --- !u!1 &1632784486
 GameObject:
   m_ObjectHideFlags: 0
@@ -3103,17 +3109,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 550573634}
---- !u!114 &1687389491 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 687446550286127401, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
-  m_PrefabInstance: {fileID: 687446549672547354}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4802609920bd262468c5de2fbdf046a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1745936353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3653,6 +3648,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 687446550286127401, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+      propertyPath: duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 687446550286127401, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+      propertyPath: durationMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 687446550286127401, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+      propertyPath: durationZoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 687446550286127412, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
       propertyPath: m_Name
       value: BossRoom
@@ -3705,5 +3712,28 @@ PrefabInstance:
       propertyPath: floorManager
       value: 
       objectReference: {fileID: 1565700883}
+    - target: {fileID: 8315689460770811234, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+      propertyPath: duration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315689460770811234, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+      propertyPath: durationMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315689460770811234, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+      propertyPath: durationZoom
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+--- !u!114 &687446549672547355 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8315689460770811234, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+  m_PrefabInstance: {fileID: 687446549672547354}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4802609920bd262468c5de2fbdf046a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

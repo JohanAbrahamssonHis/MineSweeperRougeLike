@@ -29,10 +29,13 @@ public class FloorManager : MonoBehaviour
     public PlayerInput inputHandler;
     public BossRoomSquare bossRoom;
 
+    private GameObject bossRoomContainer;
+
     public void Start()
     {
         RunPlayerStats.Instance.FloorManager = this;
         RunPlayerStats.Instance.SetBossModification();
+        bossRoomContainer = bossRoom.gameObject.transform.parent.gameObject;
     }
 
     public void BeginLogic()
@@ -294,7 +297,7 @@ public class FloorManager : MonoBehaviour
         this.gameObject.SetActive(state);
         grid.gameObject.SetActive(state);
         //inputHandler.gameObject.SetActive(state);
-        bossRoom.gameObject.SetActive(state);
+        bossRoomContainer.SetActive(state);
     }
 
     /*
@@ -305,8 +308,10 @@ public class FloorManager : MonoBehaviour
     */
 
     private SquareFloor _squareFloor;
+    public BossRoomSquare _bossRoomSquare;
     public void DoorAnimationClose()
     {
-        _squareFloor.CloseDoorAnimation(grid.transform);
+        if(currentRoom is RoomBossMine) _bossRoomSquare.CloseDoorAnimation(_bossRoomSquare.transform);
+        else _squareFloor.CloseDoorAnimation(grid.transform);
     }
 }

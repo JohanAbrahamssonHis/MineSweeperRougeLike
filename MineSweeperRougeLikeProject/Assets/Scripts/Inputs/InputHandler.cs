@@ -98,7 +98,7 @@ public class InputHandler : MonoBehaviour
 
         foreach (var interactable in _currentlyInteracted.ToList().Where(interactable => !interactables.Contains(interactable)))
         {
-            interactable?.HoverEnd();
+            if(!RunPlayerStats.Instance.EndState) interactable?.HoverEnd();
             if (interactable == _mostCurrentlyInteracted)
             {
                 _mostCurrentlyInteracted = null;

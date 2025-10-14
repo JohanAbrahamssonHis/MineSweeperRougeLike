@@ -10,14 +10,23 @@ public class RoomStartVisual : MonoBehaviour
     void Awake()
     {
         _room = RunPlayerStats.Instance.FloorManager.currentRoom;
+        SceneDeterminer.Instance.RoomStartVisual = this;
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
         _spriteRenderer.sprite = _room.sprite;
         _garageDoorShaker = GetComponent<GarageDoorShaker>();
         _garageDoorShaker.OpenDoor();
+        SoundManager.Instance.Play("OpenDoor", null, true, 2f);
     }
 
     public void CloseDoor(string sceneName = null)
     {
         _garageDoorShaker.CloseDoor(sceneName);
+        SoundManager.Instance.Play("CloseDoor", null, true, 2f);
+    }
+
+    public void OpenDoor()
+    {
+        _garageDoorShaker.OpenDoor();
+        SoundManager.Instance.Play("OpenDoor", null, true, 2f);
     }
 }

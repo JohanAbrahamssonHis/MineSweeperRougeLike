@@ -179,7 +179,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void HoverEnd()
     {
-        if(!_isHovered) return;
+        if(gameObject == null || !_isHovered) return;
         transform.localScale /= 1.1f;
         _isHovered = false;
     }

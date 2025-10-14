@@ -42,6 +42,5 @@ public abstract class Room : MonoBehaviour
     public virtual void LeaveRoomFunction()
     {
         //LeavingRoomFunction
-        SceneDeterminer.Instance.RoomStartVisual?.CloseDoor();
     }
 }

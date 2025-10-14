@@ -68,7 +68,7 @@ public class GarageDoorShaker : MonoBehaviour
         _running = null;
     }
 
-    IEnumerator CloseSequence(string sceneName)
+    IEnumerator CloseSequence(string sceneName, bool isBoss = false)
     {
         // flytta ner
         yield return MoveTo(_closedPos, closeMoveDuration, easeClose);
@@ -78,7 +78,7 @@ public class GarageDoorShaker : MonoBehaviour
         yield return Shake(shakeAfterCloseDuration);
         _running = null;
 
-        SceneDeterminer.ReturnToFloorAfter(sceneName);
+        if(RunPlayerStats.Instance.FloorManager.currentRoom is not RoomBossMine) SceneDeterminer.ReturnToFloorAfter(sceneName);
     }
 
     // ----- Helpers -----

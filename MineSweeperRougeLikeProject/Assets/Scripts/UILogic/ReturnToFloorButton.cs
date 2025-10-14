@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class ReturnToFloorButton : MonoBehaviour, IInteractable
 {
+    bool tempLock;
     public void Interact()
     {
-        SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
+        if (RunPlayerStats.Instance.FloorManager.currentRoom is RoomBossMine && !tempLock)
+        {
+            SceneDeterminer.ReturnToFloorBoss(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
+            tempLock = true;
+        }
+        else
+        {
+            SceneDeterminer.ReturnToFloor(RunPlayerStats.Instance.FloorManager.currentRoom.scene);
+            tempLock = false;
+        }
     }
 }
