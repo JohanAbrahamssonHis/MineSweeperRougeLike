@@ -58,13 +58,12 @@ public class Grid : MonoBehaviour, IInteractable
                 squares.Add(squareInfo);
                 squareInfo.position = new Vector2(i, j);
                 squareInfo.Numbers = spriteNumbers;
-                //squareInfo.squareRevealed = true;
+                squareInfo.SetUpSquareVisual();
                 square.name = $"Square {squareInfo.position.x},{squareInfo.position.y}";
             }
         }
         _collider2D = GetComponent<BoxCollider2D>();
         _collider2D.size = new Vector2(squaresXSize*squareLength + (squaresXSize-1)*margin,squaresYSize*squareLength+ (squaresYSize-1)*margin);
-
     }
 
     public void CheckWin()

@@ -49,9 +49,9 @@ public class Timmer : MonoBehaviour
 
     private void Update()
     {
+        if(!RunPlayerStats.Instance.ActiveTimer) return;
         spriteRenderer.sprite = RunPlayerStats.Instance.ActiveTimer ? spriteActive : sprite;
         
-        if(!RunPlayerStats.Instance.ActiveTimer) return;
         RunPlayerStats.Instance.Time -= Time.deltaTime*RunPlayerStats.Instance.TimeMult;
 
         if (!(beepLastTime >= RunPlayerStats.Instance.Time + beepInBetweenTimeBase)) return;

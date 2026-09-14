@@ -21,6 +21,7 @@ public class UIEffectAbilityHolder : MonoBehaviour, IInteractable, ITextable
 
     private void Update()
     {
+        //TODO: Fix this, it should not be updated every frame, but only when the effect ability changes
         _spriteRenderer.sprite = _effectAbility.sprite;
         _spriteRendererCount.gameObject.SetActive(!_effectAbility.isInfinite);
         _spriteRendererCount.sprite = NumberSprites.Instance.GetNumberedSprite(_effectAbility.count);

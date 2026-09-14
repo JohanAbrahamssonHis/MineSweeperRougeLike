@@ -15,11 +15,12 @@ public class MineViusalizer : MonoBehaviour
 
     public float distance = 4;
     
-    List<GameObject> _gameObjects = new List<GameObject>();
+    List<GameObject> _gameObjects;
     
     void OnEnable()
     {
         RunPlayerStats.Instance.mineVisualizer = this;
+        _gameObjects = new List<GameObject>();
         SetVisualizer();
     }
 
@@ -30,18 +31,13 @@ public class MineViusalizer : MonoBehaviour
 
         List<Mine> mines = new List<Mine>();
         
-        RunPlayerStats.Instance.MalwarePackages.ForEach(x => x.mines.ForEach( mine =>mines.Add(mine)));
+        RunPlayerStats.Instance.MalwarePackages.ForEach(x => x.mines.ForEach( mine => mines.Add(mine)));
 
         var orderedEnumerable = mines.OrderBy(mine => mine.name).ToList();
 
         mines = orderedEnumerable;
-        
-        /*
-        foreach (Transform o in transform)
-        {
-            Destroy(o);
-        }
-        */
+
+
         _gameObjects.ForEach(x => Destroy(x.gameObject));
         _gameObjects.Clear();
 

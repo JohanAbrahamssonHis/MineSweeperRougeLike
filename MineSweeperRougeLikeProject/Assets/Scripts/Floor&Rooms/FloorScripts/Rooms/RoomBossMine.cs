@@ -42,7 +42,7 @@ public class RoomBossMine : Room
         
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
-       rPS.EndRoomSet();
+        rPS.EndRoomSet();
         
         rPS.RoomCountCleared = 0;
         rPS.FloorCount++;
@@ -56,6 +56,6 @@ public class RoomBossMine : Room
 
     public void CheckActivation()
     {
-        if (RunPlayerStats.Instance.RoomCountCleared  >= RunPlayerStats.Instance.RoomLock) bossRoomSquare.isActive = true;
+        if (RunPlayerStats.Instance.RoomCountCleared  >= RunPlayerStats.Instance.RoomLock) bossRoomSquare.SetActive(true);
     }
 }

@@ -285,7 +285,8 @@ public class FloorManager : MonoBehaviour
         }
 
         bossRoom.squareRevealed = false;
-        bossRoom.isActive = false;
+        bossRoom.SetRevealed(false);
+        bossRoom.SetActive(false);
 
         AfterFirstMove = false;
         

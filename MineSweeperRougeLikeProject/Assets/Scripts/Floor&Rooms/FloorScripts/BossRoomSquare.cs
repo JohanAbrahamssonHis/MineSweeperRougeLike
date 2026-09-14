@@ -18,28 +18,57 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
     public Sprite squareSpriteUsed;
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         containter = gameObject.transform.parent.transform.GetChild(1).gameObject;
         
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
-        
-        _spriteRendererContainer.sprite = room.sprite;
 
         room.bossRoomSquare = this;
 
         _spriteRendererBoss = gameObject.transform.parent.transform.GetChild(3).GetComponent<SpriteRenderer>();
+
+        SetUpSquareVisual();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : isActive ? squareSpriteBossActive : squareSpriteBossUnactive;
 
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
         
         _spriteRendererBoss.sprite = RunPlayerStats.Instance.BossModification.sprite;
+        */
+    }
+
+    public void SetUpSquareVisual()
+    {
+        _spriteRendererContainer.sprite = room.sprite;
+        SetRevealed(squareRevealed);
+        SetActive(isActive);
+    }
+
+    public void SetRevealed(bool squareRevealed)
+    {
+        this.squareRevealed = squareRevealed;
+
+        _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : isActive ? squareSpriteBossActive : squareSpriteBossUnactive;
+
+        _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+    }
+
+    public void SetActive(bool isActive)
+    {
+        this.isActive = isActive;
+        _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : isActive ? squareSpriteBossActive : squareSpriteBossUnactive;
+    }
+
+    public void SetBossModificationSprite(Sprite sprite)
+    {
+        _spriteRendererBoss.sprite = sprite;
     }
 
     public void Interact()

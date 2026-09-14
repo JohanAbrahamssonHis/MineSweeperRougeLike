@@ -225,7 +225,8 @@ public class RunPlayerStats : ScriptableObject
             !BannedBossModifications.Contains(x.name)).ToList();
         
         BossModification = Instantiate(bossModifications[Random.Range(0,bossModifications.Count)]);
-        
+        if(FloorManager != null)
+            FloorManager.bossRoom.SetBossModificationSprite(BossModification.sprite);
         BannedBossModifications.Add(BossModification.name);
     }
 
@@ -347,6 +348,7 @@ public class RunPlayerStats : ScriptableObject
         Inventory = new List<Item>();
         BossModification = null;
         BannedBossModifications = new List<string>();
+        mineVisualizer = null;
         SetEffectAbilities();
         setUpState = false;
     }
@@ -371,13 +373,13 @@ public class RunPlayerStats : ScriptableObject
     public void AddMalwarePackage(MalwarePackage malwarePackage)
     {
         MalwarePackages.Add(Instantiate(malwarePackage));
-        if(mineVisualizer==null) return;
+        if(mineVisualizer is null) return;
         mineVisualizer.SetVisualizer();
     }
 
     public void SetMineVisualizer()
     {
-        if(mineVisualizer==null) return;
+        if(mineVisualizer is null) return;
         mineVisualizer.SetVisualizer();
     }
 

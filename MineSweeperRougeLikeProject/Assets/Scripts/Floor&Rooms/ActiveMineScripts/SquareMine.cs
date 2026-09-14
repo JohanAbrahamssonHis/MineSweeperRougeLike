@@ -76,7 +76,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     [SerializeField] private Material dissolveMaterial;
     
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         containter = gameObject.transform.GetChild(0).gameObject;
         flagContainer = gameObject.transform.GetChild(1).gameObject;
@@ -88,41 +88,65 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         _spriteRendererMineFlagRenderer = flagContainer.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         _spriteRendererDecalContainerRenderer = decalContainter.gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        
-        
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        RotateAround();
+    }
+
+    #region Setters
+    public void SetUpSquareVisual()
+    {
+        SetContainerSprite();
+        SetFlagSprite();
+        SetRevealed(squareRevealed);
+    }
+
+    public void SetContainerSprite(Sprite sprite = null)
+    {
+        _spriteRendererDecalContainer.sprite = isLongNeighbour ? DecalArrow : null;
+        if(!hasNeighbourMine) return;
+        _spriteRendererContainer.sprite = hasMine ? mine.sprite : NumberSprites.Instance.GetNumberedSprite(number);
+    }
+
+    public void SetFlagSprite()
+    {
+        Sprite sprite = RunPlayerStats.Instance.FlagMineSelected?.sprite is not null ? RunPlayerStats.Instance.FlagMineSelected.sprite : null;  
+
+        _spriteRendererMineFlagRenderer.sprite = sprite;
+
+        _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
+    }
+
+    public void SetRevealed(bool squareRevealed)
+    {
+        this.squareRevealed = squareRevealed;
+
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : squareSpriteUnused;
-        
-        _spriteRendererContainer.sprite = hasNeighbourMine ? hasMine ? mine.sprite : NumberSprites.Instance.GetNumberedSprite(number) : null;
-
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
+        _spriteRendererDecalContainer.gameObject.SetActive(squareRevealed);
+    }
 
-        _spriteRendererDecalContainer.sprite = isLongNeighbour && squareRevealed ? DecalArrow : null;
-        //_spriteRendererDecalContainerRenderer.sprite = isLongNeighbour && squareRevealed ? NumberSprites.Instance.GetNumberedSprite(longNumber) : null;
-        
-        _spriteRendererMineFlagRenderer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
-        
-        if (hasMine && mine.isDisabled)
+    public void SetDisabled(bool disabled)
+    {
+        if (hasMine)
         {
+            mine.isDisabled = disabled;
             _spriteRendererContainer.sprite = mine.sprite;
             _spriteRendererContainer.color = Color.red;
             _spriteRendererContainer.sortingOrder = 1;
         }
-
-        _spriteRendererFlagContainer.gameObject.SetActive(hasFlag);
-
-        RotateAround();
     }
+    #endregion
 
     public void Interact()
     {
-        if (hasFlag || (hasMine && mine.isDisabled) || RunPlayerStats.Instance.EndState || squareRevealed) return;
+        //Has the player reached the end state, or is the square already revealed, or has a flag been placed on it, or is the mine disabled? If any of these conditions are true, return early and do nothing.
+        if (hasFlag || (mine is not null && mine.isDisabled) || RunPlayerStats.Instance.EndState || squareRevealed) return;
         
+        //Debug mode: If the player is in debug mode, reveal the square and start the bobble animation if it isn't already playing, then return early.
         if (RunPlayerStats.Instance.DebugMode)
         {
             squareRevealed = true;
@@ -131,6 +155,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             return;
         }
         
+        //Check if it is the first move of the game.
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
 
         if (!mineRoomManager.AfterFirstMove)
@@ -147,6 +172,7 @@ public class SquareMine : MonoBehaviour, IInteractable
             
             ActionEvents.Instance.TriggerEventAction();
             RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*RunPlayerStats.Instance.PointsGain);
+            //TODO: make heat into a set value by RunPlayerStats.Instance.HeatGain
             RunPlayerStats.Instance.Heat += 0.15f;
             
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
@@ -204,7 +230,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         // 3) Smidig interpolation (frametålig)
         float t = 1f - Mathf.Exp(-smooth * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, t);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRot, t);
 
     }
     
@@ -212,7 +238,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     {
         isBubbling = true;
 
-        Quaternion startRot = transform.rotation;
+        Quaternion startRot = transform.localRotation;
         float elapsed = 0f;
 
         while (elapsed < 2f) // bobble for ~2 seconds
@@ -223,18 +249,17 @@ public class SquareMine : MonoBehaviour, IInteractable
             float angle = Mathf.Sin(elapsed * bobbleSpeed) * bobbleAngle * Mathf.Exp(-elapsed * damping);
 
             // apply rotation only on Z
-            transform.rotation = startRot * Quaternion.Euler(0f, 0f, angle);
+            transform.localRotation = startRot * Quaternion.Euler(0f, 0f, angle);
 
             yield return null;
         }
 
         // reset to original rotation at end
-        transform.rotation = startRot;
+        transform.localRotation = startRot;
 
         isBubbling = false;
     }
 
-    public string propertyName = "_CutoffHeight"; 
     public float startValue = 1.5f;
     public float endValue = -1.5f;
     public float duration = 1.0f;
@@ -256,24 +281,25 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         // ta renderern och ge den en unik instans av materialet
         SpriteRenderer rend = ghost.AddComponent<SpriteRenderer>();
-        rend.sprite = _spriteRenderer.sprite;
+        rend.sprite = squareSpriteUnused;
         rend.sortingOrder = 4;
         Material mat = new Material(dissolveMaterial);
         rend.material = mat;
 
         // animera värdet
         float t = 0f;
+        mat.SetFloat("_Noise_Strength", UnityEngine.Random.Range(0.8f, 1.2f));
         duration += randomOrg;
         while (t < duration)
         {
             float value = Mathf.Lerp(startValue, endValue, t / duration);
-            mat.SetFloat(propertyName, value);
+            mat.SetFloat("_CutoffHeight", value);
             t += Time.deltaTime;
             yield return null;
         }
 
         // sätt sista värdet
-        mat.SetFloat(propertyName, endValue);
+        mat.SetFloat("_CutoffHeight", endValue);
 
         // ta bort ghost när klart
         Destroy(ghost);

@@ -11,7 +11,6 @@ public class EightBall : Item
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         
         
-        
         mineRoomManager._mines.ForEach(x => x.isDisabled = Random.Range(0,8)==0);
     }
 

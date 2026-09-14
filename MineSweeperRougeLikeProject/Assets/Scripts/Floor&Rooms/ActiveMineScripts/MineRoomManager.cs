@@ -60,13 +60,17 @@ public class MineRoomManager : MonoBehaviour
         }
     }
 
-    public void SetLogic(SquareMine square)
+    public void SetLogic(SquareMine startSquare)
     {
         BeginLogic();
-        startPos = square.position;
+        startPos = startSquare.position;
         SetMineField();
         SetNumbers();
-        RevealTilesFirstMove(square);
+        foreach (var square in grid.squares)
+        {
+            square.SetContainerSprite();
+        }
+        RevealTilesFirstMove(startSquare);
         AfterFirstMove = true;
     }
 
@@ -88,12 +92,17 @@ public class MineRoomManager : MonoBehaviour
                 Vector2 selectedPosition = new Vector2(Random.Range(0, grid.squaresXSize),
                     Random.Range(0, grid.squaresYSize));
                 SquareMine selectedSquare = grid.squares[GetPostion(selectedPosition)];
+
                 if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
+
                 selectedSquare.hasMine = true;
                 selectedSquare.mine = selectedMine;
                 selectedSquare.mine.SetPosition(selectedSquare.position);
                 selectedSquare.mine.SetUpMine(this);
                 selectedSquare.mine.transform.parent = selectedSquare.transform;
+
+                selectedSquare.SetContainerSprite();
+
                 //GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
             } while (condition);
@@ -136,17 +145,17 @@ public class MineRoomManager : MonoBehaviour
         }
     }
 
-    public void RevealTile(SquareMine square)
+    public void RevealTile(SquareMine square, int orderOfReveal = 0)
     {
         //The chosen square is revealed
-        square.squareRevealed = true;
+        square.SetRevealed(true);
         
         //Random.Range(-0.1f*square.position.y,0.1f*square.position.y)
         
-        square.StartDissolve(square.position.x*0.05f+square.position.y*0.05f);
+        square.StartDissolve(Random.Range(0.03f,0.07f)+0.1f*orderOfReveal);
         
         //If this grid has a mine
-        if (square.mine != null) square.mine.Activate();
+        square.mine?.Activate();
         
         //If this square is neighbouring a mine, it will not do looping function
         if (square.hasNeighbourMine) return;
@@ -163,19 +172,19 @@ public class MineRoomManager : MonoBehaviour
                     grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
-                RevealTile(squareSelect);
+                RevealTile(squareSelect, orderOfReveal + 1);
             }
         }
     }
 
-    private void RevealTilesFirstMove(SquareMine square)
+    private void RevealTilesFirstMove(SquareMine square, int orderOfReveal = 0)
     {
         ActionEvents.Instance.TriggerEventFirstAction();
         
         //The chosen square is revealed
-        square.squareRevealed = true; 
+        square.SetRevealed(true);
         
-        square.StartDissolve(square.position.x*0.05f+square.position.y*0.05f);
+        square.StartDissolve(Random.Range(0.03f,0.07f)+0.1f*orderOfReveal);
 
         //Reveals all neighbouring squares, those cannot have a mine in them.
         for (int i = -1; i <= 1; i++)
@@ -189,23 +198,23 @@ public class MineRoomManager : MonoBehaviour
                     grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
-                RevealTile(squareSelect);
+                RevealTile(squareSelect, orderOfReveal + 1);
             }
         }
     }
 
     int GetPostion(Vector2 pos)
     {
-        int value = (int)(pos.y) + (int)(pos.x) * (grid.squaresYSize);
+        int value = (int)pos.y + (int)pos.x * grid.squaresYSize;
         return value;
     }
 
     bool IsNeighbour(Vector2 selectionPos, Vector2 comparePos)
     {
-        return (selectionPos.x <= comparePos.x + 1 &&
+        return  selectionPos.x <= comparePos.x + 1 &&
                 selectionPos.x >= comparePos.x - 1 &&
                 selectionPos.y <= comparePos.y + 1 &&
-                selectionPos.y >= comparePos.y - 1);
+                selectionPos.y >= comparePos.y - 1;
     }
 
     public void MoveMine(Mine mine, List<Vector2> neighbours)

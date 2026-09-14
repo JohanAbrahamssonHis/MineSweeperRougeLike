@@ -13,6 +13,7 @@ public class Flag : EffectAbility
     {
         if (squareMine.squareRevealed || RunPlayerStats.Instance.EndState) return;
         squareMine.hasFlag = !squareMine.hasFlag;
+        squareMine.SetFlagSprite();
 
         if (RunPlayerStats.Instance.DebugMode)
         {
