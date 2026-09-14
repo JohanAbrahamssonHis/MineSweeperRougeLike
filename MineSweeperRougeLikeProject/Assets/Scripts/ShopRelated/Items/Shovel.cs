@@ -7,7 +7,7 @@ public class Shovel : Item
 {
     public override void Function()
     {
-        RunPlayerStats.Instance.PointsGain += 1;
+        RunPlayerStats.Instance.PointsGain += 5;
     }
 
     public override void Join()
@@ -16,6 +16,6 @@ public class Shovel : Item
     }
 
     public override string Name => "Shovel";
-    public override string Description => "Gain +1 extra point per action";
+    public override string Description => "Gain +5 extra points per action";
     public override string Rarity => "Common";
 }

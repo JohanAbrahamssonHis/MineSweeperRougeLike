@@ -11,7 +11,7 @@ public class AgentMine : Mine
         base.SetUpMine(mineRoomManager);
         weight = 1;
         SetStandardNeighbours(neighbours);
-        MineRoomManager.afterActionEvent += MineRoomManagerOnAfterActionEvent;
+        ActionEvents.Instance.OnAfterAction += AgentMineMove;
     }
 
     public override string Name => "Agent Mine";
@@ -20,7 +20,7 @@ public class AgentMine : Mine
 
     public void OnDestroy()
     {
-        MineRoomManager.afterActionEvent -= MineRoomManagerOnAfterActionEvent;
+        ActionEvents.Instance.OnAfterAction -= AgentMineMove;
     }
 
     // Update is called once per frame
@@ -28,10 +28,12 @@ public class AgentMine : Mine
     {
     }
 
-    void MineRoomManagerOnAfterActionEvent(object sender, AfterActionArgs args)
+    void AgentMineMove()
     {
         if(isDisabled) return;
         List<Vector2> neighboursTemp = new List<Vector2>(base.neighbours);
+
+        
 
         mineRoomManager.MoveMine(this, neighboursTemp);
         //mineRoomManager.CheckTiles(neighbours);

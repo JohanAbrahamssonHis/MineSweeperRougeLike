@@ -133,8 +133,13 @@ public class RunPlayerStats : ScriptableObject
         get => _floorCount;
         set
         {
+            //FloorCount is used to determine what rooms are added to the floor. It is not the actual floor count, but rather a counter for how many floors have been completed.
             _floorCount = value;
+
+            // If the value is 1, we are already on the first floor, so we return early.
             if(value==1) return;
+
+            // If the value is greater than 1, we are moving to a new floor, so we add rooms based on the floor count. 
             if (_floorCount % 3 == 0) FloorManager.AddShopRoom(1);
             if (_floorCount % 2 == 1)
             {
@@ -146,6 +151,10 @@ public class RunPlayerStats : ScriptableObject
                 FloorManager.AddBasicRoom(1);
                 RoomLock++;
             }
+
+            // Add stats for the new floor. Each new floor gives the player 1 health and 60 seconds of time.
+            Health += 1;
+            Time += 60;
         }
     }
 
@@ -294,12 +303,12 @@ public class RunPlayerStats : ScriptableObject
     
     public void MoneyEndRoomSet()
     {
-        Money += MoneyGain + (Points / 10) + TempMoneyGain;
+        Money += MoneyGain + (Points / 100) + TempMoneyGain;
     }
     
     public int MoneyEndRoomGet()
     {
-        return MoneyGain + Points/10 + TempMoneyGain;
+        return MoneyGain + Points/100 + TempMoneyGain;
     }
 
     private void ResetTempValues()
@@ -324,13 +333,13 @@ public class RunPlayerStats : ScriptableObject
         HealthDamageModifier = 0;
         HealthDamageMultModifier = 1;
         Health = 5;
-        Time = 3*60;
+        Time = 4*60;
         TimeMult = 1;
         TimeGain = 15;
         Money = 5;
         MoneyGain = 1;
         Points = 0;
-        PointsGain = 1;
+        PointsGain = 10;
         Heat = 0;
         HeatGain = 0.15f;
         FloorCount = 1;

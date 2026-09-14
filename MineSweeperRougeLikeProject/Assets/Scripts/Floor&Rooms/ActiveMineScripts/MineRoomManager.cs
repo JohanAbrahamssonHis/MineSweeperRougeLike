@@ -20,8 +20,6 @@ public class MineRoomManager : MonoBehaviour
 
     public List<MalwarePackage> malwarePackages;
     public List<Mine> _mines;
-    public delegate void afterAction(object sender, AfterActionArgs args);
-    public static event afterAction afterActionEvent;
 
     public void OnEnable()
     {
@@ -264,7 +262,6 @@ public class MineRoomManager : MonoBehaviour
 
     public void AfterActionFunction()
     {
-        afterActionEvent?.Invoke(this, new AfterActionArgs());
         ResetNumbers();
         SetNumbers();
         List<SquareMine> revealedSquares = grid.squares.Where(x => x.squareRevealed).ToList();
@@ -272,6 +269,8 @@ public class MineRoomManager : MonoBehaviour
         {
             ResetRevealTile(square);
         }
+
+        
         grid.CheckWin();
     }
 
@@ -315,5 +314,3 @@ public class MineRoomManager : MonoBehaviour
         AfterFirstMove = false;
     }
 }
-
-public class AfterActionArgs { }

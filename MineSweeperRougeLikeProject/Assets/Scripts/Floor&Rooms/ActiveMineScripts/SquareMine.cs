@@ -172,16 +172,15 @@ public class SquareMine : MonoBehaviour, IInteractable
             
             ActionEvents.Instance.TriggerEventAction();
             RunPlayerStats.Instance.Points += (int)(RunPlayerStats.Instance.ComboValue*RunPlayerStats.Instance.PointsGain);
-            //TODO: make heat into a set value by RunPlayerStats.Instance.HeatGain
-            RunPlayerStats.Instance.Heat += 0.15f;
+            RunPlayerStats.Instance.Heat += RunPlayerStats.Instance.HeatGain;
             
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
             
             mineRoomManager.RevealTile(this);
             if (!isBubbling) StartCoroutine(Bobble());
 
-            mineRoomManager.AfterActionFunction();
             ActionEvents.Instance.TriggerEventAfterAction();
+            mineRoomManager.AfterActionFunction();
         }
     }
 
