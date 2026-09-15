@@ -107,8 +107,10 @@ public class SquareMine : MonoBehaviour, IInteractable
     public void SetContainerSprite(Sprite sprite = null)
     {
         _spriteRendererDecalContainer.sprite = isLongNeighbour ? DecalArrow : null;
-        if(!hasNeighbourMine) return;
-        _spriteRendererContainer.sprite = hasMine ? mine.sprite : NumberSprites.Instance.GetNumberedSprite(number);
+        // If a sprite is provided, use it. If not, check if the square has a mine. Else, use the mine's sprite. Otherwise, check if it has a neighbouring mine. If it does, use the numbered sprite corresponding to the number of neighbouring mines. If none of these conditions are met, set the sprite to null.
+        _spriteRendererContainer.sprite = sprite != null ? sprite :
+            hasMine ? mine.sprite :
+            hasNeighbourMine ? NumberSprites.Instance.GetNumberedSprite(number) : null;
     }
 
     public void SetFlagSprite()
@@ -164,7 +166,6 @@ public class SquareMine : MonoBehaviour, IInteractable
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
             mineRoomManager.SetLogic(this);
             if (!isBubbling) StartCoroutine(Bobble());
-            ActionEvents.Instance.TriggerEventAfterAction();
         }
         else
         {
@@ -178,10 +179,12 @@ public class SquareMine : MonoBehaviour, IInteractable
             
             mineRoomManager.RevealTile(this);
             if (!isBubbling) StartCoroutine(Bobble());
-
-            ActionEvents.Instance.TriggerEventAfterAction();
-            mineRoomManager.AfterActionFunction();
         }
+
+        ActionEvents.Instance.TriggerEventAfterAction();
+
+        // we want to make sure this action is called after the action events have been triggered, so we call it at the end of the Interact method.
+        mineRoomManager.AfterActionFunction();
     }
 
     public void SecondInteract()
@@ -204,7 +207,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void HoverEnd()
     {
-        if(gameObject == null || !_isHovered) return;
+        if(gameObject.IsDestroyed() || !_isHovered) return;
         transform.localScale /= 1.1f;
         _isHovered = false;
     }

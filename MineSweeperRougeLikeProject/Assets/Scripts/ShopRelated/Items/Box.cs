@@ -27,8 +27,8 @@ public class Box : Item
         
         for (int i = 0; i < randomAmountOfMines; i++)
         {
-            Mine selectedMine = Instantiate(selectedMalwarePackage.mines[Random.Range(0, selectedMalwarePackage.mines.Count)]);
-           selectedMalwarePackage.AddMine(selectedMine);
+            SMine selectedMine = Instantiate(selectedMalwarePackage.mines[Random.Range(0, selectedMalwarePackage.mines.Count)]);
+            selectedMalwarePackage.AddMine(selectedMine);
         }
     }
 

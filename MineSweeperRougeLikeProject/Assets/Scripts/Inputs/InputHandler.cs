@@ -90,13 +90,13 @@ public class InputHandler : MonoBehaviour
             
             if (!_currentlyInteracted.Contains(interactable))
             {
-                interactable.HoverStart();
+                if(!RunPlayerStats.Instance.EndState) interactable?.HoverStart();
                 _currentlyInteracted.Add(interactable);
             }
             interactables.Add(interactable);
         }
 
-        foreach (var interactable in _currentlyInteracted.ToList().Where(interactable => !interactables.Contains(interactable)))
+        foreach (var interactable in _currentlyInteracted.Where(interactable => !interactables.Contains(interactable)))
         {
             if(!RunPlayerStats.Instance.EndState) interactable?.HoverEnd();
             if (interactable == _mostCurrentlyInteracted)
@@ -104,7 +104,7 @@ public class InputHandler : MonoBehaviour
                 _mostCurrentlyInteracted = null;
                 TextVisualSingleton.Instance.textVisualObject.DisableObject();
             }
-            _currentlyInteracted.Remove(interactable);
+            //_currentlyInteracted.Remove(interactable);
         }
 
         return interactables;

@@ -196,7 +196,7 @@ public class RunPlayerStats : ScriptableObject
     public MineRoomManager MineRoomManager { get; set; }
     public FloorManager FloorManager { get; set; }
     public MineViusalizer mineVisualizer { get; set; }
-    public Mine FlagMineSelected { get; set; }
+    public SMine FlagMineSelected { get; set; }
     public BossModification BossModification { get; set; }
 
     public bool DebugMode;
@@ -230,6 +230,16 @@ public class RunPlayerStats : ScriptableObject
         if (BannedBossModifications.Count == BossModificationLibrary.Instance.bossModifications.Count)
             ResetBannedBosses();
         
+
+        if(BossModificationLibrary.Instance.UseSetBossModification)
+        {
+            BossModification = Instantiate(BossModificationLibrary.Instance.SetBossModification);
+            if(FloorManager != null)
+                FloorManager.bossRoom.SetBossModificationSprite(BossModification.sprite);
+            return;
+        }
+
+
         List<BossModification> bossModifications = BossModificationLibrary.Instance.bossModifications.Where(x =>
             !BannedBossModifications.Contains(x.name)).ToList();
         
@@ -303,12 +313,12 @@ public class RunPlayerStats : ScriptableObject
     
     public void MoneyEndRoomSet()
     {
-        Money += MoneyGain + (Points / 100) + TempMoneyGain;
+        Money += MoneyEndRoomGet();
     }
     
     public int MoneyEndRoomGet()
     {
-        return MoneyGain + Points/100 + TempMoneyGain;
+        return MoneyGain + Points/50 + TempMoneyGain;
     }
 
     private void ResetTempValues()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "TripleThreatMine", menuName = "ScriptableObjects/Mine/TripleThreatMine", order = 0)]
 public class TripleThreatMine : Mine
 {
     // Start is called before the first frame update

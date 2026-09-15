@@ -29,7 +29,7 @@ public class MineViusalizer : MonoBehaviour
     public void SetVisualizer()
     {
 
-        List<Mine> mines = new List<Mine>();
+        List<SMine> mines = new List<SMine>();
         
         RunPlayerStats.Instance.MalwarePackages.ForEach(x => x.mines.ForEach( mine => mines.Add(mine)));
 
@@ -44,7 +44,7 @@ public class MineViusalizer : MonoBehaviour
         CreateListOfVisualHolders(mines);
     }
 
-    private void CreateListOfVisualHolders(List<Mine> mines)
+    private void CreateListOfVisualHolders(List<SMine> mines)
     {
         
         int amountOfMines = 1;
@@ -82,7 +82,7 @@ public class MineViusalizer : MonoBehaviour
         }
     }
 
-    private GameObject CreateVisualHolder(Sprite mineSprite, Sprite numberSprite, Mine mine)
+    private GameObject CreateVisualHolder(Sprite mineSprite, Sprite numberSprite, SMine mine)
     {
         GameObject currentGameObject = Instantiate(visualObject, gameObject.transform);
         

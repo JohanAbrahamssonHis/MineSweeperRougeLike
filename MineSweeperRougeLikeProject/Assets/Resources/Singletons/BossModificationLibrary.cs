@@ -19,4 +19,19 @@ public class BossModificationLibrary : ScriptableObject
     }
 
     public List<BossModification> bossModifications;
+
+    public BossModification GetRandomBossModification()
+    {
+        if (bossModifications.Count == 0)
+        {
+            Debug.LogWarning("No boss modifications available.");
+            return null;
+        }
+
+        int randomIndex = UnityEngine.Random.Range(0, bossModifications.Count);
+        return bossModifications[randomIndex];
+    }
+
+    public bool UseSetBossModification = false;
+    public BossModification SetBossModification;
 }

@@ -34,6 +34,10 @@ public class ActionEvents : ScriptableObject
     //After an action has been made
     public event ActionEvent OnAfterAction;
     public void TriggerEventAfterAction() => OnAfterAction?.Invoke();
+
+    //After the basic rest has been made
+    public event ActionEvent OnAfterReset;
+    public void TriggerEventAfterReset() => OnAfterReset?.Invoke();
     
     //When you win a room
     public event ActionEvent OnMineRoomWin;

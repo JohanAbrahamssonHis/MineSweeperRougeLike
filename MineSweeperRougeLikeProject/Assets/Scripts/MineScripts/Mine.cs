@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Mine : MonoBehaviour, ITextable
+public class Mine : MonoBehaviour, ITextable
 {
+    public SMine MineData;
+
     public bool isDisabled;
     public int weight;
     public Sprite sprite;
@@ -12,17 +14,40 @@ public abstract class Mine : MonoBehaviour, ITextable
     public List<Vector2> neighbours;
     public List<Vector2> longnNeighbours;
     public bool isActivated;
-    public delegate void CallBack(string hello);
     public SpriteRenderer _spriteRenderer;
     public MineRoomManager mineRoomManager;
     public int damage = 1;
 
-    public CallBack call;
 
     public virtual void SetUpMine(MineRoomManager mineRoomManager)
     {
+        Debug.Log("Setting up mine: " + MineData.name);
+        if (MineData == null) return;
+        else
+        {
+            isDisabled = MineData.isDisabled;
+            weight = MineData.weight;
+            sprite = MineData.sprite;
+            isActivated = MineData.isActivated;
+            damage = MineData.damage;
+        }
+
         neighbours = new List<Vector2>();
+        longnNeighbours = new List<Vector2>();
         this.mineRoomManager = mineRoomManager;
+        _spriteRenderer = transform.GetComponent<SpriteRenderer>();
+
+        SetMineNeighbours();
+    }
+
+    public void SetMineNeighbours()
+    {
+        if (MineData == null) return;
+        else
+        {
+            neighbours = MineData.GetNeighbours(position);
+            longnNeighbours = MineData.GetLongNeighbours(position);
+        }
     }
 
     public virtual void Activate()
@@ -48,8 +73,9 @@ public abstract class Mine : MonoBehaviour, ITextable
         }
     }
 
-    public abstract string Name { get; }
-    public abstract string Description { get; }
+
+    public virtual string Name { get; }
+    public virtual string Description { get; }
     
-    public abstract string Rarity { get; }
+    public virtual string Rarity { get; }
 }

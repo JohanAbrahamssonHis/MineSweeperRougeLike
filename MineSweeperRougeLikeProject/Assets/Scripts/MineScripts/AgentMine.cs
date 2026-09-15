@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[CreateAssetMenu(fileName = "AgentMine", menuName = "ScriptableObjects/Mine/AgentMine", order = 0)]
 public class AgentMine : Mine
 {
     // Start is called before the first frame update
@@ -23,17 +23,10 @@ public class AgentMine : Mine
         ActionEvents.Instance.OnAfterAction -= AgentMineMove;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     void AgentMineMove()
     {
-        if(isDisabled) return;
+        if(isDisabled || RunPlayerStats.Instance.EndState || !mineRoomManager.AfterFirstMove) return;
         List<Vector2> neighboursTemp = new List<Vector2>(base.neighbours);
-
-        
 
         mineRoomManager.MoveMine(this, neighboursTemp);
         //mineRoomManager.CheckTiles(neighbours);

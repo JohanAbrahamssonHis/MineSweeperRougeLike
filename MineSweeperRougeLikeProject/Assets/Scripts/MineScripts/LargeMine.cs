@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "LargeMine", menuName = "ScriptableObjects/Mine/LargeMine", order = 0)]
 public class LargeMine : Mine
 {
     // Start is called before the first frame update

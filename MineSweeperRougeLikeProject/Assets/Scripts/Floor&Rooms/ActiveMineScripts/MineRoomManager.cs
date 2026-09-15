@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 
 public class MineRoomManager : MonoBehaviour
 {
-    public int mines;
+    //public int mines;
 
-    public Mine minePreset;
+    //public Mine minePreset;
 
     public Grid grid;
 
@@ -33,27 +33,38 @@ public class MineRoomManager : MonoBehaviour
         grid.squaresXSize = (int)RunPlayerStats.Instance.GridSize.x;
         grid.squaresYSize = (int)RunPlayerStats.Instance.GridSize.y;
         grid.SetupGrid();
+
+        //ActionEvents.Instance.OnAfterAction += AfterActionFunction;
+    }
+
+    public void OnDisable()
+    {
+        //ActionEvents.Instance.OnAfterAction -= AfterActionFunction;
     }
 
     public void BeginLogic()
     {
-        
+        /*
         _mines = new List<Mine>();
         //Adds basic mines
         for (int i = 0; i < mines; i++)
         {
-            GameObject mineInst = Instantiate(minePreset.gameObject);
+            GameObject mineInst =  Instantiate(minePreset.gameObject);
             Mine mine = mineInst.GetComponent<Mine>();
             _mines.Add(mine);
         }
+        */
 
         malwarePackages = RunPlayerStats.Instance.MalwarePackages;
 
         //Adds mines depending on packages
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
-            GameObject mineInst = Instantiate(mine.gameObject);
+            GameObject mineInst = new(mine.name);
+            mineInst.AddComponent<Mine>();
             Mine tempMine = mineInst.GetComponent<Mine>();
+            tempMine.MineData = mine;
+            tempMine.AddComponent<SpriteRenderer>();
             _mines.Add(tempMine);
         }
     }
@@ -69,7 +80,6 @@ public class MineRoomManager : MonoBehaviour
             square.SetContainerSprite();
         }
         RevealTilesFirstMove(startSquare);
-        AfterFirstMove = true;
     }
 
     void SetMineField()
@@ -78,6 +88,7 @@ public class MineRoomManager : MonoBehaviour
 
         foreach (var selectedMine in _mines)
         {
+            Debug.Log("test");
             if (grid.squares.Count(x => !x.hasMine) <= 9)
             {
                 Debug.Log("too few");
@@ -90,6 +101,7 @@ public class MineRoomManager : MonoBehaviour
                 Vector2 selectedPosition = new Vector2(Random.Range(0, grid.squaresXSize),
                     Random.Range(0, grid.squaresYSize));
                 SquareMine selectedSquare = grid.squares[GetPostion(selectedPosition)];
+                 Debug.Log("Placing mine: " + selectedMine.name + " at position: " + selectedSquare.position);
 
                 if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
 
@@ -100,6 +112,8 @@ public class MineRoomManager : MonoBehaviour
                 selectedSquare.mine.transform.parent = selectedSquare.transform;
 
                 selectedSquare.SetContainerSprite();
+                
+                Debug.Log("Mine placed: " + selectedMine.name + " at position: " + selectedSquare.position);
 
                 //GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
@@ -114,6 +128,7 @@ public class MineRoomManager : MonoBehaviour
         grid.squares.ForEach(x => x.isLongNeighbour = false);
         foreach (var mine in _mines)
         {
+            Debug.Log(mine.neighbours.Count + " " + mine.name + " neighbours");
             foreach (var neighbour in mine.neighbours)
             {
                 if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
@@ -121,6 +136,7 @@ public class MineRoomManager : MonoBehaviour
                 SquareMine square = grid.squares[GetPostion(neighbour)];
                 square.hasNeighbourMine = true;
                 square.number += mine.weight;
+                Debug.Log("Setting number for square: " + square.position + " with value: " + square.number);
             }
             //Fix this
             foreach (var neighbour in mine.longnNeighbours)
@@ -143,14 +159,13 @@ public class MineRoomManager : MonoBehaviour
         }
     }
 
-    public void RevealTile(SquareMine square, int orderOfReveal = 0)
+    public void RevealTile(SquareMine square, int orderOfReveal = 0, float randomDissolve = 0.0f)
     {
         //The chosen square is revealed
         square.SetRevealed(true);
         
-        //Random.Range(-0.1f*square.position.y,0.1f*square.position.y)
-        
-        square.StartDissolve(Random.Range(0.03f,0.07f)+0.1f*orderOfReveal);
+        if(randomDissolve == 0.0f) randomDissolve = Random.Range(0.03f,0.07f);
+        square.StartDissolve(randomDissolve+0.03f*orderOfReveal);
         
         //If this grid has a mine
         square.mine?.Activate();
@@ -170,19 +185,21 @@ public class MineRoomManager : MonoBehaviour
                     grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
-                RevealTile(squareSelect, orderOfReveal + 1);
+                RevealTile(squareSelect, orderOfReveal + 1, randomDissolve);
             }
         }
     }
 
-    private void RevealTilesFirstMove(SquareMine square, int orderOfReveal = 0)
+    private void RevealTilesFirstMove(SquareMine square)
     {
         ActionEvents.Instance.TriggerEventFirstAction();
         
         //The chosen square is revealed
         square.SetRevealed(true);
         
-        square.StartDissolve(Random.Range(0.03f,0.07f)+0.1f*orderOfReveal);
+        int orderOfReveal = 0;
+        float randomDissolve = Random.Range(0.03f,0.07f);
+        square.StartDissolve(randomDissolve+0.03f*orderOfReveal);
 
         //Reveals all neighbouring squares, those cannot have a mine in them.
         for (int i = -1; i <= 1; i++)
@@ -196,7 +213,7 @@ public class MineRoomManager : MonoBehaviour
                     grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
-                RevealTile(squareSelect, orderOfReveal + 1);
+                RevealTile(squareSelect, orderOfReveal + 1, randomDissolve);
             }
         }
     }
@@ -269,9 +286,14 @@ public class MineRoomManager : MonoBehaviour
         {
             ResetRevealTile(square);
         }
-
         
+        grid.squares.ForEach(x => x.SetContainerSprite());
+
+        ActionEvents.Instance.TriggerEventAfterReset();
+
         grid.CheckWin();
+
+        if(!AfterFirstMove) AfterFirstMove = true;
     }
 
     private void ResetRevealTile(SquareMine square)
@@ -297,7 +319,7 @@ public class MineRoomManager : MonoBehaviour
         
         foreach (var mine in _mines)
         {
-            Destroy(mine.gameObject);
+            Destroy(mine.transform.gameObject);
         }
         _mines.Clear();
 

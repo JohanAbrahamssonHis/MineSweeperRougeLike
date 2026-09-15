@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MineVisualHolder : MonoBehaviour, IInteractable, ITextable
 {
-    public Mine mine;
+    public SMine mine;
     public void Interact()
     {
         RunPlayerStats.Instance.FlagMineSelected = mine;

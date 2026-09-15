@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MineVisualHover : MonoBehaviour, IInteractable, ITextable
 {
-    public Mine _mine;
+    public SMine _mine;
     public string Name => _mine.Name;
     public string Description => _mine.Description;
     public string Rarity => _mine.Rarity;

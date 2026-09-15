@@ -15,19 +15,25 @@ public class Crazy8 : BossModification
 
     public override void JoinModification()
     {
-        ActionEvents.Instance.OnAfterAction += AddNumbers;
+        ActionEvents.Instance.OnAfterReset += AddNumbers;
     }
 
     private void AddNumbers()
     {
-        grid.squares.ForEach(x => x.number+=valueIncrease);
+        Debug.Log("Adding numbers");   
+
+        foreach (var square in grid.squares)
+        {
+            square.number += valueIncrease;
+            square.SetContainerSprite();
+        }
     }
 
     public override void UnsubscribeModification()
     {
-        ActionEvents.Instance.OnAfterAction -= AddNumbers;
+        ActionEvents.Instance.OnAfterReset -= AddNumbers;
     }
 
     public override string Description =>
-        "All numbers that are shown are ‘+8’ more than usual (aka a ‘1’ is shown as a ‘9’)";
+        "All numbers that are shown are ‘+8’ more than usual";
 }

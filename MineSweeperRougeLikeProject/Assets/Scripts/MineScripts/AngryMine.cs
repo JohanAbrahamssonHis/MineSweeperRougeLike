@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "AngryMine", menuName = "ScriptableObjects/Mine/AngryMine", order = 0)]
 public class AngryMine : Mine
 {
     public override void SetUpMine(MineRoomManager mineRoomManager)
