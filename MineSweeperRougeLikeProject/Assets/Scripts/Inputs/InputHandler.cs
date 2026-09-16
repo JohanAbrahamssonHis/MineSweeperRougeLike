@@ -96,15 +96,16 @@ public class InputHandler : MonoBehaviour
             interactables.Add(interactable);
         }
 
-        foreach (var interactable in _currentlyInteracted.Where(interactable => !interactables.Contains(interactable)))
+        foreach (var interactable in _currentlyInteracted.ToList().Where(interactable => !interactables.Contains(interactable)))
         {
+            if(interactable is null) continue;
             if(!RunPlayerStats.Instance.EndState) interactable?.HoverEnd();
             if (interactable == _mostCurrentlyInteracted)
             {
                 _mostCurrentlyInteracted = null;
                 TextVisualSingleton.Instance.textVisualObject.DisableObject();
             }
-            //_currentlyInteracted.Remove(interactable);
+            _currentlyInteracted.Remove(interactable);
         }
 
         return interactables;

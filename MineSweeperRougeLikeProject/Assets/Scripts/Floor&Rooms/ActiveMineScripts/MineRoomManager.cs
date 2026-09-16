@@ -61,7 +61,7 @@ public class MineRoomManager : MonoBehaviour
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
             GameObject mineInst = new(mine.name);
-            mineInst.AddComponent<Mine>();
+            mineInst.AddComponent(mine.GetMineType());
             Mine tempMine = mineInst.GetComponent<Mine>();
             tempMine.MineData = mine;
             tempMine.AddComponent<SpriteRenderer>();
@@ -88,7 +88,6 @@ public class MineRoomManager : MonoBehaviour
 
         foreach (var selectedMine in _mines)
         {
-            Debug.Log("test");
             if (grid.squares.Count(x => !x.hasMine) <= 9)
             {
                 Debug.Log("too few");
@@ -101,7 +100,6 @@ public class MineRoomManager : MonoBehaviour
                 Vector2 selectedPosition = new Vector2(Random.Range(0, grid.squaresXSize),
                     Random.Range(0, grid.squaresYSize));
                 SquareMine selectedSquare = grid.squares[GetPostion(selectedPosition)];
-                 Debug.Log("Placing mine: " + selectedMine.name + " at position: " + selectedSquare.position);
 
                 if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
 
@@ -112,10 +110,7 @@ public class MineRoomManager : MonoBehaviour
                 selectedSquare.mine.transform.parent = selectedSquare.transform;
 
                 selectedSquare.SetContainerSprite();
-                
-                Debug.Log("Mine placed: " + selectedMine.name + " at position: " + selectedSquare.position);
 
-                //GameObject mineInst = Instantiate(selectedMine.gameObject, selectedSquare.transform);
                 condition = false;
             } while (condition);
         }
@@ -128,24 +123,26 @@ public class MineRoomManager : MonoBehaviour
         grid.squares.ForEach(x => x.isLongNeighbour = false);
         foreach (var mine in _mines)
         {
-            Debug.Log(mine.neighbours.Count + " " + mine.name + " neighbours");
             foreach (var neighbour in mine.neighbours)
             {
-                if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
-                    (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
+                if (neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1 ||
+                    neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1) continue;
                 SquareMine square = grid.squares[GetPostion(neighbour)];
                 square.hasNeighbourMine = true;
                 square.number += mine.weight;
-                Debug.Log("Setting number for square: " + square.position + " with value: " + square.number);
             }
             //Fix this
             foreach (var neighbour in mine.longnNeighbours)
             {
-                if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
-                    (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
+                if (neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1 ||
+                    neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1) continue;
                 SquareMine square = grid.squares[GetPostion(neighbour)];
                 square.isLongNeighbour = true;
                 square.longNumber += mine.weight;
+
+                //ASSUMPTION: Long neighbours are neighbours of neighbours, so they will be counted as a neighbour as well.
+                square.hasNeighbourMine = true;
+                square.number += mine.weight;
             }
         }
     }
@@ -232,49 +229,47 @@ public class MineRoomManager : MonoBehaviour
                 selectionPos.y >= comparePos.y - 1;
     }
 
-    public void MoveMine(Mine mine, List<Vector2> neighbours)
+    public int TryMoveMine(Mine mine, Vector2 attemptedPlacementPos)
     {
+        //0 is false move, try again to move
+        //1 is true move, move is able
+        //-1 is no move possible, abort the move at all
+
         if (mine == null)
         {
             Debug.LogError("Mine is missing to move");
+            return -1;
         }
+
+        //If the mine is disabled, the game has ended or it is the first move, mines can not move and are stopped.
+        if(mine.isDisabled || RunPlayerStats.Instance.EndState || !AfterFirstMove) return -1;
         
         SquareMine currentSquare = grid.squares[GetPostion(mine.position)];
-        if(currentSquare.squareRevealed || currentSquare.hasFlag) return;
+        if(currentSquare.squareRevealed || currentSquare.hasFlag) return -1;
+
+        // If the attempted placement is outside the board, it is not a valid placement
+        if (attemptedPlacementPos.x < 0 || attemptedPlacementPos.x > grid.squaresXSize - 1 ||
+                attemptedPlacementPos.y < 0 || attemptedPlacementPos.y > grid.squaresYSize - 1) return 0;
         
-        for (int i = neighbours.Count - 1; i >= 0; i--)
-        {
-            int randomNeighbour = Random.Range(0, neighbours.Count);
-            Vector2 newPos = neighbours[randomNeighbour];
-            
-            if (newPos.x < 0 || newPos.x > grid.squaresXSize - 1 ||
-                newPos.y < 0 || newPos.y > grid.squaresYSize - 1)
-            {
-                neighbours.RemoveAt(randomNeighbour);
-                continue;
-            }
+        SquareMine selectedSquare = grid.squares[GetPostion(attemptedPlacementPos)];
 
-            SquareMine selectedSquare = grid.squares[GetPostion(newPos)];
+        // If a mine is already at the position attempted to be placed in or that square is revealed. It is not a valid placement
+        if (selectedSquare.hasMine ||
+            selectedSquare.squareRevealed)  return 0;
+        
+        selectedSquare.mine = mine;
+        selectedSquare.hasMine = true;
+        
+        mine.transform.parent = selectedSquare.transform;
+        mine.transform.position = Vector2.zero;
+        mine.position = attemptedPlacementPos;
+        mine.SetMineNeighbours();
 
-            if (selectedSquare.hasMine ||
-                selectedSquare.squareRevealed)
-            {
-                neighbours.RemoveAt(randomNeighbour);
-                continue;
-            }
-            
-            selectedSquare.mine = mine;
-            selectedSquare.hasMine = true;
-            
-            mine.transform.parent = selectedSquare.transform;
-            mine.transform.position = Vector2.zero;
-            mine.position = neighbours[randomNeighbour];
-            
-            currentSquare.mine = null;
-            currentSquare.hasMine = false;
-            
-            return;
-        }
+        
+        currentSquare.mine = null;
+        currentSquare.hasMine = false;
+        
+        return 1;
     }
 
     public void AfterActionFunction()

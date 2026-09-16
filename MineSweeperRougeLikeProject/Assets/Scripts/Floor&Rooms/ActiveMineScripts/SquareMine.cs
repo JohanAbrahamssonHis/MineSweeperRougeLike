@@ -207,8 +207,17 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void HoverEnd()
     {
-        if(gameObject.IsDestroyed() || !_isHovered) return;
-        transform.localScale /= 1.1f;
+        if(!_isHovered) return;
+        try
+        {
+            if(gameObject.IsDestroyed()) return;
+            transform.localScale /= 1.1f;
+        }
+        catch
+        {
+            Debug.LogWarning("SquareMine: HoverEnd() failed because the gameObject was destroyed.");
+            _isHovered = false;
+        }
         _isHovered = false;
     }
 

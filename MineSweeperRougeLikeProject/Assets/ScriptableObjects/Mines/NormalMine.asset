@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dddae076bbce3a74b9d119d5f86866e6, type: 3}
   m_Name: NormalMine
   m_EditorClassIdentifier: 
-  mineObject: {fileID: 0}
   isDisabled: 0
   weight: 1
   sprite: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
