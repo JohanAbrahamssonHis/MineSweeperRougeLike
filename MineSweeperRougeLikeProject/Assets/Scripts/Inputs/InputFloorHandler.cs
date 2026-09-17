@@ -23,15 +23,17 @@ public class InputFloorHandler : MonoBehaviour
 
         if (rayHit.collider.gameObject.TryGetComponent(out SquareFloor square))
         {
+            /*
             if (!floorManager.AfterFirstMove)
                 floorManager.SetLogic(square);
             else
             {
                 if (square.squareRevealed) return;
-                floorManager.RevealTile(square);
+                //floorManager.RevealTile(square);
 
-                floorManager.AfterActionFunction();
+                //floorManager.AfterActionFunction();
             }
+            */
         }
         else if (rayHit.collider.gameObject.TryGetComponent(out BossRoomSquare bossSquare))
         {
@@ -60,6 +62,6 @@ public class InputFloorHandler : MonoBehaviour
     {
         if (!context.started) return;
         
-        floorManager.ResetBoard();
+        //floorManager.ResetBoard();
     }
 }

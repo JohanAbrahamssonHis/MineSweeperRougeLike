@@ -14,7 +14,7 @@ public class FloorManager : MonoBehaviour
     public Room roomPresetElite;
     
 
-    public FloorGrid grid;
+    //public FloorGrid grid;
 
     private Vector2 startPos;
 
@@ -23,6 +23,8 @@ public class FloorManager : MonoBehaviour
     public List<Room> _rooms;
 
     public Room currentRoom;
+
+    [SerializeField] private List<FloorRoomButton> floorRoomButtons;
 
 
     //To disable
@@ -36,26 +38,26 @@ public class FloorManager : MonoBehaviour
         RunPlayerStats.Instance.FloorManager = this;
         RunPlayerStats.Instance.SetBossModification();
         bossRoomContainer = bossRoom.gameObject.transform.parent.gameObject;
+        BeginLogic();
     }
 
     public void BeginLogic()
     {
         _rooms = new List<Room>();
         
-        //Adds basic rooms
+        SetRooms();
+
+        // ! this is bad but make better later
+        floorRoomButtons[0].room = _rooms.First(x => x is RoomMine);
+        floorRoomButtons[1].room = _rooms.First(x => x is RoomShop);
+    }
+
+    private void SetRooms()
+    {
+       //Adds basic rooms
         AddRoom(roomPreset, RunPlayerStats.Instance.RoomCount);
         AddRoom(roomPresetShop, RunPlayerStats.Instance.ShopCount);
-        AddRoom(roomPresetElite, RunPlayerStats.Instance.EliteRoomCount);
-
-        /*
-        //Adds mines depending on packages
-        foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
-        {
-            GameObject mineInst = Instantiate(mine.gameObject);
-            Mine tempMine = mineInst.GetComponent<Mine>();
-            _mines.Add(tempMine);
-        }
-        */
+        AddRoom(roomPresetElite, RunPlayerStats.Instance.EliteRoomCount); 
     }
 
     public void AddRoom(Room roomObject, int amount)
@@ -101,16 +103,20 @@ public class FloorManager : MonoBehaviour
         }
     }
 
+/*
     public void SetLogic(SquareFloor square)
     {
         BeginLogic();
         startPos = square.position;
-        SetRoomField();
-        SetNumbers();
-        RevealTilesFirstMove(square);
+        //SetRoomField();
+        //SetNumbers();
+        //RevealTilesFirstMove(square);
         AfterFirstMove = true;
     }
+    */
 
+
+/*
     void SetRoomField()
     {
         
@@ -142,8 +148,8 @@ public class FloorManager : MonoBehaviour
         
         
     }
-
-
+*/
+/*
     void SetNumbers()
     {
         grid.squares.ForEach(x => x.hasNeighbourRoom = false);
@@ -161,7 +167,8 @@ public class FloorManager : MonoBehaviour
             }
         }
     }
-
+    */
+/*
     void ResetNumbers()
     {
         foreach (SquareFloor square in grid.squares)
@@ -169,7 +176,8 @@ public class FloorManager : MonoBehaviour
             square.number = 0;
         }
     }
-
+    */
+/*
     public void RevealTile(SquareFloor square)
     {
         square.squareRevealed = true;
@@ -216,13 +224,15 @@ public class FloorManager : MonoBehaviour
         }
         
     }
-
+    */
+/*
     int GetPostion(Vector2 pos)
     {
         int value = (int)(pos.y) + (int)(pos.x) * (grid.squaresYSize);
         return value;
     }
-
+    */
+/*
     bool IsNeighbour(Vector2 selectionPos, Vector2 comparePos)
     {
         return (selectionPos.x <= comparePos.x + 1 &&
@@ -230,7 +240,7 @@ public class FloorManager : MonoBehaviour
                 selectionPos.y <= comparePos.y + 1 &&
                 selectionPos.y >= comparePos.y - 1);
     }
-
+*/
     public void CheckTiles(List<Vector2> tiles)
     {
         /*
@@ -253,7 +263,7 @@ public class FloorManager : MonoBehaviour
         }
         */
     }
-
+/*
     public void AfterActionFunction()
     {
         ResetNumbers();
@@ -264,26 +274,15 @@ public class FloorManager : MonoBehaviour
             RevealTile(square);
         }
     }
-
+    */
     public void ResetBoard()
     {
         
-        foreach (var mine in _rooms)
+        foreach (var room in _rooms)
         {
-            Destroy(mine.gameObject);
+            Destroy(room.gameObject);
         }
         _rooms.Clear();
-
-        foreach (var gridSquare in grid.squares)
-        {
-            gridSquare.room = null;
-            gridSquare.squareRevealed = false;
-            gridSquare.hasRoom = false;
-            gridSquare.number = 0;
-            gridSquare.hasNeighbourShop = false;
-            gridSquare.hasFlag = false;
-        }
-
         bossRoom.squareRevealed = false;
         bossRoom.SetRevealed(false);
         bossRoom.SetActive(false);
@@ -291,14 +290,17 @@ public class FloorManager : MonoBehaviour
         AfterFirstMove = false;
         
         RunPlayerStats.Instance.SetBossModification();
+
+        SetRooms();
     }
 
     public void DisableFloor(bool state)
     {
         this.gameObject.SetActive(state);
-        grid.gameObject.SetActive(state);
+        //grid.gameObject.SetActive(state);
         //inputHandler.gameObject.SetActive(state);
         bossRoomContainer.SetActive(state);
+        floorRoomButtons[0].transform.parent.gameObject.SetActive(state);
     }
 
     /*
@@ -310,9 +312,15 @@ public class FloorManager : MonoBehaviour
 
     private SquareFloor _squareFloor;
     public BossRoomSquare _bossRoomSquare;
+
+    public List<FloorRoomButton> FloorRoomButtons { get => floorRoomButtons; set => floorRoomButtons = value; }
+
+    /*
     public void DoorAnimationClose()
     {
         if(currentRoom is RoomBossMine) _bossRoomSquare.CloseDoorAnimation(_bossRoomSquare.transform);
         else _squareFloor.CloseDoorAnimation(grid.transform);
     }
+    */
+
 }

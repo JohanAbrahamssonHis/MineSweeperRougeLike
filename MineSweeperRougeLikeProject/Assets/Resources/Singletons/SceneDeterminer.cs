@@ -52,7 +52,7 @@ public class SceneDeterminer : ScriptableObject
         rb.CheckActivation();
         SceneManager.UnloadSceneAsync(sceneName);
         SceneManager.UnloadSceneAsync("GarageDoorScene");
-        floorManager.DoorAnimationClose();
+        //floorManager.DoorAnimationClose();
     }
 
     public static void ReturnToFloorBoss(string sceneName)

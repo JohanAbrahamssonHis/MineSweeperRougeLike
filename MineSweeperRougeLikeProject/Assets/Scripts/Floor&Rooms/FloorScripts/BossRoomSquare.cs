@@ -109,17 +109,20 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
         StartCoroutine(OpenDoorAnimation(startPos, transform.position, 1, 13.846f));
     }
     
+    /*
     public void CloseDoorAnimation(Transform startPos)
     {
         StartCoroutine(CloseDoorAnimation(startPos, transform.position, -1, 1));
     }
+    */
     
     private IEnumerator OpenDoorAnimation(Transform startPos, Vector3 targetPos, int openSign, float targetScale)
     {
         isAnimating = true;
         
-        //Move to position
         float elapsed = 0f;
+        /*
+        //Move to position
         Vector3 startPosRef = startPos.position;
         while (elapsed < durationMove)
         {
@@ -190,6 +193,7 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
 
             yield return null;
         }
+        */
         
         isAnimating = false;
 
@@ -209,7 +213,7 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
     }
 
     private Vector3 test;
-    
+    /*
     private IEnumerator CloseDoorAnimation(Transform startPos, Vector3 targetPos, int openSign, float targetScale)
     {
         targetPos = test;
@@ -285,6 +289,7 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
             yield return null;
         }
     }
+    */
     
     private float EaseInOutCubic(float x)
     {

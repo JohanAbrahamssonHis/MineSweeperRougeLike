@@ -64,16 +64,17 @@ public class SquareFloor : MonoBehaviour, IInteractable
         FloorManager floorManager = RunPlayerStats.Instance.FloorManager;
         
         SoundManager.Instance.Play("Action", null, true, 1);
-        
+        /*
         if (!floorManager.AfterFirstMove)
-            floorManager.SetLogic(this);
+            //floorManager.SetLogic(this);
         else
         {
             if (squareRevealed) return;
-            floorManager.RevealTile(this);
+            //floorManager.RevealTile(this);
             
-            floorManager.AfterActionFunction();
+            //floorManager.AfterActionFunction();
         }
+        */
     }
 
     public void SecondInteract()
@@ -106,20 +107,21 @@ public class SquareFloor : MonoBehaviour, IInteractable
     {
         StartCoroutine(OpenDoorAnimation(startPos, transform.position, 1, 18));
     }
-    
+    /*
     public void CloseDoorAnimation(Transform startPos)
     {
         StartCoroutine(CloseDoorAnimation(startPos, transform.position, -1, 1));
     }
+    */
     
     private IEnumerator OpenDoorAnimation(Transform startPos, Vector3 targetPos, int openSign, float targetScale)
     {
         isAnimating = true;
-
+        float elapsed = 0f;
+        /*
         SpawnBackground();
         
         //Move to position
-        float elapsed = 0f;
         Vector3 startPosRef = startPos.position;
         while (elapsed < durationMove)
         {
@@ -195,6 +197,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
         }
         
         isAnimating = false;
+        */
 
         SceneDeterminer.Instance.LoadAddedSceneGarage();
 
@@ -212,7 +215,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
     }
 
     private Vector3 test;
-    
+    /*
     private IEnumerator CloseDoorAnimation(Transform startPos, Vector3 targetPos, int openSign, float targetScale)
     {
         targetPos = test;
@@ -290,6 +293,7 @@ public class SquareFloor : MonoBehaviour, IInteractable
 
         DestroyBackground();
     }
+    */
     
     private float EaseInOutCubic(float x)
     {
