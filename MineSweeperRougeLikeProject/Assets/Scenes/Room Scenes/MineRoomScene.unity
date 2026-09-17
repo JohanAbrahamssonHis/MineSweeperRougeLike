@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -199,10 +198,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6074278856320494051, guid: 48cd7bc87e7735246a4b88c0a08641f5, type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 6074278856435845431, guid: 48cd7bc87e7735246a4b88c0a08641f5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -307,10 +302,6 @@ PrefabInstance:
     - target: {fileID: 7984221834486062677, guid: d63cc0555ed77fa468c0152688c2dd1c, type: 3}
       propertyPath: m_Name
       value: Points holder
-      objectReference: {fileID: 0}
-    - target: {fileID: 7984221835032837103, guid: d63cc0555ed77fa468c0152688c2dd1c, type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d63cc0555ed77fa468c0152688c2dd1c, type: 3}

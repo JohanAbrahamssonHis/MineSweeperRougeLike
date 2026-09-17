@@ -1232,6 +1232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 676987639}
+  - component: {fileID: 676987640}
   m_Layer: 0
   m_Name: LowerUI
   m_TagString: Untagged
@@ -1258,6 +1259,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &676987640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676987638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 8
+  currentValueSetting: 0
+  xDisplacement: -3
+  yDisplacement: 2
 --- !u!1 &709070574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,6 +1504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722828204}
   - component: {fileID: 722828205}
+  - component: {fileID: 722828206}
   m_Layer: 0
   m_Name: FloorGrid
   m_TagString: Untagged
@@ -1530,6 +1548,22 @@ MonoBehaviour:
   squareLength: 1
   squares: []
   spriteNumbers: []
+--- !u!114 &722828206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722828202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 0
+  currentValueSetting: 0
+  xDisplacement: 0
+  yDisplacement: 0
 --- !u!1 &726089994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2434,6 +2468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1189689009}
   - component: {fileID: 1189689010}
+  - component: {fileID: 1189689011}
   m_Layer: 0
   m_Name: Mine Visualizer
   m_TagString: Untagged
@@ -2471,6 +2506,22 @@ MonoBehaviour:
   visualObject: {fileID: 6933958440122149243, guid: edcba1ed2ab6404418a513d4dac01734, type: 3}
   sprites: []
   distance: 4.5
+--- !u!114 &1189689011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189689008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 4
+  currentValueSetting: 0
+  xDisplacement: 2.5
+  yDisplacement: 0
 --- !u!1 &1254532197
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,6 +2751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1400788620}
   - component: {fileID: 1400788621}
+  - component: {fileID: 1400788622}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -2739,6 +2791,22 @@ MonoBehaviour:
   speed: 0.4
   delay: 3
   strength: 0.1
+--- !u!114 &1400788622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400788618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 8
+  currentValueSetting: 0
+  xDisplacement: -3
+  yDisplacement: 0.1
 --- !u!1 &1419680483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,6 +2850,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1559281180}
   - component: {fileID: 1559281181}
+  - component: {fileID: 1559281182}
   m_Layer: 0
   m_Name: ItemVisual
   m_TagString: Untagged
@@ -2821,6 +2890,22 @@ MonoBehaviour:
   speed: 2
   strength: 0.2
   delay: 0.2
+--- !u!114 &1559281182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559281179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 1
+  currentValueSetting: 0
+  xDisplacement: 1
+  yDisplacement: 1
 --- !u!1 &1565700880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,6 +3104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1645188004}
   - component: {fileID: 1645188005}
+  - component: {fileID: 1645188006}
   m_Layer: 0
   m_Name: Timmer
   m_TagString: Untagged
@@ -3062,6 +3148,22 @@ MonoBehaviour:
   canvas: {fileID: 1155600979}
   beepLastTime: 0
   beepInBetweenTimeBase: 1
+--- !u!114 &1645188006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645188002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 3
+  currentValueSetting: 0
+  xDisplacement: -2.5
+  yDisplacement: -1
 --- !u!1 &1664944756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,3 +3839,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4802609920bd262468c5de2fbdf046a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &687446549672547356 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 687446550286127412, guid: ce84cdf8a83d93b458afcd913e11cc72, type: 3}
+  m_PrefabInstance: {fileID: 687446549672547354}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &687446549672547357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687446549672547356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 2
+  currentValueSetting: 0
+  xDisplacement: 0
+  yDisplacement: -1

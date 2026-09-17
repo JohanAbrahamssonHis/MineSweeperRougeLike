@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7984221834486062672}
   - component: {fileID: 2163669263541720312}
   - component: {fileID: 7984221834486062674}
+  - component: {fileID: 7984221833311249424}
   m_Layer: 0
   m_Name: Points holder
   m_TagString: Untagged
@@ -99,6 +100,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7984221833311249424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984221834486062677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 3
+  currentValueSetting: 0
+  xDisplacement: -5
+  yDisplacement: -1
 --- !u!1 &7984221835032837075
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,9 +173,10 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &7984221835032837102
 MonoBehaviour:

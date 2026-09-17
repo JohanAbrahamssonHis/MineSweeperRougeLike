@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 129361687}
   - component: {fileID: 129361686}
   - component: {fileID: 129361685}
+  - component: {fileID: 129361688}
   m_Layer: 0
   m_Name: Start
   m_TagString: Untagged
@@ -331,7 +332,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartPackages:
-  - {fileID: 11400000, guid: 8ed87ea13a16ba948ac43b41f76d47bc, type: 2}
+  - {fileID: 11400000, guid: d8db646f5df12154ea944faf176df741, type: 2}
+--- !u!114 &129361688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129361682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 0
+  currentValueSetting: 0
+  xDisplacement: 0
+  yDisplacement: 0
 --- !u!1 &138581479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +2898,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2099626262}
   - component: {fileID: 2099626263}
+  - component: {fileID: 2099626264}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -2938,3 +2956,19 @@ MonoBehaviour:
   speed: 1.75
   strength: 0.28
   delay: 0.4
+--- !u!114 &2099626264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099626261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlacementSetting: 0
+  currentValueSetting: 0
+  xDisplacement: 0
+  yDisplacement: 0
