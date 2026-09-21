@@ -22,6 +22,8 @@ public class RunPlayerStats : ScriptableObject
          
     }
 
+    private StartData startData;
+
     #region Health
     
     //DevLike Immunity
@@ -336,38 +338,12 @@ public class RunPlayerStats : ScriptableObject
         if (FloorManager.currentRoom is not RoomBossMine) return;
         BossModification?.UnsubscribeModification();
     }
-    
     public void ResetValues()
     {
         setUpState = true;
-        HealthDamageModifier = 0;
-        HealthDamageMultModifier = 1;
-        Health = 5;
-        Time = 4*60;
-        TimeMult = 1;
-        TimeGain = 15;
-        Money = 5;
-        MoneyGain = 1;
-        Points = 0;
-        PointsGain = 10;
-        Heat = 0;
-        HeatGain = 0.15f;
-        FloorCount = 1;
-        RoomCountCleared = 0;
-        EliteRoomCount = 1;
-        RoomCount = 2;
-        ShopCount = 2;
-        RoomLock = 2;
-        GridSize = new Vector2(6, 6);
-        ActiveTimer = false;
-        MalwarePackages = new List<MalwarePackage>();
-        MineRoomManager = null;
-        FloorManager = null;
-        FlagMineSelected = null;
-        Inventory = new List<Item>();
-        BossModification = null;
-        BannedBossModifications = new List<string>();
-        mineVisualizer = null;
+        startData = StartData.Instance;
+        startData.StartValues(this);
+
         SetEffectAbilities();
         setUpState = false;
     }
