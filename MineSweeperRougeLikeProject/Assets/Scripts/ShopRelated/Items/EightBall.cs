@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,8 +11,7 @@ public class EightBall : Item
     {
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         
-        
-        mineRoomManager._mines.ForEach(x => x.isDisabled = Random.Range(0,8)==0);
+        foreach (var item in mineRoomManager.grid.squares.Where(x => x.hasMine)) item.SetDisabled(Random.Range(0,8)==0);
     }
 
     public override void Join()

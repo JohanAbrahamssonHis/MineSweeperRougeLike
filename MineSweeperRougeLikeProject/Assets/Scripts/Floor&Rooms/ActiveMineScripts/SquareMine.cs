@@ -137,8 +137,8 @@ public class SquareMine : MonoBehaviour, IInteractable
         {
             mine.isDisabled = disabled;
             _spriteRendererContainer.sprite = mine.sprite;
-            _spriteRendererContainer.color = Color.red;
-            _spriteRendererContainer.sortingOrder = 1;
+            _spriteRendererContainer.color = disabled ? Color.red : Color.white;
+            _spriteRendererContainer.sortingOrder = disabled ? 1 : -1;
         }
     }
     #endregion
@@ -195,7 +195,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 
     public void HoverStart()
     {
-        if(squareRevealed)return;
+        if(squareRevealed || (hasMine && mine.isDisabled))return;
         transform.localScale *= 1.1f;
         _isHovered = true;
     }

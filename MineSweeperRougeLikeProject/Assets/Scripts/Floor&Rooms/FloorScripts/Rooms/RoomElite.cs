@@ -28,10 +28,11 @@ public class RoomElite : Room
 
     public override void LeaveRoomFunction()
     {
-        base.LeaveRoomFunction();
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
         rPS.RoomCountCleared++;
+        base.LeaveRoomFunction();
+        
         RunPlayerStats.Instance.EndRoomSet();
     }
 }

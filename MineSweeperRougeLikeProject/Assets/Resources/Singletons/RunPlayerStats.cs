@@ -140,15 +140,15 @@ public class RunPlayerStats : ScriptableObject
             if(value==1) return;
 
             // If the value is greater than 1, we are moving to a new floor, so we add rooms based on the floor count. 
-            if (_floorCount % 3 == 0) FloorManager.AddShopRoom(1);
+            if (_floorCount % 3 == 0) ShopCount++;
             if (_floorCount % 2 == 1)
             {
-                FloorManager.AddEliteRoom(1);
+                EliteRoomCount++;
                 GridSize += Vector2.one;
             }
             else
             {
-                FloorManager.AddBasicRoom(1);
+                RoomCount++;
                 RoomLock++;
             }
 

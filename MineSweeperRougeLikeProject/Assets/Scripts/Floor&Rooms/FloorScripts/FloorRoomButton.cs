@@ -5,13 +5,24 @@ using UnityEngine;
 public class FloorRoomButton : MonoBehaviour, IInteractable
 {
     public Room room;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject lockObject;
+    private bool isLocked;
 
     public void Interact()
     {
-        //TODO Should clean this out
+        if(isLocked) return;
         RunPlayerStats.Instance.FloorManager.currentRoom = room;
         room.SetUpRoom(RunPlayerStats.Instance.FloorManager);
         StartCoroutine(Scenetransition());
+    }
+
+    public void SetVisual(bool isLocked = false)
+    {
+        spriteRenderer.sprite = room.sprite;
+        spriteRenderer.color = isLocked ? Color.grey : Color.white;
+        this.isLocked = isLocked;
+        lockObject.SetActive(isLocked);
     }
 
     private IEnumerator Scenetransition()

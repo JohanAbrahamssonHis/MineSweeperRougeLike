@@ -42,5 +42,6 @@ public abstract class Room : MonoBehaviour
     public virtual void LeaveRoomFunction()
     {
         //LeavingRoomFunction
+        floorManager.RoomExited(this);
     }
 }

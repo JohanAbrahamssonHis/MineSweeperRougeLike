@@ -10,9 +10,11 @@ using Random = UnityEngine.Random;
 public class FloorManager : MonoBehaviour
 {
     public Room roomPreset;
+    public int currentRoomAmount;
     public Room roomPresetShop;
+    public int currentShopAmount;
     public Room roomPresetElite;
-    
+    public int currentEliteAmount;
 
     //public FloorGrid grid;
 
@@ -21,6 +23,7 @@ public class FloorManager : MonoBehaviour
     public bool AfterFirstMove;
     
     public List<Room> _rooms;
+    public List<int> _dangerRooms;
 
     public Room currentRoom;
 
@@ -44,23 +47,29 @@ public class FloorManager : MonoBehaviour
     public void BeginLogic()
     {
         _rooms = new List<Room>();
-        
-        SetRooms();
+        _dangerRooms = new List<int>();
 
-        // ! this is bad but make better later
-        floorRoomButtons[0].room = _rooms.First(x => x is RoomMine);
-        floorRoomButtons[1].room = _rooms.First(x => x is RoomShop);
+        currentRoomAmount = RunPlayerStats.Instance.RoomCount;
+        currentShopAmount = RunPlayerStats.Instance.ShopCount;
+        currentEliteAmount = RunPlayerStats.Instance.EliteRoomCount;
+
+        SetDangerRoomsOrder();
+
+        AddRoomToSelection("RoomMine");
+        AddRoomToSelection("RoomShop");
     }
 
+/*
     private void SetRooms()
     {
-       //Adds basic rooms
+        //Adds basic rooms
         AddRoom(roomPreset, RunPlayerStats.Instance.RoomCount);
         AddRoom(roomPresetShop, RunPlayerStats.Instance.ShopCount);
         AddRoom(roomPresetElite, RunPlayerStats.Instance.EliteRoomCount); 
     }
+    */
 
-    public void AddRoom(Room roomObject, int amount)
+    public List<Room> AddRoom(Room roomObject, int amount = 1)
     {
         for (int i = 0; i < amount; i++)
         {
@@ -68,221 +77,137 @@ public class FloorManager : MonoBehaviour
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
+        return _rooms;
     }
     
-    public void AddBasicRoom(int amount)
+    public List<Room> AddBasicRoom(int amount = 1)
     {
-        RunPlayerStats.Instance.RoomCount += amount;
         for (int i = 0; i < amount; i++)
         {
             GameObject roomInst = Instantiate(roomPreset.gameObject);
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
+        return _rooms;
     }
     
-    public void AddShopRoom(int amount)
+    public List<Room> AddShopRoom(int amount = 1)
     {
-        RunPlayerStats.Instance.ShopCount += amount;
         for (int i = 0; i < amount; i++)
         {
             GameObject roomInst = Instantiate(roomPresetShop.gameObject);
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
+        return _rooms;
     }
     
-    public void AddEliteRoom(int amount)
+    public List<Room> AddEliteRoom(int amount = 1)
     {
-        RunPlayerStats.Instance.EliteRoomCount += amount;
         for (int i = 0; i < amount; i++)
         {
             GameObject roomInst = Instantiate(roomPresetElite.gameObject);
             Room room = roomInst.GetComponent<Room>();
             _rooms.Add(room);
         }
+        return _rooms;
     }
 
-/*
-    public void SetLogic(SquareFloor square)
+    public void SetDangerRoomsOrder()
     {
-        BeginLogic();
-        startPos = square.position;
-        //SetRoomField();
-        //SetNumbers();
-        //RevealTilesFirstMove(square);
-        AfterFirstMove = true;
-    }
-    */
+        int tempCRA = currentRoomAmount;
+        int tempCEA = currentEliteAmount;
+        int total = tempCRA + tempCEA;
 
+        for (int i = 0; i<=total && tempCEA>0 && tempCRA>0; i++)
+        {
+            //0 is normal room, 1 is elite room
+            int result = Random.Range((int)0, (int)2);
 
-/*
-    void SetRoomField()
-    {
-        
-        var roomsCollection = new List<Room>(_rooms);
+            //First one should always be a normal room
+            if (i is 0) result = 0;
 
-        foreach (var selectedRoom in _rooms)
-        {
-            if (grid.squares.Count(x => !x.hasRoom) <= 9)
-            {
-                Debug.LogError("too few");
-                break;
-            }
+            _dangerRooms.Add(result);
+            if (result is 0) tempCRA--;
+            else tempCEA--;
+        }
 
-            bool condition = true;
-            do
-            {
-                Vector2 selectedPosition = new Vector2(Random.Range(0, grid.squaresXSize),
-                    Random.Range(0, grid.squaresYSize));
-                SquareFloor selectedSquare = grid.squares[GetPostion(selectedPosition)];
-                if (selectedSquare.hasRoom || IsNeighbour(selectedSquare.position, startPos)) continue;
-                selectedSquare.hasRoom = true;
-                selectedSquare.room = selectedRoom;
-                selectedSquare.room.SetPosition(selectedSquare.position);
-                selectedSquare.room.SetUpRoom(this);
-                selectedSquare.room.transform.parent = selectedSquare.transform;
-                condition = false;
-            } while (condition);
-        }
-        
-        
+        if(tempCRA > 0) for (; tempCRA is > 0; tempCRA--)_dangerRooms.Add(0);
+        if(tempCEA > 0) for (; tempCEA is > 0; tempCEA--)_dangerRooms.Add(1);
     }
-*/
-/*
-    void SetNumbers()
-    {
-        grid.squares.ForEach(x => x.hasNeighbourRoom = false);
-        grid.squares.ForEach(x => x.hasNeighbourShop = false);
-        foreach (var room in _rooms)
-        {
-            foreach (var neighbour in room.neighbours)
-            {
-                if ((neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1) ||
-                    (neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1)) continue;
-                SquareFloor square = grid.squares[GetPostion(neighbour)];
-                if (room is RoomShop) square.hasNeighbourShop = true;
-                square.hasNeighbourRoom = true;
-                square.number += 1;
-            }
-        }
-    }
-    */
-/*
-    void ResetNumbers()
-    {
-        foreach (SquareFloor square in grid.squares)
-        {
-            square.number = 0;
-        }
-    }
-    */
-/*
-    public void RevealTile(SquareFloor square)
-    {
-        square.squareRevealed = true;
 
-        if (square.hasRoom)
-        {
-            currentRoom = square.room;
-            square.StartDoorAnimation(grid.transform);
-            _squareFloor = square;
-            //square.room.RoomFunction();
-        }
-        
-        if (square.hasNeighbourRoom) return;
+    public Room GetAndCreateCurrentDangerRoom()
+    {
+        //TODO Probs should be something like a empty method here, but this will do for now
+        if(RunPlayerStats.Instance.RoomCountCleared > _dangerRooms.Count-1) return AddBasicRoom().Last();
+        return _dangerRooms[RunPlayerStats.Instance.RoomCountCleared] == 0 ? AddBasicRoom().Last() : AddEliteRoom().Last();
+    }
 
-        for (int i = -1; i <= 1; i++)
-        {
-            for (int j = -1; j <= 1; j++)
-            {
-                if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
-                    square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                SquareFloor selectedSquare =
-                    grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
-                if (!selectedSquare.squareRevealed && !selectedSquare.hasFlag) RevealTile(selectedSquare);
-            }
-        }
-    }
-    
-    public void RevealTilesFirstMove(SquareFloor square)
+    public void RoomExited(Room room)
     {
-        square.squareRevealed = true; 
-        
-        if(square.hasRoom) square.room.RoomFunction();
-        
-        for (int i = -1; i <= 1; i++)
-        {
-            for (int j = -1; j <= 1; j++)
-            {
-                if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
-                    square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                SquareFloor selectedSquare =
-                    grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))];
-                if (!selectedSquare.squareRevealed && !selectedSquare.hasFlag) RevealTile(selectedSquare);
-            }
-        }
-        
+        AddRoomToSelection(room);
     }
-    */
-/*
-    int GetPostion(Vector2 pos)
-    {
-        int value = (int)(pos.y) + (int)(pos.x) * (grid.squaresYSize);
-        return value;
-    }
-    */
-/*
-    bool IsNeighbour(Vector2 selectionPos, Vector2 comparePos)
-    {
-        return (selectionPos.x <= comparePos.x + 1 &&
-                selectionPos.x >= comparePos.x - 1 &&
-                selectionPos.y <= comparePos.y + 1 &&
-                selectionPos.y >= comparePos.y - 1);
-    }
-*/
-    public void CheckTiles(List<Vector2> tiles)
-    {
-        /*
-        foreach (Square square in tiles.Select(squarePos => grid.squares[GetPostion(squarePos)]))
-        {
-            if (square.hasNeighbourMine) return;
 
-            for (int i = -1; i <= 1; i++)
-            {
-                for (int j = -1; j <= 1; j++)
-                {
-                    if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
-                        square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                    if (!grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]
-                            .squareRevealed &&
-                        !grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))].hasFlag)
-                        RevealTile(grid.squares[GetPostion(new Vector2(square.position.x + i, square.position.y + j))]);
-                }
-            }
-        }
-        */
-    }
-/*
-    public void AfterActionFunction()
+    public void AddRoomToSelection(string roomType)
     {
-        ResetNumbers();
-        SetNumbers();
-        List<SquareFloor> revealedSquares = grid.squares.Where(x => x.squareRevealed).ToList();
-        foreach (var square in revealedSquares.Where(x => !x.hasNeighbourRoom))
+        switch (roomType)
         {
-            RevealTile(square);
+            case "RoomShop":
+                FloorButtonShopRoomSet(floorRoomButtons[1], currentShopAmount<=0);
+                currentShopAmount--;
+            break;
+            case not "RoomShop":
+                FloorButtonDangerRoomSet(floorRoomButtons[0], currentRoomAmount+currentEliteAmount<=0);
+                currentEliteAmount--;
+            break;
         }
     }
-    */
+
+    public void AddRoomToSelection(Room room)
+    {
+        switch (room)
+        {
+            case RoomShop:
+                FloorButtonShopRoomSet(floorRoomButtons[1], currentShopAmount<=0);
+                currentShopAmount--;
+            break;
+            case not RoomShop:
+                FloorButtonDangerRoomSet(floorRoomButtons[0], currentRoomAmount+currentEliteAmount<=0);
+                currentEliteAmount--;
+            break;
+        }
+    }
+
+    public void FloorButtonDangerRoomSet(FloorRoomButton floorRoomButton, bool Condition = false)
+    {
+        floorRoomButton.room = GetAndCreateCurrentDangerRoom();
+        floorRoomButton.SetVisual(Condition);
+    }
+
+    public void FloorButtonShopRoomSet(FloorRoomButton floorRoomButton, bool Condition = false)
+    {
+        //TODO should add instead a psuedo room here if it is too much rather than the otherway around
+        floorRoomButton.room = AddShopRoom().Last();
+        floorRoomButton.SetVisual(Condition);
+    }
+
     public void ResetBoard()
     {
-        
         foreach (var room in _rooms)
         {
             Destroy(room.gameObject);
         }
         _rooms.Clear();
+        _dangerRooms.Clear();
+
+        currentRoomAmount = RunPlayerStats.Instance.RoomCount;
+        currentShopAmount = RunPlayerStats.Instance.ShopCount;
+        currentEliteAmount = RunPlayerStats.Instance.EliteRoomCount;
+        SetDangerRoomsOrder();
+
+        AddRoomToSelection("RoomMine");
+        AddRoomToSelection("RoomShop");
+
         bossRoom.squareRevealed = false;
         bossRoom.SetRevealed(false);
         bossRoom.SetActive(false);
@@ -291,7 +216,6 @@ public class FloorManager : MonoBehaviour
         
         RunPlayerStats.Instance.SetBossModification();
 
-        SetRooms();
     }
 
     public void DisableFloor(bool state)
@@ -303,24 +227,5 @@ public class FloorManager : MonoBehaviour
         floorRoomButtons[0].transform.parent.gameObject.SetActive(state);
     }
 
-    /*
-    public void OnApplicationQuit()
-    {
-        RunPlayerStats.Instance.ResetValues();
-    }
-    */
-
-    private SquareFloor _squareFloor;
     public BossRoomSquare _bossRoomSquare;
-
-    public List<FloorRoomButton> FloorRoomButtons { get => floorRoomButtons; set => floorRoomButtons = value; }
-
-    /*
-    public void DoorAnimationClose()
-    {
-        if(currentRoom is RoomBossMine) _bossRoomSquare.CloseDoorAnimation(_bossRoomSquare.transform);
-        else _squareFloor.CloseDoorAnimation(grid.transform);
-    }
-    */
-
 }

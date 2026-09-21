@@ -14,11 +14,9 @@ public class Sensor : EffectAbility
     {
         if (!squareMine.hasMine)
         {
-            MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
-            if (!mineRoomManager.AfterFirstMove) mineRoomManager.SetLogic(squareMine);
-            else mineRoomManager.RevealTile(squareMine);
+            squareMine.Interact();
         }
-        else squareMine.mine.isDisabled = true;
+        else squareMine.SetDisabled(true);
     }
 
     public override string Name => "Sensor";

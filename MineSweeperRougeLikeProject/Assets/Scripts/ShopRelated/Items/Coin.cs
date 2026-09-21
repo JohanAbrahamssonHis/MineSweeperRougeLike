@@ -6,7 +6,7 @@ public class Coin : Item
 {
     public override void Function()
     {
-        RunPlayerStats.Instance.FloorManager.AddShopRoom(1);
+        RunPlayerStats.Instance.ShopCount++;
     }
 
     public override void Join()

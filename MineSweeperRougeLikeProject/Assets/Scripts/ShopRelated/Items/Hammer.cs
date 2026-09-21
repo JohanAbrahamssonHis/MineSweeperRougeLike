@@ -11,14 +11,13 @@ public class Hammer : Item
     {
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         
-        List<Mine> mines = mineRoomManager._mines.Where(x => !x.isDisabled && !x.isActivated).ToList();
-        
+        List<SquareMine> mines = mineRoomManager.grid.squares.Where(x => x.hasMine).Where(y => !y.mine.isDisabled && !y.mine.isActivated).ToList();
         
         for (int i = 0; i < _totalAmountOfDisable; i++)
         {
             if (mines.Count == 0) break;
             int number = Random.Range(0, mines.Count());
-            mines[number].isDisabled = true;
+            mines[number].SetDisabled(true);
             mines.RemoveAt(number);
         }
     }
@@ -35,6 +34,6 @@ public class Hammer : Item
     }
 
     public override string Name => "Hammer";
-    public override string Description => "After taking damage, disable 3 random mines";
+    public override string Description => $"After taking damage, disable {_totalAmountOfDisable} random mines";
     public override string Rarity => "UnCommon";
 }

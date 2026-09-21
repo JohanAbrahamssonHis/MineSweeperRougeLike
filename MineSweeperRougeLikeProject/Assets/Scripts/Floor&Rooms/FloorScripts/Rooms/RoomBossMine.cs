@@ -36,10 +36,10 @@ public class RoomBossMine : Room
 
     public override void LeaveRoomFunction()
     {
-        base.LeaveRoomFunction();
         
         SceneDeterminer.LoadAddedScene("MalwarePicker");
         
+        base.LeaveRoomFunction();
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
         rPS.EndRoomSet();
