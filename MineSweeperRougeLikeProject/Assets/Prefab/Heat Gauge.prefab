@@ -488,10 +488,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c252a4a41aee8e644b099af19505270f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPlacementSetting: 6
+  currentPlacementSetting: 0
   currentValueSetting: 0
-  xDisplacement: 5
-  yDisplacement: 2
+  xDisplacement: -5
+  yDisplacement: -2
 --- !u!1 &6074278856715683605
 GameObject:
   m_ObjectHideFlags: 0

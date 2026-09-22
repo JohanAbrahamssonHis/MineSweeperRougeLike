@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class FloorRoomButton : MonoBehaviour, IInteractable
+public class FloorRoomButton : MonoBehaviour, IInteractable, ITextable
 {
     public Room room;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject lockObject;
     private bool isLocked;
+
 
     public void Interact()
     {
@@ -39,4 +41,8 @@ public class FloorRoomButton : MonoBehaviour, IInteractable
         
         room.RoomFunction();
     }
+
+    public string Name => room.Name;
+
+    public string Description => room.Description;
 }

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class RoomMine : Room
 {
+    public override string Name => "Mine Room";
+    public override string Description => "A game of Minesweeper, gives money, time and one unlock";
+
     public override void SetUpRoom(FloorManager floorManager)
     {
         base.SetUpRoom(floorManager);

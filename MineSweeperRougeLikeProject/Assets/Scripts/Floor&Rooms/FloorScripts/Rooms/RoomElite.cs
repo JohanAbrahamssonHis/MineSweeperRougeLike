@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class RoomElite : Room
 {
+    public override string Name => "Elite Mine Room";
+    public override string Description => "A game of Minesweeper with the timmer on, gives money, time and one unlock";
+
     public override void SetUpRoom(FloorManager floorManager)
     {
         base.SetUpRoom(floorManager);

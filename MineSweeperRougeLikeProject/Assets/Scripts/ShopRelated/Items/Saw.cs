@@ -8,19 +8,23 @@ public class Saw : Item
 
     public void ShopFunction(ShopManager shopManager)
     {
-        shopManager.ShopItems.ForEach(x => x.Cost/=2);
+        Function();
     }
 
     public override void Function()
     {
-        throw new NotImplementedException();
+        RunPlayerStats.Instance.ShopManager.ShopItems.ForEach(x => x.Cost/=2);
+    }
+
+    public override void Bought()
+    {
+        base.Bought();
+        Function();
     }
 
     public override void Join()
     {
         ActionEvents.Instance.OnShopAfter += ShopFunction;
-        //TODO: add shop cost immediately
-        //ShopFunction();
     }
 
     public override void Unsubscribe()
@@ -30,6 +34,6 @@ public class Saw : Item
     }
 
     public override string Name => "Saw";
-    public override string Description => "Future prices in shops are halved";
+    public override string Description => "Prices in shops are halved";
     public override string Rarity => "Rare";
 }

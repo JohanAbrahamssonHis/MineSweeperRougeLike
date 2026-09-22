@@ -47,8 +47,11 @@ public class ShopItem : MonoBehaviour, IInteractable, ITextable
         _spriteRenderer.color = Color.gray;
         
         Item.Join();
+        Item.Bought();
         
         RunPlayerStats.Instance.AddItemToInventory(Item);
+
+        ActionEvents.Instance.TriggerEventShopBought();
     }
 
     public void SecondInteract()

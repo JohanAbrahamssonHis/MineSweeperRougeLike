@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RoomShop : Room
 {
+
+    public override string Name => "Shop Room";
+    public override string Description => "Use money to buy items that help your run";
+
     public override void SetUpRoom(FloorManager floorManager)
     {
         base.SetUpRoom(floorManager);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public abstract class Room : MonoBehaviour
+public abstract class Room : MonoBehaviour, ITextable
 {
     public Sprite sprite;
     public Vector2 position;
@@ -44,4 +44,7 @@ public abstract class Room : MonoBehaviour
         //LeavingRoomFunction
         floorManager.RoomExited(this);
     }
+
+    public abstract string Name { get; }
+    public abstract string Description { get; }
 }

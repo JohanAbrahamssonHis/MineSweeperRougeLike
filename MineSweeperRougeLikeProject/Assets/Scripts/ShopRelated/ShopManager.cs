@@ -13,6 +13,8 @@ public class ShopManager : MonoBehaviour
     private int HighestRarity;
     void Start()
     {
+        RunPlayerStats.Instance.ShopManager = this;
+
         ActionEvents.Instance.TriggerEventShop(this);
         BannedItemList = new List<Item>();
         
@@ -29,6 +31,7 @@ public class ShopManager : MonoBehaviour
 
     private Item GetShopItem()
     {
+        if(BannedItemList.Count >= ItemList.Count) BannedItemList.Clear();
         List<Item> rarityItems = GetRarityValue();
         
         while (rarityItems.Count == 0) rarityItems = GetRarityValue();

@@ -9,6 +9,7 @@ public abstract class Item : ScriptableObject, ITextable
     public int rarity;
     public abstract void Function();
     public abstract void Join();
+    public virtual void Bought() {}
 
     public virtual void Unsubscribe(){}
     public abstract string Name { get; }

@@ -198,6 +198,7 @@ public class RunPlayerStats : ScriptableObject
     public Vector2 GridSize { get; set; }
     public MineRoomManager MineRoomManager { get; set; }
     public FloorManager FloorManager { get; set; }
+    public ShopManager ShopManager { get; set; }
     public MineViusalizer mineVisualizer { get; set; }
     public SMine FlagMineSelected { get; set; }
     public BossModification BossModification { get; set; }

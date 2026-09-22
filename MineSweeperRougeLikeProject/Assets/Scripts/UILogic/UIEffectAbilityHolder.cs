@@ -10,6 +10,7 @@ public class UIEffectAbilityHolder : MonoBehaviour, IInteractable, ITextable
     private GameObject _decalHolder;
     private SpriteRenderer _spriteRendererCount;
     private EffectAbility _effectAbility;
+    
     void Start()
     {
         _effectAbility = RunPlayerStats.Instance.currentEffectAbility;
@@ -19,21 +20,21 @@ public class UIEffectAbilityHolder : MonoBehaviour, IInteractable, ITextable
         _spriteRendererFlagContainer = _decalHolder.transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
-    private void Update()
+    public void Interact()
     {
-        //TODO: Fix this, it should not be updated every frame, but only when the effect ability changes
-        _spriteRenderer.sprite = _effectAbility.sprite;
+        _effectAbility = RunPlayerStats.Instance.GetNextEffectAbility();
+        RunPlayerStats.Instance.currentEffectAbility = _effectAbility;
+        TextVisualSingleton.Instance.textVisualObject.SetObject(gameObject,_effectAbility);
+
+    }
+
+    public void SetEffectVisual()
+    {
+         _spriteRenderer.sprite = _effectAbility.sprite;
         _spriteRendererCount.gameObject.SetActive(!_effectAbility.isInfinite);
         _spriteRendererCount.sprite = NumberSprites.Instance.GetNumberedSprite(_effectAbility.count);
         _decalHolder.SetActive(_effectAbility is Flag);
         _spriteRendererFlagContainer.sprite = RunPlayerStats.Instance.FlagMineSelected == null ? null : RunPlayerStats.Instance.FlagMineSelected.sprite;
-    }
-
-    public void Interact()
-    {
-        _effectAbility =  RunPlayerStats.Instance.GetNextEffectAbility();
-        RunPlayerStats.Instance.currentEffectAbility = _effectAbility;
-        TextVisualSingleton.Instance.textVisualObject.SetObject(gameObject,_effectAbility);
     }
 
     public string Name => _effectAbility.Name;

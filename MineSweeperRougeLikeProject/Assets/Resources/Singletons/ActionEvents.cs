@@ -58,6 +58,11 @@ public class ActionEvents : ScriptableObject
     //After shop is entered
     public event ActionEventShop OnShopAfter;
     public void TriggerEventShopAfter(ShopManager shopManager) => OnShopAfter?.Invoke(shopManager);
+
+    //After Item is bought
+    public event ActionEvent OnShopBought;
+    public void TriggerEventShopBought() => OnShopBought?.Invoke();
+
     
     //Leaving Shop
     public event ActionEventShop OnShopLeave;

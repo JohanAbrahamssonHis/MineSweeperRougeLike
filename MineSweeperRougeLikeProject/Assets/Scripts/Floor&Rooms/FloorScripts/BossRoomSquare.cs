@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BossRoomSquare : MonoBehaviour, IInteractable
+public class BossRoomSquare : MonoBehaviour, IInteractable, ITextable
 {
     private GameObject containter;
     public bool squareRevealed;
@@ -297,6 +297,11 @@ public class BossRoomSquare : MonoBehaviour, IInteractable
     }
 
     private GameObject gameObjectBackground;
+
+    public string Name => room.Name;
+
+    public string Description => room.Description;
+
     public void SpawnBackground()
     {
         GameObject gameObjectBackgroundSelect = new GameObject

@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class RoomBossMine : Room
 {
+    public override string Name => "Boss Room";
+    public override string Description => "A game of Minesweeper with a boss modifier, completes the floor";
+
     public BossRoomSquare bossRoomSquare;
 
     public void OnEnable()
