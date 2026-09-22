@@ -21,7 +21,6 @@ public class CameraSet : MonoBehaviour
 
         // Sätt och bevara
         stats.Camera = camera != null ? camera : GetComponentInChildren<Camera>();
-        DontDestroyOnLoad(gameObject);
     }
 
     // Bra att nollställa när detta objekt försvinner

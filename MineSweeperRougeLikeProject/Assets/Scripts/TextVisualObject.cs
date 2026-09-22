@@ -31,9 +31,14 @@ public class TextVisualObject : MonoBehaviour
         _boxCollider2D.offset = new Vector2(-HiderForm.rect.x, HiderForm.rect.y);
         _boxCollider2D.size = new Vector2(HiderForm.rect.width, HiderForm.rect.height);
         */
+
+        if(TextVisualSingleton.Instance.textVisualObject != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         TextVisualSingleton.Instance.textVisualObject = this;
         HiderContainer.SetActive(false);
-        DontDestroyOnLoad(baseParent);
     }
 
     public void SetObject(GameObject gameObjectSet, ITextable textable)

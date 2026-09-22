@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb2f315fcd865cb44be3f1a96f03c245, type: 3}
+  m_Name: StartData
+  m_EditorClassIdentifier: 
+  MainComponents: {fileID: 6884337327436317278, guid: bf599e754f082e245a0d0ba9408f8925, type: 3}
+  HealthDamageModifier: 0
+  HealthDamageMultModifier: 1
+  Health: 5
+  Time: 240
+  TimeMult: 1
+  TimeGain: 15
+  Money: 5
+  MoneyGain: 1
+  Heat: 0
+  HeatGain: 0.15
+  Points: 0
+  PointsGain: 10
+  FloorCount: 1
+  RoomCountCleared: 0
+  EliteRoomCount: 1
+  RoomCount: 2
+  ShopCount: 2
+  RoomLock: 2
+  GridSize: {x: 6, y: 6}
+  ActiveTimer: 0
+  FlagMineSelected: {fileID: 0}
+  MalwarePackages:
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  - {fileID: 11400000, guid: 5009eea5fdf914e45886875916434c8b, type: 2}
+  MineRoomManager: {fileID: 0}
+  FloorManager: {fileID: 0}
+  Inventory: []
+  BossModification: {fileID: 0}
+  BannedBossModifications: []
+  startEffectAbilities:
+  - {fileID: 11400000, guid: 4860ec8dd1a6f4b41aaea418a48590d4, type: 2}
+  - {fileID: 11400000, guid: aedeb8bb12f0f994490c45aac9bfd49d, type: 2}
+  mineVisualizer: {fileID: 0}

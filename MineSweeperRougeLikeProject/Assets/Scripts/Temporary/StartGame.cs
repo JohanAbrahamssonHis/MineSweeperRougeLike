@@ -9,7 +9,12 @@ public class StartGame : MonoBehaviour, IInteractable
     public void Interact()
     {
         RunPlayerStats.Instance.ResetValues();
-        StartPackages.ForEach(x => RunPlayerStats.Instance.AddMalwarePackage(x));
+        //StartPackages.ForEach(x => RunPlayerStats.Instance.AddMalwarePackage(x));
         SceneManager.LoadScene("FloorScene");
+    }
+
+    public void OnEnable()
+    {
+        StartData.Instance.StartObjects(RunPlayerStats.Instance);
     }
 }

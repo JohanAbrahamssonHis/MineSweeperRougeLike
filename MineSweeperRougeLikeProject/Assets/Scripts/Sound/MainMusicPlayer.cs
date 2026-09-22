@@ -17,9 +17,6 @@ public class MainMusicPlayer : MonoBehaviour
             return;
         }
         
-        
-        DontDestroyOnLoad(gameObject);
-        
         /*
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = backgroundMusic;

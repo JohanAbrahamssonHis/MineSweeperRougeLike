@@ -23,6 +23,7 @@ public class RunPlayerStats : ScriptableObject
     }
 
     private StartData startData;
+    public MainComponents mainComponents;
 
     #region Health
     
@@ -216,7 +217,6 @@ public class RunPlayerStats : ScriptableObject
         if (Instance != null) Instance._camera = null;
     }
 
-    public List<EffectAbility> startEffectAbilities;
     public List<EffectAbility> effectAbilities;
     public EffectAbility currentEffectAbility;
 
@@ -343,21 +343,12 @@ public class RunPlayerStats : ScriptableObject
         setUpState = true;
         startData = StartData.Instance;
         startData.StartValues(this);
-
-        SetEffectAbilities();
         setUpState = false;
     }
 
     private void ResetBannedBosses()
     {
         BannedBossModifications.Clear();
-    }
-
-    private void SetEffectAbilities()
-    {
-        effectAbilities.Clear();
-        startEffectAbilities.ForEach(x => effectAbilities.Add(Instantiate(x)));
-        currentEffectAbility = effectAbilities.First();
     }
 
     #endregion
