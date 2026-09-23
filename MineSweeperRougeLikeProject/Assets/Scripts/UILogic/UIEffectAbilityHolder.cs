@@ -18,6 +18,8 @@ public class UIEffectAbilityHolder : MonoBehaviour, IInteractable, ITextable
         _spriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
         _spriteRendererCount = transform.GetChild(1).transform.GetChild(1).GetComponent<SpriteRenderer>();
         _spriteRendererFlagContainer = _decalHolder.transform.GetChild(1).GetComponent<SpriteRenderer>();
+
+        SetEffectVisual();
     }
 
     public void Interact()
@@ -26,11 +28,12 @@ public class UIEffectAbilityHolder : MonoBehaviour, IInteractable, ITextable
         RunPlayerStats.Instance.currentEffectAbility = _effectAbility;
         TextVisualSingleton.Instance.textVisualObject.SetObject(gameObject,_effectAbility);
 
+        SetEffectVisual();
     }
 
     public void SetEffectVisual()
     {
-         _spriteRenderer.sprite = _effectAbility.sprite;
+        _spriteRenderer.sprite = _effectAbility.sprite;
         _spriteRendererCount.gameObject.SetActive(!_effectAbility.isInfinite);
         _spriteRendererCount.sprite = NumberSprites.Instance.GetNumberedSprite(_effectAbility.count);
         _decalHolder.SetActive(_effectAbility is Flag);

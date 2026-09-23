@@ -8,12 +8,13 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     public List<ShopItem> ShopItems;
-    public List<Item> ItemList;
+    private List<Item> ItemList;
     private List<Item> BannedItemList;
     private int HighestRarity;
     void Start()
     {
         RunPlayerStats.Instance.ShopManager = this;
+        ItemList = ItemLibrary.Instance.Items;
 
         ActionEvents.Instance.TriggerEventShop(this);
         BannedItemList = new List<Item>();

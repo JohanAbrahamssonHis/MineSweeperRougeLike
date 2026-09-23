@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(menuName = "Singletons/BossModificationLibrary", fileName = "BossModificationLibrary")]
+[CreateAssetMenu(menuName = "Singletons/Library/BossModificationLibrary", fileName = "BossModificationLibrary")]
 public class BossModificationLibrary : ScriptableObject
 {
     private static BossModificationLibrary _instance;
