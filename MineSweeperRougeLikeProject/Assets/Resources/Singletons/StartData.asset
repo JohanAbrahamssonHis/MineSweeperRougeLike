@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: StartData
   m_EditorClassIdentifier: 
   MainComponents: {fileID: 6884337327436317278, guid: bf599e754f082e245a0d0ba9408f8925, type: 3}
+  removeTimeValues: 0
   HealthDamageModifier: 0
   HealthDamageMultModifier: 1
   Health: 5

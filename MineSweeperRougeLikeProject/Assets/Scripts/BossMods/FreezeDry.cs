@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "BossMod/Freeze Dry", fileName = "Freeze Dry")]
-public class FreezeDry : BossModification
+public class FreezeDry : BossModification, ITimeObject
 {
     public float timeMultiplierBase = 2;
     private float _timeMultiplier;

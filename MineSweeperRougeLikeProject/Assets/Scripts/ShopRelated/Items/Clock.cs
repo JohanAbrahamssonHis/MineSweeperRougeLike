@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Clock", fileName = "Clock")]
-public class Clock : Item
+public class Clock : Item, ITimeObject
 {
     public override void Function()
     {

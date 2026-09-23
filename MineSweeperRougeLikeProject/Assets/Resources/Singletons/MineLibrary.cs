@@ -18,7 +18,13 @@ public class MineLibrary : ScriptableObject
         }
     }
 
-    public List<SMine> SMines;
+    [SerializeField] private List<SMine> _baseSetSMines;
+
+    public List<SMine> SMines { private set; get; }
+
+    public void ConnectLibrary() => SMines = new(_baseSetSMines);
+
+    public void SetListDependancy(List<SMine> SMines) => this.SMines = SMines;
 
     public SMine GetRandomSMine()
     {
@@ -31,6 +37,7 @@ public class MineLibrary : ScriptableObject
         int randomIndex = UnityEngine.Random.Range(0, SMines.Count);
         return SMines[randomIndex];
     }
+
 
     public bool UseSetSMine = false;
     public SMine SetSMine;

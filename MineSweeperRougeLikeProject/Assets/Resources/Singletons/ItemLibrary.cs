@@ -16,7 +16,13 @@ public class ItemLibrary : ScriptableObject
         }
     }
 
-    public List<Item> Items;
+       [SerializeField] private List<Item> _baseSetItems;
+
+    public List<Item> Items { private set; get; }
+
+    public void ConnectLibrary() => Items = new(_baseSetItems);
+
+    public void SetListDependancy(List<Item> Items) => this.Items = Items;
 
     public Item GetRandomItem()
     {

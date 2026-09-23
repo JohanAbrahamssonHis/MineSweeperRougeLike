@@ -24,6 +24,7 @@ public class RunPlayerStats : ScriptableObject
 
     private StartData startData;
     public MainComponents mainComponents;
+    public bool removeTimeValues;
 
     #region Health
     
@@ -230,7 +231,7 @@ public class RunPlayerStats : ScriptableObject
 
     public void SetBossModification()
     {
-        if (BannedBossModifications.Count == BossModificationLibrary.Instance.bossModifications.Count)
+        if (BannedBossModifications.Count == BossModificationLibrary.Instance.BossModifications.Count)
             ResetBannedBosses();
         
 
@@ -243,7 +244,7 @@ public class RunPlayerStats : ScriptableObject
         }
 
 
-        List<BossModification> bossModifications = BossModificationLibrary.Instance.bossModifications.Where(x =>
+        List<BossModification> bossModifications = BossModificationLibrary.Instance.BossModifications.Where(x =>
             !BannedBossModifications.Contains(x.name)).ToList();
         
         BossModification = Instantiate(bossModifications[Random.Range(0,bossModifications.Count)]);

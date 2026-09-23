@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(menuName = "BossMod/Aged like Milk", fileName = "Aged like Milk")]
-public class AgedLikeMilk : BossModification
+public class AgedLikeMilk : BossModification, ITimeObject
 {
     public float  timeDamageLoss = 60;
     

@@ -11,12 +11,19 @@ public class StartData : ScriptableObject
     [Header("SetUpBasics")]
     [SerializeField] private GameObject MainComponents = null;
     #endregion
+    #region Settings
+    [Header("Settings")]
+    //TODO make this private and create a settings holder
+    [SerializeField] public bool removeTimeValues;
+    #endregion
+
 
     #region Health
     [Header("Health")]
     [SerializeField] private  int HealthDamageModifier = 0;
     [SerializeField] private  int HealthDamageMultModifier = 1;
-    [SerializeField] private  int Health = 5;
+    //TODO Make this private
+    [SerializeField] public  int Health = 5;
     #endregion
 
     #region Time
@@ -121,7 +128,16 @@ public class StartData : ScriptableObject
         rPS.BossModification = BossModification;
         rPS.BannedBossModifications = new(BannedBossModifications);
         rPS.mineVisualizer = mineVisualizer;
+        rPS.removeTimeValues = removeTimeValues;
+
         SetEffectAbilities(rPS);
+
+        MineLibrary.Instance.ConnectLibrary();
+        ItemLibrary.Instance.ConnectLibrary();
+        MalwareLibrary.Instance.ConnectLibrary();
+        BossModificationLibrary.Instance.ConnectLibrary();
+
+        if(removeTimeValues) RemoveTimeObjects();
     }
 
     private void SetEffectAbilities(RunPlayerStats rPS)
@@ -129,6 +145,17 @@ public class StartData : ScriptableObject
         rPS.effectAbilities.Clear();
         startEffectAbilities.ForEach(x => rPS.effectAbilities.Add(Instantiate(x)));
         rPS.currentEffectAbility = rPS.effectAbilities.First();
+    }
+
+    private void RemoveTimeObjects()
+    {
+        MineLibrary.Instance.SetListDependancy(MineLibrary.Instance.SMines.Where(x => x is not ITimeObject).ToList());
+        ItemLibrary.Instance.SetListDependancy(ItemLibrary.Instance.Items.Where(x => x is not ITimeObject).ToList());
+        MalwareLibrary.Instance.SetListDependancy(MalwareLibrary.Instance.MalwarePackages.Where(x => x is not ITimeObject).ToList());
+        BossModificationLibrary.Instance.SetListDependancy(BossModificationLibrary.Instance.BossModifications.Where(x => x is not ITimeObject).ToList());
+        
+        //Is running local, to not make null references
+        //RunPlayerStats.Instance.Timmer.TurnOff();
     }
 
     public void StartObjects(RunPlayerStats rPS)

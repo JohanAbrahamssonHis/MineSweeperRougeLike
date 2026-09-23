@@ -17,12 +17,18 @@ public class Timmer : MonoBehaviour
     private AudioSource _audioSource;
     [SerializeField] private float beepLastTime;
     [SerializeField] private float beepInBetweenTimeBase;
+    private bool isTurnedOff;
+
     void Awake()
     {
         time = RunPlayerStats.Instance.Time;
         beepLastTime = time;
         
         RunPlayerStats.Instance.Timmer = this;
+        if(RunPlayerStats.Instance.removeTimeValues)
+        {
+            TurnOff();
+        }
 
         _audioSource = transform.GetChild(1).GetComponent<AudioSource>();
         
@@ -49,7 +55,7 @@ public class Timmer : MonoBehaviour
 
     private void Update()
     {
-        if(!RunPlayerStats.Instance.ActiveTimer) return;
+        if(!RunPlayerStats.Instance.ActiveTimer || isTurnedOff) return;
         spriteRenderer.sprite = RunPlayerStats.Instance.ActiveTimer ? spriteActive : sprite;
         
         RunPlayerStats.Instance.Time -= Time.deltaTime*RunPlayerStats.Instance.TimeMult;
@@ -71,6 +77,12 @@ public class Timmer : MonoBehaviour
         int seconds = (int)(time-(minutes*60));
         textMinutes.text = $"{minutes:0#}";
         textSeconds.text = $"{seconds:0#}";
+    }
+
+    public void TurnOff()
+    {
+        isTurnedOff = true;
+        gameObject.SetActive(false);
     }
 
     public void FixBeepTimmer()

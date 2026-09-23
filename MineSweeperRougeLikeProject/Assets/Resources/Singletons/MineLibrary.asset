@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc888125ec13f84ab2644862e6be440, type: 3}
   m_Name: MineLibrary
   m_EditorClassIdentifier: 
-  SMines:
-  - {fileID: 11400000, guid: c2ef8d07819f0774fac524408c0c554e, type: 2}
-  - {fileID: 11400000, guid: d9fd9b402a4997040877a1c2180d4433, type: 2}
-  - {fileID: 11400000, guid: 7b31dd2589c860b448c860561384bf9c, type: 2}
+  _baseSetSMines:
   - {fileID: 11400000, guid: cd6095b10f6b024439f07d807d68711b, type: 2}
   - {fileID: 11400000, guid: ffff7c4f02dd18543966a4901693ed2a, type: 2}
+  - {fileID: 11400000, guid: d9fd9b402a4997040877a1c2180d4433, type: 2}
   - {fileID: 11400000, guid: cd63eb2575f2fa245bfde7160d3d22a8, type: 2}
   - {fileID: 11400000, guid: 5463cd53d9e48f345a905685344c0a82, type: 2}
   - {fileID: 11400000, guid: cf7eb8d4c5660334eb06fd1d74e8f5ad, type: 2}
+  - {fileID: 11400000, guid: c2ef8d07819f0774fac524408c0c554e, type: 2}
   - {fileID: 11400000, guid: 0b9e783ee851ac84b841bbb3745f824b, type: 2}
+  - {fileID: 11400000, guid: 7b31dd2589c860b448c860561384bf9c, type: 2}
   UseSetSMine: 0
   SetSMine: {fileID: 0}
