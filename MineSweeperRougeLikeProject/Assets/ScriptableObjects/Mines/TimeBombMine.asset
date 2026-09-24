@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8fe6c657917134c8e22d4591bce3ad, type: 3}
-  m_Name: Plier
+  m_Script: {fileID: 11500000, guid: f200d2b3a20cb1d4881fc8eef908d354, type: 3}
+  m_Name: TimeBombMine
   m_EditorClassIdentifier: 
-  cost: 5
-  sprite: {fileID: -350242663, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
-  rarity: 1
+  weight: 1
+  sprite: {fileID: 1532839819, guid: 0c75f1b24b902884a9ad80801728527a, type: 3}
+  damage: 1
+  isConstant: 0

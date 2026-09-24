@@ -50,6 +50,10 @@ public class ActionEvents : ScriptableObject
     //When You take Damage
     public event ActionEvent OnDamage;
     public void TriggerEventDamage() => OnDamage?.Invoke();
+
+    //When You gain Health
+    public event ActionEvent OnHealthGain;
+    public void TriggerEventHealthGain() => OnHealthGain?.Invoke();
     
     //When shop is entered
     public event ActionEventShop OnShop;

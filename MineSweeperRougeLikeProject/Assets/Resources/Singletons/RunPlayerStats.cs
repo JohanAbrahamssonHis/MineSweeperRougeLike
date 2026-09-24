@@ -44,11 +44,17 @@ public class RunPlayerStats : ScriptableObject
         get => _health;
         set
         {
+            //If invincable, then ignore all health triggers
             if(isInvincable) return;
+            //check if the health is gained or lost and trigger values accordingly, this has to be check due to checks are just flat values of what the health will become rather then the modifictaion number
             var healthDelta = value < _health ? HealthDamage(value-_health) : HealthGain(value-_health);
+            //Health triggers will happen but no health will change
             if(isUnDamageable) return;
+            //Make health change
             _health += healthDelta;
+            //Update Health bar
             if(HealthBar!=null) HealthBar.HealthChanged(_health);
+            //If you have hit a lose condition
             if (_health < 1) Lose();
         }
     }
@@ -62,6 +68,7 @@ public class RunPlayerStats : ScriptableObject
 
     private int HealthGain(int change)
     {
+        ActionEvents.Instance.TriggerEventHealthGain();
         return change;
     }
 
@@ -157,7 +164,7 @@ public class RunPlayerStats : ScriptableObject
             }
 
             // Add stats for the new floor. Each new floor gives the player 1 health and 60 seconds of time.
-            Health += 1;
+            Health++;
             Time += 60;
         }
     }
@@ -276,6 +283,7 @@ public class RunPlayerStats : ScriptableObject
         Inventory.ForEach(x => x.Unsubscribe());
         effectAbilities.ForEach(x => x.ResetAbility());
         ResetBoss();
+        mainComponents.DestroyGlobalObjects();
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);
         SoundManager.Instance.Play("GameOver", null, true, 3f);
         SoundManager.Instance.Play("GameOverVoice", null, true, 3f);
@@ -360,7 +368,9 @@ public class RunPlayerStats : ScriptableObject
 
     public void AddMalwarePackage(MalwarePackage malwarePackage)
     {
-        MalwarePackages.Add(Instantiate(malwarePackage));
+        MalwarePackage malwarePackageInst = Instantiate(malwarePackage);
+        MalwarePackages.Add(malwarePackageInst);
+        malwarePackageInst.mines.ForEach(x => x.GlobalMineAction());
         if(mineVisualizer is null) return;
         mineVisualizer.SetVisualizer();
     }

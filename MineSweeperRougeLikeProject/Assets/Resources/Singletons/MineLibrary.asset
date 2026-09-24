@@ -22,5 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c2ef8d07819f0774fac524408c0c554e, type: 2}
   - {fileID: 11400000, guid: 0b9e783ee851ac84b841bbb3745f824b, type: 2}
   - {fileID: 11400000, guid: 7b31dd2589c860b448c860561384bf9c, type: 2}
+  - {fileID: 11400000, guid: 1d14473482dad5540a74d433ce9eed4a, type: 2}
+  - {fileID: 11400000, guid: da95c094b0e6fae4583eeef0b67cd1bc, type: 2}
   UseSetSMine: 0
   SetSMine: {fileID: 0}

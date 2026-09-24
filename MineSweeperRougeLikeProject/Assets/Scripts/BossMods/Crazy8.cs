@@ -20,8 +20,6 @@ public class Crazy8 : BossModification
 
     private void AddNumbers()
     {
-        Debug.Log("Adding numbers");   
-
         foreach (var square in grid.squares)
         {
             square.number += valueIncrease;

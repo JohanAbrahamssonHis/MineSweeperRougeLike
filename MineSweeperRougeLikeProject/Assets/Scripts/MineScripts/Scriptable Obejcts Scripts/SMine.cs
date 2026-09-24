@@ -9,10 +9,28 @@ public abstract class SMine : ScriptableObject, ITextable
     public int weight = 1;
     public Sprite sprite;
     public int damage = 1;
+    public bool isConstant = false;
 
     public abstract Type GetMineType();
 
-    public virtual void SetUpMine() {}
+    public virtual void GlobalMineAction()
+    {
+        if(isConstant)
+        {
+            //CreateMineType
+            GameObject mineInst = new(name);
+            mineInst.transform.parent = RunPlayerStats.Instance.mainComponents.GlobalObjectsHolder.transform;
+            mineInst.AddComponent(GetMineType());
+            Mine tempMine = mineInst.GetComponent<Mine>();
+            tempMine.MineData = this;
+            tempMine.GlobalMineSubscribe();
+            DontDestroyOnLoad(mineInst);
+        }
+    }
+
+    public virtual void SetUpMine(){}
+
+    public virtual void SendDataToMine(Mine mine){}
 
     public virtual List<Vector2> GetNeighbours(Vector2 pos)
     {

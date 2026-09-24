@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MainComponents : MonoBehaviour
 {
+    public GameObject GlobalObjectsHolder;
     // Start is called before the first frame update
     public bool TryActivateComponents()
     {
@@ -19,5 +20,13 @@ public class MainComponents : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);  
         return true;  
+    }
+
+    public void DestroyGlobalObjects()
+    {
+        for (int i = GlobalObjectsHolder.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(GlobalObjectsHolder.transform.GetChild(i).gameObject);
+        }
     }
 }

@@ -120,7 +120,8 @@ public class StartData : ScriptableObject
         rPS.RoomLock = RoomLock;
         rPS.GridSize = GridSize;
         rPS.ActiveTimer = ActiveTimer;
-        rPS.MalwarePackages = new(MalwarePackages);
+        //ADD MALWAREPACKAGE (has been a long bug ongoing darn)
+        rPS.MalwarePackages = new(MalwarePackages.Select(x => Instantiate(x)));
         rPS.MineRoomManager = MineRoomManager;
         rPS.FloorManager = FloorManager;
         rPS.FlagMineSelected = FlagMineSelected;
@@ -129,6 +130,8 @@ public class StartData : ScriptableObject
         rPS.BannedBossModifications = new(BannedBossModifications);
         rPS.mineVisualizer = mineVisualizer;
         rPS.removeTimeValues = removeTimeValues;
+
+        rPS.MalwarePackages.ForEach(x => x.mines.ForEach(y => y.GlobalMineAction()));
 
         SetEffectAbilities(rPS);
 
