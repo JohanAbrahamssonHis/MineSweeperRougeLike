@@ -274,8 +274,8 @@ public class MineRoomManager : MonoBehaviour
 
     public void SetContainters(List<Vector2> pos, Sprite sprite, bool stopAtMines)
     {
-        List<SquareMine> selectedSquare = pos.Where(y => y.x < 0 || y.x > grid.squaresXSize - 1 ||
-                y.y < 0 || y.y > grid.squaresYSize - 1).Select(x => grid.squares[GetPostion(x)]).ToList();
+        List<SquareMine> selectedSquare = pos.Where(posSelected => !(posSelected.x < 0 || posSelected.x > grid.squaresXSize - 1 ||
+                posSelected.y < 0 || posSelected.y > grid.squaresYSize - 1)).Select(x => grid.squares[GetPostion(x)]).ToList();
         
         selectedSquare.Where(i => stopAtMines && !i.hasMine).ToList().ForEach(j => j.SetContainerSprite(sprite));
     }
