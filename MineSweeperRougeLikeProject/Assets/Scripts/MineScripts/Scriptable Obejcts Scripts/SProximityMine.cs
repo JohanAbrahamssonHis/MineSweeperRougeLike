@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "ProximityMine", menuName = "ScriptableObjects/Mine/ProximityMine", order = 10)]
-public class SProximityMine : SMine
+public class SProximityMine : SMine, ITimeObject
 {
     public override string Name => "Proximity Mine";
     public override string Description => "When a neighbour is revealed, this is shown and will explode shortly. Do NOT have your mouse close then";
