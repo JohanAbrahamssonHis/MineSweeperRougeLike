@@ -64,7 +64,7 @@ public class MineRoomManager : MonoBehaviour
             mineInst.AddComponent(mine.GetMineType());
             Mine tempMine = mineInst.GetComponent<Mine>();
             tempMine.MineData = mine;
-            tempMine.AddComponent<SpriteRenderer>();
+            //tempMine.AddComponent<SpriteRenderer>();
             _mines.Add(tempMine);
         }
     }
@@ -166,6 +166,9 @@ public class MineRoomManager : MonoBehaviour
         
         //If this grid has a mine
         square.mine?.Activate();
+
+        //Activate related position based events
+        ActionEvents.Instance.TriggerEventSquareActivate(square.position);
         
         //If this square is neighbouring a mine, it will not do looping function
         if (square.hasNeighbourMine) return;
@@ -215,7 +218,7 @@ public class MineRoomManager : MonoBehaviour
         }
     }
 
-    int GetPostion(Vector2 pos)
+    public int GetPostion(Vector2 pos)
     {
         int value = (int)pos.y + (int)pos.x * grid.squaresYSize;
         return value;
@@ -278,6 +281,11 @@ public class MineRoomManager : MonoBehaviour
                 posSelected.y < 0 || posSelected.y > grid.squaresYSize - 1)).Select(x => grid.squares[GetPostion(x)]).ToList();
         
         selectedSquare.Where(i => stopAtMines && !i.hasMine).ToList().ForEach(j => j.SetContainerSprite(sprite));
+    }
+
+    public void RevealContainer(Vector2 pos)
+    {
+        grid.squares[GetPostion(pos)].RevealContainer();
     }
 
     public void AfterActionFunction()

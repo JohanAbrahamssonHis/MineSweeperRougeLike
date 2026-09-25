@@ -21,6 +21,8 @@ public class ActionEvents : ScriptableObject
     public delegate void ActionEvent();
     
     public delegate void ActionEventShop(ShopManager shopManager);
+
+    public delegate void ActionEventPosition(Vector2 position);
     
     
     //First Action Of the game
@@ -72,4 +74,7 @@ public class ActionEvents : ScriptableObject
     public event ActionEventShop OnShopLeave;
     public void TriggerEventShopLeave(ShopManager shopManager) => OnShopLeave?.Invoke(shopManager);
 
+    //When a Square is activated
+    public event ActionEventPosition OnSquareActivate;
+    public void TriggerEventSquareActivate(Vector2 Position) => OnSquareActivate?.Invoke(Position);
 }

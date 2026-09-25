@@ -141,6 +141,13 @@ public class SquareMine : MonoBehaviour, IInteractable
             _spriteRendererContainer.sortingOrder = disabled ? 1 : -1;
         }
     }
+
+    public void RevealContainer()
+    {
+        SetContainerSprite();
+        _spriteRendererContainer.sortingOrder = 1;
+    
+    }
     #endregion
 
     public void Interact()

@@ -36,7 +36,8 @@ MonoBehaviour:
   ActiveTimer: 0
   FlagMineSelected: {fileID: 0}
   MalwarePackages:
-  - {fileID: 11400000, guid: da63c088583734644bf8261ad504e4cf, type: 2}
+  - {fileID: 11400000, guid: 64b647e1999be514d86155e7583ad25a, type: 2}
+  - {fileID: 11400000, guid: 85f3ef7eef82b1747b08cf3050603548, type: 2}
   MineRoomManager: {fileID: 0}
   FloorManager: {fileID: 0}
   Inventory: []
