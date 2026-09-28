@@ -56,6 +56,10 @@ public class ActionEvents : ScriptableObject
     //When You gain Health
     public event ActionEvent OnHealthGain;
     public void TriggerEventHealthGain() => OnHealthGain?.Invoke();
+
+    //When 1 second of Timer time has passed
+    public event ActionEvent On1SecondTimerPassed;
+    public void TriggerEvent1SecondTimerPassed() => On1SecondTimerPassed?.Invoke();
     
     //When shop is entered
     public event ActionEventShop OnShop;

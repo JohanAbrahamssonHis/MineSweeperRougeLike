@@ -150,11 +150,11 @@ public class StartData : ScriptableObject
         rPS.currentEffectAbility = rPS.effectAbilities.First();
     }
 
-    private void RemoveTimeObjects()
+    public void RemoveTimeObjects()
     {
+        MalwareLibrary.Instance.SetListDependancy(MalwareLibrary.Instance.MalwarePackages.Where(x => x.mines.All(y=> y is not ITimeObject)).ToList());
         MineLibrary.Instance.SetListDependancy(MineLibrary.Instance.SMines.Where(x => x is not ITimeObject).ToList());
         ItemLibrary.Instance.SetListDependancy(ItemLibrary.Instance.Items.Where(x => x is not ITimeObject).ToList());
-        MalwareLibrary.Instance.SetListDependancy(MalwareLibrary.Instance.MalwarePackages.Where(x => x is not ITimeObject).ToList());
         BossModificationLibrary.Instance.SetListDependancy(BossModificationLibrary.Instance.BossModifications.Where(x => x is not ITimeObject).ToList());
         
         //Is running local, to not make null references

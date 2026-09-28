@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 [CreateAssetMenu(fileName = "DevilMine", menuName = "ScriptableObjects/Mine/DevilMine", order = 11)]
-public class SDevilMine : SMine
+public class SDevilMine : SMine, ITimeObject
 {
     public override string Name => "Devil Mine";
-    public override string Description => "Every 6s, lose 6s. Inscreased Heat gain";
+    public override string Description => "When the timmer is on, every 6s, lose 6s. Gain 6$ and Increased Heat gain";
     public override string Rarity => "Very Rare";
 
     public override Type GetMineType(){return typeof(DevilMine);}

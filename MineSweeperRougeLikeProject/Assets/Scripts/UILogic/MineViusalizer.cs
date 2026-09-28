@@ -33,6 +33,8 @@ public class MineViusalizer : MonoBehaviour
         
         RunPlayerStats.Instance.MalwarePackages.ForEach(x => x.mines.ForEach( mine => mines.Add(mine)));
 
+        if(RunPlayerStats.Instance.MineRoomManager != null && !RunPlayerStats.Instance.EndState) RunPlayerStats.Instance.MineRoomManager._temporaryMines.ForEach(mine=> mines.Add(mine.MineData));
+
         var orderedEnumerable = mines.OrderBy(mine => mine.name).ToList();
 
         mines = orderedEnumerable;

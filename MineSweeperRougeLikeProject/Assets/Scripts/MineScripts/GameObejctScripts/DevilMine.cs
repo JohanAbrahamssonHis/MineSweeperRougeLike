@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class DevilMine : Mine
+public class DevilMine : Mine, ITimeObject
 {
     public float pauseDuration;
     private float timeBank;
@@ -12,6 +12,7 @@ public class DevilMine : Mine
     public override void GlobalMineSubscribe()
     {
         base.GlobalMineSubscribe();
+        RunPlayerStats.Instance.Money +=6;
         RunPlayerStats.Instance.HeatGain += 0.1f;
     }
 
@@ -21,12 +22,19 @@ public class DevilMine : Mine
         RunPlayerStats.Instance.HeatGain -= 0.1f;
     }
 
-    public void Update()
+    public override void GlobalMineUpdate()
     {
+        base.GlobalMineUpdate();
+        DevilReap();
+    }
+
+    public void DevilReap()
+    {
+        if(!RunPlayerStats.Instance.ActiveTimer) return;
         currentTime += Time.deltaTime;
         if (currentTime < timeBank + pauseDuration)return;
 
         RunPlayerStats.Instance.Time -= 6;
-        timeBank += pauseDuration;
+        timeBank = currentTime;
     }
 }

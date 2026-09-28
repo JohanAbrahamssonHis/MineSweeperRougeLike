@@ -43,6 +43,7 @@ public abstract class Room : MonoBehaviour, ITextable
     {
         //LeavingRoomFunction
         floorManager.RoomExited(this);
+        RunPlayerStats.Instance.mineVisualizer.SetVisualizer();
     }
 
     public abstract string Name { get; }

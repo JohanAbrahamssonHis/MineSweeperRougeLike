@@ -66,6 +66,9 @@ public class Timmer : MonoBehaviour
         //SoundManager.Instance.Play("BoomBeep", transform, true, 1f, pitchSet, false, 0.2f);
         _audioSource.pitch = pitchSet;
         _audioSource.Play();
+        
+        //ActionEvents.Instance.TriggerEvent1SecondTimerPassed();
+        
         beepLastTime -= beepInBetweenTimeBase;
     }
 

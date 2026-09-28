@@ -58,6 +58,16 @@ public abstract class Mine : MonoBehaviour, ITextable
         GlobalMineUnSubscribe();
     }
 
+    public void Update()
+    {
+        MineUpdate();
+        if(MineData.isConstant) GlobalMineUpdate();
+    }
+
+    public virtual void MineUpdate() {}
+
+    public virtual void GlobalMineUpdate() {}
+
     public void SetMineNeighbours()
     {
         if (MineData == null) return;

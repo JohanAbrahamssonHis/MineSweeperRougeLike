@@ -79,7 +79,17 @@ public class RunPlayerStats : ScriptableObject
     #region Time
     
     public Timmer Timmer { get; set; }
-    public bool ActiveTimer { get; set; }
+    public bool AlwaysTime {get; set;}
+
+    private bool activeTimer;
+    public bool ActiveTimer { 
+        get => activeTimer;
+        set
+        {
+            if(AlwaysTime) return;
+            activeTimer = value;
+        } 
+        }
     
     
     private float _time;

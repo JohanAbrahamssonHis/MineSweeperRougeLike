@@ -20,6 +20,7 @@ public class MineRoomManager : MonoBehaviour
 
     public List<MalwarePackage> malwarePackages;
     public List<Mine> _mines;
+    public List<Mine> _temporaryMines;
 
     public void OnEnable()
     {
@@ -90,7 +91,7 @@ public class MineRoomManager : MonoBehaviour
         {
             if (grid.squares.Count(x => !x.hasMine) <= 9)
             {
-                Debug.Log("too few");
+                Debug.LogWarning("too few");
                 break;
             }
 
@@ -288,6 +289,39 @@ public class MineRoomManager : MonoBehaviour
         grid.squares[GetPostion(pos)].RevealContainer();
     }
 
+    public void AddTemporaryMine(SMine mine)
+    {
+        if(mine == null)
+        {
+            Debug.LogError("Added temporary mine is not valid");
+            return;
+        }
+
+        List<SquareMine> spawnLocations = grid.squares.Where(x => !x.hasMine && !x.hasFlag && !x.squareRevealed).ToList();
+
+        if(spawnLocations.Count<=0) return;
+
+        GameObject mineInst = new(mine.name);
+        mineInst.AddComponent(mine.GetMineType());
+        Mine tempMine = mineInst.GetComponent<Mine>();
+        tempMine.MineData = mine;
+        _mines.Add(tempMine);
+        _temporaryMines.Add(tempMine);
+
+
+        SquareMine selectedSquare = spawnLocations[Random.Range(0, spawnLocations.Count)];
+        selectedSquare.hasMine = true;
+        selectedSquare.mine = tempMine;
+        selectedSquare.mine.SetPosition(selectedSquare.position);
+        selectedSquare.mine.SetUpMine(this);
+        selectedSquare.mine.transform.parent = selectedSquare.transform;
+
+        selectedSquare.SetContainerSprite();
+
+        //TODO make mineVisualizer also reads temporary mines
+        RunPlayerStats.Instance.mineVisualizer.SetVisualizer();
+    }
+
     public void AfterActionFunction()
     {
         ResetNumbers();
@@ -333,6 +367,7 @@ public class MineRoomManager : MonoBehaviour
             Destroy(mine.transform.gameObject);
         }
         _mines.Clear();
+        _temporaryMines.Clear();
 
         foreach (var gridSquare in grid.squares)
         {
