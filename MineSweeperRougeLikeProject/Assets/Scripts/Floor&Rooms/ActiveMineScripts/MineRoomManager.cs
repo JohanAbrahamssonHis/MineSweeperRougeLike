@@ -58,6 +58,8 @@ public class MineRoomManager : MonoBehaviour
 
         malwarePackages = RunPlayerStats.Instance.MalwarePackages;
 
+        ActionEvents.Instance.TriggerEventBeginLogic();
+
         //Adds mines depending on packages
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
@@ -65,6 +67,8 @@ public class MineRoomManager : MonoBehaviour
             mineInst.AddComponent(mine.GetMineType());
             Mine tempMine = mineInst.GetComponent<Mine>();
             tempMine.MineData = mine;
+            mine.SendDataToMine(tempMine);
+            tempMine.SendDataConnection();
             //tempMine.AddComponent<SpriteRenderer>();
             _mines.Add(tempMine);
         }

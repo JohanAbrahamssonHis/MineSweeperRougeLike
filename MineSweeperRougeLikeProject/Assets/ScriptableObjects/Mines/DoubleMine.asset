@@ -15,3 +15,4 @@ MonoBehaviour:
   weight: 2
   sprite: {fileID: -286034292, guid: af96cb144a83eaf46b9c05241cbae54e, type: 3}
   damage: 1
+  isConstant: 0

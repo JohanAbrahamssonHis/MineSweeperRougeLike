@@ -10,11 +10,13 @@ public class SFanMine : SMine
     public override string Description => "At the start of a room, becomes a copy of your most common mine";
     public override string Rarity => "Rare";
 
+    public Sprite fanSprite;
+
     public override Type GetMineType(){return typeof(FanMine);}
 
     public override void SendDataToMine(Mine mine)
     {
         (mine as FanMine).fanMine = this;
-        (mine as FanMine).fanSprite = this.sprite;
+        (mine as FanMine).fanSprite = fanSprite;
     }
 }

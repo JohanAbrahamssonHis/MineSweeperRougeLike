@@ -60,6 +60,11 @@ public class ActionEvents : ScriptableObject
     //When 1 second of Timer time has passed
     public event ActionEvent On1SecondTimerPassed;
     public void TriggerEvent1SecondTimerPassed() => On1SecondTimerPassed?.Invoke();
+
+    //When 1 second of Timer time has passed
+    public event ActionEvent OnBeginLogic;
+    public void TriggerEventBeginLogic() => OnBeginLogic?.Invoke();
+    
     
     //When shop is entered
     public event ActionEventShop OnShop;

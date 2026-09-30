@@ -28,7 +28,6 @@ public abstract class Mine : MonoBehaviour, ITextable
             sprite = MineData.sprite;
             damage = MineData.damage;
             MineData.SetUpMine();
-            MineData.SendDataToMine(this);
         }
 
         neighbours = new List<Vector2>();
@@ -39,6 +38,8 @@ public abstract class Mine : MonoBehaviour, ITextable
 
         SetMineNeighbours();
     }
+
+    public virtual void SendDataConnection() {}
 
     public virtual void MineSubscribe() {}
     public virtual void MineUnSubscribe() {}
@@ -61,7 +62,7 @@ public abstract class Mine : MonoBehaviour, ITextable
     public void Update()
     {
         MineUpdate();
-        if(MineData.isConstant) GlobalMineUpdate();
+        //if(MineData.isConstant) GlobalMineUpdate();
     }
 
     public virtual void MineUpdate() {}

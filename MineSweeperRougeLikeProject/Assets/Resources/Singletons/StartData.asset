@@ -38,6 +38,7 @@ MonoBehaviour:
   MalwarePackages:
   - {fileID: 11400000, guid: 7f69fa4c6492ff84a9624e3e33453c38, type: 2}
   - {fileID: 11400000, guid: f44d5bfd95266ed4f83318d6019ef3b0, type: 2}
+  - {fileID: 11400000, guid: f44d5bfd95266ed4f83318d6019ef3b0, type: 2}
   MineRoomManager: {fileID: 0}
   FloorManager: {fileID: 0}
   Inventory: []

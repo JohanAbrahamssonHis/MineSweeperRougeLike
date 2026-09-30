@@ -15,7 +15,7 @@ MonoBehaviour:
   mainComponents: {fileID: 0}
   removeTimeValues: 0
   isInvincable: 0
-  isUnDamageable: 0
+  isUnDamageable: 1
   DebugMode: 0
   setUpState: 0
   effectAbilities:
