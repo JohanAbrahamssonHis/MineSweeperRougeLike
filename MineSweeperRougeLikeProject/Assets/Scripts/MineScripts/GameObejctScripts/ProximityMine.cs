@@ -38,9 +38,9 @@ public class ProximityMine : Mine
 
     public void Reveal(Vector2 position)
     {
-        if(!neighbours.Contains(position) || isExploding) return;
+        if(!Context.neighbours.Contains(position) || isExploding) return;
         isExploding = true;
-        mineRoomManager.RevealContainer(this.position);
+        Context.mineRoomManager.RevealContainer(Context.position);
         StartCoroutine(SetForExplode());
     }
 
@@ -92,7 +92,7 @@ public class ProximityMine : Mine
         SoundManager.Instance.Play("Explosion", null, true, 2f, 0.7f);
         Vector3 worldMousePos = RunPlayerStats.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
         if(Vector2.Distance(transform.parent.position, worldMousePos)<distance && !isActivated) Activate();
-        mineRoomManager.grid.squares[mineRoomManager.GetPostion(position)].SetDisabled(true);
+        Context.mineRoomManager.grid.squares[Context.mineRoomManager.GetPostion(Context.position)].SetDisabled(true);
     }
 
     public void OnDrawGizmos()

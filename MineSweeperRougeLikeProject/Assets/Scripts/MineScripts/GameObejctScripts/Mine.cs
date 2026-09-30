@@ -19,6 +19,17 @@ public abstract class Mine : MonoBehaviour, ITextable
     public MineRoomManager mineRoomManager;
     public int damage = 1;
 
+    public IMineBehavoir currentBehavior;
+
+    protected Mine Context => _context ?? this;
+
+    private Mine _context;
+
+    public void SetContext(Mine mine)
+    {
+        _context = mine;
+    }
+
     public virtual void SetUpMine(MineRoomManager mineRoomManager)
     {
         if (MineData == null) return;
@@ -44,7 +55,7 @@ public abstract class Mine : MonoBehaviour, ITextable
     public virtual void MineSubscribe() {}
     public virtual void MineUnSubscribe() {}
 
-    public virtual void GlobalMineSubscribe() {}
+    public virtual void GlobalMinesubscribe() {}
     public virtual void GlobalMineUnSubscribe() {}
 
     public void OnDisable()
@@ -62,7 +73,7 @@ public abstract class Mine : MonoBehaviour, ITextable
     public void Update()
     {
         MineUpdate();
-        //if(MineData.isConstant) GlobalMineUpdate();
+        if(Context.MineData.isConstant) GlobalMineUpdate();
     }
 
     public virtual void MineUpdate() {}
@@ -71,24 +82,28 @@ public abstract class Mine : MonoBehaviour, ITextable
 
     public void SetMineNeighbours()
     {
-        if (MineData == null) return;
+        if (MineData == null) 
+        {
+            Debug.LogError(Context.Name + " is not good for neighbour setting");
+            return;
+        }
         else
         {
-            neighbours = MineData.GetNeighbours(position);
-            longnNeighbours = MineData.GetLongNeighbours(position);
+            Context.neighbours = MineData.GetNeighbours(position);
+            Context.longnNeighbours = MineData.GetLongNeighbours(position);
         }
     }
 
     public virtual void Activate()
     {
-        isActivated = true;
-        RunPlayerStats.Instance.Health -= damage;
+        Context.isActivated = true;
+        RunPlayerStats.Instance.Health -= Context.damage;
         SoundManager.Instance.Play("Explosion", transform, true, 1);
     }
 
     public void SetPosition(Vector2 pos)
     {
-        position = pos;
+        Context.position = pos;
     }
 
     protected void SetStandardNeighbours(List<Vector2> setNeighbours)
@@ -97,7 +112,7 @@ public abstract class Mine : MonoBehaviour, ITextable
         {
             for (int y = -1; y <= 1; y++)
             {
-                setNeighbours.Add(new Vector2(position.x+x,position.y+y));
+                setNeighbours.Add(new Vector2(Context.position.x+x,Context.position.y+y));
             }  
         }
     }

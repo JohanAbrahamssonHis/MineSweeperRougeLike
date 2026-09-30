@@ -22,7 +22,7 @@ public class AgentMine : Mine
             Debug.LogError("Mine is missing to move");
         }
 
-        List<Vector2> tempNeighbours = new(neighbours);
+        List<Vector2> tempNeighbours = new(Context.neighbours);
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
 
         for (int i = tempNeighbours.Count - 1; i >= 0; i--)

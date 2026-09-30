@@ -14,12 +14,12 @@ public class JamMine : Mine
 
     public override void MineUnSubscribe()
     {
-        base.MineSubscribe();
+        base.MineUnSubscribe();
         ActionEvents.Instance.OnAfterReset -= JamIt;
     }
 
     public void JamIt()
     {
-       RunPlayerStats.Instance.MineRoomManager.SetContainters(neighbours, questionMarkSprite, true);
+       RunPlayerStats.Instance.MineRoomManager.SetContainters(Context.neighbours, questionMarkSprite, true);
     }
 }

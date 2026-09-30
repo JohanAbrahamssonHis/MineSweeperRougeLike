@@ -23,7 +23,7 @@ public abstract class SMine : ScriptableObject, ITextable
             mineInst.AddComponent(GetMineType());
             Mine tempMine = mineInst.GetComponent<Mine>();
             tempMine.MineData = this;
-            tempMine.GlobalMineSubscribe();
+            tempMine.GlobalMinesubscribe();
             //TODO Maybe SetupMine?
             SendDataToMine(tempMine);
             DontDestroyOnLoad(mineInst);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class FanMine : Mine
 {
@@ -11,12 +12,21 @@ public class FanMine : Mine
     public Sprite fanSprite;
     public Mine copiedMine;
 
-    public override void SetUpMine(MineRoomManager mineRoomManager) => copiedMine.SetUpMine(mineRoomManager);
+    public IMineBehavoir copiedBehaviour;
+
+    
+
+    public override void SetUpMine(MineRoomManager mineRoomManager) 
+    {
+        base.SetUpMine(mineRoomManager);
+        if(copiedMine is not FanMine) copiedMine.SetUpMine(mineRoomManager);
+    }
 
     public override void MineSubscribe()
     {
         base.MineSubscribe();
         ActionEvents.Instance.OnMineRoomWin += Revert;
+        if(copiedMine is FanMine) return;
         copiedMine.MineSubscribe();
     }
 
@@ -24,18 +34,19 @@ public class FanMine : Mine
     {
         base.MineUnSubscribe();
         ActionEvents.Instance.OnMineRoomWin -= Revert;
+        if(copiedMine is FanMine) return;
         copiedMine.MineUnSubscribe();
     }
 
-    public override void GlobalMineSubscribe() => copiedMine.GlobalMineSubscribe();
+    public override void GlobalMinesubscribe() {if(copiedMine is not FanMine) copiedMine.GlobalMinesubscribe();}
 
-    public override void GlobalMineUnSubscribe() => copiedMine.GlobalMineUnSubscribe();
+    public override void GlobalMineUnSubscribe() {if(copiedMine is not FanMine) copiedMine.GlobalMineUnSubscribe();}
 
-    public override void Activate() => copiedMine.Activate();
+    public override void Activate() {if(copiedMine is not FanMine) copiedMine.Activate();}
 
-    public override void MineUpdate() => copiedMine.MineUpdate();
+    public override void MineUpdate() {if(copiedMine is not FanMine) copiedMine.MineUpdate();}
 
-    public override void GlobalMineUpdate() => copiedMine.GlobalMineUpdate();
+    public override void GlobalMineUpdate() {if(copiedMine is not FanMine) copiedMine.GlobalMineUpdate();}
 
     public override void SendDataConnection()
     {
@@ -46,12 +57,24 @@ public class FanMine : Mine
 
     public void TriggerFanTransformation()
     {
+        // Unsubscribe previous behaviour.
+        copiedBehaviour?.MineUnSubscribe(this);
+
+        // Find corresponding behaviour.
+      
+
+
         List<SMine> mines = new();
         RunPlayerStats.Instance.MalwarePackages.ForEach(x=> x.mines.ForEach(y => mines.Add(y)));
 
         SMine sMine = GetMostCommonMine(mines);
 
+        //if fan mines are the most, we want to stop it. Otherwise we will have stackoverflow problems.
+        if(sMine is SFanMine) return;
+
         BecomeFanOfMine(sMine);
+        // Subscribe new behaviour using THIS FanMine.
+        copiedBehaviour?.MineSubscribe(this);
     }
 
     private SMine GetMostCommonMine(IEnumerable<SMine> items)
@@ -75,22 +98,37 @@ public class FanMine : Mine
 
     public void BecomeFanOfMine(SMine sMine)
     {
-        MineData = Instantiate(sMine);
-        MineData.sprite = fanSprite;
+        if (sMine == null || sMine is SFanMine)
+        return;
 
+        SMine smine = Instantiate(sMine);
+        smine.sprite = fanSprite;
+        
         //TODO Make copied mine of correct type, should solve all
-        GameObject mineInst = new(MineData.name);
-        mineInst.AddComponent(MineData.GetMineType());
-        copiedMine = mineInst.GetComponent<Mine>();
-        MineData.SendDataToMine(copiedMine);
+        // Remove previous copied component if necessary.
+        if (copiedMine != null && copiedMine != this)
+        {
+            Destroy(copiedMine);
+        }
+
+        // Attach the new mine behaviour to THIS GameObject.
+        copiedMine = (Mine)gameObject.AddComponent(smine.GetMineType());
+
+        smine.SendDataToMine(copiedMine);
         copiedMine.SendDataConnection();
+        MineData = smine;
+        copiedMine.SetUpMine(RunPlayerStats.Instance.MineRoomManager);
+        smine.GlobalMineAction();
+
+        copiedMine.SetContext(this);
+
     }
 
     public void Revert()
     {
         MineData = fanMine;
 
-        Destroy(copiedMine.gameObject);
+        Destroy(copiedMine);
 
         copiedMine = this;
     }
