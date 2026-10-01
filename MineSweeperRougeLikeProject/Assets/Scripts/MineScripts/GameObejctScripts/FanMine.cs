@@ -104,7 +104,6 @@ public class FanMine : Mine
         SMine smine = Instantiate(sMine);
         smine.sprite = fanSprite;
         
-        //TODO Make copied mine of correct type, should solve all
         // Remove previous copied component if necessary.
         if (copiedMine != null && copiedMine != this)
         {
@@ -126,9 +125,10 @@ public class FanMine : Mine
 
     public void Revert()
     {
+        if(MineData.isConstant) RunPlayerStats.Instance.mainComponents.DestroyGlobalMine(MineData);
+        else Destroy(copiedMine);
+        
         MineData = fanMine;
-
-        Destroy(copiedMine);
 
         copiedMine = this;
     }

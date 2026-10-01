@@ -37,6 +37,10 @@ public class ActionEvents : ScriptableObject
     public event ActionEvent OnAfterAction;
     public void TriggerEventAfterAction() => OnAfterAction?.Invoke();
 
+    //After first action has been made
+    public event ActionEvent OnAfterFirstAction;
+    public void TriggerEventAfterFirstAction() => OnAfterFirstAction?.Invoke();
+
     //After the basic rest has been made
     public event ActionEvent OnAfterReset;
     public void TriggerEventAfterReset() => OnAfterReset?.Invoke();

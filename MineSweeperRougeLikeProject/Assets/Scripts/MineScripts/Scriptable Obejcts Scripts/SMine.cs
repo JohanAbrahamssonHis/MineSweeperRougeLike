@@ -18,15 +18,9 @@ public abstract class SMine : ScriptableObject, ITextable
         if(isConstant)
         {
             //CreateMineType
-            GameObject mineInst = new(name);
-            mineInst.transform.parent = RunPlayerStats.Instance.mainComponents.GlobalObjectsHolder.transform;
-            mineInst.AddComponent(GetMineType());
-            Mine tempMine = mineInst.GetComponent<Mine>();
-            tempMine.MineData = this;
-            tempMine.GlobalMinesubscribe();
-            //TODO Maybe SetupMine?
-            SendDataToMine(tempMine);
-            DontDestroyOnLoad(mineInst);
+            Mine mine = RunPlayerStats.Instance.mainComponents.AddGlobalMine(this);
+
+            SendDataToMine(mine);
         }
     }
 
