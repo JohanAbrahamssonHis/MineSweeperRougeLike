@@ -48,6 +48,7 @@ public class MineViusalizer : MonoBehaviour
 
     private void CreateListOfVisualHolders(List<SMine> mines)
     {
+        if(mines.Count == 0) return;
         
         int amountOfMines = 1;
         
@@ -63,7 +64,7 @@ public class MineViusalizer : MonoBehaviour
             amountOfMines = 1;
 
         }
-        
+
         //Last is created regardless
         _gameObjects.Add(CreateVisualHolder(mines.Last().sprite, NumberSprites.Instance.GetNumberedSprite(amountOfMines), mines.Last()));
 

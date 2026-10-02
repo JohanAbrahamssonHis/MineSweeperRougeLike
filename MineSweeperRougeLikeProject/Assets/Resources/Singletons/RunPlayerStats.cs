@@ -380,6 +380,7 @@ public class RunPlayerStats : ScriptableObject
     {
         MalwarePackage malwarePackageInst = Instantiate(malwarePackage);
         MalwarePackages.Add(malwarePackageInst);
+        malwarePackageInst.mines.ForEach(x => x.MinePicked());
         malwarePackageInst.mines.ForEach(x => x.GlobalMineAction());
         if(mineVisualizer is null) return;
         mineVisualizer.SetVisualizer();

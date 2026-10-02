@@ -30,6 +30,18 @@ public abstract class Mine : MonoBehaviour, ITextable
         _context = mine;
     }
 
+    public Mine GlobalMine => _globalMine ?? this;
+
+    private Mine _globalMine;
+
+    public void SetGlobal(Mine mine)
+    {
+        _globalMine = mine;
+    }
+
+    public bool isGlobal;
+    public bool hasGlobalChild;
+
     public virtual void SetUpMine(MineRoomManager mineRoomManager)
     {
         if (MineData == null) return;
@@ -55,7 +67,7 @@ public abstract class Mine : MonoBehaviour, ITextable
     public virtual void MineSubscribe() {}
     public virtual void MineUnSubscribe() {}
 
-    public virtual void GlobalMinesubscribe() {}
+    public virtual void GlobalMineSubscribe() {}
     public virtual void GlobalMineUnSubscribe() {}
 
     public void OnDisable()
@@ -68,6 +80,11 @@ public abstract class Mine : MonoBehaviour, ITextable
     {
         MineUnSubscribe();
         GlobalMineUnSubscribe();
+
+        if(Context.MineData.isConstant)
+        {
+            Context.GlobalMine.hasGlobalChild = false;
+        }
     }
 
     public void Update()

@@ -38,7 +38,7 @@ public class FanMine : Mine
         copiedMine.MineUnSubscribe();
     }
 
-    public override void GlobalMinesubscribe() {if(copiedMine is not FanMine) copiedMine.GlobalMinesubscribe();}
+    public override void GlobalMineSubscribe() {if(copiedMine is not FanMine) copiedMine.GlobalMineSubscribe();}
 
     public override void GlobalMineUnSubscribe() {if(copiedMine is not FanMine) copiedMine.GlobalMineUnSubscribe();}
 

@@ -9,9 +9,9 @@ public class DevilMine : Mine, ITimeObject
     private float timeBank;
     private float currentTime;
 
-    public override void GlobalMinesubscribe()
+    public override void GlobalMineSubscribe()
     {
-        base.GlobalMinesubscribe();
+        base.GlobalMineSubscribe();
         RunPlayerStats.Instance.Money +=6;
         RunPlayerStats.Instance.HeatGain += 0.1f;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LemonMine : Mine
 {
-    public override void GlobalMinesubscribe()
+    public override void GlobalMineSubscribe()
     {
         ActionEvents.Instance.OnHealthGain += LemonMineFunction;
     }

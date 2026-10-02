@@ -35,6 +35,8 @@ public class MainComponents : MonoBehaviour
         {
             Destroy(GlobalObjectsHolder.transform.GetChild(i).gameObject);
         }
+        globalGameObjects.Clear();
+        globalMines.Clear();
     }
 
     public Mine AddGlobalMine(SMine sMine)
@@ -46,7 +48,7 @@ public class MainComponents : MonoBehaviour
         Mine Mine = mineInst.GetComponent<Mine>();
         globalMines.Add(Mine);
         Mine.MineData = sMine;
-        Mine.GlobalMinesubscribe();
+        Mine.GlobalMineSubscribe();
 
         return Mine;
     }
@@ -57,10 +59,28 @@ public class MainComponents : MonoBehaviour
         if(globalMines.Any(x => x.GetType() == sMine.GetMineType()))
         {
             Mine selectedMine = globalMines.First(x => x.GetType() == sMine.GetMineType());
+            selectedMine.hasGlobalChild = false;
             Destroy(selectedMine.gameObject);
             globalMines.Remove(selectedMine);
             globalGameObjects.Remove(selectedMine.gameObject);
         }
         else Debug.LogError(sMine.name + " was not a global Mine");
+    }
+
+    public Mine GetGlobalMine(SMine sMine, bool ignoreIfItHasAMineChild = false)
+    {
+        if(globalMines.Any(x => x.GetType() == sMine.GetMineType()))
+        {
+            if(ignoreIfItHasAMineChild)
+            {
+                Mine selectedMineWithOutChild = globalMines.Where(x => !x.hasGlobalChild).First(x => x.GetType() == sMine.GetMineType());
+                return selectedMineWithOutChild;
+            }
+            Mine selectedMine = globalMines.First(x => x.GetType() == sMine.GetMineType());
+            return selectedMine;
+        }
+  
+        Debug.LogError(sMine.name + " was not a global Mine");
+        return null;
     }
 }

@@ -69,6 +69,9 @@ public class ActionEvents : ScriptableObject
     public event ActionEvent OnBeginLogic;
     public void TriggerEventBeginLogic() => OnBeginLogic?.Invoke();
     
+    //When the player leaves a non shop room
+    public event ActionEvent OnLeaveRoom;
+    public void TriggerEventLeaveRoom() => OnLeaveRoom?.Invoke();
     
     //When shop is entered
     public event ActionEventShop OnShop;

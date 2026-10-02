@@ -26,6 +26,8 @@ public abstract class SMine : ScriptableObject, ITextable
 
     public virtual void SetUpMine(){}
 
+    public virtual void MinePicked(){}
+
     public virtual void SendDataToMine(Mine mine){}
 
     public virtual List<Vector2> GetNeighbours(Vector2 pos)

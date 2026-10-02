@@ -31,6 +31,8 @@ public class RoomElite : Room
 
     public override void LeaveRoomFunction()
     {
+        ActionEvents.Instance.TriggerEventLeaveRoom();
+        
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
         rPS.RoomCountCleared++;

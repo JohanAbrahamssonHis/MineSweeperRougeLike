@@ -63,13 +63,20 @@ public class MineRoomManager : MonoBehaviour
         //Adds mines depending on packages
         foreach (var mine in malwarePackages.SelectMany(malwarePackage => malwarePackage.mines))
         {
+
             GameObject mineInst = new(mine.name);
             mineInst.AddComponent(mine.GetMineType());
             Mine tempMine = mineInst.GetComponent<Mine>();
             tempMine.MineData = mine;
+            if(mine.isConstant) 
+            {
+                Mine GlobalMine = RunPlayerStats.Instance.mainComponents.GetGlobalMine(mine, true);
+                tempMine.SetGlobal(GlobalMine);
+                GlobalMine.hasGlobalChild = true;
+            }
             mine.SendDataToMine(tempMine);
             tempMine.SendDataConnection();
-            //tempMine.AddComponent<SpriteRenderer>();
+            
             _mines.Add(tempMine);
         }
     }

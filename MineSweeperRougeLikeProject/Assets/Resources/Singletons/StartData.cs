@@ -122,6 +122,9 @@ public class StartData : ScriptableObject
         rPS.ActiveTimer = ActiveTimer;
         //ADD MALWAREPACKAGE (has been a long bug ongoing darn)
         rPS.MalwarePackages = new(MalwarePackages.Select(x => Instantiate(x)));
+        rPS.MalwarePackages.ForEach(x => x.mines.ForEach(y => y.MinePicked()));
+        rPS.MalwarePackages.ForEach(x => x.mines.ForEach(y => y.GlobalMineAction()));
+
         rPS.MineRoomManager = MineRoomManager;
         rPS.FloorManager = FloorManager;
         rPS.FlagMineSelected = FlagMineSelected;
@@ -131,7 +134,6 @@ public class StartData : ScriptableObject
         rPS.mineVisualizer = mineVisualizer;
         rPS.removeTimeValues = removeTimeValues;
 
-        rPS.MalwarePackages.ForEach(x => x.mines.ForEach(y => y.GlobalMineAction()));
 
         SetEffectAbilities(rPS);
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -43,6 +44,7 @@ public class RoomBossMine : Room
         SceneDeterminer.LoadAddedScene("MalwarePicker");
         
         base.LeaveRoomFunction();
+        ActionEvents.Instance.TriggerEventLeaveRoom();
         RunPlayerStats rPS = RunPlayerStats.Instance;
         
         rPS.EndRoomSet();
