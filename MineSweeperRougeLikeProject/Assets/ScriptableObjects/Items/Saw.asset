@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b63c7adf4b9a1340b091f79f361a156, type: 3}
   m_Name: Saw
   m_EditorClassIdentifier: 
-  cost: 6
+  cost: 10
   sprite: {fileID: 1263599406, guid: 40f6c0bfe3f84184fbae8d8fdc105a71, type: 3}
   rarity: 5
