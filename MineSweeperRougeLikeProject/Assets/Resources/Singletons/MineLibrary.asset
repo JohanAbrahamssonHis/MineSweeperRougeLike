@@ -31,5 +31,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e47d355954f070a4ea2444d7b5c1d6b5, type: 2}
   - {fileID: 11400000, guid: 4c966ac7c13785842b765d22f43f1f95, type: 2}
   - {fileID: 11400000, guid: 4c322ad496039544b827852cb588ed10, type: 2}
+  - {fileID: 11400000, guid: a943ffa96d4bef4429604f5486b361a4, type: 2}
   UseSetSMine: 0
   SetSMine: {fileID: 0}

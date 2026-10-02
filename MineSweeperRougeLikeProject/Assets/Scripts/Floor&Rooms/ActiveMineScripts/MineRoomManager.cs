@@ -276,6 +276,10 @@ public class MineRoomManager : MonoBehaviour
         
         currentSquare.mine = null;
         currentSquare.hasMine = false;
+
+        ResetVisuals();
+
+        grid.CheckWin();
         
         return 1;
     }
@@ -343,6 +347,19 @@ public class MineRoomManager : MonoBehaviour
         grid.CheckWin();
 
         if(!AfterFirstMove) AfterFirstMove = true;
+    }
+
+    public void ResetVisuals()
+    {
+        ResetNumbers();
+        SetNumbers();
+        List<SquareMine> revealedSquares = grid.squares.Where(x => x.squareRevealed).ToList();
+        foreach (var square in revealedSquares.Where(x => !x.hasNeighbourMine))
+        {
+            ResetRevealTile(square);
+        }
+        
+        grid.squares.ForEach(x => x.SetContainerSprite());
     }
 
     private void ResetRevealTile(SquareMine square)
