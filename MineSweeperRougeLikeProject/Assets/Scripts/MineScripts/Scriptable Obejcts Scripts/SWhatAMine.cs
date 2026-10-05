@@ -14,6 +14,7 @@ public class SWhatAMine : SMine
 
     public override Type GetMineType(){return typeof(WhatAMine);}
 
+/*
     public override void MinePicked()
     {
         base.MinePicked();
@@ -35,4 +36,5 @@ public class SWhatAMine : SMine
             Destroy(malwarePackage);
         }
     }
+    */
 }

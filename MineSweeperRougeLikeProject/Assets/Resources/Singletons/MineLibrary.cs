@@ -38,6 +38,24 @@ public class MineLibrary : ScriptableObject
         return SMines[randomIndex];
     }
 
+    public SMine GetSelectedSMineByType(Type smineType)
+    {
+        if (smineType == null)
+        {
+            Debug.LogWarning("SMine type is null.");
+            return null;
+        }
+
+        SMine selectedSMine = SMines.Find(s => s.GetType() == smineType);
+
+        if (selectedSMine == null)
+        {
+            Debug.LogWarning($"No SMine found for type: {smineType}");
+            return null;
+        }
+
+        return selectedSMine;
+    }
 
     public bool UseSetSMine = false;
     public SMine SetSMine;

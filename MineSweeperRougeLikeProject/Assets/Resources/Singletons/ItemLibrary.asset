@@ -23,5 +23,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44c114b679ea7684fb6a743cc38b9354, type: 2}
   - {fileID: 11400000, guid: 8f8d1a88fc8a72843bfe945358267eb8, type: 2}
   - {fileID: 11400000, guid: 0d723fd023b8e554bb42022149ed67e0, type: 2}
-  UseSetItem: 0
-  SetItem: {fileID: 0}
+  - {fileID: 11400000, guid: a295a64dbbdb3ba488d20c0a8eb3c806, type: 2}
+  - {fileID: 11400000, guid: 76539dc76a3e3594d8babbf0b30592a9, type: 2}
+  - {fileID: 11400000, guid: 571d687d381e7ab49b37607acf88e0f3, type: 2}
+  - {fileID: 11400000, guid: 23b4b4248bc3a3e40af91bb910b1c6c4, type: 2}
+  - {fileID: 11400000, guid: e2f663b8396c32f4e834d4ef82af839c, type: 2}
+  - {fileID: 11400000, guid: 4bf9135de087e284e908f91b14deee5e, type: 2}
+  - {fileID: 11400000, guid: 8cce4aff7b6bd3545a8d8184bf08179f, type: 2}
+  - {fileID: 11400000, guid: 75f9f1f6fadcec645b7af842f597113d, type: 2}
+  - {fileID: 11400000, guid: a77aadf8a3a92ef4abb4e4b5cb9bb3a1, type: 2}
+  - {fileID: 11400000, guid: 08ad7cd00b96a4c429ec6a732933763f, type: 2}
+  UseSetItem: 1
+  SetItem: {fileID: 11400000, guid: 08ad7cd00b96a4c429ec6a732933763f, type: 2}

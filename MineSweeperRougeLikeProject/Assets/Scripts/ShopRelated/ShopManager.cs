@@ -23,7 +23,12 @@ public class ShopManager : MonoBehaviour
         
         BannedItemList.Clear();
         
-        ShopItems.ForEach(x => x.Item = GetShopItem());
+        if(ItemLibrary.Instance.UseSetItem)
+        {
+            ShopItems[0].Item = ItemLibrary.Instance.SetItem;
+            ShopItems.Where(y => ShopItems.IndexOf(y) != 0).ToList().ForEach(x => x.Item = GetShopItem());
+        }
+        else ShopItems.ForEach(x => x.Item = GetShopItem());
         ShopItems.ForEach(x => x.SetUpShopItem());
         
         ActionEvents.Instance.TriggerEventShopAfter(this);

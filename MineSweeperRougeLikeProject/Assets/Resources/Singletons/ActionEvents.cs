@@ -23,7 +23,9 @@ public class ActionEvents : ScriptableObject
     public delegate void ActionEventShop(ShopManager shopManager);
 
     public delegate void ActionEventPosition(Vector2 position);
-    
+
+    public delegate void ActionEventSMine(SMine SMine);
+
     //On Start of a run
     public event ActionEvent OnStartRun;
     public void TriggerEventStartRun() => OnStartRun?.Invoke();
@@ -68,7 +70,11 @@ public class ActionEvents : ScriptableObject
     public event ActionEvent On1SecondTimerPassed;
     public void TriggerEvent1SecondTimerPassed() => On1SecondTimerPassed?.Invoke();
 
-    //When 1 second of Timer time has passed
+    //When the timer is activated
+    public event ActionEvent OnTimerActivated;
+    public void TriggerEventTimerActivated() => OnTimerActivated?.Invoke();
+
+    //When beginLogic function has started
     public event ActionEvent OnBeginLogic;
     public void TriggerEventBeginLogic() => OnBeginLogic?.Invoke();
     
@@ -96,4 +102,8 @@ public class ActionEvents : ScriptableObject
     //When a Square is activated
     public event ActionEventPosition OnSquareActivate;
     public void TriggerEventSquareActivate(Vector2 Position) => OnSquareActivate?.Invoke(Position);
+    
+    //When a Square is activated
+    public event ActionEventSMine OnMinePicked;
+    public void TriggerEventMinePicked(SMine SMine) => OnMinePicked?.Invoke(SMine);
 }

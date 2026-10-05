@@ -43,6 +43,8 @@ public class StartData : ScriptableObject
     [Header("Heat")]
     [SerializeField] private  float Heat = 0;
     [SerializeField] private  float HeatGain = 0.15f;
+    [SerializeField] private  float ComboValueGain = 0;
+    [SerializeField] private  float ComboValueMult = 1;
     #endregion
 
     #region Point
@@ -112,6 +114,8 @@ public class StartData : ScriptableObject
         rPS.PointsGain = PointsGain;
         rPS.Heat = Heat;
         rPS.HeatGain = HeatGain;
+        rPS.ComboValueGain = ComboValueGain;
+        rPS.ComboValueMult = ComboValueMult;
         rPS.FloorCount = FloorCount;
         rPS.RoomCountCleared = RoomCountCleared;
         rPS.EliteRoomCount = EliteRoomCount;

@@ -88,6 +88,7 @@ public class RunPlayerStats : ScriptableObject
         {
             if(AlwaysTime) return;
             activeTimer = value;
+            if(value) ActionEvents.Instance.TriggerEventTimerActivated();
         } 
         }
     
@@ -126,6 +127,8 @@ public class RunPlayerStats : ScriptableObject
     public float Heat { get; set; }
     public float HeatGain { get; set; }
     public float ComboValue { get; set; }
+    public float ComboValueGain { get; set; }
+    public float ComboValueMult { get; set; }
     
     #endregion
 
@@ -302,8 +305,8 @@ public class RunPlayerStats : ScriptableObject
     public void Win()
     {
         EndState = true;
-        ActiveTimer = false;
         ActionEvents.Instance.TriggerEventMineRoomWin();
+        ActiveTimer = false;
         effectAbilities.ForEach(x => x.ResetAbility());
         ResetBoss();
     }

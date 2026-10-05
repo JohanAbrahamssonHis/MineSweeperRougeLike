@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainComponents: {fileID: 0}
   removeTimeValues: 0
-  isInvincable: 0
-  isUnDamageable: 1
+  isInvincable: 1
+  isUnDamageable: 0
   DebugMode: 0
   setUpState: 0
   effectAbilities:

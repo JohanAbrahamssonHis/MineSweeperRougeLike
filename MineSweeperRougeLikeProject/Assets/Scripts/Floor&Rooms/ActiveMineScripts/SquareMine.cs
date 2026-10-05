@@ -146,7 +146,12 @@ public class SquareMine : MonoBehaviour, IInteractable
     {
         SetContainerSprite();
         _spriteRendererContainer.sortingOrder = 1;
-    
+    }
+
+    public void RevealNumber()
+    {
+        SetContainerSprite(NumberSprites.Instance.GetNumberedSprite(number));
+        _spriteRendererContainer.sortingOrder = 1;
     }
     #endregion
 

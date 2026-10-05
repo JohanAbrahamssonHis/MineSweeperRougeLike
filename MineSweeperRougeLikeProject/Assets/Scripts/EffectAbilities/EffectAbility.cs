@@ -7,6 +7,7 @@ public abstract class EffectAbility : ScriptableObject, ITextable
     public bool isInfinite;
     public int baseCount = 1;
     public int count = 1;
+    public int tempCount = 0;
     public Sprite sprite;
     
     
@@ -18,13 +19,22 @@ public abstract class EffectAbility : ScriptableObject, ITextable
             return;
         }
         if(count<=0)return;
-        count--;
+        //TODO: Add if the effect fails to trigger, it should not count as a use of the ability
+        if(tempCount>0)
+        {
+            tempCount--;
+            count--;
+        }
+        else
+        {
+            count--;
+        }
         Function(squareMine);
     }
     
     public void ResetAbility()
     {
-        count = baseCount;
+        count = baseCount+tempCount;
     }
 
     protected abstract void Function(SquareMine squareMine);

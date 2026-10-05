@@ -35,7 +35,7 @@ public class ImpatientMine : Mine
         if (currentTime < explodeTime || Context.isDisabled || Context.isActivated)return;
 
         Activate();
-        Context.mineRoomManager.grid.squares[Context.mineRoomManager.GetPostion(Context.position)].SetDisabled(true);
+        Context.mineRoomManager.grid.squares[Context.mineRoomManager.GetPosition(Context.position)].SetDisabled(true);
     }
 
     public void ResetExplodeTimer()

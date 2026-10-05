@@ -26,14 +26,16 @@ public class MushroomMine : Mine
         currentTick++;
         if(currentTick<tickMax) return;
         
-        MalwarePackage MushroomMalwarePackage = RunPlayerStats.Instance.MalwarePackages.First(x => x.mines.First(y => y.GetMineType() == typeof(MushroomMine)));
+        MalwarePackage MushroomMalwarePackage = Instantiate(new MalwarePackage());
         MushroomMalwarePackage.RemoveMine(Context.MineData);
+        RunPlayerStats.Instance.AddMalwarePackage(MushroomMalwarePackage);
     }
 
     public override void Activate()
     {
         base.Activate();
-        MalwarePackage MushroomMalwarePackage = RunPlayerStats.Instance.MalwarePackages.First(x => x.mines.First(y => y.GetMineType() == typeof(MushroomMine)));
+        MalwarePackage MushroomMalwarePackage = Instantiate(new MalwarePackage());
         MushroomMalwarePackage.AddMine(Instantiate(Context.MineData));
+        RunPlayerStats.Instance.AddMalwarePackage(MushroomMalwarePackage);
     }
 }

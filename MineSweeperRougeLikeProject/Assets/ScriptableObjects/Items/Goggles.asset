@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d078c896d3635a4d8943b48a3bf4491, type: 3}
+  m_Name: Goggles
+  m_EditorClassIdentifier: 
+  cost: 5
+  sprite: {fileID: -2130674523, guid: 85720d1b6e756c74caad2360b1b7aef9, type: 3}
+  rarity: 2
+  xRay: {fileID: 11400000, guid: 1f33b6d959413184985c933ec40b5524, type: 2}
+  XRayCount: 2

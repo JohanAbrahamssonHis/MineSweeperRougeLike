@@ -24,6 +24,8 @@ MonoBehaviour:
   MoneyGain: 1
   Heat: 0
   HeatGain: 0.15
+  ComboValueGain: 0
+  ComboValueMult: 1
   Points: 0
   PointsGain: 10
   FloorCount: 1
@@ -36,7 +38,7 @@ MonoBehaviour:
   ActiveTimer: 0
   FlagMineSelected: {fileID: 0}
   MalwarePackages:
-  - {fileID: 11400000, guid: 86ae441c27063a04498ad957c85291c7, type: 2}
+  - {fileID: 11400000, guid: 85f3ef7eef82b1747b08cf3050603548, type: 2}
   MineRoomManager: {fileID: 0}
   FloorManager: {fileID: 0}
   Inventory: []
