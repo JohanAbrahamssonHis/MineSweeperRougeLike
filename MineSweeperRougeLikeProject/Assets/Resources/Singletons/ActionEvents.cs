@@ -24,6 +24,9 @@ public class ActionEvents : ScriptableObject
 
     public delegate void ActionEventPosition(Vector2 position);
     
+    //On Start of a run
+    public event ActionEvent OnStartRun;
+    public void TriggerEventStartRun() => OnStartRun?.Invoke();
     
     //First Action Of the game
     public event ActionEvent OnFirstAction;

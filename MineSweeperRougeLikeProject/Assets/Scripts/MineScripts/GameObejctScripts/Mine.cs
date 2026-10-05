@@ -70,6 +70,8 @@ public abstract class Mine : MonoBehaviour, ITextable
     public virtual void GlobalMineSubscribe() {}
     public virtual void GlobalMineUnSubscribe() {}
 
+    public virtual void MinePicked(){}
+
     public void OnDisable()
     {
         MineUnSubscribe();

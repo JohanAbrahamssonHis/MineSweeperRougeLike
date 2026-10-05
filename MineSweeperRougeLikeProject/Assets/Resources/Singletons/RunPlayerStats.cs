@@ -363,6 +363,7 @@ public class RunPlayerStats : ScriptableObject
         setUpState = true;
         startData = StartData.Instance;
         startData.StartValues(this);
+        ActionEvents.Instance.TriggerEventStartRun();
         setUpState = false;
     }
 
@@ -380,8 +381,8 @@ public class RunPlayerStats : ScriptableObject
     {
         MalwarePackage malwarePackageInst = Instantiate(malwarePackage);
         MalwarePackages.Add(malwarePackageInst);
-        malwarePackageInst.mines.ForEach(x => x.MinePicked());
         malwarePackageInst.mines.ForEach(x => x.GlobalMineAction());
+        malwarePackageInst.mines.ForEach(x => x.MinePicked());
         if(mineVisualizer is null) return;
         mineVisualizer.SetVisualizer();
     }

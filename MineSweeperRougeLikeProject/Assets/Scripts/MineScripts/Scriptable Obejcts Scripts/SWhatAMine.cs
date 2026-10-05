@@ -17,20 +17,22 @@ public class SWhatAMine : SMine
     public override void MinePicked()
     {
         base.MinePicked();
-
-        Debug.Log("Mines have been added");
-        //Add new Mines
         MalwarePackage newMalwarePackage = Instantiate(new MalwarePackage());
         SMine selectedSMine = MineLibrary.Instance.GetRandomSMine();
         newMalwarePackage.mines.Add(Instantiate(selectedSMine));
-        RunPlayerStats.Instance.MalwarePackages.Add(newMalwarePackage);
+        RunPlayerStats.Instance.AddMalwarePackage(newMalwarePackage);
+        
+        //Add new Mines
+        MalwarePackage malwarePackage = RunPlayerStats.Instance.MalwarePackages.FirstOrDefault(x => x.mines.FirstOrDefault(y => y.GetType() == typeof(SWhatAMine)));
 
         //Remove this mine, to swap it with the new mine.
-        MalwarePackage malwarePackage = RunPlayerStats.Instance.MalwarePackages.FirstOrDefault(x => x.mines.FirstOrDefault(y => y.GetType() == selectedSMine.GetMineType()));
-
-        if(malwarePackage != null)
+        if(malwarePackage != null)malwarePackage.RemoveMine(this);
+        else Debug.LogError("Removed Mine was null");
+        
+        if (malwarePackage.mines.Count == 0)
         {
-            malwarePackage.RemoveMine(this);
+            RunPlayerStats.Instance.MalwarePackages.Remove(malwarePackage);
+            Destroy(malwarePackage);
         }
     }
 }
