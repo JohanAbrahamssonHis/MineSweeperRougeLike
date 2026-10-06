@@ -391,7 +391,6 @@ public class MineRoomManager : MonoBehaviour
                     grid.squares.Find(squareInstance => squareInstance.position == new Vector2(square.position.x + i, square.position.y + j));
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
-                Debug.Log($"Revealing square at {squareSelect}, and at coordinates {square.position.x + i}, {square.position.y + j}");
                 RevealTile(squareSelect);
             }
         }

@@ -7,10 +7,13 @@ public class DanceAroundTheRoses : BossModification
     public override string Description => "All content in the squares will dance around";
 
     [SerializeField]
-    private float Amplitude = 3.0f;
+    private float Amplitude = 10.0f;
 
     [SerializeField]
-    private float Frequency = 1.0f;
+    private float Frequency = 4.0f;
+
+    [SerializeField]
+    private float Distance = 0.4f;
 
     public override void Modification()
     {
@@ -23,15 +26,13 @@ public class DanceAroundTheRoses : BossModification
         {
             if (square.squareRevealed)
             {
-                //The squares should rotate by a sin wave and end up at a equal length both times.
                 float angle = Mathf.Sin(Time.time * Frequency) * Amplitude;
                 Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                Quaternion startRot = square.GetContainer().transform.localRotation;
-                square.GetContainer().transform.localRotation = startRot * rotation;
+                square.GetContainer().transform.localRotation = rotation;
+
+                
+                square.GetContainer().transform.localPosition = Vector2.Lerp(new Vector2(-Distance,0), new Vector2(Distance,0), (Mathf.Sin(Time.time)+1)/2);
             }
         }
-
-
-        //.RotateAround(Vector2.zero, Vector3.forward, Time.deltaTime*10);
     }
 }
