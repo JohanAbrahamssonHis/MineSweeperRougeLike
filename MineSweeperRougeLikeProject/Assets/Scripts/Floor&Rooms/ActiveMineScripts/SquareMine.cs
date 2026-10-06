@@ -34,6 +34,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     
     public SquareColour currentSquareColour;
     public bool squareRevealed;
+    public bool numberRevealed;
     public bool hasMine;
     public Mine mine;
     public bool hasFlag;
@@ -111,6 +112,8 @@ public class SquareMine : MonoBehaviour, IInteractable
         _spriteRendererContainer.sprite = sprite != null ? sprite :
             hasMine ? mine.sprite :
             hasNeighbourMine ? NumberSprites.Instance.GetNumberedSprite(number) : null;
+
+        _spriteRendererContainer.sprite = numberRevealed ? NumberSprites.Instance.GetNumberedSprite(number) : _spriteRendererContainer.sprite;
     }
 
     public void SetFlagSprite()
@@ -125,7 +128,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     public void SetRevealed(bool squareRevealed)
     {
         this.squareRevealed = squareRevealed;
-
+        numberRevealed = false;
         _spriteRenderer.sprite = squareRevealed ? squareSpriteUsed : squareSpriteUnused;
         _spriteRendererContainer.sortingOrder = squareRevealed ? 1 : -1;
         _spriteRendererDecalContainer.gameObject.SetActive(squareRevealed);
@@ -152,6 +155,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     {
         SetContainerSprite(NumberSprites.Instance.GetNumberedSprite(number));
         _spriteRendererContainer.sortingOrder = 1;
+        numberRevealed = true;
     }
     #endregion
 
@@ -189,7 +193,6 @@ public class SquareMine : MonoBehaviour, IInteractable
             RunPlayerStats.Instance.Heat += RunPlayerStats.Instance.HeatGain;
             
             SoundManager.Instance.Play("Click", transform, true, 1, 1 + RunPlayerStats.Instance.Heat / 2);
-            
             mineRoomManager.RevealTile(this);
             if (!isBubbling) StartCoroutine(Bobble());
         }

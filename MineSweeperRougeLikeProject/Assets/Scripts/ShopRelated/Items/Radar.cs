@@ -15,19 +15,7 @@ public class Radar : Item
 
     public override void Function()
     {
-        var EffectAbilties = RunPlayerStats.Instance.effectAbilities;    
-
-        if(EffectAbilties.Any(x => x.GetType() == sensor.GetType()))
-        {
-           
-            var existingSensor = EffectAbilties.Find(x => x.GetType() == sensor.GetType());
-
-            existingSensor.baseCount++;
-            existingSensor.count++;
-            
-            return;
-        }
-        EffectAbilties.Add(Instantiate(sensor));
+        sensor.AddOrSetAbility(1,0);
     }
 
     public override void Join()

@@ -15,6 +15,6 @@ public class Stopwatch : Item, ITimeObject
     }
 
     public override string Name => "Stopwatch";
-    public override string Description => "Rooms give 20 more seconds to the timer";
+    public override string Description => "Completing Rooms give 20 more seconds to the timer";
     public override string Rarity => "Common";
 }

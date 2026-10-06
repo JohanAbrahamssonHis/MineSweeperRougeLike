@@ -17,23 +17,7 @@ public class Goggles : Item
 
     public override void Function()
     {
-        var EffectAbilties = RunPlayerStats.Instance.effectAbilities;    
-
-        if(EffectAbilties.Any(x => x.GetType() == xRay.GetType()))
-        {
-           
-            var existingXRay= EffectAbilties.Find(x => x.GetType() == xRay.GetType());
-
-            existingXRay.baseCount += XRayCount;
-            existingXRay.count += XRayCount;
-            
-            return;
-        }
-
-        XRay newXRay = Instantiate(xRay);
-        newXRay.baseCount = XRayCount;
-        newXRay.count = XRayCount;
-        EffectAbilties.Add(newXRay);
+        xRay.AddOrSetAbility(XRayCount,0);
     }
 
     public override void Join()

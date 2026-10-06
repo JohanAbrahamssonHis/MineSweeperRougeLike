@@ -9,19 +9,20 @@ public class Flag : EffectAbility
         isInfinite = true;
     }
 
-    protected override void Function(SquareMine squareMine)
+    public override bool Function(SquareMine squareMine)
     {
-        if (squareMine.squareRevealed || RunPlayerStats.Instance.EndState) return;
+        if (squareMine.squareRevealed || RunPlayerStats.Instance.EndState) return false;
         squareMine.hasFlag = !squareMine.hasFlag;
         squareMine.SetFlagSprite();
 
         if (RunPlayerStats.Instance.DebugMode)
         {
-            return;
+            return false;
         }
 
         ActionEvents.Instance.TriggerEventFlag();
         SoundManager.Instance.Play("Flag", squareMine.transform, true, 1);
+        return true;
     }
 
     public override string Name => "Flag";

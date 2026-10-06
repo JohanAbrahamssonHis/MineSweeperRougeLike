@@ -10,13 +10,14 @@ public class Sensor : EffectAbility
         count = 1;
     }
 
-    protected override void Function(SquareMine squareMine)
+    public override bool Function(SquareMine squareMine)
     {
         if (!squareMine.hasMine)
         {
             squareMine.Interact();
         }
         else squareMine.SetDisabled(true);
+        return true;
     }
 
     public override string Name => "Sensor";

@@ -17,22 +17,7 @@ public class Radio : Item
 
     public override void Function()
     {
-        var EffectAbilties = RunPlayerStats.Instance.effectAbilities;    
-
-        if(EffectAbilties.Any(x => x.GetType() == sensor.GetType()))
-        {
-            var existingSensor = EffectAbilties.Find(x => x.GetType() == sensor.GetType());
-
-            existingSensor.tempCount += tempCount;
-            existingSensor.count += tempCount;
-            return;
-        }
-
-        Sensor newSensor = Instantiate(sensor);
-        newSensor.tempCount = tempCount;
-        newSensor.count = tempCount;
-        newSensor.baseCount = 0;
-        EffectAbilties.Add(newSensor);
+        sensor.AddOrSetAbility(0,tempCount);
     }
 
     public override void Join()

@@ -1,16 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "EffectAbility/XRay", fileName = "XRay")]
-public class XRay : EffectAbility
+[CreateAssetMenu(menuName = "Item/SubMarine", fileName = "SubMarine")]
+public class SubMarine : Item
 {
-    public XRay()
+    public override string Name => "Sub-Marine";
+
+    public override string Description => "Gain " + XRayCount + " Permantent XRays and X-Rays also Disable Mines.";
+
+    public override string Rarity => "Very Rare";
+
+    public XRay xRay;
+
+    public int XRayCount = 1;
+
+    public override void Function()
     {
-        baseCount = 1;
-        count = 1;
+        xRay.AddOrSetAbility(XRayCount,0);
     }
 
-    public override bool Function(SquareMine squareMine)
+    public bool SubMarineFunction(SquareMine squareMine)
     {
         if(!RunPlayerStats.Instance.MineRoomManager.AfterFirstMove || squareMine.numberRevealed) return false;
         int x = (int)squareMine.position.x;
@@ -24,12 +34,14 @@ public class XRay : EffectAbility
                     y + j < 0 || y + j > grid.squaresYSize - 1) continue;
 
                 SquareMine targetSquare = RunPlayerStats.Instance.MineRoomManager.grid.squares[RunPlayerStats.Instance.MineRoomManager.GetPosition(new Vector2(x + i, y + j))];
-                targetSquare?.RevealNumber();
+                if(targetSquare.hasMine) targetSquare?.SetDisabled(true);
             }
         }
         return true;
     }
 
-    public override string Name => "X-Ray";
-    public override string Description => "Reveals the number, but not its content, for all tiles in a 3x3 area";
+    public override void Join()
+    {
+        Function();
+    }
 }
