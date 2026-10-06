@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,7 @@ public abstract class EffectAbility : ScriptableObject, ITextable
         {
             count--;
         }
+        ActionEvents.Instance.TriggerEventEffectAbilityActivated(this, squareMine);
     }
     
     public void ResetAbility()
@@ -50,14 +52,14 @@ public abstract class EffectAbility : ScriptableObject, ITextable
 
             existingEffect.tempCount += tempCount;
             existingEffect.baseCount += baseCount;
-            existingEffect.count = tempCount+baseCount;
+            existingEffect.count = existingEffect.tempCount+existingEffect.baseCount;
             return;
         }
 
         EffectAbility newEffectAbility = Instantiate(this);
         newEffectAbility.tempCount = tempCount;
         newEffectAbility.baseCount = baseCount;
-        newEffectAbility.count = tempCount+baseCount;
+        newEffectAbility.count = newEffectAbility.tempCount+newEffectAbility.baseCount;
         EffectAbilties.Add(newEffectAbility);
     }
 

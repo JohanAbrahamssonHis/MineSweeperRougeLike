@@ -24,4 +24,9 @@ public class BloodBag : Item
     {
         ActionEvents.Instance.OnMineRoomWin += Function;
     }
+
+    public override void Unsubscribe()
+    {
+        ActionEvents.Instance.OnMineRoomWin -= Function;
+    }
 }

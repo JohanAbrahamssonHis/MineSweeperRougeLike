@@ -23,7 +23,7 @@ public class XRay : EffectAbility
                 if (x + i < 0 || x + i > grid.squaresXSize - 1 ||
                     y + j < 0 || y + j > grid.squaresYSize - 1) continue;
 
-                SquareMine targetSquare = RunPlayerStats.Instance.MineRoomManager.grid.squares[RunPlayerStats.Instance.MineRoomManager.GetPosition(new Vector2(x + i, y + j))];
+                SquareMine targetSquare = RunPlayerStats.Instance.MineRoomManager.grid.squares.Find(square => square.position == new Vector2(x + i, y + j));
                 targetSquare?.RevealNumber();
             }
         }

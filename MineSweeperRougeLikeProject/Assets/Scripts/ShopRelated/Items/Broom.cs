@@ -32,4 +32,9 @@ public class Broom : Item
     {
         ActionEvents.Instance.OnAfterAction += Function;
     }
+
+    public override void Unsubscribe()
+    {
+        ActionEvents.Instance.OnAfterAction -= Function;
+    }
 }

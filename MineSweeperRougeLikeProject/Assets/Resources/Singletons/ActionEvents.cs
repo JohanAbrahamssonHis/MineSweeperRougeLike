@@ -26,6 +26,8 @@ public class ActionEvents : ScriptableObject
 
     public delegate void ActionEventSMine(SMine SMine);
 
+    public delegate void ActionEventEffectAbility(EffectAbility effectAbility, SquareMine squareMine);
+
     //On Start of a run
     public event ActionEvent OnStartRun;
     public void TriggerEventStartRun() => OnStartRun?.Invoke();
@@ -106,4 +108,8 @@ public class ActionEvents : ScriptableObject
     //When a Square is activated
     public event ActionEventSMine OnMinePicked;
     public void TriggerEventMinePicked(SMine SMine) => OnMinePicked?.Invoke(SMine);
+
+    //When an EffectAbility is activated
+    public event ActionEventEffectAbility OnEffectAbilityActivated;
+    public void TriggerEventEffectAbilityActivated(EffectAbility effectAbility, SquareMine squareMine) => OnEffectAbilityActivated?.Invoke(effectAbility, squareMine);
 }

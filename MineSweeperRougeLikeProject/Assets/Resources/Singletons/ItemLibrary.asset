@@ -35,5 +35,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 08ad7cd00b96a4c429ec6a732933763f, type: 2}
   - {fileID: 11400000, guid: cadb0c2fd0a55ba4291da66e6af3bda2, type: 2}
   - {fileID: 11400000, guid: 8c8b0d256c6e76347b4de1c2406a490c, type: 2}
-  UseSetItem: 0
+  UseSetItem: 1
   SetItem: {fileID: 11400000, guid: 8c8b0d256c6e76347b4de1c2406a490c, type: 2}

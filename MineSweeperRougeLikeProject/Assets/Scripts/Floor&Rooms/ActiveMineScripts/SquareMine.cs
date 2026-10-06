@@ -28,7 +28,7 @@ public class SquareMine : MonoBehaviour, IInteractable
 {
     public int number;
     public int longNumber;
-    private GameObject containter;
+    private GameObject container;
     private GameObject flagContainer;
     private GameObject decalContainter;
     
@@ -79,11 +79,11 @@ public class SquareMine : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void OnEnable()
     {
-        containter = gameObject.transform.GetChild(0).gameObject;
+        container = gameObject.transform.GetChild(0).gameObject;
         flagContainer = gameObject.transform.GetChild(1).gameObject;
         decalContainter = gameObject.transform.GetChild(2).gameObject;
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRendererContainer = containter.GetComponent<SpriteRenderer>();
+        _spriteRendererContainer = container.GetComponent<SpriteRenderer>();
         _spriteRendererFlagContainer = flagContainer.GetComponent<SpriteRenderer>();
         _spriteRendererDecalContainer = decalContainter.GetComponent<SpriteRenderer>();
 
@@ -112,8 +112,12 @@ public class SquareMine : MonoBehaviour, IInteractable
         _spriteRendererContainer.sprite = sprite != null ? sprite :
             hasMine ? mine.sprite :
             hasNeighbourMine ? NumberSprites.Instance.GetNumberedSprite(number) : null;
-
+        
+        //If the number is revealed, then do not update the true contents.
         _spriteRendererContainer.sprite = numberRevealed ? NumberSprites.Instance.GetNumberedSprite(number) : _spriteRendererContainer.sprite;
+
+        _spriteRendererContainer.sprite = hasMine && mine.isDisabled ? mine.sprite : _spriteRendererContainer.sprite;
+
     }
 
     public void SetFlagSprite()
@@ -330,5 +334,10 @@ public class SquareMine : MonoBehaviour, IInteractable
 
         // ta bort ghost när klart
         Destroy(ghost);
+    }
+
+    public GameObject GetContainer()
+    {
+        return container;
     }
 }

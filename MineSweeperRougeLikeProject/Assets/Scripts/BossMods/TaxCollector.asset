@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195bba0f6597cfc40a9d0d16b466dfa4, type: 3}
-  m_Name: SubMarine
+  m_Script: {fileID: 11500000, guid: 98aff3cce8567d84ea17217c10df5c96, type: 3}
+  m_Name: TaxCollector
   m_EditorClassIdentifier: 
-  cost: 1
-  sprite: {fileID: 856782676, guid: 85720d1b6e756c74caad2360b1b7aef9, type: 3}
-  rarity: 5
-  xRay: {fileID: 11400000, guid: 1f33b6d959413184985c933ec40b5524, type: 2}
-  XRayCount: 1
+  name: Tax Collector
+  sprite: {fileID: 1076255447, guid: 985d681274a77a349bc7fad50c2f3de1, type: 3}
+  DamageMoney: 2

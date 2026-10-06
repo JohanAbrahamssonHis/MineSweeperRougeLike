@@ -111,7 +111,7 @@ public class MineRoomManager : MonoBehaviour
             {
                 Vector2 selectedPosition = new Vector2(Random.Range(0, grid.squaresXSize),
                     Random.Range(0, grid.squaresYSize));
-                SquareMine selectedSquare = grid.squares[GetPosition(selectedPosition)];
+                SquareMine selectedSquare = grid.squares.Find(square => square.position == selectedPosition);
 
                 if (selectedSquare.hasMine || IsNeighbour(selectedSquare.position, startPos)) continue;
 
@@ -139,7 +139,7 @@ public class MineRoomManager : MonoBehaviour
             {
                 if (neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1 ||
                     neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1) continue;
-                SquareMine square = grid.squares[GetPosition(neighbour)];
+                SquareMine square = grid.squares.Find(square => square.position == neighbour);
                 square.hasNeighbourMine = true;
                 square.number += mine.weight;
             }
@@ -148,7 +148,7 @@ public class MineRoomManager : MonoBehaviour
             {
                 if (neighbour.x < 0 || neighbour.x > grid.squaresXSize - 1 ||
                     neighbour.y < 0 || neighbour.y > grid.squaresYSize - 1) continue;
-                SquareMine square = grid.squares[GetPosition(neighbour)];
+                SquareMine square = grid.squares.Find(square => square.position == neighbour);
                 square.isLongNeighbour = true;
                 square.longNumber += mine.weight;
 
@@ -194,7 +194,7 @@ public class MineRoomManager : MonoBehaviour
                     square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
 
                 SquareMine squareSelect =
-                    grid.squares[GetPosition(new Vector2(square.position.x + i, square.position.y + j))];
+                    grid.squares.Find(squareInstance => squareInstance.position == new Vector2(square.position.x + i, square.position.y + j));
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
                 RevealTile(squareSelect, orderOfReveal + 1, randomDissolve);
@@ -220,21 +220,23 @@ public class MineRoomManager : MonoBehaviour
             {
                 if (square.position.x + i < 0 || square.position.x + i > grid.squaresXSize - 1 ||
                     square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
-                
+
                 SquareMine squareSelect =
-                    grid.squares[GetPosition(new Vector2(square.position.x + i, square.position.y + j))];
-                
+                    grid.squares.Find(squareInstance => squareInstance.position == new Vector2(square.position.x, square.position.y));
+
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
                 RevealTile(squareSelect, orderOfReveal + 1, randomDissolve);
             }
         }
     }
 
+    /*
     public int GetPosition(Vector2 pos)
     {
         int value = (int)pos.y + (int)pos.x * grid.squaresYSize;
         return value;
     }
+    */
 
     bool IsNeighbour(Vector2 selectionPos, Vector2 comparePos)
     {
@@ -259,14 +261,14 @@ public class MineRoomManager : MonoBehaviour
         //If the mine is disabled, the game has ended or it is the first move, mines can not move and are stopped.
         if(mine.isDisabled || RunPlayerStats.Instance.EndState || !AfterFirstMove) return -1;
         
-        SquareMine currentSquare = grid.squares[GetPosition(mine.position)];
+        SquareMine currentSquare = grid.squares.Find(square => square.position == mine.position);
         if(currentSquare.squareRevealed || currentSquare.hasFlag) return -1;
 
         // If the attempted placement is outside the board, it is not a valid placement
         if (attemptedPlacementPos.x < 0 || attemptedPlacementPos.x > grid.squaresXSize - 1 ||
                 attemptedPlacementPos.y < 0 || attemptedPlacementPos.y > grid.squaresYSize - 1) return 0;
         
-        SquareMine selectedSquare = grid.squares[GetPosition(attemptedPlacementPos)];
+        SquareMine selectedSquare = grid.squares.Find(square => square.position == attemptedPlacementPos);
 
         // If a mine is already at the position attempted to be placed in or that square is revealed. It is not a valid placement
         if (selectedSquare.hasMine ||
@@ -294,19 +296,19 @@ public class MineRoomManager : MonoBehaviour
     public void SetContainters(List<Vector2> pos, Sprite sprite, bool stopAtMines)
     {
         List<SquareMine> selectedSquare = pos.Where(posSelected => !(posSelected.x < 0 || posSelected.x > grid.squaresXSize - 1 ||
-                posSelected.y < 0 || posSelected.y > grid.squaresYSize - 1)).Select(x => grid.squares[GetPosition(x)]).ToList();
+                posSelected.y < 0 || posSelected.y > grid.squaresYSize - 1)).Select(x => grid.squares.Find(square => square.position == x)).ToList();
         
         selectedSquare.Where(i => stopAtMines && !i.hasMine).ToList().ForEach(j => j.SetContainerSprite(sprite));
     }
 
     public void RevealContainer(Vector2 pos)
     {
-        grid.squares[GetPosition(pos)].RevealContainer();
+        grid.squares.Find(square => square.position == pos).RevealContainer();
     }
 
     public void RevealNumber(Vector2 pos)
     {
-        grid.squares[GetPosition(pos)].RevealNumber();
+        grid.squares.Find(square => square.position == pos).RevealNumber();
     }
 
     public void AddTemporaryMine(SMine mine)
@@ -354,6 +356,8 @@ public class MineRoomManager : MonoBehaviour
         
         grid.squares.ForEach(x => x.SetContainerSprite());
 
+        _mines.ForEach(x => x.SetMineNeighbours());
+
         ActionEvents.Instance.TriggerEventAfterReset();
 
         grid.CheckWin();
@@ -384,9 +388,10 @@ public class MineRoomManager : MonoBehaviour
                     square.position.y + j < 0 || square.position.y + j > grid.squaresYSize - 1) continue;
                 
                 SquareMine squareSelect =
-                    grid.squares[GetPosition(new Vector2(square.position.x + i, square.position.y + j))];
+                    grid.squares.Find(squareInstance => squareInstance.position == new Vector2(square.position.x + i, square.position.y + j));
                 
                 if (squareSelect.squareRevealed || squareSelect.hasFlag) continue;
+                Debug.Log($"Revealing square at {squareSelect}, and at coordinates {square.position.x + i}, {square.position.y + j}");
                 RevealTile(squareSelect);
             }
         }

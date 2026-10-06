@@ -20,9 +20,11 @@ public class SubMarine : Item
         xRay.AddOrSetAbility(XRayCount,0);
     }
 
-    public bool SubMarineFunction(SquareMine squareMine)
+    public void SubMarineFunction(EffectAbility effectAbility, SquareMine squareMine)
     {
-        if(!RunPlayerStats.Instance.MineRoomManager.AfterFirstMove || squareMine.numberRevealed) return false;
+        if(effectAbility.GetType() != typeof(XRay)) return;
+
+        if(!RunPlayerStats.Instance.MineRoomManager.AfterFirstMove) return;
         int x = (int)squareMine.position.x;
         int y = (int)squareMine.position.y;
         for (int i = -1; i <= 1; i++)
@@ -33,15 +35,21 @@ public class SubMarine : Item
                 if (x + i < 0 || x + i > grid.squaresXSize - 1 ||
                     y + j < 0 || y + j > grid.squaresYSize - 1) continue;
 
-                SquareMine targetSquare = RunPlayerStats.Instance.MineRoomManager.grid.squares[RunPlayerStats.Instance.MineRoomManager.GetPosition(new Vector2(x + i, y + j))];
+                SquareMine targetSquare = RunPlayerStats.Instance.MineRoomManager.grid.squares.Find(square => square.position == new Vector2(x + i, y + j));
                 if(targetSquare.hasMine) targetSquare?.SetDisabled(true);
             }
         }
-        return true;
+        return;
     }
 
     public override void Join()
     {
         Function();
+        ActionEvents.Instance.OnEffectAbilityActivated += SubMarineFunction;
+    }
+
+    public override void Unsubscribe()
+    {
+        ActionEvents.Instance.OnEffectAbilityActivated -= SubMarineFunction;
     }
 }

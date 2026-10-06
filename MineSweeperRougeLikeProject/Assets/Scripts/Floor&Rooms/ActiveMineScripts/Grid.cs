@@ -119,4 +119,35 @@ public class Grid : MonoBehaviour, IInteractable
         transform.position = startPos;
         transform.localScale = startScale;
     }
+
+    public void MoveLeft(int leftMoveAmount)
+    {
+        List<SquareMine> mostLeftSquares = new List<SquareMine>();
+        //Move all the leftmost columns to the most right position.
+        for (int i = 0; i < squaresYSize; i++)
+        {
+            mostLeftSquares.Add(squares.Find(x => x.position == new Vector2(0, i)));
+        }
+
+
+        //Move all the other columns one step to the left.
+        for (int i = 0; i < squaresXSize; i++)
+        {
+            for (int j = 0; j < squaresYSize; j++)
+            {
+                SquareMine square = squares.Find(x => x.position == new Vector2(i, j));
+                square.position = new Vector2(i-1, j);
+                square.gameObject.transform.position = new Vector2(setOnGrid(i-1,squaresXSize), setOnGrid(j,squaresYSize));
+            }
+        }
+
+        mostLeftSquares.ForEach(x => x.position = new Vector2(squaresXSize - 1, x.position.y));
+        mostLeftSquares.ForEach(x => x.gameObject.transform.position = new Vector2(setOnGrid(squaresXSize-1,squaresXSize), setOnGrid((int)x.position.y,squaresYSize)));
+
+
+        squares.Where(x => x.hasMine).ToList().ForEach(x => x.mine.position = x.position);
+        RunPlayerStats.Instance.MineRoomManager._mines.ForEach(x => x.SetMineNeighbours());
+        RunPlayerStats.Instance.MineRoomManager.ResetVisuals();
+
+    }
 }

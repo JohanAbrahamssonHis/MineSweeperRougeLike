@@ -20,5 +20,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4203feb3cba228d4ca327bfbb3527cb9, type: 2}
   - {fileID: 11400000, guid: 6a2de7b0cd56acb40a8fc4791e20f0e8, type: 2}
   - {fileID: 11400000, guid: 59a126af4d6814340aac2cbb605093dd, type: 2}
-  UseSetBossModification: 0
-  SetBossModification: {fileID: 11400000, guid: 4203feb3cba228d4ca327bfbb3527cb9, type: 2}
+  - {fileID: 11400000, guid: 730bfee55ee7b8f4fbfd7c59113d5454, type: 2}
+  - {fileID: 11400000, guid: 66def28121f74d344bf543a64c3541cb, type: 2}
+  - {fileID: 11400000, guid: a9861a81a27c46549b7928fb2730fb28, type: 2}
+  UseSetBossModification: 1
+  SetBossModification: {fileID: 11400000, guid: a9861a81a27c46549b7928fb2730fb28, type: 2}

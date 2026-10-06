@@ -41,4 +41,11 @@ public class Laser : Item
         ActionEvents.Instance.OnAfterFirstAction += ResetTookDamage;
         ActionEvents.Instance.OnDamage += SetTookDamage;
     }
+
+    public override void Unsubscribe()
+    {
+        ActionEvents.Instance.OnMineRoomWin -= Function;
+        ActionEvents.Instance.OnAfterFirstAction -= ResetTookDamage;
+        ActionEvents.Instance.OnDamage -= SetTookDamage;
+    }
 }

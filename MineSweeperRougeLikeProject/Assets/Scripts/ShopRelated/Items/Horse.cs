@@ -22,8 +22,6 @@ public class Horse : Item, ITimeObject
         
         float timeTaken = timeStart - RunPlayerStats.Instance.Time;
 
-        Debug.Log("Time taken: " + timeTaken + " seconds. Money gained: " + (timeTaken < TimeLimitShort ? MoneyGainShort : timeTaken < TimeLimitLong ? MoneyGainLong : 0) + "$");
-
         RunPlayerStats.Instance.TempMoneyGain += timeTaken < TimeLimitShort ? MoneyGainShort : timeTaken < TimeLimitLong ? MoneyGainLong : 0;   
     }
 
@@ -36,6 +34,12 @@ public class Horse : Item, ITimeObject
     {
         ActionEvents.Instance.OnTimerActivated += StartTimer;
         ActionEvents.Instance.OnMineRoomWin += Function;
+    }
+
+    public override void Unsubscribe()
+    {
+        ActionEvents.Instance.OnTimerActivated -= StartTimer;
+        ActionEvents.Instance.OnMineRoomWin -= Function;
     }
 
 }
