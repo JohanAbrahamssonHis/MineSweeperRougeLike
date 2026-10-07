@@ -10,6 +10,8 @@ public class InputHandler : MonoBehaviour
     private Camera _mainCamera;
     private List<IInteractable> _currentlyInteracted;
     private IInteractable _mostCurrentlyInteracted;
+
+    public bool isNotSwaped = true;
     
     void Start()
     {
@@ -20,12 +22,15 @@ public class InputHandler : MonoBehaviour
     
     public void OnClick(InputAction.CallbackContext context)
     {
-        ButtonEffect(context)?.ForEach(x => x.Interact());
+        if(isNotSwaped) ButtonEffect(context)?.ForEach(x => x.Interact());
+        else ButtonEffect(context)?.ForEach(x => x.SecondInteract());
     }
     
     public void OnRightClick(InputAction.CallbackContext context)
     {
-        ButtonEffect(context)?.ForEach(x => x.SecondInteract());
+
+        if(isNotSwaped) ButtonEffect(context)?.ForEach(x => x.SecondInteract());
+        else ButtonEffect(context)?.ForEach(x => x.Interact());
     }
     
     public void OnResetBoard(InputAction.CallbackContext context)

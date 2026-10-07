@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bad Touch
   sprite: {fileID: -1345277547, guid: 985d681274a77a349bc7fad50c2f3de1, type: 3}
-  BombSprite: {fileID: -2046922763, guid: 08e751ca542aba94aa038e228de6a3d3, type: 3}
+  BombSprite: {fileID: 21300000, guid: 318018e02afa27f4684436fe44ddcb7c, type: 3}
+  speed: 4
+  turnSpeed: 1.5
+  timeBank: 4

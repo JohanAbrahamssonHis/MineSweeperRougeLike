@@ -9,13 +9,31 @@ public class BadTouch : BossModification
 
     public Sprite BombSprite;
 
+    public float speed = 6;
+
+    public float turnSpeed = 1.5f;
+
+    public float timeBank = 5;
+
+    private GameObject gameObject;
+
     public override void Modification()
     {
-        GameObject gameObject = new GameObject("Mouse Seaking Bomb");
-        gameObject.transform.position = new Vector3(0,Camera.main.orthographicSize);
+        gameObject = new GameObject("Mouse Seaking Bomb");
+        gameObject.transform.position = new Vector3(0,Camera.main.orthographicSize+3);
         SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
         spriteRenderer.sprite = BombSprite;
-        Rigidbody2D rigidbody = gameObject.AddComponent<Rigidbody2D>();
+        spriteRenderer.sortingOrder = 7;
+        CircleCollider2D circleCollider2D = gameObject.AddComponent<CircleCollider2D>();
         MouseSeakingBomb mouseSeakingBomb = gameObject.AddComponent<MouseSeakingBomb>();
+        mouseSeakingBomb.speed = speed;
+        mouseSeakingBomb.turnSpeed = turnSpeed;
+        mouseSeakingBomb.timeBank = timeBank;
+    }
+
+    public override void UnsubscribeModification()
+    {
+        base.UnsubscribeModification();
+        Destroy(gameObject);
     }
 }
