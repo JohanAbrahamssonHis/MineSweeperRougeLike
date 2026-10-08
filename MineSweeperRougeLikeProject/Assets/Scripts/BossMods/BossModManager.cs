@@ -29,6 +29,6 @@ public class BossModManager : MonoBehaviour
 
     public void Update()
     {
-        _bossModification.UpdateModification();
+        if(!RunPlayerStats.Instance.EndState) _bossModification.UpdateModification();
     }
 }

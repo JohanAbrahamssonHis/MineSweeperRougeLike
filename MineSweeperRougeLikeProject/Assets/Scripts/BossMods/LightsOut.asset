@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de599bccff7f194dae26e56dc319064, type: 3}
+  m_Name: LightsOut
+  m_EditorClassIdentifier: 
+  name: Lights Out
+  sprite: {fileID: -1633321016, guid: 985d681274a77a349bc7fad50c2f3de1, type: 3}
+  material: {fileID: 2100000, guid: 657626b8eaf97f741972973bc1cb8378, type: 2}
+  shadowSprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}

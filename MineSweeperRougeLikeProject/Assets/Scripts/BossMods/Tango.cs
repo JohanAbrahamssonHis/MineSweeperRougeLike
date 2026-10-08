@@ -8,11 +8,21 @@ public class Tango : BossModification
 
     public override void Modification()
     {
+        RunPlayerStats.Instance.IsNotSwaped = !RunPlayerStats.Instance.IsNotSwaped;
     }
 
     public override void JoinModification()
     {
         base.JoinModification();
-        
+        ActionEvents.Instance.OnAction += Modification;
+        ActionEvents.Instance.OnEffectAbility += Modification;
+    }
+
+    public override void UnsubscribeModification()
+    {
+        base.UnsubscribeModification();
+        ActionEvents.Instance.OnAction -= Modification;
+        ActionEvents.Instance.OnEffectAbility -= Modification;
+        RunPlayerStats.Instance.IsNotSwaped = true;
     }
 }

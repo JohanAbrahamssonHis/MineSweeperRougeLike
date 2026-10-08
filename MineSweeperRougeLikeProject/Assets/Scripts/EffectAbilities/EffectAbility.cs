@@ -18,6 +18,8 @@ public abstract class EffectAbility : ScriptableObject, ITextable
         if (isInfinite)
         {
             Function(squareMine);
+            ActionEvents.Instance.TriggerEventEffectAbility();
+            ActionEvents.Instance.TriggerEventEffectAbilityActivated(this, squareMine);
             return;
         }
         if(count<=0)return;
@@ -34,6 +36,7 @@ public abstract class EffectAbility : ScriptableObject, ITextable
         {
             count--;
         }
+        ActionEvents.Instance.TriggerEventEffectAbility();
         ActionEvents.Instance.TriggerEventEffectAbilityActivated(this, squareMine);
     }
     

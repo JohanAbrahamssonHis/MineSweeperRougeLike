@@ -17,6 +17,8 @@ public class InputHandler : MonoBehaviour
     {
         _mainCamera = RunPlayerStats.Instance.Camera;
         _currentlyInteracted = new List<IInteractable>();
+        RunPlayerStats.Instance.InputHandler = this;
+        isNotSwaped = true;
     }
     
     

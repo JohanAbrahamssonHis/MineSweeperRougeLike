@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
@@ -223,6 +224,18 @@ public class RunPlayerStats : ScriptableObject
     public MineViusalizer mineVisualizer { get; set; }
     public SMine FlagMineSelected { get; set; }
     public BossModification BossModification { get; set; }
+
+    public InputHandler InputHandler { get; set; }
+
+    private bool isNotSwaped;
+    public bool IsNotSwaped { get
+        {
+            return isNotSwaped;
+        } set
+        {
+            InputHandler.isNotSwaped = value;
+            isNotSwaped = value;
+        } }
 
     public bool DebugMode;
     public bool setUpState;
