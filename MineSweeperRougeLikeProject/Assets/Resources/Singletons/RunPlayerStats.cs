@@ -89,6 +89,7 @@ public class RunPlayerStats : ScriptableObject
         {
             if(AlwaysTime) return;
             activeTimer = value;
+            if(Timmer is not null) Timmer.SetTimerSprite(activeTimer);
             if(value) ActionEvents.Instance.TriggerEventTimerActivated();
         } 
         }
@@ -254,6 +255,7 @@ public class RunPlayerStats : ScriptableObject
 
     public List<EffectAbility> effectAbilities;
     public EffectAbility currentEffectAbility;
+    public UIEffectAbilityHolder uIEffectAbilityHolder;
 
     public EffectAbility GetNextEffectAbility()
     {

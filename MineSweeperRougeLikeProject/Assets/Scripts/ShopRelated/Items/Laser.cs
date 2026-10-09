@@ -7,7 +7,7 @@ public class Laser : Item
 {
     public override string Name => "Laser";
 
-    public override string Description => "If you do not take damage at the end of a room, Gain 1 Temporary X-Ray.";
+    public override string Description => "If you do not take damage at the end of a room, Gain "+tempCount+" Temporary X-Ray.";
 
     public override string Rarity => "UnCommon";
 

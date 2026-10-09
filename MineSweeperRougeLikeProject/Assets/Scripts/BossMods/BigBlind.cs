@@ -21,7 +21,7 @@ public class BigBlind : BossModification
         ActionEvents.Instance.OnFlag -= SetMoneyLoss;
     }
 
-    public override string Description => "Lose 1$ whenever you place a flag";
+    public override string Description => "Lose "+moneyLoss+"$ whenever you place a flag";
 
     public override void UpdateModification()
     {

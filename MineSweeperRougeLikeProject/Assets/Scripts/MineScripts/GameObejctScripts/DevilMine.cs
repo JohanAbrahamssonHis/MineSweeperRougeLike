@@ -6,13 +6,14 @@ using UnityEngine;
 public class DevilMine : Mine, ITimeObject
 {
     public float pauseDuration;
+    public int moneyGained;
     private float timeBank;
     private float currentTime;
 
     public override void GlobalMineSubscribe()
     {
         base.GlobalMineSubscribe();
-        RunPlayerStats.Instance.Money +=6;
+        RunPlayerStats.Instance.Money += moneyGained;
         RunPlayerStats.Instance.HeatGain += 0.1f;
     }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LemonMine : Mine
 {
+    public int MoneyLost;
+
     public override void GlobalMineSubscribe()
     {
         ActionEvents.Instance.OnHealthGain += LemonMineFunction;
@@ -16,6 +18,6 @@ public class LemonMine : Mine
 
     public void LemonMineFunction()
     {
-        RunPlayerStats.Instance.Money -= 1;
+        RunPlayerStats.Instance.Money -= MoneyLost;
     }
 }

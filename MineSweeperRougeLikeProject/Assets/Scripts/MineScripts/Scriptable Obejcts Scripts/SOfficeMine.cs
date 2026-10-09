@@ -8,7 +8,7 @@ public class SOfficeMine : SMine
 {
 
     public override string Name => "Office Mine";
-    public override string Description => "When activated, 50% odds to do nothing";
+    public override string Description => "When activated, "+ 100/odds +"% odds to do nothing";
     public override string Rarity => "Rare";
 
     public override Type GetMineType(){return typeof(OfficeMine);}

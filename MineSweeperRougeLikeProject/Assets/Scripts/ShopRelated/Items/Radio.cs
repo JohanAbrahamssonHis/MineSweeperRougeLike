@@ -8,7 +8,7 @@ public class Radio : Item
 {
     public override string Name => "Radio";
 
-    public override string Description => "Gain 3 temporary Sensor abilities";
+    public override string Description => "Gain "+tempCount+" temporary Sensor abilities";
 
     public override string Rarity => "Common";
 

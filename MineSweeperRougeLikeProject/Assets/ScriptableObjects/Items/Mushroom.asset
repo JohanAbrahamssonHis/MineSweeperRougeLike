@@ -15,3 +15,6 @@ MonoBehaviour:
   cost: 8
   sprite: {fileID: -1390602486, guid: 85720d1b6e756c74caad2360b1b7aef9, type: 3}
   rarity: 5
+  pointsGain: 1
+  healthGain: 1
+  timeGain: 1

@@ -21,10 +21,10 @@ public class Timmer : MonoBehaviour
 
     void Awake()
     {
+        RunPlayerStats.Instance.Timmer = this;
         time = RunPlayerStats.Instance.Time;
         beepLastTime = time;
         
-        RunPlayerStats.Instance.Timmer = this;
         if(RunPlayerStats.Instance.removeTimeValues)
         {
             TurnOff();
@@ -56,7 +56,6 @@ public class Timmer : MonoBehaviour
     private void Update()
     {
         if(!RunPlayerStats.Instance.ActiveTimer || isTurnedOff) return;
-        spriteRenderer.sprite = RunPlayerStats.Instance.ActiveTimer ? spriteActive : sprite;
         
         RunPlayerStats.Instance.Time -= Time.deltaTime*RunPlayerStats.Instance.TimeMult;
 
@@ -80,6 +79,11 @@ public class Timmer : MonoBehaviour
         int seconds = (int)(time-(minutes*60));
         textMinutes.text = $"{minutes:0#}";
         textSeconds.text = $"{seconds:0#}";
+    }
+
+    public void SetTimerSprite(bool isActive)
+    {
+        spriteRenderer.sprite = isActive ? spriteActive : sprite;
     }
 
     public void TurnOff()

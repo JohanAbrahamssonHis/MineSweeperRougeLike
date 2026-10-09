@@ -4,9 +4,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Mushroom", fileName = "Mushroom")]
 public class Mushroom : Item
 {
+    public int pointsGain = 1;
+    public int healthGain = 1;
+    public float timeGain = 1;
+
     public override string Name => "Mushroom";
 
-    public override string Description => "Gain 1 point per action, Gain 1 Health, Gain 1 minute and 1 Mushroom Mine.";
+    public override string Description => "Gain "+pointsGain+" point per action, Gain "+healthGain+" Health, Gain "+timeGain+" minute and 1 Mushroom Mine.";
 
     public override string Rarity => "Rare";
 

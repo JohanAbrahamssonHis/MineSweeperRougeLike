@@ -8,6 +8,10 @@ public class MineVisualHolder : MonoBehaviour, IInteractable, ITextable
     public void Interact()
     {
         RunPlayerStats.Instance.FlagMineSelected = mine;
+        if(RunPlayerStats.Instance.currentEffectAbility is Flag)
+        {
+            RunPlayerStats.Instance.uIEffectAbilityHolder.SetEffectVisual();
+        }
     }
 
     public string Name => mine.Name;

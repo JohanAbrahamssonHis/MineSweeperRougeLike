@@ -7,7 +7,7 @@ using System;
 public class SMOABMine : SMine
 {
     public override string Name => "MOAB Mine";
-    public override string Description => "Every 3 actions, add a random temporary mine";
+    public override string Description => "Every "+ amountOfActions +" actions, add a normal temporary mine";
     public override string Rarity => "Rare";
 
     public override Type GetMineType(){return typeof(MOABMine);}

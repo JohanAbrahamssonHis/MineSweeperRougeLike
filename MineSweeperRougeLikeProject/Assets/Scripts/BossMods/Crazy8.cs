@@ -33,5 +33,5 @@ public class Crazy8 : BossModification
     }
 
     public override string Description =>
-        "All numbers that are shown are ‘+8’ more than usual";
+        "All numbers that are shown are ‘+"+valueIncrease+"’ more than usual";
 }

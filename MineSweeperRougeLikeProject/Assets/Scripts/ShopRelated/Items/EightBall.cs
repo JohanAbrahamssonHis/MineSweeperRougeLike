@@ -7,11 +7,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/EightBall", fileName = "EightBall")]
 public class EightBall : Item
 {
+    public int odds = 8;
+
     public override void Function()
     {
         MineRoomManager mineRoomManager = RunPlayerStats.Instance.MineRoomManager;
         
-        foreach (var item in mineRoomManager.grid.squares.Where(x => x.hasMine)) item.SetDisabled(Random.Range(0,8)==0);
+        foreach (var item in mineRoomManager.grid.squares.Where(x => x.hasMine)) item.SetDisabled(Random.Range(0,odds)==0);
     }
 
     public override void Join()
@@ -26,6 +28,6 @@ public class EightBall : Item
     }
 
     public override string Name => "Eight Ball";
-    public override string Description => "Start of a round. 1 in 8 chance per mine to be disabled";
+    public override string Description => "Start of a round. 1 in "+odds+" chance per mine to be disabled";
     public override string Rarity => "UnCommon";
 }

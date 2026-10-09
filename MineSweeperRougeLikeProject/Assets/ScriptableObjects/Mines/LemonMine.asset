@@ -16,3 +16,4 @@ MonoBehaviour:
   sprite: {fileID: -2140114582, guid: 0c75f1b24b902884a9ad80801728527a, type: 3}
   damage: 1
   isConstant: 1
+  MoneyLost: 1

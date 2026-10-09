@@ -13,13 +13,21 @@ public class UIEffectAbilityHolder : MonoBehaviour, IInteractable, ITextable
     
     void Start()
     {
+        RunPlayerStats.Instance.uIEffectAbilityHolder = this;
         _effectAbility = RunPlayerStats.Instance.currentEffectAbility;
         _decalHolder = transform.GetChild(1).transform.GetChild(0).gameObject;
         _spriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
         _spriteRendererCount = transform.GetChild(1).transform.GetChild(1).GetComponent<SpriteRenderer>();
         _spriteRendererFlagContainer = _decalHolder.transform.GetChild(1).GetComponent<SpriteRenderer>();
 
+        ActionEvents.Instance.OnEffectAbility += SetEffectVisual;
+
         SetEffectVisual();
+    }
+
+    void OnDestroy()
+    {
+        ActionEvents.Instance.OnEffectAbility -= SetEffectVisual;
     }
 
     public void Interact()

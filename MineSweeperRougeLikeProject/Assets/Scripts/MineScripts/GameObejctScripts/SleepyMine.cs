@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class SleepyMine : Mine
 {
+    public float timeLost;
+
     public override void Activate()
     {
         base.Activate();
-        RunPlayerStats.Instance.Time -= 15;
+        RunPlayerStats.Instance.Time -= timeLost;
     }
 }

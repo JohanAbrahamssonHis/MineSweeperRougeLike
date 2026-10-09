@@ -5,7 +5,7 @@ using UnityEngine;
 public class Horse : Item, ITimeObject
 {
     public override string Name => "Horse";
-    public override string Description => "If a room with timer is completed under " + (TimeLimitLong / 60) + " minutes, Gain 2$. If it was completed under " + TimeLimitShort + " seconds, Gain 5$";
+    public override string Description => "If a room with timer is completed under " + (TimeLimitLong / 60) + " minutes, Gain " + MoneyGainLong + "$. If it was completed under " + TimeLimitShort + " seconds, Gain " + MoneyGainShort + "$";
     public override string Rarity => "Very Rare";
 
     public float timeStart = 0;

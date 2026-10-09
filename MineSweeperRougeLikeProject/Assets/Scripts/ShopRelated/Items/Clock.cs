@@ -4,9 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Clock", fileName = "Clock")]
 public class Clock : Item, ITimeObject
 {
+    public float timeGain = 60;
+
     public override void Function()
     {
-        RunPlayerStats.Instance.Time += 60;
+        RunPlayerStats.Instance.Time += timeGain;
     }
 
     public override void Join()
@@ -15,6 +17,6 @@ public class Clock : Item, ITimeObject
     }
 
     public override string Name => "Clock";
-    public override string Description => "Gain a minute";
+    public override string Description => "Gain "+ timeGain/60+" minute";
     public override string Rarity => "Common";
 }

@@ -5,9 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Shovel", fileName = "Shovel")]
 public class Shovel : Item
 {
+
+    public int pointsGain = 5;
+
     public override void Function()
     {
-        RunPlayerStats.Instance.PointsGain += 5;
+        RunPlayerStats.Instance.PointsGain += pointsGain;
     }
 
     public override void Join()
@@ -16,6 +19,6 @@ public class Shovel : Item
     }
 
     public override string Name => "Shovel";
-    public override string Description => "Gain +5 extra points per action";
+    public override string Description => "Gain +"+pointsGain+" extra points per action";
     public override string Rarity => "Common";
 }

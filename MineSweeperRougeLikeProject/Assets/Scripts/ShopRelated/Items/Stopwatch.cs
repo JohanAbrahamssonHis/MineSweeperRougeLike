@@ -4,9 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Stopwatch", fileName = "Stopwatch")]
 public class Stopwatch : Item, ITimeObject
 {
+    public float timeGained = 20;
+
     public override void Function()
     {
-        RunPlayerStats.Instance.TimeGain += 20;
+        RunPlayerStats.Instance.TimeGain += timeGained;
     }
 
     public override void Join()
@@ -15,6 +17,6 @@ public class Stopwatch : Item, ITimeObject
     }
 
     public override string Name => "Stopwatch";
-    public override string Description => "Completing Rooms give 20 more seconds to the timer";
+    public override string Description => "Completing Rooms give +"+timeGained+" more seconds to the timer";
     public override string Rarity => "Common";
 }

@@ -38,6 +38,6 @@ public class Box : Item
     }
 
     public override string Name => "Box";
-    public override string Description => "Gain 1-10 money and 0-2 random mines";
+    public override string Description => "Randomly gain "+minMoney+" to "+maxMoney+" money and "+minMines+" to "+maxMines+" random mines";
     public override string Rarity => "UnCommon";
 }
