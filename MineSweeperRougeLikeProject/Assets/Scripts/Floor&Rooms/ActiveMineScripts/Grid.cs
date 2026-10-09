@@ -93,8 +93,7 @@ public class Grid : MonoBehaviour, IInteractable
         if (Mathf.Approximately(value, 0f)) return;
 
         // 1) Världen under musen före zoom
-        Vector2 mouse = Mouse.current.position.ReadValue();
-        Vector3 worldBefore = Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y, Camera.main.WorldToScreenPoint(transform.position).z));
+        Vector3 worldBefore = Camera.main.ScreenToWorldPoint(RunPlayerStats.Instance.InputHandler.MousePosition);
 
         // 2) Samma punkt i lokala coords före zoom
         Vector3 localPoint = transform.InverseTransformPoint(worldBefore);

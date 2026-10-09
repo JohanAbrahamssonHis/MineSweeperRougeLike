@@ -22,13 +22,13 @@ public class LightsOut : BossModification
         spriteRenderer.sprite = shadowSprite;
         spriteRenderer.material = Instantiate(material);
         spriteRenderer.sortingOrder = 10;
-        material.SetVector("_MousePosition", Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+        material.SetVector("_MousePosition", Camera.main.ScreenToWorldPoint(RunPlayerStats.Instance.InputHandler.MousePosition));
     }
 
     public override void UpdateModification()
     {
         base.UpdateModification();
-        spriteRenderer.material.SetVector("_MousePosition", Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
+        spriteRenderer.material.SetVector("_MousePosition", Camera.main.ScreenToWorldPoint(RunPlayerStats.Instance.InputHandler.MousePosition));
     }
 
     public override void UnsubscribeModification()

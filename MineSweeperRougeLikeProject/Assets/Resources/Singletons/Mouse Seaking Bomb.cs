@@ -33,7 +33,7 @@ public class MouseSeakingBomb : MonoBehaviour, IInteractable
         currentTime += Time.deltaTime;
         if(currentTime < timeBank) return;
 
-        target = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        target = Camera.main.ScreenToWorldPoint(RunPlayerStats.Instance.InputHandler.MousePosition);
 
         direction = (target-(Vector2)transform.position).normalized;
 

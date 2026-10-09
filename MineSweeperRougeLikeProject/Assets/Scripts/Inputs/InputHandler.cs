@@ -11,7 +11,22 @@ public class InputHandler : MonoBehaviour
     private List<IInteractable> _currentlyInteracted;
     private IInteractable _mostCurrentlyInteracted;
 
+    public Vector2 MousePositionOffset;
+    public Vector2 MousePosition {
+        get => Mouse.current.position.ReadValue()+MousePositionOffset;
+        }
+
     public bool isNotSwaped = true;
+
+    public Texture2D cursorText;
+
+    [Header("Assign your cursor sprite here")]
+    public RectTransform cursorImage; // UI Image or RectTransform for the fake cursor
+    public Canvas canvas;             // The canvas containing the cursor
+
+    [Header("Cursor Settings")]
+    public bool lockSystemCursor = true; // Hide and lock system cursor
+    public Vector2 customPosition;       // Position to set the fake cursor
     
     void Start()
     {
@@ -19,6 +34,13 @@ public class InputHandler : MonoBehaviour
         _currentlyInteracted = new List<IInteractable>();
         RunPlayerStats.Instance.InputHandler = this;
         isNotSwaped = true;
+        //Cursor.SetCursor(cursorText, MousePositionOffset, CursorMode.Auto);
+
+        if (lockSystemCursor)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.None; // Or Locked if you want fixed position
+        }
     }
     
     
@@ -58,13 +80,28 @@ public class InputHandler : MonoBehaviour
     public void Update()
     {
         ButtonEffectHover()?.ForEach(x => x.Hover());
+
+        //TODO: this is bad but will work for now
+        if (lockSystemCursor)
+        {
+            Cursor.visible = false;
+        }
+
+        Vector2 mousePos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.transform as RectTransform,
+            (Vector2)Input.mousePosition - new Vector2(-cursorImage.rect.width/2,cursorImage.rect.height/2),
+            canvas.worldCamera,
+            out mousePos
+        );
+        cursorImage.localPosition = mousePos;
     }
 
     private List<IInteractable> ButtonEffect(InputAction.CallbackContext context)
     {
         if (!context.performed) return null;
         List<IInteractable> interactables = new List<IInteractable>();
-        var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(MousePosition));
         if(rayHits.Any(x => !x.collider)) return null;
 
         foreach (var rayHit in rayHits)
@@ -79,7 +116,7 @@ public class InputHandler : MonoBehaviour
     private List<IInteractable> ButtonEffectHover()
     {
         List<IInteractable> interactables = new List<IInteractable>();
-        var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        var rayHits = Physics2D.GetRayIntersectionAll(_mainCamera.ScreenPointToRay(MousePosition));
         if(rayHits.Any(x => !x.collider)) return null;
 
         foreach (var rayHit in rayHits)
@@ -118,4 +155,21 @@ public class InputHandler : MonoBehaviour
         return interactables;
     }
     
+
+    public void SetCursor(Vector2 vector2)
+    {
+        Cursor.SetCursor(cursorText, vector2, CursorMode.Auto);
+    }
+
+    public void SetFakeCursorPosition(Vector2 screenPosition)
+    {
+        Vector2 localPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            canvas.transform as RectTransform,
+            screenPosition + (Vector2)Input.mousePosition - new Vector2(-cursorImage.rect.width/2,cursorImage.rect.height/2),
+            canvas.worldCamera,
+            out localPos
+        );
+        cursorImage.localPosition = localPos;
+    }
 }

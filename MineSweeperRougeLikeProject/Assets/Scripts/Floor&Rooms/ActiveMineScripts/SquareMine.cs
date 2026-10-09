@@ -244,7 +244,7 @@ public class SquareMine : MonoBehaviour, IInteractable
     public void RotateAround()
     {
         // 1) Få mouse pos
-        Vector3 mouseWorld = RunPlayerStats.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorld = RunPlayerStats.Instance.Camera.ScreenToWorldPoint(RunPlayerStats.Instance.InputHandler.MousePosition);
         
         // 2) Räkna tilt mot musen (lokal 3D-känsla)
         Vector2 d = new Vector2(mouseWorld.x - transform.position.x, mouseWorld.y - transform.position.y);

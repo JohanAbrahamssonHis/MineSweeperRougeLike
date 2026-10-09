@@ -18,7 +18,7 @@ public class InputFloorHandler : MonoBehaviour
     {
         if (!context.started) return;
 
-        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        var rayHit = Physics2D.GetRayIntersection(_mainCamera.ScreenPointToRay(RunPlayerStats.Instance.InputHandler.MousePosition));
         if(!rayHit.collider) return;
 
         if (rayHit.collider.gameObject.TryGetComponent(out SquareFloor square))

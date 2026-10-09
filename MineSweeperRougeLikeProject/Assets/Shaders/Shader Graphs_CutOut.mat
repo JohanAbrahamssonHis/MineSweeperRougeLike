@@ -48,7 +48,7 @@ Material:
     - _Size: 1.8
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0}
-    - _MousePosition: {r: 0, g: 0, b: 0, a: 0}
+    - _MousePosition: {r: -0.08275426, g: 3.6718738, b: -10, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &4492538552483366714
 MonoBehaviour:

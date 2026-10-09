@@ -47,5 +47,4 @@ MonoBehaviour:
   startEffectAbilities:
   - {fileID: 11400000, guid: 4860ec8dd1a6f4b41aaea418a48590d4, type: 2}
   - {fileID: 11400000, guid: aedeb8bb12f0f994490c45aac9bfd49d, type: 2}
-  - {fileID: 11400000, guid: 1f33b6d959413184985c933ec40b5524, type: 2}
   mineVisualizer: {fileID: 0}

@@ -90,7 +90,7 @@ public class ProximityMine : Mine
     public void Explode()
     {
         SoundManager.Instance.Play("Explosion", null, true, 2f, 0.7f);
-        Vector3 worldMousePos = RunPlayerStats.Instance.Camera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 worldMousePos = RunPlayerStats.Instance.Camera.ScreenToWorldPoint(RunPlayerStats.Instance.InputHandler.MousePosition);
         if(Vector2.Distance(transform.parent.position, worldMousePos)<distance && !Context.isActivated) Activate();
         Context.mineRoomManager.grid.squares.Find(square => square.position == Context.position).SetDisabled(true);
     }
