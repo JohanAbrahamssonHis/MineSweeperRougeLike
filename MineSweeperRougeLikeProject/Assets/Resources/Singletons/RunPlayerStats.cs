@@ -310,6 +310,7 @@ public class RunPlayerStats : ScriptableObject
         ActiveTimer = false;
         Inventory.ForEach(x => x.Unsubscribe());
         effectAbilities.ForEach(x => x.ResetAbility());
+        uIEffectAbilityHolder.SetEffectVisual();
         ResetBoss();
         mainComponents.DestroyGlobalObjects();
         SceneManager.LoadScene("DeathScene", LoadSceneMode.Additive);

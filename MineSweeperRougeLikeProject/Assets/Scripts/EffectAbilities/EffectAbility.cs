@@ -44,6 +44,7 @@ public abstract class EffectAbility : ScriptableObject, ITextable
     public void ResetAbility()
     {
         count = baseCount+tempCount;
+        
     }
 
     public void AddOrSetAbility(int baseCount, int tempCount)

@@ -108,6 +108,7 @@ public class StartData : ScriptableObject
         rPS.Time = Time;
         rPS.TimeMult = TimeMult;
         rPS.TimeGain = TimeGain;
+        rPS.Timmer = null;
         rPS.Money = Money;
         rPS.MoneyGain = MoneyGain;
         rPS.Points = Points;
