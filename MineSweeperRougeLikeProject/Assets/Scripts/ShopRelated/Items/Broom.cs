@@ -20,7 +20,7 @@ public class Broom : Item
         if(ActionCount < actionLimit)  ActionCount++;
         if (ActionCount >= actionLimit)
         {
-            List<SquareMine> squareMines = RunPlayerStats.Instance.MineRoomManager.grid.squares.Where(x => x.squareRevealed && x.hasMine && !x.mine.isDisabled && !x.mine.isActivated).ToList();
+            List<SquareMine> squareMines = RunPlayerStats.Instance.MineRoomManager.grid.squares.Where(x => x.hasMine).Where(y => !y.mine.isDisabled && !y.mine.isActivated).ToList();
             if(squareMines.Count == 0) return;
             SquareMine square = squareMines[Random.Range(0, squareMines.Count)];
             square.SetDisabled(true); // Disable a mine on the board
