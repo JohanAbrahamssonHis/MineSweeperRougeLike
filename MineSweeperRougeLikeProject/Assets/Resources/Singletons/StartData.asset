@@ -20,7 +20,7 @@ MonoBehaviour:
   Time: 240
   TimeMult: 1
   TimeGain: 15
-  Money: 20
+  Money: 5
   MoneyGain: 1
   Heat: 0
   HeatGain: 0.15

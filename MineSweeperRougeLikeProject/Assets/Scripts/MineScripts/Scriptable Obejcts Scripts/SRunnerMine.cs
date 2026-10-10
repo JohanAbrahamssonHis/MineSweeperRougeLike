@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 [CreateAssetMenu(fileName = "RunnerMine", menuName = "ScriptableObjects/Mine/RunnerMine", order = 16)]
-public class SRunnerMine : SMine
+public class SRunnerMine : SMine, ITimeObject
 {
     public override string Name => "Runner Mine";
     public override string Description => "Every " + runTime + "s, Move to another neighbour square";

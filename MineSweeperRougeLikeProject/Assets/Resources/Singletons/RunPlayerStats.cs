@@ -324,6 +324,7 @@ public class RunPlayerStats : ScriptableObject
         ActionEvents.Instance.TriggerEventMineRoomWin();
         ActiveTimer = false;
         effectAbilities.ForEach(x => x.ResetAbility());
+        uIEffectAbilityHolder.SetEffectVisual();
         ResetBoss();
     }
     

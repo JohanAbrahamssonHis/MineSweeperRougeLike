@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653006c013feb644b917ee7ea31f664e, type: 3}
   m_Name: DanceAroundTheRoses
   m_EditorClassIdentifier: 
-  name: Dance Around The Roses
+  name: Rose Dance
   sprite: {fileID: 759341595, guid: 985d681274a77a349bc7fad50c2f3de1, type: 3}
   Amplitude: 12
   Frequency: 4

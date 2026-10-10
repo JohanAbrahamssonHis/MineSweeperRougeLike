@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour, IInteractable, ITextable
 {
     private int curentHealth; // Tracks current health
     private List<GameObject> _gameObjects; // List of health icon GameObjects
@@ -16,7 +16,11 @@ public class HealthBar : MonoBehaviour
     public float speed;
     public float delay;
     public float strength;
-    
+
+    public string Name => "Health";
+
+    public string Description => "";
+
     private void OnEnable()
     {
         RunPlayerStats.Instance.HealthBar = this;

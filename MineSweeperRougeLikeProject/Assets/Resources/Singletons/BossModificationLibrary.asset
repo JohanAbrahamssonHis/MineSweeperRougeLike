@@ -28,4 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf9630980afd7f24f912d0926ca575a3, type: 2}
   - {fileID: 11400000, guid: e04268c77b9756b48b30523a8edb0420, type: 2}
   UseSetBossModification: 0
-  SetBossModification: {fileID: 11400000, guid: e04268c77b9756b48b30523a8edb0420, type: 2}
+  SetBossModification: {fileID: 11400000, guid: bf9630980afd7f24f912d0926ca575a3, type: 2}

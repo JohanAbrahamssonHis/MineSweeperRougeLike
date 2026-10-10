@@ -39,7 +39,7 @@ public class InputHandler : MonoBehaviour
         if (lockSystemCursor)
         {
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.None; // Or Locked if you want fixed position
+            Cursor.lockState = CursorLockMode.Confined; // Or Locked if you want fixed position
         }
     }
     
@@ -90,7 +90,7 @@ public class InputHandler : MonoBehaviour
         Vector2 mousePos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
-            (Vector2)Input.mousePosition - new Vector2(-cursorImage.rect.width/2,cursorImage.rect.height/2),
+            (Vector2)Input.mousePosition,
             canvas.worldCamera,
             out mousePos
         );
@@ -166,10 +166,12 @@ public class InputHandler : MonoBehaviour
         Vector2 localPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             canvas.transform as RectTransform,
-            screenPosition + (Vector2)Input.mousePosition - new Vector2(-cursorImage.rect.width/2,cursorImage.rect.height/2),
+            screenPosition + (Vector2)Input.mousePosition,
             canvas.worldCamera,
             out localPos
         );
         cursorImage.localPosition = localPos;
     }
+
+    // - new Vector2(-cursorImage.rect.width/2,cursorImage.rect.height/2),
 }
