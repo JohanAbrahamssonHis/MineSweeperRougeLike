@@ -307,7 +307,10 @@ public class SquareMine : MonoBehaviour, IInteractable
         GameObject ghost = new GameObject(gameObject.name + "_ShaderOBJ");
         
         ghost.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        ghost.transform.localScale = transform.localScale;
+        ghost.transform.localScale = transform.parent.parent.localScale;
+
+        if(ghost.transform.localScale.x < 1) ghost.transform.localScale = Vector3.one;
+
         ghost.transform.parent = transform;
 
         // ta renderern och ge den en unik instans av materialet

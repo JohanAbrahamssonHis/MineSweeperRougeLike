@@ -136,12 +136,12 @@ public class Grid : MonoBehaviour, IInteractable
             {
                 SquareMine square = squares.Find(x => x.position == new Vector2(i, j));
                 square.position = new Vector2(i-1, j);
-                square.gameObject.transform.position = new Vector2(setOnGrid(i-1,squaresXSize), setOnGrid(j,squaresYSize));
+                square.gameObject.transform.localPosition = new Vector2(setOnGrid(i-1,squaresXSize), setOnGrid(j,squaresYSize));
             }
         }
 
         mostLeftSquares.ForEach(x => x.position = new Vector2(squaresXSize - 1, x.position.y));
-        mostLeftSquares.ForEach(x => x.gameObject.transform.position = new Vector2(setOnGrid(squaresXSize-1,squaresXSize), setOnGrid((int)x.position.y,squaresYSize)));
+        mostLeftSquares.ForEach(x => x.gameObject.transform.localPosition = new Vector2(setOnGrid(squaresXSize-1,squaresXSize), setOnGrid((int)x.position.y,squaresYSize)));
 
 
         squares.Where(x => x.hasMine).ToList().ForEach(x => x.mine.position = x.position);
