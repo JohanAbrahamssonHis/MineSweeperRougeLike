@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Spin
   sprite: {fileID: -229216987, guid: f8ac758ceb56eef40b63336eb53b3ddb, type: 3}
-  Speed: 1
+  Speed: 2.5

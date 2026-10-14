@@ -58,6 +58,7 @@ public abstract class EffectAbility : ScriptableObject, ITextable
             existingEffect.tempCount += tempCount;
             existingEffect.baseCount += baseCount;
             existingEffect.count = existingEffect.tempCount+existingEffect.baseCount;
+            RunPlayerStats.Instance.uIEffectAbilityHolder.SetEffectVisual();
             return;
         }
 
@@ -66,6 +67,8 @@ public abstract class EffectAbility : ScriptableObject, ITextable
         newEffectAbility.baseCount = baseCount;
         newEffectAbility.count = newEffectAbility.tempCount+newEffectAbility.baseCount;
         EffectAbilties.Add(newEffectAbility);
+
+        RunPlayerStats.Instance.uIEffectAbilityHolder.SetEffectVisual();
     }
 
     public abstract bool Function(SquareMine squareMine);

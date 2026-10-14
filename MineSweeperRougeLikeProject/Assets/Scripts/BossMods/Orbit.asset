@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Orbit
   sprite: {fileID: 276108790, guid: 985d681274a77a349bc7fad50c2f3de1, type: 3}
-  frequency: 0.6
-  amplitude: 70
+  frequency: 0.8
+  amplitude: 200

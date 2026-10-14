@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Unity.Mathematics;
 [CreateAssetMenu(menuName = "Item/SubMarine", fileName = "SubMarine")]
 public class SubMarine : Item
 {
     public override string Name => "Sub-Marine";
 
-    public override string Description => "Gain " + XRayCount + " Permantent XRays and X-Rays also Disable Mines.";
+    public override string Description => "Gain " + XRayCount + " Permantent XRays and X-Rays also Disable one Mine that was X-Rayed.";
 
     public override string Rarity => "Very Rare";
 
@@ -25,6 +27,22 @@ public class SubMarine : Item
         if(effectAbility.GetType() != typeof(XRay)) return;
 
         if(!RunPlayerStats.Instance.MineRoomManager.AfterFirstMove) return;
+
+        Grid grid = RunPlayerStats.Instance.MineRoomManager.grid;
+
+        var MineSquares = RunPlayerStats.Instance.MineRoomManager.grid.squares.Where(square => square.hasMine &&
+        !square.mine.isDisabled &&
+        square.position.x - 1  <= squareMine.position.x && 
+        square.position.x + 1 >= squareMine.position.x &&
+        square.position.y - 1 <= squareMine.position.y &&
+        square.position.y + 1 >= squareMine.position.y).ToList();
+
+        if(MineSquares.Count() <= 0) return;
+
+        SquareMine targetSquare = MineSquares[UnityEngine.Random.Range(0, MineSquares.Count)];
+        targetSquare?.SetDisabled(true);
+
+/*
         int x = (int)squareMine.position.x;
         int y = (int)squareMine.position.y;
         for (int i = -1; i <= 1; i++)
@@ -40,6 +58,7 @@ public class SubMarine : Item
             }
         }
         return;
+        */
     }
 
     public override void Join()

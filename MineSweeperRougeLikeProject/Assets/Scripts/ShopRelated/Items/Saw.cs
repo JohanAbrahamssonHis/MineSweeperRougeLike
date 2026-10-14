@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Item/Saw", fileName = "Saw")]
 public class Saw : Item
 {
+    
+    public int CostReduction;
 
     public void ShopFunction(ShopManager shopManager)
     {
@@ -13,7 +15,7 @@ public class Saw : Item
 
     public override void Function()
     {
-        RunPlayerStats.Instance.ShopManager.ShopItems.ForEach(x => x.Cost/=2);
+        RunPlayerStats.Instance.ShopManager.ShopItems.ForEach(x => x.Cost-=CostReduction);
     }
 
     public override void Bought()
@@ -34,6 +36,6 @@ public class Saw : Item
     }
 
     public override string Name => "Saw";
-    public override string Description => "Prices in shops are halved";
+    public override string Description => "Prices in shops are reduced by "+ CostReduction +"";
     public override string Rarity => "Rare";
 }

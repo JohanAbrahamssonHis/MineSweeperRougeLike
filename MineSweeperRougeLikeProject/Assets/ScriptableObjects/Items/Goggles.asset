@@ -16,4 +16,4 @@ MonoBehaviour:
   sprite: {fileID: -2130674523, guid: 85720d1b6e756c74caad2360b1b7aef9, type: 3}
   rarity: 2
   xRay: {fileID: 11400000, guid: 1f33b6d959413184985c933ec40b5524, type: 2}
-  XRayCount: 2
+  XRayCount: 1

@@ -148,6 +148,7 @@ public class RunPlayerStats : ScriptableObject
         }
     }
     public int MoneyGain { get; set; }
+    public int PointToMoneyGain { get; set; } = 100;
 
     #endregion
 
@@ -360,7 +361,7 @@ public class RunPlayerStats : ScriptableObject
     
     public int MoneyEndRoomGet()
     {
-        return MoneyGain + Points/50 + TempMoneyGain;
+        return MoneyGain + Points/PointToMoneyGain + TempMoneyGain;
     }
 
     private void ResetTempValues()

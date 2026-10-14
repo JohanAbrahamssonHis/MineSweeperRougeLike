@@ -20,5 +20,10 @@ public class TaxCollector : BossModification
         RunPlayerStats.Instance.Money = Mathf.FloorToInt(RunPlayerStats.Instance.Money * (1 - MoneyLossPercent / 100f));
     }
 
+    public override void UnsubscribeModification()
+    {
+        ActionEvents.Instance.OnDamage -= Modification;
+    }
+
     public override string Description => "Whenever you take Damage, lose "+DamageMoney+"$ and then " + MoneyLossPercent + "% of your remaining Money.";
 }
